@@ -55,7 +55,7 @@ Claim: ${claim}`;
 
     const result = await runAgent({ query: directive, caller_id });
 
-    await db.from("verification_log").insert({
+    await db.schema("verity").from("verification_log").insert({
       caller_id,
       claim,
       verdict: extractVerdict(result.response),

@@ -21,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   yesterdayEnd.setUTCHours(0, 0, 0, 0);
 
   const { data: rows, error } = await db
-    .from("verification_log")
+    .schema("verity").from("verification_log")
     .select("caller_id, payment_usdc, verdict, created_at")
     .gte("created_at", yesterdayStart.toISOString())
     .lt("created_at", yesterdayEnd.toISOString());

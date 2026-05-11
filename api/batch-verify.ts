@@ -74,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Log each as a separate verification
     await Promise.all(
       results.map(r =>
-        db.from("verification_log").insert({
+        db.schema("verity").from("verification_log").insert({
           caller_id,
           claim: r.claim,
           verdict: extractVerdict(r.result),

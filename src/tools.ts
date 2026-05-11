@@ -306,6 +306,7 @@ async function runRetrieveCallerMemory(input: Record<string, any>): Promise<stri
   const { caller_id } = input;
 
   const { data, error } = await db
+    .schema("verity")
     .from("caller_memory")
     .select("*")
     .eq("caller_id", caller_id)
@@ -322,7 +323,7 @@ async function runRetrieveCallerMemory(input: Record<string, any>): Promise<stri
 async function runStoreCallerMemory(input: Record<string, any>): Promise<string> {
   const { caller_id, updates } = input;
 
-  const { error } = await db.from("caller_memory").upsert(
+  const { error } = await db.schema("verity").from("caller_memory").upsert(
     { caller_id, ...updates, updated_at: new Date().toISOString() },
     { onConflict: "caller_id" }
   );

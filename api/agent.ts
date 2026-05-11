@@ -127,7 +127,7 @@ async function handleSync(res: VercelResponse, query: string, caller_id: string,
 
 async function handleAsync(req: VercelRequest, res: VercelResponse, query: string, caller_id: string, isJsonRpc: boolean, jsonRpcId: any) {
   const { data: task, error } = await db
-    .from("tasks")
+    .schema("verity").from("tasks")
     .insert({ caller_id, query, status: "working" })
     .select("id")
     .single();
@@ -140,20 +140,20 @@ async function handleAsync(req: VercelRequest, res: VercelResponse, query: strin
   try {
     const result = await runAgent({ query, caller_id });
     await logVerification(caller_id, query, result);
-    await db.from("tasks").update({
+    await db.schema("verity").from("tasks").update({
       status: "completed",
       result: { artifact: { parts: [{ type: "text", text: result.response }], index: 0 }, tokens: result.tokens_used },
       completed_at: new Date().toISOString(),
     }).eq("id", task.id);
   } catch (e: any) {
-    await db.from("tasks").update({ status: "failed", error: e.message, completed_at: new Date().toISOString() }).eq("id", task.id);
+    await db.schema("verity").from("tasks").update({ status: "failed", error: e.message, completed_at: new Date().toISOString() }).eq("id", task.id);
   }
 }
 
 async function handleTaskPoll(req: VercelRequest, res: VercelResponse) {
   const task_id = req.query.task_id as string;
   const { data: task, error } = await db
-    .from("tasks")
+    .schema("verity").from("tasks")
     .select("id, status, result, error, created_at, completed_at")
     .eq("id", task_id)
     .single();
@@ -201,7 +201,7 @@ async function logVerification(caller_id: string, query: string, result: { tool_
   const verdict  = response.match(/"verdict"\s*:\s*"(\w+)"/)?.[1] ?? "UNVERIFIABLE";
   const confidence = parseInt(response.match(/"confidence"\s*:\s*(\d+)/)?.[1] ?? "0", 10);
 
-  await db.from("verification_log").insert({
+  await db.schema("verity").from("verification_log").insert({
     caller_id,
     claim: query.substring(0, 500),
     verdict,

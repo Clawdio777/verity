@@ -49,7 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const directive = `Verify the following claim and return a VerityResult JSON object.\n\nClaim: ${claim}`;
     const result    = await runAgent({ query: directive, caller_id });
 
-    await db.from("verification_log").insert({
+    await db.schema("verity").from("verification_log").insert({
       caller_id,
       claim,
       verdict: extractVerdict(result.response),
