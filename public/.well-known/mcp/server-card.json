@@ -1,0 +1,26 @@
+{
+  "name": "verity",
+  "version": "1.0.0",
+  "displayName": "VERITY — Real-Time Fact-Checking Agent",
+  "description": "Real-time fact-checking and data freshness agent. Verifies claims against live web sources and returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with confidence scores, sources, and what has changed. Persistent memory per caller_id.",
+  "homepage": "https://verity.basechainlabs.com",
+  "authentication": {
+    "required": true,
+    "schemes": ["header"],
+    "description": "Base wallet private key (0x...) with USDC on Base for x402 payments, passed as X-Wallet-Key header"
+  },
+  "tools": [
+    { "name": "verity_verify",     "description": "Verify a claim or URL against live sources. Returns verdict, confidence, sources, what changed. 0.10 USDC." },
+    { "name": "verity_deep_check", "description": "Thorough multi-angle verification with advanced search. For high-stakes fact-checks. 0.50 USDC." },
+    { "name": "verity_batch",      "description": "Verify up to 10 claims in one call. For content audits and pipelines. 0.75 USDC." },
+    { "name": "verity_agent",      "description": "Natural language fact-checking. 'Is this still true?' VERITY selects the right strategy. 0.10 USDC." }
+  ],
+  "prompts": [
+    { "name": "verify-claim",    "description": "Verify a specific claim against live web sources" },
+    { "name": "check-url",       "description": "Check if a URL's content is still current" },
+    { "name": "content-audit",   "description": "Audit content for outdated or disputed claims" },
+    { "name": "deep-verify",     "description": "Thorough multi-angle verification for high-stakes checks" },
+    { "name": "freshness-check", "description": "Check how current a topic or data point is" }
+  ],
+  "resources": []
+}

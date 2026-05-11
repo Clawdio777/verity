@@ -1,0 +1,55 @@
+name: verity
+displayName: "VERITY — Real-Time Fact-Checking Agent"
+description: |
+  Real-time fact-checking and data freshness agent. The first MCP server that
+  verifies claims against live web sources and returns structured verdicts:
+  CURRENT, OUTDATED, DISPUTED, or UNVERIFIABLE — with confidence scores,
+  supporting sources, and exactly what has changed.
+
+  Use VERITY to eliminate AI hallucinations, detect stale information, and
+  audit content before publishing. Perfect for content agents, research pipelines,
+  and any workflow where trusting your data matters.
+
+  Persistent memory per caller_id — remembers domains and topics you've checked.
+  No re-sending context on repeat calls.
+
+  Payments: x402 v2, USDC on Base. 0.10–0.75 USDC per call depending on depth.
+
+version: "1.0.0"
+license: MIT
+homepage: https://verity.basechainlabs.com
+repository: https://github.com/Clawdio777/verity
+
+tags:
+  - fact-check
+  - fact-checking
+  - verification
+  - data-freshness
+  - hallucination
+  - claim-check
+  - content-audit
+  - ai-verification
+  - research
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      VERITY_PRIVATE_KEY:
+        type: string
+        description: "Base wallet private key (0x...) with USDC for x402 payments. Get USDC on Base at coinbase.com/wallet."
+      CALLER_ID:
+        type: string
+        description: "Optional: your agent or user ID to activate persistent memory across sessions."
+    required:
+      - VERITY_PRIVATE_KEY
+  commandFunction: |-
+    (config) => ({
+      command: "node",
+      args: ["mcp-server.mjs"],
+      env: {
+        VERITY_PRIVATE_KEY: config.VERITY_PRIVATE_KEY,
+        ...(config.CALLER_ID ? { CALLER_ID: config.CALLER_ID } : {})
+      }
+    })

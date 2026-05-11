@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/verity-logo.jpg" type="image/jpeg" />
+  <title>VERITY — Real-Time Fact-Checking Agent</title>
+  <meta name="description" content="VERITY verifies claims, URLs, and content against live web sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with confidence scores. Agent-native, x402 payments." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0071e3;
+      --green: #30d158;
+      --red: #ff453a;
+      --amber: #ff9f0a;
+      --white: #ffffff;
+      --off-white: #f5f5f7;
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #aeaeb2;
+      --border: rgba(0,0,0,0.08);
+      --card-shadow: 0 2px 20px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: #fff; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* Nav */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 1.05rem; font-weight: 600; text-decoration: none; color: var(--text); letter-spacing: -0.01em; }
+    .nav-logo span { color: var(--green); }
+    .nav-home { font-size: 0.85rem; color: var(--blue); text-decoration: none; }
+    .nav-home:hover { text-decoration: underline; }
+
+    /* Hero */
+    .hero { background: #000; text-align: center; padding: 80px 24px 90px; }
+    .hero-logo { width: 110px; height: 110px; object-fit: contain; border-radius: 24px; margin-bottom: 20px; }
+    .hero-name { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; letter-spacing: -0.04em; color: #f5f5f7; margin-bottom: 6px; }
+    .hero-name em { font-style: normal; color: var(--green); }
+    .hero-eyebrow { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em; color: #86868b; margin-bottom: 28px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: #f5f5f7; margin-bottom: 16px; }
+    .hero h1 em { font-style: normal; color: var(--green); }
+    .hero p { color: #86868b; font-size: clamp(1rem, 2vw, 1.2rem); max-width: 560px; margin: 0 auto 40px; line-height: 1.6; }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 12px 22px; border-radius: 980px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: opacity 0.2s; letter-spacing: -0.01em; }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--green); color: #000; }
+    .btn-ghost { background: rgba(255,255,255,0.1); color: #f5f5f7; }
+
+    /* Section */
+    .section { max-width: 980px; margin: 0 auto; padding: 80px 24px; }
+    .section-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+    .section-sub { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; max-width: 520px; margin-bottom: 48px; }
+
+    /* Verdict pills */
+    .verdict-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
+    .verdict-pill { padding: 8px 18px; border-radius: 980px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; }
+    .pill-current  { background: rgba(48,209,88,0.12); color: #30d158; }
+    .pill-outdated { background: rgba(255,159,10,0.12); color: #ff9f0a; }
+    .pill-disputed { background: rgba(255,69,58,0.12); color: #ff453a; }
+    .pill-unverifiable { background: rgba(110,110,115,0.12); color: #6e6e73; }
+
+    /* Services */
+    .services { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; background: var(--border); border-radius: 20px; overflow: hidden; }
+    .service-card { background: #fff; padding: 28px 26px; display: flex; flex-direction: column; gap: 8px; }
+    .service-icon { font-size: 1.4rem; margin-bottom: 4px; }
+    .service-name { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+    .service-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; }
+    .service-price { font-size: 0.8rem; color: var(--green); font-weight: 500; margin-top: 6px; }
+
+    /* Integration */
+    .bg-off { background: var(--off-white); }
+    .integration-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    @media (max-width: 700px) { .integration-wrap { grid-template-columns: 1fr; } }
+    .integration-text h2 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .integration-text p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin-bottom: 24px; }
+    pre { background: #1d1d1f; border-radius: 14px; padding: 22px 24px; overflow-x: auto; font-size: 0.8rem; line-height: 1.7; color: #f5f5f7; font-family: "SF Mono", "Fira Code", monospace; }
+    .c-method { color: var(--green); }
+    .c-url    { color: #0071e3; }
+    .c-key    { color: #bf5af2; }
+    .c-val    { color: #ff9f0a; }
+    .c-comment { color: #6e6e73; }
+
+    /* Protocols */
+    .proto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+    .proto-card { background: #fff; border-radius: 14px; padding: 20px; box-shadow: var(--card-shadow); }
+    .proto-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); margin-bottom: 4px; font-weight: 600; }
+    .proto-value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+
+    /* Competitors */
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .compare-table th { text-align: left; padding: 12px 16px; background: var(--off-white); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+    .compare-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .tick { color: var(--green); font-weight: 700; }
+    .cross { color: var(--red); }
+    .verity-row td { background: rgba(48,209,88,0.04); font-weight: 500; }
+
+    /* Footer */
+    footer { background: var(--off-white); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-size: 0.82rem; color: var(--text-secondary); display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer .dot { color: var(--text-tertiary); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">VERI<span>TY</span></a>
+    <a href="https://basechainlabs.com" class="nav-home">BaseChain Labs ↗</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="hero-name">VERI<em>TY</em></h1>
+    <p class="hero-eyebrow">Real-Time Fact-Checking Agent · Live Web Verification</p>
+    <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.03em;color:#f5f5f7;margin-bottom:16px;line-height:1.1;">Know if any claim is <em style="font-style:normal;color:#30d158;">current, outdated,<br>or disputed</em> — in seconds.</h2>
+    <p>Verify claims, URLs, and AI-generated content against live web sources. Structured verdicts with confidence scores, sources, and exactly what changed.</p>
+    <div class="hero-actions">
+      <a href="/api/agent" class="btn btn-primary">Try the API</a>
+      <a href="/SKILL.md" class="btn btn-ghost">Download SKILL.md</a>
+    </div>
+  </section>
+
+  <!-- Verdicts -->
+  <div class="section">
+    <p class="section-eyebrow">Verdicts</p>
+    <h2 class="section-title">Four verdicts.<br>Zero ambiguity.</h2>
+    <p class="section-sub">Every verification returns one of four machine-readable verdicts — no essays, no vague citations. Just a clear answer your agent can act on.</p>
+    <div class="verdict-row">
+      <span class="verdict-pill pill-current">✓ CURRENT</span>
+      <span class="verdict-pill pill-outdated">⚠ OUTDATED</span>
+      <span class="verdict-pill pill-disputed">✕ DISPUTED</span>
+      <span class="verdict-pill pill-unverifiable">? UNVERIFIABLE</span>
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <div class="service-name">Standard Verify</div>
+        <div class="service-desc">Verify any claim or URL against live sources. Returns verdict, confidence 0–100, sources, and what changed.</div>
+        <div class="service-price">0.10 USDC · x402</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔬</div>
+        <div class="service-name">Deep Check</div>
+        <div class="service-desc">Multi-angle verification with advanced search depth. Cross-references 5+ angles and authoritative sources. Higher confidence.</div>
+        <div class="service-price">0.50 USDC · x402</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <div class="service-name">Batch Verify</div>
+        <div class="service-desc">Verify up to 10 claims in one call. Perfect for content audits and fact-checking pipelines before publishing.</div>
+        <div class="service-price">0.75 USDC · x402</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💬</div>
+        <div class="service-name">Natural Language</div>
+        <div class="service-desc">"Is this still true?", "Check this URL", "When was this last updated?" — VERITY picks the right strategy.</div>
+        <div class="service-price">0.10 USDC · x402</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <div class="service-name">Persistent Memory</div>
+        <div class="service-desc">Remembers domains and topics you've checked. Pass a consistent caller_id and VERITY builds context over time.</div>
+        <div class="service-price">Included with every call</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <div class="service-name">What Changed</div>
+        <div class="service-desc">Every result includes exactly what has changed since the original claim — not just a verdict, but the delta.</div>
+        <div class="service-price">Included in all verdicts</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- vs Competitors -->
+  <div class="bg-off">
+    <div class="section">
+      <p class="section-eyebrow">Why VERITY</p>
+      <h2 class="section-title">The gap no one filled.</h2>
+      <p class="section-sub" style="margin-bottom:36px;">Existing tools either require human editors (days of lag), return raw search results (no verdict), or only work on subscription (can't scale for agents).</p>
+      <table class="compare-table">
+        <thead>
+          <tr><th>Tool</th><th>Real-time</th><th>Structured verdict</th><th>What changed</th><th>API / agent-native</th><th>Pay per check</th></tr>
+        </thead>
+        <tbody>
+          <tr class="verity-row"><td><strong>VERITY</strong></td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+          <tr><td>Snopes / FactCheck.org</td><td class="cross">✗ days</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Perplexity / you.com</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="tick">partial</td><td class="cross">✗</td></tr>
+          <tr><td>Tavily Search</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+          <tr><td>Smithery fact-check skills</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="tick">partial</td><td class="cross">✗</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Integration -->
+  <div class="section">
+    <div class="integration-wrap">
+      <div class="integration-text">
+        <p class="section-eyebrow">Integration</p>
+        <h2>One call.<br>Any agent.</h2>
+        <p>VERITY works with any A2A or x402-compatible agent. 0.10 USDC per verify on Base.</p>
+        <a href="/SKILL.md" class="btn btn-primary" style="display:inline-block;margin-top:4px;background:var(--green);color:#000;">Download SKILL.md</a>
+      </div>
+      <pre><code><span class="c-method">POST</span> <span class="c-url">https://verity.basechainlabs.com/api/verify</span>
+
+{
+  <span class="c-key">"claim"</span>: <span class="c-val">"Is GPT-4 still the most capable AI model?"</span>,
+  <span class="c-key">"caller_id"</span>: <span class="c-val">"your-agent-id"</span>
+}
+
+<span class="c-comment">// Response</span>
+{
+  <span class="c-key">"verdict"</span>: <span class="c-val">"OUTDATED"</span>,
+  <span class="c-key">"confidence"</span>: <span class="c-val">91</span>,
+  <span class="c-key">"what_changed"</span>: <span class="c-val">"GPT-4o and o3 released in 2024–25"</span>,
+  <span class="c-key">"sources"</span>: [{ <span class="c-key">"url"</span>: <span class="c-val">"..."</span>, <span class="c-key">"supports"</span>: <span class="c-val">"CONTRADICTS"</span> }]
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- Protocols -->
+  <div class="bg-off">
+    <div class="section">
+      <p class="section-eyebrow">Standards</p>
+      <h2 class="section-title">Built on open protocols.</h2>
+      <p class="section-sub" style="margin-bottom:36px;">VERITY runs on the same infrastructure as AEONOS, AWS AgentCore, and the Linux Foundation x402 standard.</p>
+      <div class="proto-grid">
+        <div class="proto-card"><div class="proto-label">Payment</div><div class="proto-value">x402 v2</div></div>
+        <div class="proto-card"><div class="proto-label">Network</div><div class="proto-value">Base · USDC</div></div>
+        <div class="proto-card"><div class="proto-label">Agent Protocol</div><div class="proto-value">A2A v0.2.1</div></div>
+        <div class="proto-card"><div class="proto-label">MCP</div><div class="proto-value">Streamable HTTP</div></div>
+        <div class="proto-card"><div class="proto-label">Search</div><div class="proto-value">Tavily</div></div>
+        <div class="proto-card"><div class="proto-label">AI Model</div><div class="proto-value">Claude Sonnet 4.6</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 BaseChain Labs</span>
+    <span class="dot">·</span>
+    <a href="https://basechainlabs.com">basechainlabs.com</a>
+    <span class="dot">·</span>
+    <a href="/SKILL.md">SKILL.md</a>
+    <span class="dot">·</span>
+    <a href="/.well-known/agent.json">Agent Card</a>
+    <span class="dot">·</span>
+    <a href="https://aeonos.basechainlabs.com">AEONOS</a>
+  </footer>
+
+</body>
+</html>

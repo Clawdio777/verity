@@ -1,0 +1,63 @@
+{
+  "name": "VERITY",
+  "description": "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with confidence scores, what changed, and supporting sources. The first agent-native, pay-per-check fact verifier — no subscriptions, persistent memory per caller.",
+  "url": "https://verity.basechainlabs.com/api/agent",
+  "version": "1.0.0",
+  "protocolVersion": "0.2.1",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "skills": [
+    {
+      "id": "claim_verify",
+      "name": "Claim Verification",
+      "description": "Input: claim or URL (string). Output: VerityResult JSON — verdict (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE), confidence 0–100, sources array, what_changed string. Verifies against live web via Tavily.",
+      "tags": ["fact-check", "verification", "claim", "live-web"],
+      "endpoint": "https://verity.basechainlabs.com/api/verify",
+      "price": "0.10 USDC",
+      "inputExample": { "claim": "Is GPT-4 still the most capable OpenAI model?", "caller_id": "my-agent-id" },
+      "outputExample": { "verdict": "OUTDATED", "confidence": 91, "summary": "GPT-4 has been superseded by GPT-4o and o3.", "what_changed": "OpenAI released GPT-4o (May 2024) and o3 (late 2024), both outperforming GPT-4.", "sources": [] }
+    },
+    {
+      "id": "deep_check",
+      "name": "Deep Fact Check",
+      "description": "Input: claim (string). Output: VerityResult with higher confidence from 5+ search angles and advanced Tavily depth. Use for high-stakes verification.",
+      "tags": ["fact-check", "deep-research", "high-confidence"],
+      "endpoint": "https://verity.basechainlabs.com/api/deep-check",
+      "price": "0.50 USDC"
+    },
+    {
+      "id": "batch_verify",
+      "name": "Batch Verify",
+      "description": "Input: claims array (up to 10 strings). Output: array of VerityResult objects. Use for content audits and fact-check pipelines.",
+      "tags": ["batch", "bulk", "content-audit", "pipeline"],
+      "endpoint": "https://verity.basechainlabs.com/api/batch-verify",
+      "price": "0.75 USDC"
+    },
+    {
+      "id": "persistent_memory",
+      "name": "Persistent Caller Memory",
+      "description": "Remembers domains monitored, topics checked, and verification history across all sessions. Pass a consistent caller_id to activate.",
+      "tags": ["memory", "persistence", "context"],
+      "endpoint": "https://verity.basechainlabs.com/api/agent",
+      "price": "Included with every call"
+    }
+  ],
+  "pricing": {
+    "standard": "0.10 USDC — single claim verify",
+    "deep":     "0.50 USDC — deep multi-angle check",
+    "batch":    "0.75 USDC — up to 10 claims"
+  },
+  "protocols": ["x402", "a2a"],
+  "network": "base",
+  "payment_address": "0x400d65bb174c546ed92f5d61ce21fbde96b8bacc",
+  "useCases": [
+    "Verify AI-generated content before publishing",
+    "Check if training data or RAG sources are still current",
+    "Detect hallucinations in agent outputs",
+    "Audit articles and blog posts for outdated claims",
+    "Monitor whether key facts about a domain have changed"
+  ]
+}

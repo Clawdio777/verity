@@ -1,0 +1,38 @@
+{
+  "rewrites": [
+    { "source": "/.well-known/agent.json",       "destination": "/public/.well-known/agent.json" },
+    { "source": "/.well-known/agent-card.json",  "destination": "/public/.well-known/agent.json" },
+    { "source": "/.well-known/mcp/server-card.json", "destination": "/public/.well-known/mcp/server-card.json" },
+    { "source": "/api/agent-card",               "destination": "/api/agent?agent-card=true" },
+    { "source": "/SKILL.md",                     "destination": "/public/SKILL.md" },
+    { "source": "/favicon.svg",                  "destination": "/public/favicon.svg" },
+    { "source": "/verity-logo.jpg",              "destination": "/public/verity-logo.jpg" },
+    { "source": "/",                             "destination": "/public/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/.well-known/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Content-Type", "value": "application/json" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ],
+  "functions": {
+    "api/agent.ts":       { "maxDuration": 300 },
+    "api/verify.ts":      { "maxDuration": 300 },
+    "api/deep-check.ts":  { "maxDuration": 300 },
+    "api/batch-verify.ts":{ "maxDuration": 300 },
+    "api/mcp.ts":         { "maxDuration": 300 }
+  },
+  "crons": [
+    { "path": "/api/daily-summary", "schedule": "0 23 * * *" },
+    { "path": "/api/cron-check-deps", "schedule": "0 23 * * 0" }
+  ]
+}

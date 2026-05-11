@@ -1,0 +1,51 @@
+{
+  "name": "verity-mcp",
+  "version": "1.0.0",
+  "description": "VERITY — Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts with confidence scores and change tracking.",
+  "type": "module",
+  "bin": {
+    "verity-mcp": "./mcp-server.mjs"
+  },
+  "files": [
+    "mcp-server.mjs",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "fact-check",
+    "fact-checking",
+    "data-freshness",
+    "claim-verification",
+    "ai-verification",
+    "hallucination",
+    "x402"
+  ],
+  "homepage": "https://verity.basechainlabs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Clawdio777/verity"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@coinbase/x402": "^2.1.0",
+    "@supabase/supabase-js": "^2.49.0",
+    "@vercel/node": "^5.0.0",
+    "@x402/core": "^2.11.0",
+    "@x402/evm": "^2.11.0",
+    "@x402/extensions": "^2.11.0",
+    "@x402/fetch": "^2.11.0",
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}
