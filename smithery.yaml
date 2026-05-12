@@ -46,8 +46,8 @@ startCommand:
       - VERITY_PRIVATE_KEY
   commandFunction: |-
     (config) => ({
-      command: "node",
-      args: ["mcp-server.mjs"],
+      command: "npx",
+      args: ["-y", "verity-mcp"],
       env: {
         VERITY_PRIVATE_KEY: config.VERITY_PRIVATE_KEY,
         ...(config.CALLER_ID ? { CALLER_ID: config.CALLER_ID } : {})
