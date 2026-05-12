@@ -24,8 +24,8 @@ async function main() {
 
   const fetchWithPayment = wrapFetchWithPayment(fetch, client);
 
-  console.log("Step 1: Probing for 402...");
-  const probe = await fetch(AGENT_URL, { method: "GET" });
+  console.log("Step 1: Probing for 402 (POST without payment)...");
+  const probe = await fetch(AGENT_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
   console.log(`Probe status: ${probe.status}`);
   if (probe.status === 402) {
     const paymentRequired = await probe.json();

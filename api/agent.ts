@@ -37,16 +37,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  if (req.method === "GET" && req.query["agent-card"]) {
-    return res.json(buildAgentCard());
-  }
-
   if (req.method === "GET" && req.query.task_id) {
     return handleTaskPoll(req, res);
   }
 
   if (req.method === "GET") {
-    return send402(res, buildPaymentRequirements());
+    return res.json(buildAgentCard());
   }
 
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
