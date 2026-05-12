@@ -138,7 +138,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const privateKey = (req.headers["verity_private_key"] ?? req.headers["x-wallet-key"] ?? process.env.MCP_DEMO_PRIVATE_KEY) as string | undefined;
-  const defaultCallerId = req.headers["x-caller-id"] as string | undefined;
+  const defaultCallerId = (req.headers["caller_id"] ?? req.headers["x-caller-id"]) as string | undefined;
 
   const body = req.body as { jsonrpc: string; id: any; method: string; params?: any };
   const { id, method, params } = body;
