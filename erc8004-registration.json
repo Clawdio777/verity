@@ -1,0 +1,23 @@
+{
+  "agentId": 50896,
+  "registry": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
+  "chain": "base",
+  "chainId": 8453,
+  "owner": "0x4a0D792185d05330C8506B29cC9335fb7820B958",
+  "tokenURI": "ipfs://bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
+  "pinataCid": "bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
+  "gateway": "https://gateway.pinata.cloud/ipfs/bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
+  "registeredAt": "2026-05-12",
+  "transactions": {
+    "register": "0xfa5dbd5d3e0a86fdc8a9f7632a39b6771281ce0b6c2230bd6bcdf1e842e7eeda",
+    "setAgentURI": "0xc6aae48a3944b4b948cfed29ecb17132818ea2458817bea6d633e9ba1896a941"
+  },
+  "blocks": {
+    "register": 45891087,
+    "setAgentURI": 45891088
+  },
+  "links": {
+    "8004scan": "https://8004scan.io/agents/base/50896?tab=metadata",
+    "basescan": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=50896"
+  }
+}
