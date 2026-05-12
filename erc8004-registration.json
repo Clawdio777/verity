@@ -4,9 +4,10 @@
   "chain": "base",
   "chainId": 8453,
   "owner": "0x4a0D792185d05330C8506B29cC9335fb7820B958",
-  "tokenURI": "ipfs://bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
-  "pinataCid": "bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
-  "gateway": "https://gateway.pinata.cloud/ipfs/bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
+  "tokenURI": "ipfs://bafkreiarmmej7c3qzvie5mxv35lnermkakdrtsd5e7heecw2kgfxl6cooi",
+  "pinataCid": "bafkreiarmmej7c3qzvie5mxv35lnermkakdrtsd5e7heecw2kgfxl6cooi",
+  "gateway": "https://gateway.pinata.cloud/ipfs/bafkreiarmmej7c3qzvie5mxv35lnermkakdrtsd5e7heecw2kgfxl6cooi",
+  "previousURI": "ipfs://bafkreiaoeilka4y7oq2rycgdte24aqhjxgpcpynliq6cndq5gkzxaheydi",
   "registeredAt": "2026-05-12",
   "transactions": {
     "register": "0xfa5dbd5d3e0a86fdc8a9f7632a39b6771281ce0b6c2230bd6bcdf1e842e7eeda",

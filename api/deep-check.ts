@@ -13,7 +13,7 @@ import { runAgent } from "../src/agent.js";
 const PRICE_USDC    = 0.50;
 const BASE_URL      = () => (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
 const RESOURCE_URL  = () => `${BASE_URL()}/api/deep-check`;
-const RESOURCE_DESC = "Deep multi-angle claim verification. 5+ search angles, advanced Tavily depth, cross-referenced sources. Higher confidence result for high-stakes checks. 0.50 USDC.";
+const RESOURCE_DESC = "Deep multi-angle fact-checking with persistent memory — VERITY remembers prior verdicts so your agent stops re-verifying confirmed claims. 5+ search angles, advanced Tavily depth, cross-referenced sources for high-stakes verification. 0.50 USDC.";
 
 const BAZAAR = buildBazaarExtension({
   serviceName:      "VERITY — Deep Fact Check",

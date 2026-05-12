@@ -261,7 +261,7 @@ function send402(res: VercelResponse, paymentReqs: PaymentRequirements, errorRea
     error:       errorReason ?? "payment-required",
     resource: {
       url:         `${base}/api/agent`,
-      description: "Real-time fact-checking agent. Verifies claims against live web sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict with confidence score. 0.10 USDC/call.",
+      description: "Conversational fact-checking with persistent memory — VERITY remembers what your agent has checked across sessions, skipping repeat lookups. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with confidence scores and sources. 0.10 USDC/call.",
       mimeType:    "application/json",
     },
     accepts:    [paymentReqs],

@@ -14,7 +14,7 @@ import { runAgent } from "../src/agent.js";
 const PRICE_USDC    = 0.10;
 const BASE_URL      = () => (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
 const RESOURCE_URL  = () => `${BASE_URL()}/api/verify`;
-const RESOURCE_DESC = "Real-time claim verification. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict with confidence score, sources, and what changed. 0.10 USDC.";
+const RESOURCE_DESC = "Fact-checking with persistent memory — VERITY remembers prior claims your agent has checked and skips repeat lookups, saving tokens across sessions. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with confidence score, sources, and what changed. 0.10 USDC.";
 
 const BAZAAR = buildBazaarExtension({
   serviceName:      "VERITY — Claim Verification",

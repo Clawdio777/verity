@@ -13,7 +13,7 @@ import { runAgent } from "../src/agent.js";
 const PRICE_USDC    = 0.75;
 const BASE_URL      = () => (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
 const RESOURCE_URL  = () => `${BASE_URL()}/api/batch-verify`;
-const RESOURCE_DESC = "Verify up to 10 claims in one call. Returns array of verdicts. Use for content audits and fact-check pipelines. 0.75 USDC for the batch.";
+const RESOURCE_DESC = "Batch fact-checking with persistent memory — verify up to 10 claims per call. VERITY remembers prior checks so repeat claims aren't re-verified. Use for content audits and fact-check pipelines. 0.75 USDC for the batch.";
 
 const BAZAAR = buildBazaarExtension({
   serviceName:      "VERITY — Batch Verify",
