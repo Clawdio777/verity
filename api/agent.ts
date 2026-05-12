@@ -255,7 +255,7 @@ const BAZAAR_EXTENSION = {
 };
 
 function send402(res: VercelResponse, paymentReqs: PaymentRequirements, errorReason?: string) {
-  const base = process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com";
+  const base = (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
   const body: PaymentRequired = {
     x402Version: X402_VERSION,
     error:       errorReason ?? "payment-required",
@@ -277,7 +277,7 @@ function jsonRpcError(res: VercelResponse, isJsonRpc: boolean, id: any, code: nu
 }
 
 function buildAgentCard() {
-  const base = process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com";
+  const base = (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
   return {
     name: "VERITY",
     description: "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with confidence scores, what changed, and persistent caller memory.",

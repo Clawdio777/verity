@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Clawdio777/verity",
+  "description": "Real-time fact-checking MCP. Verifies claims against live sources with structured verdicts.",
+  "repository": {
+    "url": "https://github.com/Clawdio777/verity",
+    "source": "github"
+  },
+  "version": "1.0.2",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "verity-mcp",
+      "version": "1.0.2",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "VERITY_PRIVATE_KEY",
+          "description": "Base wallet private key (0x...) — used to sign x402 payments in USDC on Base. Per-call: 0.10 USDC (verify), 0.50 USDC (deep-check), 0.75 USDC (batch).",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
