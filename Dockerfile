@@ -8,6 +8,8 @@ RUN chmod +x /usr/local/lib/node_modules/@virtuals-protocol/acp-cli/bin/acp-cli-
 
 WORKDIR /app
 COPY seller-v2.mjs .
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 # /data is a Railway persistent volume — all ACP auth lives here
 ENV DATA_DIR=/data
@@ -22,4 +24,4 @@ ENV TS_KEYRING_BACKEND=file
 ENV KEYRING_PROPERTY_FILE_PATH=/data/keyring.json
 ENV KEYRING_PROPERTY_KEY_FILE_PATH=/data/keyring.key
 
-CMD ["node", "seller-v2.mjs"]
+CMD ["/app/entrypoint.sh"]
