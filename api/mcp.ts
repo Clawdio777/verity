@@ -40,7 +40,7 @@ const TOOL_ANNOTATIONS = {
 const TOOLS = [
   {
     name:        "verity_verify",
-    description: "Verify a claim, URL, or statement against live web sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, confidence 0–100, sources, and what has changed. 0.10 USDC per call.",
+    description: "Verify a claim, URL, or statement against multiple live sources: web search (Tavily), AI synthesis (Perplexity), Wikipedia, and academic papers (Semantic Scholar). Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, confidence 0–100, sources with credibility tiers, and what has changed. 0.10 USDC per call.",
     annotations: TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
@@ -54,7 +54,7 @@ const TOOLS = [
   },
   {
     name:        "verity_deep_check",
-    description: "Thorough multi-angle verification with advanced search depth. Cross-references 5+ angles and authoritative sources. Higher confidence result for high-stakes fact-checks. 0.50 USDC per call.",
+    description: "Thorough multi-angle verification using all available sources: Perplexity sonar-pro, Wikipedia, Semantic Scholar academic papers, and advanced Tavily search. Cross-references 5+ independent angles. Returns highest-confidence verdicts for high-stakes fact-checks. 0.50 USDC per call.",
     annotations: TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
