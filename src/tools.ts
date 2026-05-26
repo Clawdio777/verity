@@ -1,11 +1,14 @@
 /**
- * tools.ts — VERITY: 5 core tools
+ * tools.ts — VERITY: 8 core tools
  *
- * 1. searchClaim      — Tavily search for current info on a claim/topic
- * 2. fetchUrl         — Tavily Extract to get page content + publication date
- * 3. searchForUpdates — Recency-biased search to find what has changed
- * 4. retrieveCallerMemory — Caller-specific persistent context
- * 5. storeCallerMemory    — Save new context for this caller
+ * 1. searchClaim          — Tavily web search (broad coverage)
+ * 2. fetchUrl             — Tavily Extract for full page content + date
+ * 3. searchForUpdates     — Recency-biased search for corrections/updates
+ * 4. askPerplexity        — AI-synthesised answer with citations (best for complex/nuanced claims)
+ * 5. lookupWikipedia      — Authoritative encyclopedia lookup (historical, factual, scientific)
+ * 6. checkAcademic        — Semantic Scholar academic paper search (scientific/medical claims)
+ * 7. retrieveCallerMemory — Caller-specific persistent context
+ * 8. storeCallerMemory    — Save new context for this caller
  */
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -17,10 +20,83 @@ const db = createClient(
 );
 
 const TAVILY_API_KEY = process.env.TAVILY_API_KEY!;
+const PPLX_API_KEY = process.env.PPLX_API_KEY!;
+
+// Credibility tier for source scoring (used by agent.ts system prompt)
+export const CREDIBILITY_DOMAINS = {
+  tier1: [".gov", ".edu", "nature.com", "science.org", "pubmed.ncbi.nlm.nih.gov", "who.int", "cdc.gov", "reuters.com", "apnews.com", "bbc.com", "theguardian.com", "nytimes.com", "washingtonpost.com"],
+  tier2: ["wikipedia.org", "britannica.com", "scholar.google.com", "semanticscholar.org", "arxiv.org", "techcrunch.com", "wired.com", "theverge.com", "arstechnica.com"],
+  tier3: [], // general web — baseline
+};
 
 // ── Tool definitions ───────────────────────────────────────────────────────────
 
 export const tools: Anthropic.Tool[] = [
+  {
+    name: "askPerplexity",
+    description:
+      "Ask Perplexity AI for a synthesised, sourced answer about a claim or topic. " +
+      "Returns an AI-generated summary with inline citations and source URLs. " +
+      "Best for: complex/nuanced claims, political/AI/tech topics, anything where synthesis across many sources is needed. " +
+      "More powerful than a raw search — use this when searchClaim results are ambiguous or contradictory.",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        query: {
+          type: "string",
+          description: "The claim or question to verify. Phrase as a question for best results. E.g. 'Is GPT-5 currently available to the public?'",
+        },
+        mode: {
+          type: "string",
+          enum: ["sonar", "sonar-pro"],
+          description: "'sonar' for fast real-time answers (default), 'sonar-pro' for deeper analysis of complex claims",
+        },
+      },
+      required: ["query"],
+    },
+  },
+
+  {
+    name: "lookupWikipedia",
+    description:
+      "Look up a topic on Wikipedia. Returns the summary, last edit date, and key facts. " +
+      "Best for: historical facts, scientific concepts, biographical claims, definitions, well-established facts. " +
+      "Wikipedia is authoritative for encyclopedic knowledge — use it whenever the claim involves a verifiable fact that Wikipedia would cover.",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        topic: {
+          type: "string",
+          description: "The topic, person, event, or concept to look up. Use the most likely Wikipedia article title.",
+        },
+      },
+      required: ["topic"],
+    },
+  },
+
+  {
+    name: "checkAcademic",
+    description:
+      "Search Semantic Scholar for academic papers related to a claim. " +
+      "Returns paper titles, authors, year, citation count, and abstracts. " +
+      "Best for: scientific claims, medical/health claims, research findings, statistical claims. " +
+      "High citation count = high credibility. Use this for any claim that should have peer-reviewed backing.",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        query: {
+          type: "string",
+          description: "The scientific/research topic to search for. Be specific. E.g. 'mRNA vaccine efficacy against COVID-19 variants 2024'",
+        },
+        max_results: {
+          type: "number",
+          description: "Number of papers to return. Default 5, max 10.",
+        },
+      },
+      required: ["query"],
+    },
+  },
+
   {
     name: "searchClaim",
     description:
@@ -138,12 +214,177 @@ export async function executeTool(
   input: Record<string, any>
 ): Promise<string> {
   switch (name) {
-    case "searchClaim":       return await runSearchClaim(input);
-    case "fetchUrl":          return await runFetchUrl(input);
-    case "searchForUpdates":  return await runSearchForUpdates(input);
+    case "askPerplexity":        return await runAskPerplexity(input);
+    case "lookupWikipedia":      return await runLookupWikipedia(input);
+    case "checkAcademic":        return await runCheckAcademic(input);
+    case "searchClaim":          return await runSearchClaim(input);
+    case "fetchUrl":             return await runFetchUrl(input);
+    case "searchForUpdates":     return await runSearchForUpdates(input);
     case "retrieveCallerMemory": return await runRetrieveCallerMemory(input);
     case "storeCallerMemory":    return await runStoreCallerMemory(input);
     default: return `Unknown tool: ${name}`;
+  }
+}
+
+// ── Perplexity ─────────────────────────────────────────────────────────────────
+
+async function runAskPerplexity(input: Record<string, any>): Promise<string> {
+  const { query, mode = "sonar" } = input;
+
+  if (!PPLX_API_KEY) return "Perplexity not configured (PPLX_API_KEY missing).";
+
+  try {
+    const res = await fetch("https://api.perplexity.ai/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${PPLX_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: mode,
+        messages: [
+          {
+            role: "system",
+            content: "You are a fact-checking assistant. Answer concisely and accurately. Always cite your sources.",
+          },
+          { role: "user", content: query },
+        ],
+        max_tokens: 1024,
+        return_citations: true,
+        search_recency_filter: "month",
+      }),
+      signal: AbortSignal.timeout(30000),
+    });
+
+    if (!res.ok) return `Perplexity error: ${res.status} ${await res.text()}`;
+
+    const data = await res.json() as {
+      choices?: { message?: { content?: string } }[];
+      citations?: string[];
+    };
+
+    const answer = data.choices?.[0]?.message?.content ?? "No answer returned.";
+    const citations = data.citations ?? [];
+
+    return JSON.stringify({ answer, citations }, null, 2);
+  } catch (e: any) {
+    return `askPerplexity error: ${e.message}`;
+  }
+}
+
+// ── Wikipedia ──────────────────────────────────────────────────────────────────
+
+async function runLookupWikipedia(input: Record<string, any>): Promise<string> {
+  const { topic } = input;
+
+  try {
+    // First try exact title match via summary API
+    const slug = encodeURIComponent(topic.replace(/ /g, "_"));
+    const summaryRes = await fetch(
+      `https://en.wikipedia.org/api/rest_v1/page/summary/${slug}`,
+      { signal: AbortSignal.timeout(10000) }
+    );
+
+    if (summaryRes.ok) {
+      const data = await summaryRes.json() as {
+        title?: string;
+        extract?: string;
+        timestamp?: string;
+        content_urls?: { desktop?: { page?: string } };
+        description?: string;
+      };
+      return JSON.stringify({
+        title: data.title,
+        description: data.description,
+        summary: data.extract?.substring(0, 1500),
+        last_edited: data.timestamp,
+        url: data.content_urls?.desktop?.page,
+        source: "wikipedia",
+      }, null, 2);
+    }
+
+    // Fallback: search Wikipedia for closest match
+    const searchRes = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(topic)}&format=json&srlimit=3`,
+      { signal: AbortSignal.timeout(10000) }
+    );
+
+    if (!searchRes.ok) return `Wikipedia search error: ${searchRes.status}`;
+
+    const searchData = await searchRes.json() as {
+      query?: { search?: { title: string; snippet: string; timestamp: string }[] };
+    };
+
+    const results = searchData.query?.search ?? [];
+    if (!results.length) return `No Wikipedia article found for: ${topic}`;
+
+    return JSON.stringify({
+      search_results: results.map(r => ({
+        title: r.title,
+        snippet: r.snippet.replace(/<[^>]+>/g, ""),
+        timestamp: r.timestamp,
+        url: `https://en.wikipedia.org/wiki/${encodeURIComponent(r.title.replace(/ /g, "_"))}`,
+      })),
+      source: "wikipedia_search",
+    }, null, 2);
+  } catch (e: any) {
+    return `lookupWikipedia error: ${e.message}`;
+  }
+}
+
+// ── Semantic Scholar ───────────────────────────────────────────────────────────
+
+async function runCheckAcademic(input: Record<string, any>): Promise<string> {
+  const { query, max_results = 5 } = input;
+
+  try {
+    const params = new URLSearchParams({
+      query,
+      fields: "title,year,abstract,authors,citationCount,externalIds,isOpenAccess",
+      limit: String(Math.min(max_results, 10)),
+    });
+
+    const res = await fetch(
+      `https://api.semanticscholar.org/graph/v1/paper/search?${params}`,
+      {
+        headers: { "User-Agent": "VERITY-FactCheck/1.0" },
+        signal: AbortSignal.timeout(15000),
+      }
+    );
+
+    if (!res.ok) return `Semantic Scholar error: ${res.status}`;
+
+    const data = await res.json() as {
+      data?: {
+        title: string;
+        year: number;
+        abstract?: string;
+        authors?: { name: string }[];
+        citationCount?: number;
+        externalIds?: { DOI?: string };
+        isOpenAccess?: boolean;
+      }[];
+      total?: number;
+    };
+
+    if (!data.data?.length) return "No academic papers found for this query.";
+
+    return JSON.stringify({
+      total_found: data.total,
+      papers: data.data.map(p => ({
+        title: p.title,
+        year: p.year,
+        authors: p.authors?.slice(0, 3).map(a => a.name),
+        citation_count: p.citationCount,
+        abstract: p.abstract?.substring(0, 500),
+        doi: p.externalIds?.DOI,
+        open_access: p.isOpenAccess,
+        url: p.externalIds?.DOI ? `https://doi.org/${p.externalIds.DOI}` : null,
+      })),
+      source: "semantic_scholar",
+    }, null, 2);
+  } catch (e: any) {
+    return `checkAcademic error: ${e.message}`;
   }
 }
 
