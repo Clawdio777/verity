@@ -129,12 +129,29 @@ async function callVerity(path: string, body: Record<string, any>, privateKey: s
   return data?.artifact?.parts?.[0]?.text ?? JSON.stringify(data);
 }
 
+function isSmitheryProbe(req: VercelRequest): boolean {
+  const ua = (req.headers["user-agent"] ?? "").toLowerCase();
+  if (ua.includes("smithery")) return true;
+  const hasBody = req.headers["content-length"] && req.headers["content-length"] !== "0";
+  if (req.method === "GET" && !hasBody) return true;
+  return false;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Wallet-Key, X-Caller-Id");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 
   if (req.method === "OPTIONS") return res.status(200).end();
+
+  if (isSmitheryProbe(req)) {
+    return res.status(200).json({
+      name:    "verity",
+      version: "1.1.0",
+      tools:   TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
+    });
+  }
+
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const privateKey = (req.headers["verity_private_key"] ?? req.headers["x-wallet-key"] ?? process.env.MCP_DEMO_PRIVATE_KEY) as string | undefined;
@@ -148,7 +165,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       jsonrpc: "2.0", id,
       result: {
         protocolVersion: "2024-11-05",
-        serverInfo:      { name: "verity", version: "1.0.0" },
+        serverInfo:      { name: "verity", version: "1.1.0" },
         capabilities:    { tools: {}, prompts: {} },
         instructions: `You have access to VERITY — a specialist real-time fact-checking and data freshness agent.
 
