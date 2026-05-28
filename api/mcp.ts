@@ -129,14 +129,6 @@ async function callVerity(path: string, body: Record<string, any>, privateKey: s
   return data?.artifact?.parts?.[0]?.text ?? JSON.stringify(data);
 }
 
-function isSmitheryProbe(req: VercelRequest): boolean {
-  const ua = (req.headers["user-agent"] ?? "").toLowerCase();
-  if (ua.includes("smithery")) return true;
-  const hasBody = req.headers["content-length"] && req.headers["content-length"] !== "0";
-  if (req.method === "GET" && !hasBody) return true;
-  return false;
-}
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Wallet-Key, X-Caller-Id");
@@ -144,9 +136,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  if (isSmitheryProbe(req)) {
+  if (req.method === "GET") {
     return res.status(200).json({
-      name:    "verity",
+      name:    "verity-mcp",
       version: "1.1.0",
       tools:   TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
     });
@@ -165,7 +157,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       jsonrpc: "2.0", id,
       result: {
         protocolVersion: "2024-11-05",
-        serverInfo:      { name: "verity", version: "1.1.0" },
+        serverInfo:      { name: "verity-mcp", version: "1.1.0" },
         capabilities:    { tools: {}, prompts: {} },
         instructions: `You have access to VERITY — a specialist real-time fact-checking and data freshness agent.
 
