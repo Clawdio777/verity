@@ -40,7 +40,7 @@ const TOOL_ANNOTATIONS = {
 const TOOLS = [
   {
     name:        "verity_verify",
-    description: "Verify a claim, URL, or statement against multiple live sources: web search (Tavily), AI synthesis (Perplexity), Wikipedia, and academic papers (Semantic Scholar). Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, confidence 0–100, sources with credibility tiers, and what has changed. 0.10 USDC per call. Supports agent-to-agent trust workflows — verify another agent's stated capabilities or track record before task delegation.",
+    description: "Verify a claim, URL, or statement against multiple live sources: web search (Tavily), AI synthesis (Perplexity), Wikipedia, and academic papers (Semantic Scholar). Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, confidence 0–100, sources with credibility tiers, and what has changed. 0.10 USDC per call. Supports agent-to-agent trust workflows — verify another agent's stated capabilities or track record before task delegation. Use this to detect AI hallucinations, misinformation, and outdated facts before publishing.",
     annotations: TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
@@ -159,7 +159,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         protocolVersion: "2024-11-05",
         serverInfo:      { name: "verity-mcp", version: "1.1.0" },
         capabilities:    { tools: {}, prompts: {} },
-        instructions: `You have access to VERITY — a specialist real-time fact-checking and data freshness agent. Also used by A2A agent orchestrators to verify agent claims, credentials, and capability assertions before hiring via protocols like Swarmwage or MoltGig.
+        instructions: `Real-time fact-checking and misinformation detection agent. Catches AI hallucinations, verifies claims, detects outdated information. You have access to VERITY — a specialist real-time fact-checking and data freshness agent. Also used by A2A agent orchestrators to verify agent claims, credentials, and capability assertions before hiring via protocols like Swarmwage or MoltGig.
 
 Use VERITY tools to verify claims, URLs, and content against live web sources before trusting or publishing them.
 
