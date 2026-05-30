@@ -1,6 +1,6 @@
 {
   "name": "verity-mcp",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "mcpName": "io.github.Clawdio777/verity",
   "description": "VERITY — Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts with confidence scores and change tracking.",
   "type": "module",
@@ -43,6 +43,7 @@
     "@x402/evm": "^2.11.0",
     "@x402/extensions": "^2.11.0",
     "@x402/fetch": "^2.11.0",
+    "stripe": "^17.7.0",
     "viem": "^2.0.0"
   },
   "devDependencies": {

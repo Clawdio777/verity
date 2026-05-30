@@ -103,6 +103,12 @@ export async function requirePayment(
   resourceUrl: string,
   resourceDesc: string
 ): Promise<string | null> {
+  // PayGated internal bypass — request already authenticated + billed via credit system
+  const internalKey = req.headers["x-internal-key"] as string | undefined;
+  if (internalKey && process.env.INTERNAL_API_KEY && internalKey === process.env.INTERNAL_API_KEY) {
+    return "internal-bypass";
+  }
+
   const paymentReqs    = buildPaymentReqs(priceUsdc);
   const xPaymentHeader = (req.headers["payment-signature"] ?? req.headers["x-payment"]) as string | undefined;
 

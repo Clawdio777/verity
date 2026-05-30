@@ -117,8 +117,11 @@ function buildX402Fetch(privateKey: string) {
   return wrapFetchWithPayment(fetch, client);
 }
 
-async function callVerity(path: string, body: Record<string, any>, privateKey: string): Promise<string> {
-  const x402Fetch = buildX402Fetch(privateKey);
+async function callVerity(path: string, body: Record<string, any>, auth: { privateKey?: string; internalKey?: string }): Promise<string> {
+  const x402Fetch = auth.internalKey
+    ? (url: RequestInfo | URL, init?: RequestInit) =>
+        fetch(url, { ...init, headers: { ...(init?.headers as Record<string, string> ?? {}), "x-internal-key": auth.internalKey! } })
+    : buildX402Fetch(auth.privateKey!);
   const res = await x402Fetch(`${BASE_URL}${path}`, {
     method:  "POST",
     headers: { "Content-Type": "application/json" },
@@ -146,7 +149,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const privateKey = (req.headers["verity_private_key"] ?? req.headers["x-wallet-key"] ?? process.env.MCP_DEMO_PRIVATE_KEY) as string | undefined;
+  // PayGated auth — token embedded in PAYGATE_REMOTE_URL query string (PayGated preserves ?pg_token=... when proxying)
+  const pgToken    = req.query.pg_token as string | undefined;
+  const isPaygated = !!pgToken && !!process.env.PAYGATE_AUTH_SECRET && pgToken === process.env.PAYGATE_AUTH_SECRET;
+  const internalKey  = isPaygated ? process.env.INTERNAL_API_KEY : undefined;
+
+  const privateKey = isPaygated ? undefined : (req.headers["verity_private_key"] ?? req.headers["x-wallet-key"] ?? process.env.MCP_DEMO_PRIVATE_KEY) as string | undefined;
   const defaultCallerId = (req.headers["caller_id"] ?? req.headers["x-caller-id"]) as string | undefined;
 
   const body = req.body as { jsonrpc: string; id: any; method: string; params?: any };
@@ -223,10 +231,10 @@ Payments via x402 (USDC on Base). Each call deducts from the configured wallet.`
 
     if (!route) return res.json({ jsonrpc: "2.0", id, error: { code: -32601, message: `Unknown tool: ${name}` } });
 
-    if (!privateKey) {
+    if (!isPaygated && !privateKey) {
       return res.json({
         jsonrpc: "2.0", id,
-        result: { content: [{ type: "text", text: "⚠️ **Wallet key not configured.**\n\nTo use VERITY, configure a Base wallet private key with USDC in the connection settings (X-Wallet-Key header).\n\nGet USDC on Base at coinbase.com/wallet." }] },
+        result: { content: [{ type: "text", text: "⚠️ **Payment not configured.**\n\nTwo options:\n\n**Option 1 — Pay with card (no wallet needed):**\nBuy credits at https://verity.basechainlabs.com/#get-access and use your API key as `VERITY_API_KEY` in settings.\n\n**Option 2 — Pay with USDC (x402):**\nAdd a Base wallet private key with USDC as `VERITY_PRIVATE_KEY`. Get USDC on Base at coinbase.com/wallet." }] },
       });
     }
 
@@ -235,7 +243,7 @@ Payments via x402 (USDC on Base). Each call deducts from the configured wallet.`
         [route.field]: args[route.field] ?? args.claim ?? args.query,
         caller_id: args.caller_id || defaultCallerId || "mcp-user",
       };
-      const text = await callVerity(route.path, reqBody, privateKey);
+      const text = await callVerity(route.path, reqBody, isPaygated ? { internalKey } : { privateKey });
       return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
     } catch (e: any) {
       return res.json({ jsonrpc: "2.0", id, error: { code: -32000, message: e.message } });

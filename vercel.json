@@ -23,7 +23,9 @@
     "api/verify.ts":      { "maxDuration": 300 },
     "api/deep-check.ts":  { "maxDuration": 300 },
     "api/batch-verify.ts":{ "maxDuration": 300 },
-    "api/mcp.ts":         { "maxDuration": 300 }
+    "api/mcp.ts":         { "maxDuration": 300 },
+    "api/checkout.ts":        { "maxDuration": 30 },
+    "api/stripe-webhook.ts":  { "maxDuration": 30 }
   },
   "crons": [
     { "path": "/api/daily-summary", "schedule": "0 23 * * *" },
