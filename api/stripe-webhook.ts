@@ -27,7 +27,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const pgUrl          = process.env.PAYGATE_VERITY_URL!;
   const pgAdminKey     = process.env.PAYGATE_VERITY_ADMIN_KEY!;
 
-  const stripe = new Stripe(stripeKey, { apiVersion: "2025-05-28.basil" });
+  const stripe = new Stripe(stripeKey, { apiVersion: "2025-02-24.acacia" });
   const rawBody = await getRawBody(req);
 
   let event: Stripe.Event;
@@ -67,7 +67,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
-        from:    "VERITY <noreply@basechainlabs.com>",
+        from:    "VERITY <onboarding@resend.dev>",
         to:      email,
         subject: "Your VERITY API Key",
         html: `

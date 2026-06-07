@@ -9,6 +9,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { base } from "viem/chains";
 import { x402Client, wrapFetchWithPayment } from "@x402/fetch";
 import { ExactEvmScheme, toClientEvmSigner } from "@x402/evm";
+import { runAgent } from "../src/agent.js";
 
 const BASE_URL = "https://verity.basechainlabs.com";
 
@@ -101,6 +102,34 @@ const TOOL_ROUTES: Record<string, { path: string; field: string }> = {
   verity_deep_check: { path: "/api/deep-check",   field: "claim" },
   verity_batch:      { path: "/api/batch-verify", field: "claims" },
   verity_agent:      { path: "/api/agent",         field: "query" },
+};
+
+function buildVerityDirective(toolName: string, args: Record<string, any>): string {
+  switch (toolName) {
+    case "verity_verify":
+      return `Verify the following claim and return a VerityResult JSON object.\n\nClaim: ${args.claim}`;
+    case "verity_deep_check":
+      return `Perform a THOROUGH multi-angle deep verification of the following claim. Use advanced search depth, check 5+ angles, cross-reference authoritative sources including Wikipedia and academic papers, and return a high-confidence verdict with detailed sourcing.\n\nClaim: ${args.claim}`;
+    case "verity_batch": {
+      const claims: string[] = Array.isArray(args.claims) ? args.claims.slice(0, 10) : [];
+      return `Verify each of the following claims and return a JSON array of VerityResult objects. For each claim, keep summary to 1 sentence.\n\nClaims:\n${claims.map((c, i) => `${i + 1}. ${c}`).join("\n")}`;
+    }
+    default: // verity_agent
+      return args.query;
+  }
+}
+
+const CHECK_CREDITS_TOOL = {
+  name:        "check_credits",
+  description: "Check your remaining VERITY credit balance. Call this whenever you want to see how many credits you have left. Returns a warning if balance is low.",
+  annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
+  inputSchema: {
+    type:       "object",
+    properties: {
+      key: { type: "string", description: "Your VERITY API key (starts with pg_)" },
+    },
+    required: ["key"],
+  },
 };
 
 function buildX402Fetch(privateKey: string) {
@@ -223,10 +252,35 @@ Payments via x402 (USDC on Base). Each call deducts from the configured wallet.`
     });
   }
 
-  if (method === "tools/list") return res.json({ jsonrpc: "2.0", id, result: { tools: TOOLS } });
+  if (method === "tools/list") return res.json({ jsonrpc: "2.0", id, result: { tools: [...TOOLS, CHECK_CREDITS_TOOL] } });
 
   if (method === "tools/call") {
     const { name, arguments: args } = params as { name: string; arguments: Record<string, any> };
+
+    if (name === "check_credits") {
+      const pgUrl      = process.env.PAYGATE_VERITY_URL;
+      const pgAdminKey = process.env.PAYGATE_VERITY_ADMIN_KEY;
+      const userKey    = (args.key || "").trim();
+      if (!pgUrl || !pgAdminKey || !userKey) {
+        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Credit check unavailable — missing key or config." }] } });
+      }
+      try {
+        const listRes = await fetch(`${pgUrl}/keys`, { headers: { "X-Admin-Key": pgAdminKey } });
+        const allKeys = await listRes.json() as any[];
+        const found   = allKeys.find((k: any) => k.keyPrefix && userKey.startsWith(k.keyPrefix.replace("...", "")));
+        if (!found) {
+          return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Key not found. Make sure you're using your full `pg_xxx...` API key." }] } });
+        }
+        const credits = found.credits as number;
+        const text = credits < 100
+          ? `⚠️ **Low balance: ${credits} credits remaining**\n\nTop up at: https://verity.basechainlabs.com/#get-access`
+          : `✅ **${credits} credits remaining**\n\n10cr/verify · 50cr/deep-check · 75cr/batch · 10cr/agent`;
+        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
+      } catch (e: any) {
+        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Could not check credits. Try again." }] } });
+      }
+    }
+
     const route = TOOL_ROUTES[name];
 
     if (!route) return res.json({ jsonrpc: "2.0", id, error: { code: -32601, message: `Unknown tool: ${name}` } });
@@ -239,11 +293,19 @@ Payments via x402 (USDC on Base). Each call deducts from the configured wallet.`
     }
 
     try {
-      const reqBody: Record<string, any> = {
-        [route.field]: args[route.field] ?? args.claim ?? args.query,
-        caller_id: args.caller_id || defaultCallerId || "mcp-user",
-      };
-      const text = await callVerity(route.path, reqBody, isPaygated ? { internalKey } : { privateKey });
+      const callerId = args.caller_id || defaultCallerId || "mcp-user";
+      let text: string;
+      if (isPaygated) {
+        const directive = buildVerityDirective(name, args);
+        const result    = await runAgent({ query: directive, caller_id: callerId });
+        text = result.response;
+      } else {
+        const reqBody: Record<string, any> = {
+          [route.field]: args[route.field] ?? args.claim ?? args.query,
+          caller_id: callerId,
+        };
+        text = await callVerity(route.path, reqBody, { privateKey });
+      }
       return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
     } catch (e: any) {
       return res.json({ jsonrpc: "2.0", id, error: { code: -32000, message: e.message } });

@@ -66,6 +66,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const xPaymentHeader = (req.headers["payment-signature"] ?? req.headers["x-payment"]) as string | undefined;
 
+  // PayGated internal bypass — already authenticated + billed via credit system
+  const internalKey = req.headers["x-internal-key"] as string | undefined;
+  if (internalKey && process.env.INTERNAL_API_KEY && internalKey === process.env.INTERNAL_API_KEY) {
+    if (!query) return jsonRpcError(res, isJsonRpc, jsonRpcId, -32602, "Missing query");
+    try {
+      if (isStream) return await handleStream(res, query, caller_id);
+      if (isAsync)  return await handleAsync(req, res, query, caller_id, isJsonRpc, jsonRpcId);
+      return await handleSync(res, query, caller_id, isJsonRpc, jsonRpcId);
+    } catch (e: any) {
+      return jsonRpcError(res, isJsonRpc, jsonRpcId, -32000, e.message);
+    }
+  }
+
   if (!query) {
     if (!xPaymentHeader) return send402(res, buildPaymentRequirements());
     return jsonRpcError(res, isJsonRpc, jsonRpcId, -32602, "Missing query");

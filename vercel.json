@@ -1,7 +1,9 @@
 {
   "rewrites": [
     { "source": "/.well-known/agent-card.json",  "destination": "/.well-known/agent.json" },
-    { "source": "/api/agent-card",               "destination": "/api/agent?agent-card=true" }
+    { "source": "/api/agent-card",               "destination": "/api/agent?agent-card=true" },
+    { "source": "/smithery-verify",              "destination": "/api/mcp" },
+    { "source": "/ping",                         "destination": "/api/mcp" }
   ],
   "headers": [
     {
@@ -25,7 +27,8 @@
     "api/batch-verify.ts":{ "maxDuration": 300 },
     "api/mcp.ts":         { "maxDuration": 300 },
     "api/checkout.ts":        { "maxDuration": 30 },
-    "api/stripe-webhook.ts":  { "maxDuration": 30 }
+    "api/stripe-webhook.ts":  { "maxDuration": 30 },
+    "api/recover-key.ts":     { "maxDuration": 30 }
   },
   "crons": [
     { "path": "/api/daily-summary", "schedule": "0 23 * * *" },
