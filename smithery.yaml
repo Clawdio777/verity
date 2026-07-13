@@ -16,6 +16,7 @@ description: |
   Payments: x402 v2, USDC on Base. 0.10–0.75 USDC per call depending on depth.
 
 version: "1.1.0"
+schema_version: 1
 license: MIT
 homepage: https://verity.basechainlabs.com
 repository: https://github.com/Clawdio777/verity
@@ -34,12 +35,72 @@ tags:
 tools:
   - name: verity_verify
     description: "Verify a claim, URL, or statement against live sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, confidence 0–100, and what has changed. 0.10 USDC per call."
+    inputSchema:
+      type: object
+      properties:
+        claim:
+          type: string
+          description: "The claim, URL, or content to verify."
+        caller_id:
+          type: string
+          description: "Optional stable ID for persistent memory across calls."
+      required:
+        - claim
+
   - name: verity_deep_check
     description: "Thorough multi-angle verification using Perplexity sonar-pro, Wikipedia, Semantic Scholar, and advanced Tavily search. Highest-confidence verdicts for high-stakes fact-checks. 0.50 USDC per call."
+    inputSchema:
+      type: object
+      properties:
+        claim:
+          type: string
+          description: "The claim to deeply verify."
+        caller_id:
+          type: string
+          description: "Optional stable ID for persistent memory."
+      required:
+        - claim
+
   - name: verity_batch
     description: "Verify up to 10 claims in one call. Returns an array of verdicts for content audits and fact-check pipelines. 0.75 USDC for the batch."
+    inputSchema:
+      type: object
+      properties:
+        claims:
+          type: array
+          items:
+            type: string
+          description: "Array of claims to verify. Max 10."
+        caller_id:
+          type: string
+          description: "Optional stable ID for persistent memory."
+      required:
+        - claims
+
   - name: verity_agent
     description: "Natural language fact-checking. Ask anything in plain English — VERITY selects the right strategy automatically. 0.10 USDC per call."
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: "Natural language fact-check request."
+        caller_id:
+          type: string
+          description: "Optional stable ID for persistent memory."
+      required:
+        - query
+
+  - name: check_credits
+    description: "Check your remaining VERITY credit balance. Returns a warning if balance is low."
+    inputSchema:
+      type: object
+      properties:
+        key:
+          type: string
+          description: "Your VERITY API key (starts with pg_)."
+      required:
+        - key
 
 startCommand:
   type: stdio
@@ -55,4 +116,7 @@ startCommand:
     required:
       - VERITY_PRIVATE_KEY
     additionalProperties: false
-  commandFunction: ./smithery-command.js
+  command: npx
+  args:
+    - "-y"
+    - "verity-mcp"
