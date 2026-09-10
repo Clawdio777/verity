@@ -4,6 +4,7 @@
   "mcpName": "io.github.Clawdio777/verity",
   "description": "VERITY — Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts with confidence scores and change tracking.",
   "type": "module",
+  "main": "./mcp-server.mjs",
   "bin": {
     "verity-mcp": "./mcp-server.mjs"
   },
@@ -15,6 +16,11 @@
     "mcp",
     "fact-check",
     "fact-checking",
+    "verification",
+    "real-time",
+    "Wikipedia",
+    "Perplexity",
+    "academic",
     "data-freshness",
     "claim-verification",
     "ai-verification",
