@@ -1,7 +1,5 @@
 # VERITY — Real-Time Fact-Checking Agent
 
-[![Smithery Badge](https://smithery.ai/badge/clawdio777/verity)](https://smithery.ai/servers/clawdio777/verity)
-
 Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts with confidence scores, what has changed, and supporting sources.
 
 ## Verdicts
@@ -78,3 +76,36 @@ GET https://verity.basechainlabs.com/api/agent?agent-card=true
 ```
 
 Built by [BaseChain Labs](https://basechainlabs.com)
+
+---
+
+## Making changes (maintainer guide)
+
+### Where things live
+
+| Thing | Where |
+|---|---|
+| The agent's brain | `src/agent.ts` (system prompt, orchestration), `src/tools.ts` (fact-checking: Tavily search + Claude verdicts) |
+| API endpoints | one file per route under `api/`: `agent` (paid A2A entry), `verify`, `deep-check`, `batch-verify`, `mcp`, `checkout`, `stripe-webhook`, `recover-key`, plus the `cron-check-deps` and `daily-summary` crons |
+| Payment gate | `api/_x402-gate.ts`: unpaid POSTs get HTTP 402 with the price and the Bazaar listing; GET returns the agent card |
+| Public page | `public/index.html` (plain HTML). Agent card: `public/.well-known/agent.json` |
+| Marketplace seller | `seller-v2.mjs` + `Dockerfile` + `railway.json`, the Virtuals ACP seller on Railway. Its keyring lives on a Railway volume; `keyring.json` and `keyring.key` are runtime files and gitignored |
+| Secrets | hosting environment variables only. Never in a file, never in a commit |
+
+### How a change goes live
+
+There is no test suite and no CI on this repo. A push to `main` is the deploy.
+
+1. Edit, then type-check: `npx tsc --noEmit -p .`
+2. Commit and push to `main`. Vercel builds and deploys production from the GitHub integration.
+3. Confirm the newest production deployment carries your commit SHA and the endpoint answers: `curl -s https://verity.basechainlabs.com/.well-known/agent.json | head -c 300`
+4. A push also redeploys the Railway seller. Confirm its log shows it connected afterwards.
+
+Because there are no tests, prove a change on the live endpoint with a read-only call before calling it done. Never make a paid call (x402 or Stripe) just to test.
+
+### Things that bite
+
+- Prices live in four places that must stay in sync: `public/index.html`, the 402 body in `api/_x402-gate.ts`, the Virtuals ACP offerings, and the npm package README.
+- Agentic.market's "Validate endpoint" tool: use POST. GET returns the agent card (200) by design and the validator then says "no x402 setup".
+- Tavily is the search backend. If verifications start failing, check the Tavily credit first.
+- Removing the Railway volume wipes the seller's keyring on the next redeploy and takes it offline.
