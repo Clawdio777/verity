@@ -99,6 +99,17 @@ const TOOLS = [
       required: ["query"],
     },
   },
+  {
+    name:        "check_credits",
+    description: "Check your remaining VERITY credit balance. Returns a warning if balance is low.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        key: { type: "string", description: "Your VERITY API key (starts with pg_)." },
+      },
+      required: ["key"],
+    },
+  },
 ];
 
 const TOOL_ROUTES = {
@@ -116,15 +127,35 @@ async function handleRequest(req) {
   if (method === "initialize") {
     return send({ jsonrpc: "2.0", id, result: {
       protocolVersion: "2024-11-05",
-      serverInfo:      { name: "verity", version: "1.0.0" },
+      serverInfo:      { name: "verity-mcp", version: "1.2.0" },
       capabilities:    { tools: {} },
     }});
   }
+
+  if (method === "notifications/initialized") return;
 
   if (method === "tools/list") return send({ jsonrpc: "2.0", id, result: { tools: TOOLS } });
 
   if (method === "tools/call") {
     const { name, arguments: args } = params;
+
+    // Credit lookup is free and needs no wallet: forward it to the hosted MCP endpoint, which
+    // holds the PayGated admin key and does the real balance check.
+    if (name === "check_credits") {
+      try {
+        const res = await fetch(`${BASE_URL}/api/mcp`, {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({ jsonrpc: "2.0", id, method: "tools/call", params: { name, arguments: { key: args?.key ?? "" } } }),
+        });
+        const data = await res.json();
+        const text = data?.result?.content?.[0]?.text ?? data?.error?.message ?? `VERITY error: HTTP ${res.status}`;
+        return send({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
+      } catch (e) {
+        return send({ jsonrpc: "2.0", id, error: { code: -32000, message: e.message } });
+      }
+    }
+
     const route = TOOL_ROUTES[name];
     if (!route) return send({ jsonrpc: "2.0", id, error: { code: -32601, message: `Unknown tool: ${name}` } });
 

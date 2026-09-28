@@ -171,7 +171,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
     return res.status(200).json({
       name:    "verity-mcp",
-      version: "1.1.0",
+      version: "1.2.0",
       tools:   TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
     });
   }
@@ -194,7 +194,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       jsonrpc: "2.0", id,
       result: {
         protocolVersion: "2024-11-05",
-        serverInfo:      { name: "verity-mcp", version: "1.1.0" },
+        serverInfo:      { name: "verity-mcp", version: "1.2.0" },
         capabilities:    { tools: {}, prompts: {} },
         instructions: `Real-time fact-checking and misinformation detection agent. Catches AI hallucinations, verifies claims, detects outdated information. You have access to VERITY — a specialist real-time fact-checking and data freshness agent. Also used by A2A agent orchestrators to verify agent claims, credentials, and capability assertions before hiring via protocols like Swarmwage or MoltGig.
 

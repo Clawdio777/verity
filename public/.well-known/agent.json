@@ -2,7 +2,7 @@
   "name": "VERITY",
   "description": "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with confidence scores, what changed, and supporting sources. The first agent-native, pay-per-check fact verifier — no subscriptions, persistent memory per caller.",
   "url": "https://verity.basechainlabs.com/api/agent",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "protocolVersion": "0.2.1",
   "capabilities": {
     "streaming": true,
