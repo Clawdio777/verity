@@ -37,6 +37,7 @@ Get USDC on Base at [coinbase.com/wallet](https://coinbase.com/wallet).
 | `verity_deep_check` | Multi-angle thorough verification | 0.50 USDC |
 | `verity_batch` | Verify up to 10 claims at once | 0.75 USDC |
 | `verity_agent` | Natural language fact-checking | 0.10 USDC |
+| `check_credits` | Remaining balance for a PayGated `pg_` key | free |
 
 ## API
 
