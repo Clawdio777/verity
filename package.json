@@ -45,6 +45,7 @@
     "@anthropic-ai/sdk": "^0.39.0",
     "@coinbase/x402": "^2.1.0",
     "@supabase/supabase-js": "^2.49.0",
+    "@vercel/functions": "^3.10.2",
     "@vercel/node": "^5.0.0",
     "@x402/core": "^2.14.0",
     "@x402/evm": "^2.14.0",
