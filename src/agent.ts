@@ -12,7 +12,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { tools, executeTool } from "./tools.js";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
+// maxRetries 4 (SDK default 2): rides out short overloads/5xx with backoff before a paid run is failed.
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY!, maxRetries: 4 });
 
 // Behavioural instructions only. Marketing copy belongs in public/index.html and the agent card,
 // not here: between May and September 2026 automated "auto:" commits stacked seven near-identical
@@ -155,8 +156,10 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
 
     if (response.stop_reason === "end_turn" || response.stop_reason === "max_tokens") {
       const textBlock = response.content.find((b) => b.type === "text");
+      // An empty answer is a failed run: throw so the paid routes don't charge for it.
+      if (textBlock?.type !== "text" || !textBlock.text.trim()) throw new Error("No response produced");
       return {
-        response: textBlock?.type === "text" ? textBlock.text : "No response produced.",
+        response: textBlock.text,
         tool_calls_made: toolCallsMade,
         tokens_used: totalTokens,
       };
@@ -194,9 +197,5 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
     break;
   }
 
-  return {
-    response: "Agent completed without a final response.",
-    tool_calls_made: toolCallsMade,
-    tokens_used: totalTokens,
-  };
+  throw new Error("Agent completed without a final response");
 }
