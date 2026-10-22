@@ -5,10 +5,12 @@
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { HTTPFacilitatorClient } from "@x402/core/server";
-import type { PaymentRequired, PaymentPayload, PaymentRequirements } from "@x402/core/types";
+import { SettleError, type PaymentRequired, type PaymentPayload, type PaymentRequirements } from "@x402/core/types";
 import { x402Version as X402_VERSION } from "@x402/core";
 import { createFacilitatorConfig } from "@coinbase/x402";
 import { declareDiscoveryExtension } from "@x402/extensions";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createHash } from "node:crypto";
 
 export const facilitatorClient = new HTTPFacilitatorClient(
   process.env.CDP_API_KEY_NAME && process.env.CDP_API_KEY_PRIVATE_KEY
@@ -18,6 +20,16 @@ export const facilitatorClient = new HTTPFacilitatorClient(
       )
     : {}
 );
+
+// Without CDP keys the client above points at the default x402.org facilitator, which does not settle
+// Base mainnet for us. Paid routes refuse with 500 instead of quietly using it (fail closed).
+export const PAYMENTS_NOT_CONFIGURED = "payments not configured";
+export function paymentsConfigured(): boolean {
+  return !!(process.env.CDP_API_KEY_NAME?.trim() && process.env.CDP_API_KEY_PRIVATE_KEY?.trim());
+}
+
+// Obvious placeholder for the discovery listing, so a copied example is clearly not a real caller id.
+export const DISCOVERY_CALLER_ID_EXAMPLE = "YOUR-AGENT-OR-DOMAIN-ID";
 
 const PAYMENT_ADDRESS = "0x400d65bb174c546ed92f5d61ce21fbde96b8bacc";
 const USDC_ASSET      = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
@@ -42,7 +54,7 @@ export function buildBazaarExtension(opts: {
 }) {
   const base = declareDiscoveryExtension({
     bodyType: "json",
-    input: { query: opts.queryExample, caller_id: "my-agent-id" },
+    input: { query: opts.queryExample, caller_id: DISCOVERY_CALLER_ID_EXAMPLE },
     inputSchema: {
       properties: {
         query:     { type: "string", description: opts.queryDescription },
@@ -99,7 +111,7 @@ export function send402(
 // Before: the payment was settled first and the work ran after, so a failed run (model error, outage)
 // left the buyer charged with nothing to show. Now: verifyPayment() checks the signed payment, the
 // route does the work, and settlePayment() takes the money only once there is a result to deliver.
-// If the work fails, sendNotCharged() tells the buyer nothing was taken and emails Carly.
+// If the work fails, sendNotCharged() tells the buyer nothing was taken and alerts Carly.
 export interface PendingPayment {
   /** Raw payment header, for query_log ("internal-bypass" for PayGated calls). */
   header: string;
@@ -107,7 +119,7 @@ export interface PendingPayment {
   reqs?: PaymentRequirements;
 }
 
-// Returns the verified (not yet settled) payment, or null if a 402/500 was already sent.
+// Returns the verified and claimed (not yet settled) payment, or null if a response was already sent.
 export async function verifyPayment(
   req: VercelRequest,
   res: VercelResponse,
@@ -127,6 +139,12 @@ export async function verifyPayment(
 
   if (!xPaymentHeader) {
     send402(res, paymentReqs, bazaarExtension, resourceUrl, resourceDesc);
+    return null;
+  }
+
+  if (!paymentsConfigured()) {
+    console.error("[verity] CDP_API_KEY_NAME / CDP_API_KEY_PRIVATE_KEY missing: refusing paid request");
+    res.status(500).json({ error: PAYMENTS_NOT_CONFIGURED });
     return null;
   }
 
@@ -151,31 +169,109 @@ export async function verifyPayment(
     return null;
   }
 
-  return { header: xPaymentHeader, payload: paymentPayload, reqs: paymentReqs };
+  const payment = { header: xPaymentHeader, payload: paymentPayload, reqs: paymentReqs };
+  if (!(await claimPayment(res, payment))) return null;
+  return payment;
+}
+
+// ── One signed payment, one run (same design as AEONOS) ──────────────────────
+// Settling after the work leaves a window where the same signed payment could be sent again (or in
+// parallel) and get the work done twice. Each payment is claimed in public.payment_claims (primary key)
+// before any work starts; a second claim is refused. If the claim can't be recorded, the work doesn't start.
+export function paymentId(payload: PaymentPayload): string {
+  return createHash("sha256").update(JSON.stringify(payload.payload)).digest("hex");
+}
+
+let claimsDb: SupabaseClient | undefined;
+
+export const PAYMENT_ALREADY_USED_MESSAGE =
+  "This payment has already been used for a request. Sign a new payment to run another one. Nothing more was charged.";
+
+// Returns true if this payment is new and now claimed; otherwise sends 409/503 and returns false.
+export async function claimPayment(res: VercelResponse, p: PendingPayment): Promise<boolean> {
+  if (!p.payload) return true;
+  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) {
+    console.error("[verity] payment claim failed: SUPABASE_URL / SUPABASE_SERVICE_KEY missing");
+    res.status(503).json({ status: "failed", charged: false, error: NOT_CHARGED_MESSAGE });
+    return false;
+  }
+  claimsDb ??= createClient(url, key);
+  let code: string | undefined, message = "";
+  try {
+    const { error } = await claimsDb.from("payment_claims").insert({ id: paymentId(p.payload) });
+    if (!error) return true;
+    code = error.code; message = error.message;
+  } catch (e: unknown) {
+    message = e instanceof Error ? e.message : String(e);
+  }
+  if (code === "23505") {
+    res.status(409).json({ status: "failed", charged: false, error: PAYMENT_ALREADY_USED_MESSAGE });
+    return false;
+  }
+  console.error("[verity] payment claim failed:", message);
+  res.status(503).json({ status: "failed", charged: false, error: NOT_CHARGED_MESSAGE });
+  return false;
 }
 
 export type SettleOutcome =
-  | { ok: true; paymentResponse?: string }
+  | { ok: true; paymentResponse?: string; pendingTx?: string }
   | { ok: false; reason: string };
 
-// Takes the money. Call only once the result is ready to send. Internal (PayGated) calls are a no-op.
-export async function settlePayment(p: PendingPayment): Promise<SettleOutcome> {
-  if (!p.payload || !p.reqs) return { ok: true };
+// The facilitator's non-terminal "settlement_pending" failure (as in @x402/core's x402ResourceServer).
+const SETTLEMENT_PENDING = "settlement_pending";
+type SettleAttempt = { success: boolean; errorReason?: string; transaction?: string };
+
+async function attemptSettle(p: PendingPayment & { payload: PaymentPayload; reqs: PaymentRequirements }): Promise<SettleAttempt> {
   try {
-    const r = await facilitatorClient.settle(p.payload, p.reqs);
-    if (!r.success) return { ok: false, reason: r.errorReason || "settlement_failed" };
-    return { ok: true, paymentResponse: Buffer.from(JSON.stringify(r)).toString("base64") };
-  } catch (e: any) {
-    console.error("[verity] settle error:", e.message);
-    return { ok: false, reason: "settlement_failed" };
+    return await facilitatorClient.settle(p.payload, p.reqs);
+  } catch (e: unknown) {
+    // A non-2xx facilitator reply with a settle body arrives as SettleError, carrying reason and tx hash.
+    if (e instanceof SettleError) return { success: false, errorReason: e.errorReason, transaction: e.transaction };
+    console.error("[verity] settle error:", e instanceof Error ? e.message : String(e));
+    return { success: false, errorReason: "settlement_failed" };
   }
+}
+
+const isPending = (r: SettleAttempt) => !r.success && r.errorReason === SETTLEMENT_PENDING;
+
+// Takes the money. Call only once the result is ready to send. Internal (PayGated) calls are a no-op.
+// - "settlement_pending" with a tx hash: retried once with the identical payload (as x402ResourceServer's
+//   settleWithPendingRetry does). Still pending: the buyer has most likely paid, so the result is delivered
+//   and Carly is alerted with the tx hash to check on-chain.
+// - Any other failure: the route withholds the result; Carly is alerted, since the work was done unpaid.
+export async function settlePayment(p: PendingPayment, route: string, caller_id: string): Promise<SettleOutcome> {
+  if (!p.payload || !p.reqs) return { ok: true };
+  const pay = { ...p, payload: p.payload, reqs: p.reqs };
+  let r = await attemptSettle(pay);
+  if (isPending(r) && r.transaction) r = await attemptSettle(pay);
+
+  if (r.success) return { ok: true, paymentResponse: Buffer.from(JSON.stringify(r)).toString("base64") };
+
+  if (isPending(r)) {
+    const tx = r.transaction || "none reported";
+    console.error(`[verity/${route}] settlement still pending after one retry, result delivered. tx:`, tx);
+    await alertCarly(
+      `VERITY: payment for a ${route} request is still pending (result delivered)`,
+      `A paying request to /api/${route} finished the work, but the facilitator still reports the payment as settlement_pending after one retry. The buyer has most likely paid, so the result was delivered.\n\nCaller: ${caller_id}\nTransaction: ${tx}\nTime: ${new Date().toISOString()}\n\nCheck the transaction on basescan.org to confirm it landed.`,
+    );
+    return { ok: true, pendingTx: tx };
+  }
+
+  const reason = r.errorReason || "settlement_failed";
+  console.error(`[verity/${route}] settlement failed after the work succeeded, result withheld:`, reason);
+  await alertCarly(
+    `VERITY: payment for a ${route} request failed to settle (result withheld)`,
+    `A paying request to /api/${route} finished the work, but settling the payment failed, so the result was withheld and nothing was charged.\n\nCaller: ${caller_id}\nReason: ${reason}\nTime: ${new Date().toISOString()}\n\nIf this repeats, check the CDP facilitator and the Vercel logs for verity.`,
+  );
+  return { ok: false, reason };
 }
 
 export const NOT_CHARGED_MESSAGE =
   "VERITY could not finish this request, so your payment was not taken. Nothing was charged. Please try again in a few minutes.";
 
 // The work failed before settlement: the buyer keeps their money. Sends a clear message (no raw error)
-// and emails Carly so a run of failures is noticed the same day.
+// and alerts Carly so a run of failures is noticed the same day.
 export async function sendNotCharged(res: VercelResponse, route: string, caller_id: string, err: unknown) {
   await alertPaidFailure(route, caller_id, err);
   return res.status(503).json({ status: "failed", charged: false, error: NOT_CHARGED_MESSAGE });
@@ -184,21 +280,34 @@ export async function sendNotCharged(res: VercelResponse, route: string, caller_
 export async function alertPaidFailure(route: string, caller_id: string, err: unknown) {
   const detail = err instanceof Error ? err.message : String(err);
   console.error(`[verity/${route}] paid run failed, not charged:`, detail);
+  await alertCarly(
+    `VERITY: a paid ${route} request failed (buyer not charged)`,
+    `A paying request to /api/${route} failed before delivery, so the payment was not taken.\n\nCaller: ${caller_id}\nError: ${detail.slice(0, 500)}\nTime: ${new Date().toISOString()}\n\nIf this repeats, check the Vercel logs for verity.`,
+  );
+}
+
+// Email (Resend) and Telegram, each sent only if its env vars are set. Never throws.
+export async function alertCarly(subject: string, text: string) {
   const key = process.env.RESEND_API_KEY, to = process.env.NOTIFY_EMAIL;
-  if (!key || !to) return;
-  try {
-    await fetch("https://api.resend.com/emails", {
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN, tgChat = process.env.TELEGRAM_CHAT_ID;
+  await Promise.all([
+    key && to && fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${key.trim()}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: (process.env.RESEND_FROM || "VERITY <noreply@resend.dev>").trim(),
         to: to.trim(),
-        subject: `VERITY: a paid ${route} request failed (buyer not charged)`,
-        text: `A paying request to /api/${route} failed before delivery, so the payment was not taken.\n\nCaller: ${caller_id}\nError: ${detail.slice(0, 500)}\nTime: ${new Date().toISOString()}\n\nIf this repeats, check the Vercel logs for verity.`,
+        subject,
+        text,
       }),
       signal: AbortSignal.timeout(5_000),
-    });
-  } catch (e: any) {
-    console.error("[verity] failure alert email failed:", e.message);
-  }
+    }).catch((e: unknown) => console.error("[verity] alert email failed:", e instanceof Error ? e.message : String(e))),
+    // Log only the error name: a fetch error message could include the bot token from the URL.
+    tgToken && tgChat && fetch(`https://api.telegram.org/bot${tgToken.trim()}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: tgChat.trim(), text: `${subject}\n\n${text}`.slice(0, 4000) }),
+      signal: AbortSignal.timeout(5_000),
+    }).catch((e: unknown) => console.error("[verity] alert Telegram failed:", e instanceof Error ? e.name : "error")),
+  ]);
 }

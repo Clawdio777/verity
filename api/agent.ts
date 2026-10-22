@@ -10,22 +10,14 @@
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
-import { HTTPFacilitatorClient } from "@x402/core/server";
 import type { PaymentRequired, PaymentPayload, PaymentRequirements } from "@x402/core/types";
 import { x402Version as X402_VERSION } from "@x402/core";
-import { createFacilitatorConfig } from "@coinbase/x402";
 import { declareDiscoveryExtension } from "@x402/extensions";
 import { runAgent } from "../src/agent.js";
-import { settlePayment, alertPaidFailure, NOT_CHARGED_MESSAGE, type PendingPayment } from "./_x402-gate.js";
-
-const facilitatorClient = new HTTPFacilitatorClient(
-  process.env.CDP_API_KEY_NAME && process.env.CDP_API_KEY_PRIVATE_KEY
-    ? createFacilitatorConfig(
-        process.env.CDP_API_KEY_NAME.trim(),
-        process.env.CDP_API_KEY_PRIVATE_KEY.trim()
-      )
-    : {}
-);
+import {
+  facilitatorClient, paymentsConfigured, PAYMENTS_NOT_CONFIGURED, DISCOVERY_CALLER_ID_EXAMPLE,
+  settlePayment, alertPaidFailure, claimPayment, NOT_CHARGED_MESSAGE, type PendingPayment,
+} from "./_x402-gate.js";
 
 const PRICE_USDC = 0.10;
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
@@ -88,6 +80,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const paymentReqs = buildPaymentRequirements();
   if (!xPaymentHeader) return send402(res, paymentReqs);
 
+  if (!paymentsConfigured()) {
+    console.error("[verity] CDP_API_KEY_NAME / CDP_API_KEY_PRIVATE_KEY missing: refusing paid request");
+    return res.status(500).json({ error: PAYMENTS_NOT_CONFIGURED });
+  }
+
   let paymentPayload: PaymentPayload;
   try {
     paymentPayload = JSON.parse(Buffer.from(xPaymentHeader, "base64").toString("utf8")) as PaymentPayload;
@@ -106,6 +103,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Verified, not settled: each pattern below settles only once it has a result to deliver
   // (see _x402-gate.ts "Charge only after the work succeeds").
   const payment: PendingPayment = { header: xPaymentHeader, payload: paymentPayload, reqs: paymentReqs };
+  if (!(await claimPayment(res, payment))) return;
 
   try {
     if (isStream)  return await handleStream(res, query, caller_id, payment);
@@ -121,7 +119,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 async function handleSync(res: VercelResponse, query: string, caller_id: string, isJsonRpc: boolean, jsonRpcId: any, payment?: PendingPayment) {
   const result = await runAgent({ query, caller_id });
   if (payment) {
-    const settled = await settlePayment(payment);
+    const settled = await settlePayment(payment, "agent", caller_id);
     if (!settled.ok) return send402(res, payment.reqs!, settled.reason);
     if (settled.paymentResponse) res.setHeader("PAYMENT-RESPONSE", settled.paymentResponse);
   }
@@ -152,7 +150,7 @@ async function handleAsync(req: VercelRequest, res: VercelResponse, query: strin
     const result = await runAgent({ query, caller_id });
     let payment_response: string | undefined;
     if (payment) {
-      const settled = await settlePayment(payment);
+      const settled = await settlePayment(payment, "agent", caller_id);
       if (!settled.ok) {
         await db.schema("verity").from("tasks").update({
           status: "failed",
@@ -214,7 +212,7 @@ async function handleStream(res: VercelResponse, query: string, caller_id: strin
     // Headers are already sent on a stream, so the settlement receipt goes in the final event.
     let payment_response: string | undefined;
     if (payment) {
-      const settled = await settlePayment(payment);
+      const settled = await settlePayment(payment, "agent", caller_id);
       if (!settled.ok) {
         send({ status: "failed", charged: false, error: `Payment could not be completed (${settled.reason}). Nothing was charged.` });
         return res.end();
@@ -268,7 +266,7 @@ function buildPaymentRequirements(): PaymentRequirements {
 
 const _bazaarBase = declareDiscoveryExtension({
   bodyType: "json",
-  input: { query: "Is GPT-4 still the most capable AI model?", caller_id: "my-agent-id" },
+  input: { query: "Is GPT-4 still the most capable AI model?", caller_id: DISCOVERY_CALLER_ID_EXAMPLE },
   inputSchema: {
     properties: {
       query:     { type: "string", description: "Claim, URL, or question to verify. E.g. 'Is X still true?', 'Check this URL: https://...'." },
