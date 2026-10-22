@@ -178,8 +178,26 @@ export async function verifyPayment(
 // Settling after the work leaves a window where the same signed payment could be sent again (or in
 // parallel) and get the work done twice. Each payment is claimed in public.payment_claims (primary key)
 // before any work starts; a second claim is refused. If the claim can't be recorded, the work doesn't start.
+// The id is the payer plus the authorisation's nonce (EIP-3009 `authorization` or Permit2
+// `permit2Authorization`): the token contract accepts each payer+nonce once, so this is the payment's real
+// identity however the JSON is re-encoded or re-signed. A hash of the raw JSON (the earlier version) could be
+// dodged by reordering keys. Payloads without a nonce fall back to a key-sorted hash.
+// payment_claims is shared with AEONOS (same database); payer+nonce ids can't collide across the two.
 export function paymentId(payload: PaymentPayload): string {
-  return createHash("sha256").update(JSON.stringify(payload.payload)).digest("hex");
+  const p = (payload.payload ?? {}) as Record<string, any>;
+  const auth = p.authorization ?? p.permit2Authorization;
+  const from = typeof auth?.from === "string" ? auth.from.toLowerCase() : "";
+  const nonce = auth?.nonce != null ? String(auth.nonce).toLowerCase() : "";
+  const key = from && nonce ? `evm|${from}|${nonce}` : `raw|${canonicalJson(p)}`;
+  return createHash("sha256").update(key).digest("hex");
+}
+
+function canonicalJson(v: unknown): string {
+  if (Array.isArray(v)) return `[${v.map(canonicalJson).join(",")}]`;
+  if (v && typeof v === "object") {
+    return `{${Object.keys(v).sort().map(k => `${JSON.stringify(k)}:${canonicalJson((v as any)[k])}`).join(",")}}`;
+  }
+  return JSON.stringify(v);
 }
 
 let claimsDb: SupabaseClient | undefined;

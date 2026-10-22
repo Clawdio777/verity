@@ -14,9 +14,10 @@ import type { PaymentRequired, PaymentPayload, PaymentRequirements } from "@x402
 import { x402Version as X402_VERSION } from "@x402/core";
 import { declareDiscoveryExtension } from "@x402/extensions";
 import { runAgent } from "../src/agent.js";
+import { waitUntil } from "@vercel/functions";
 import {
   facilitatorClient, paymentsConfigured, PAYMENTS_NOT_CONFIGURED, DISCOVERY_CALLER_ID_EXAMPLE,
-  settlePayment, alertPaidFailure, claimPayment, NOT_CHARGED_MESSAGE, type PendingPayment,
+  settlePayment, alertPaidFailure, alertCarly, claimPayment, NOT_CHARGED_MESSAGE, type PendingPayment,
 } from "./_x402-gate.js";
 
 const PRICE_USDC = 0.10;
@@ -146,6 +147,11 @@ async function handleAsync(req: VercelRequest, res: VercelResponse, query: strin
   const immediate = { task_id: task.id, status: "working" };
   isJsonRpc ? res.json({ jsonrpc: "2.0", id: jsonRpcId, result: immediate }) : res.json(immediate);
 
+  // Run after the response. waitUntil keeps the function alive until the run, settlement and task update
+  // finish; without it Vercel may cut the work off once the response has been sent.
+  waitUntil((async () => {
+  // Once settled, the buyer has paid: a later failure must never be reported as "not charged".
+  let charged = false;
   try {
     const result = await runAgent({ query, caller_id });
     let payment_response: string | undefined;
@@ -160,6 +166,7 @@ async function handleAsync(req: VercelRequest, res: VercelResponse, query: strin
         return;
       }
       payment_response = settled.paymentResponse;
+      charged = true;
     }
     await logVerification(caller_id, query, result).catch((e) => console.error("[verity] log write failed:", e.message));
     await db.schema("verity").from("tasks").update({
@@ -172,9 +179,20 @@ async function handleAsync(req: VercelRequest, res: VercelResponse, query: strin
       completed_at: new Date().toISOString(),
     }).eq("id", task.id);
   } catch (e: any) {
-    if (payment) await alertPaidFailure("agent", caller_id, e);
-    await db.schema("verity").from("tasks").update({ status: "failed", error: payment ? NOT_CHARGED_MESSAGE : e.message, completed_at: new Date().toISOString() }).eq("id", task.id);
+    if (charged) {
+      await alertCarly(
+        "VERITY: a paid async task was charged but its result could not be saved",
+        `Caller: ${caller_id}\nTask: ${task.id}\nError: ${String(e?.message ?? e).slice(0, 500)}\n\nThe buyer paid. Resend the result or refund them.`,
+      );
+    } else if (payment) {
+      await alertPaidFailure("agent", caller_id, e);
+    }
+    const error = charged
+      ? "Your payment went through but the result could not be saved. VERITY has been alerted and will resend it or refund you."
+      : payment ? NOT_CHARGED_MESSAGE : e.message;
+    await db.schema("verity").from("tasks").update({ status: "failed", error, completed_at: new Date().toISOString() }).eq("id", task.id);
   }
+  })().catch((e: any) => console.error("[verity] async task update failed:", e.message)));
 }
 
 async function handleTaskPoll(req: VercelRequest, res: VercelResponse) {

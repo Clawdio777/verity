@@ -1,9 +1,11 @@
 -- ── Payment claims (22/10/2026) ────────────────────────────────────────────────
 -- VERITY settles an x402 payment only after the work succeeds. To stop one signed payment getting the
--- work done twice, each payment (sha256 of its signed payload) is claimed here before any work starts.
+-- work done twice, each payment (sha256 of payer + authorisation nonce) is claimed here before any work starts.
 -- A second insert with the same id fails on the primary key and is refused (409).
 -- Server-only: written with the service role, never exposed to anon or authenticated clients.
--- Same design as AEONOS 004_payment_claims.sql.
+-- Same design as AEONOS 004_payment_claims.sql. VERITY uses the AEONOS database (project wwglcsdolnvgrdzgoumg),
+-- where this exact table was already created on 22/10/2026, so nothing needs applying; this file documents it
+-- and is a no-op (`if not exists`) if run again.
 
 create table if not exists public.payment_claims (
   id          text primary key,             -- sha256 hex of the signed x402 payload
