@@ -258,7 +258,8 @@ async function logVerification(caller_id: string, query: string, result: { tool_
   const verdict  = response.match(/"verdict"\s*:\s*"(\w+)"/)?.[1] ?? "UNVERIFIABLE";
   const confidence = parseInt(response.match(/"confidence"\s*:\s*(\d+)/)?.[1] ?? "0", 10);
 
-  await db.schema("verity").from("verification_log").insert({
+  // supabase-js returns a failed insert as { error } instead of throwing: surface it so callers log it.
+  const { error } = await db.schema("verity").from("verification_log").insert({
     caller_id,
     claim: query.substring(0, 500),
     verdict,
@@ -268,6 +269,7 @@ async function logVerification(caller_id: string, query: string, result: { tool_
     response_tokens: result.tokens_used,
     payment_usdc: PRICE_USDC,
   });
+  if (error) throw new Error(error.message);
 }
 
 function buildPaymentRequirements(): PaymentRequirements {
