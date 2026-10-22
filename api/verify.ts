@@ -8,7 +8,7 @@
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
-import { requirePayment, buildPaymentReqs, buildBazaarExtension, send402 } from "./_x402-gate.js";
+import { buildPaymentReqs, buildBazaarExtension, send402, verifyPayment, settlePayment, sendNotCharged } from "./_x402-gate.js";
 import { runAgent } from "../src/agent.js";
 
 const PRICE_USDC    = 0.10;
@@ -42,13 +42,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const claim     = req.body?.claim || req.body?.query || "";
   const caller_id = req.body?.caller_id || "anon";
 
-  const paymentHeader = await requirePayment(req, res, PRICE_USDC, BAZAAR, RESOURCE_URL(), RESOURCE_DESC);
-  if (paymentHeader === null) return;
+  const payment = await verifyPayment(req, res, PRICE_USDC, BAZAAR, RESOURCE_URL(), RESOURCE_DESC);
+  if (payment === null) return;
 
   try {
     const directive = `Verify the following claim and return a VerityResult JSON object.\n\nClaim: ${claim}`;
     const result    = await runAgent({ query: directive, caller_id });
 
+    // Charge only now that the result is ready (see _x402-gate.ts "Charge only after the work succeeds").
+    const settled = await settlePayment(payment);
+    if (!settled.ok) return send402(res, buildPaymentReqs(PRICE_USDC), BAZAAR, RESOURCE_URL(), RESOURCE_DESC, settled.reason);
+    if (settled.paymentResponse) res.setHeader("PAYMENT-RESPONSE", settled.paymentResponse);
+
+    // After settlement: a failed log write must not turn a charged success into "not charged".
     await db.schema("verity").from("verification_log").insert({
       caller_id,
       claim,
@@ -58,7 +64,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       url_checked: claim.startsWith("http"),
       response_tokens: result.tokens_used,
       payment_usdc: PRICE_USDC,
-    });
+    }).then(undefined, (e: any) => console.error("[verity/verify] log write failed:", e.message));
 
     return res.json({
       status:   "completed",
@@ -66,7 +72,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       tokens:   result.tokens_used,
     });
   } catch (e: any) {
-    return res.status(500).json({ error: e.message });
+    return sendNotCharged(res, "verify", caller_id, e);
   }
 }
 

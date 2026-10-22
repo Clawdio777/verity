@@ -7,7 +7,7 @@
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
-import { requirePayment, buildPaymentReqs, buildBazaarExtension, send402 } from "./_x402-gate.js";
+import { buildPaymentReqs, buildBazaarExtension, send402, verifyPayment, settlePayment, sendNotCharged } from "./_x402-gate.js";
 import { runAgent } from "../src/agent.js";
 
 const PRICE_USDC    = 0.75;
@@ -56,8 +56,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const caller_id = req.body?.caller_id || "anon";
 
-  const paymentHeader = await requirePayment(req, res, PRICE_USDC, BAZAAR, RESOURCE_URL(), RESOURCE_DESC);
-  if (paymentHeader === null) return;
+  const payment = await verifyPayment(req, res, PRICE_USDC, BAZAAR, RESOURCE_URL(), RESOURCE_DESC);
+  if (payment === null) return;
 
   try {
     // Run all claims concurrently
@@ -68,6 +68,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return { claim, result: result.response, tokens: result.tokens_used };
       })
     );
+
+    // Charge only now that the result is ready (see _x402-gate.ts "Charge only after the work succeeds").
+    const settled = await settlePayment(payment);
+    if (!settled.ok) return send402(res, buildPaymentReqs(PRICE_USDC), BAZAAR, RESOURCE_URL(), RESOURCE_DESC, settled.reason);
+    if (settled.paymentResponse) res.setHeader("PAYMENT-RESPONSE", settled.paymentResponse);
 
     const totalTokens = results.reduce((sum, r) => sum + r.tokens, 0);
 
@@ -85,7 +90,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           payment_usdc: PRICE_USDC / claims.length,
         })
       )
-    );
+    ).catch((e: any) => console.error("[verity/batch-verify] log write failed:", e.message));
 
     return res.json({
       status:   "completed",
@@ -97,7 +102,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       tokens: totalTokens,
     });
   } catch (e: any) {
-    return res.status(500).json({ error: e.message });
+    return sendNotCharged(res, "batch-verify", caller_id, e);
   }
 }
 

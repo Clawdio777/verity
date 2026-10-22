@@ -8,7 +8,7 @@
 
 import { createInterface } from "readline";
 import { execFileSync, execSync, spawn } from "child_process";
-import { writeFileSync, mkdirSync } from "fs";
+import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { homedir } from "os";
 
@@ -129,41 +129,7 @@ async function handleEvent(raw) {
 
     jobLog(jobId, `Offering: ${offering} | Endpoint: ${config.endpoint} | Query:`, query.slice(0, 100));
 
-    try {
-      const res = await fetch(`${VERITY_API_BASE}${config.endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, caller_id }),
-        signal: AbortSignal.timeout(VERITY_TIMEOUT_MS),
-      });
-
-      if (!res.ok) {
-        throw new Error(`VERITY API ${res.status}: ${await res.text().then(t => t.slice(0, 200))}`);
-      }
-
-      const data = await res.json();
-      const deliverable = data.artifact?.parts?.[0]?.text
-        ?? data.response
-        ?? data.result
-        ?? JSON.stringify(data);
-
-      jobLog(jobId, `VERITY response (${deliverable.length} chars). Submitting...`);
-
-      execFileSync(ACP_BIN, [
-        "provider", "submit",
-        "--job-id",      jobId,
-        "--deliverable", deliverable,
-        "--chain-id",    String(job.chainId),
-      ], { encoding: "utf8", timeout: ACP_TIMEOUT_MS, env: acpEnv() });
-
-      jobLog(jobId, "Submitted ✓");
-      jobs.delete(jobId);
-      sweepIfNeeded().catch(e => log("[Sweep] unhandled:", e.message));
-
-    } catch (e) {
-      jobLog(jobId, "Submit ERROR:", e.message.slice(0, 300));
-      job.submitted = false;
-    }
+    await deliverWithRetry(jobId, job, config.endpoint, query, caller_id);
   }
 
   // Clean up
@@ -171,6 +137,93 @@ async function handleEvent(raw) {
     jobLog(jobId, `Job ${status} — cleaning up`);
     jobs.delete(jobId);
   }
+}
+
+// ── Delivery fail-safe (22/10/2026, same as AEONOS #42) ──────────────────────
+// Before: a failed run waited for another job event to retry, and often none came, so the buyer sat on a
+// funded job until it expired. Now the seller retries on its own; if every try fails it tells the buyer
+// in the job room and pings Carly. A provider can't reject on ACP, so the buyer's escrow is refunded
+// automatically when the job expires and they are never charged for undelivered work.
+const RETRY_DELAYS_MS = [0, 60_000, 180_000];
+
+async function deliverWithRetry(jobId, job, endpoint, query, caller_id) {
+  let lastError = "";
+  for (const [i, delay] of RETRY_DELAYS_MS.entries()) {
+    if (delay) await new Promise(r => setTimeout(r, delay));
+    try {
+      await deliverOnce(jobId, job, endpoint, query, caller_id);
+      return;
+    } catch (e) {
+      lastError = e.message.slice(0, 300);
+      jobLog(jobId, `Submit ERROR (try ${i + 1}/${RETRY_DELAYS_MS.length}):`, lastError);
+    }
+  }
+  jobLog(jobId, "All delivery tries failed; telling the buyer and Carly");
+  try {
+    execFileSync(ACP_BIN, [
+      "message", "send",
+      "--job-id",   jobId,
+      "--chain-id", String(job.chainId),
+      "--content",  "Sorry, VERITY could not complete this job. Your payment stays in escrow and is refunded automatically when the job expires; you will not be charged. Please try again later.",
+    ], { encoding: "utf8", timeout: ACP_TIMEOUT_MS, env: acpEnv() });
+  } catch (e) {
+    jobLog(jobId, "Buyer message failed:", e.message.slice(0, 200));
+  }
+  try {
+    execFileSync(`${process.env.HOME}/bin/ping-carly`,
+      [`⚠️ VERITY (Virtuals) job ${jobId} failed after ${RETRY_DELAYS_MS.length} tries. Buyer told; escrow refunds them on expiry. Last error: ${lastError.slice(0, 200)}`],
+      { timeout: 15_000 });
+  } catch (e) {
+    jobLog(jobId, "Telegram ping failed:", e.message.slice(0, 200));
+  }
+}
+
+// Virtuals buyers pay through ACP escrow, so the seller calls VERITY with the internal key (PayGated bypass).
+// Without it every call got 402 and no Virtuals job could ever be delivered (found 22/10/2026).
+// Read at call time from the secrets store so a rotation needs no seller restart. Never logged.
+function internalKey() {
+  if (process.env.VERITY_INTERNAL_API_KEY) return process.env.VERITY_INTERNAL_API_KEY.trim();
+  try {
+    const line = readFileSync(`${process.env.HOME}/.config/codi/secrets.env`, "utf8")
+      .split("\n").find(l => /^(export\s+)?VERITY_INTERNAL_API_KEY=/.test(l));
+    return line ? line.split("=").slice(1).join("=").trim().replace(/^["']|["']$/g, "") : "";
+  } catch {
+    return "";
+  }
+}
+
+async function deliverOnce(jobId, job, endpoint, query, caller_id) {
+  const key = internalKey();
+  if (!key) throw new Error("VERITY internal key not found (VERITY_INTERNAL_API_KEY)");
+  const res = await fetch(`${VERITY_API_BASE}${endpoint}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-internal-key": key },
+    body: JSON.stringify({ query, caller_id }),
+    signal: AbortSignal.timeout(VERITY_TIMEOUT_MS),
+  });
+
+  if (!res.ok) {
+    throw new Error(`VERITY API ${res.status}: ${await res.text().then(t => t.slice(0, 200))}`);
+  }
+
+  const data = await res.json();
+  const deliverable = data.artifact?.parts?.[0]?.text
+    ?? data.response
+    ?? data.result
+    ?? JSON.stringify(data);
+
+  jobLog(jobId, `VERITY response (${deliverable.length} chars). Submitting...`);
+
+  execFileSync(ACP_BIN, [
+    "provider", "submit",
+    "--job-id",      jobId,
+    "--deliverable", deliverable,
+    "--chain-id",    String(job.chainId),
+  ], { encoding: "utf8", timeout: ACP_TIMEOUT_MS, env: acpEnv() });
+
+  jobLog(jobId, "Submitted ✓");
+  jobs.delete(jobId);
+  sweepIfNeeded().catch(e => log("[Sweep] unhandled:", e.message));
 }
 
 // ── Fee resolution ─────────────────────────────────────────────────────────────
