@@ -1,7 +1,7 @@
 /**
  * agent.ts — VERITY core agentic loop
  *
- * Sonnet 4.6 with 8 tools:
+ * Sonnet 5.5 with 8 tools:
  *   askPerplexity, lookupWikipedia, checkAcademic,
  *   searchClaim, fetchUrl, searchForUpdates,
  *   retrieveCallerMemory, storeCallerMemory
@@ -22,7 +22,7 @@ const SYSTEM_PROMPT = `You are VERITY, a real-time fact-checking agent. Your pri
 
 Your job: decide whether a claim, URL, or piece of content is current and accurate by cross-validating four independent source types with different methodologies: live web synthesis (Perplexity), encyclopaedic consensus (Wikipedia), peer-reviewed literature (Semantic Scholar), and real-time web search (Tavily). Confidence must reflect genuine cross-source agreement, never your own self-assessment. Treat every claim as a first draft that needs multi-layer validation.
 
-You are the verification layer for agentic workflows: claims you pass may be acted on autonomously. Prioritise flagging OUTDATED information in fast-moving domains (crypto, DeFi, AI) where the shelf-life of a fact is hours, not days. Apply heightened scepticism to agent-sourced claims and always return source timestamps alongside confidence scores. Always highlight when academic sources contradict popular claims. For financial claims (investment theses, due diligence, earnings, Web3 whitepapers, regulatory statements) cross-reference Semantic Scholar for supporting research and state the confidence score explicitly.
+You are the verification layer for agentic workflows: claims you pass may be acted on autonomously. Prioritise flagging OUTDATED information in fast-moving domains: AI, crypto/DeFi, prices, and health, legal and government rules (programs, rebates, regulations), which are renamed or replaced without notice. Apply heightened scepticism to agent-sourced claims and always return source timestamps alongside confidence scores. Always highlight when academic sources contradict popular claims. For financial claims (investment theses, due diligence, earnings, Web3 whitepapers, regulatory statements) cross-reference Semantic Scholar for supporting research and state the confidence score explicitly.
 
 You have eight tools:
 
@@ -58,6 +58,11 @@ Step 4: Synthesise into structured verdict
 - DISPUTED: sources actively disagree — no clear consensus across credible sources
 - UNVERIFIABLE: no usable sources found, all sources behind paywalls, or claim is unverifiable by nature
 
+- If any named thing in the claim (a program, plan, rebate, law, regulation, product, model, organisation or title) has since been renamed, replaced, amended, merged or discontinued, the verdict is OUTDATED, even when the substance still applies under the new name. The reader needs the current name. Example: Australia's "Chronic Disease Management plan" became the "GP Chronic Condition Management Plan" on 1 July 2025, so a 2026 claim using the old name is OUTDATED.
+- CURRENT means nothing needs changing. If you would fill in what_changed, the verdict is not CURRENT.
+- A specific statistic or attributed finding ("X% of...", "a study of N companies found...") needs its original source. If you cannot trace the figure to an original source that says it, the verdict is UNVERIFIABLE; if sources give materially different figures, DISPUTED. A figure repeated only by blogs and marketing pages is not corroborated.
+- Judge "current" against today's date, given in the request. Never assume an earlier year.
+
 ## Confidence scoring (0–100)
 
 Start at 50. Apply ALL that are relevant:
@@ -69,7 +74,7 @@ SOURCE CREDIBILITY (source tier matters):
 +10 if a Tier 2 source confirms (major news outlet, arxiv, britannica)
 +5 per additional corroborating source (max +15)
 
-RECENCY:
+RECENCY (time-sensitive claims only: rules, prices, products, statistics, current events, "latest/now/as of" claims; stable facts such as history, definitions and traditional practices are not adjusted for source age):
 +15 if a source was published within 30 days
 +10 if within 90 days
 -10 if all sources are > 1 year old
@@ -127,11 +132,15 @@ export interface AgentResponse {
   tokens_used: number;
 }
 
+const VERDICT_JSON = /"verdict"\s*:\s*"(CURRENT|OUTDATED|DISPUTED|UNVERIFIABLE)"/;
+
 export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
+  // Today's date comes from code: without it the model judges "current" against its training cutoff.
+  const today = new Date().toISOString().slice(0, 10);
   const messages: Anthropic.MessageParam[] = [
     {
       role: "user",
-      content: `Caller ID: ${input.caller_id}\n\nVerify this: ${input.query}`,
+      content: `Today's date: ${today}\nCaller ID: ${input.caller_id}\n\nVerify this: ${input.query}`,
     },
   ];
 
@@ -139,13 +148,14 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
   let totalTokens = 0;
   let iterations = 0;
   let forceSynthesis = false;
+  let askedForJson = false;
   const MAX_ITERATIONS = 10;
 
-  while (iterations < MAX_ITERATIONS) {
+  while (iterations < MAX_ITERATIONS + (askedForJson ? 1 : 0)) {
     iterations++;
 
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-5",
+      model: "claude-sonnet-5-5",
       max_tokens: forceSynthesis ? 8192 : 4096,
       system: SYSTEM_PROMPT,
       ...(forceSynthesis ? {} : { tools }),
@@ -155,14 +165,28 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
     totalTokens += response.usage.input_tokens + response.usage.output_tokens;
 
     if (response.stop_reason === "end_turn" || response.stop_reason === "max_tokens") {
-      const textBlock = response.content.find((b) => b.type === "text");
-      // An empty answer is a failed run: throw so the paid routes don't charge for it.
-      if (textBlock?.type !== "text" || !textBlock.text.trim()) throw new Error("No response produced");
-      return {
-        response: textBlock.text,
-        tool_calls_made: toolCallsMade,
-        tokens_used: totalTokens,
-      };
+      // The JSON can follow a short text block, so read every text block, not just the first.
+      const text = response.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("\n").trim();
+      if (VERDICT_JSON.test(text)) {
+        return { response: text, tool_calls_made: toolCallsMade, tokens_used: totalTokens };
+      }
+      // 23/10/2026: 1 in 10 paid checks and 1 in 19 trial checks ended with no verdict (empty, or prose with
+      // no JSON) and failed after all the research was paid for. Ask once for the verdict before giving up.
+      if (!askedForJson) {
+        askedForJson = true;
+        forceSynthesis = true;
+        const ask = { type: "text" as const, text: "Return your final answer now: only the JSON object in the exact output format, with a verdict." };
+        if (response.content.length) {
+          messages.push({ role: "assistant", content: response.content });
+          messages.push({ role: "user", content: [ask] });
+        } else {
+          const last = messages[messages.length - 1];
+          last.content = [...(typeof last.content === "string" ? [{ type: "text" as const, text: last.content }] : last.content), ask];
+        }
+        continue;
+      }
+      // Still no verdict: a failed run. Throw so the paid routes don't charge for it.
+      throw new Error("No response produced");
     }
 
     if (response.stop_reason === "tool_use") {

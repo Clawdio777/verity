@@ -64,7 +64,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       url_checked: claim.startsWith("http"),
       response_tokens: result.tokens_used,
       payment_usdc: PRICE_USDC,
-    }).then(undefined, (e: any) => console.error("[verity/verify] log write failed:", e.message));
+    }).then(({ error }) => { if (error) console.error("[verity/verify] log write failed:", error.message); },
+      (e: any) => console.error("[verity/verify] log write failed:", e.message));
 
     return res.json({
       status:   "completed",

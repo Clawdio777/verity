@@ -88,7 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           url_checked: false,
           response_tokens: r.tokens,
           payment_usdc: PRICE_USDC / claims.length,
-        })
+        }).then(({ error }) => { if (error) throw new Error(error.message); })
       )
     ).catch((e: any) => console.error("[verity/batch-verify] log write failed:", e.message));
 
