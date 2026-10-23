@@ -11,6 +11,7 @@ import { execFileSync, execSync, spawn } from "child_process";
 import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { homedir } from "os";
+import { findTokenBalance } from "./sweep-balance.mjs";
 
 // ── Config ─────────────────────────────────────────────────────────────────────
 
@@ -37,6 +38,7 @@ const OFFERINGS = {
 // Sweep config — same personal wallet as AEONOS
 const SWEEP_DEST      = "0x282d873b3737144b45c507320c12f22edfd51fe3";
 const SWEEP_THRESHOLD = 5.00; // USDC — sweep when VERITY balance ≥ this
+const SWEEP_FEE_BUFFER = 1.00; // USDC left behind to pay the wallet's own network fee
 const USDC_CONTRACT   = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
 const BASE_RPC        = "https://mainnet.base.org";
 
@@ -305,18 +307,26 @@ async function sweepIfNeeded() {
       "wallet", "balance", "--chain-id", String(CHAIN_ID),
     ], { encoding: "utf8", timeout: 30_000, env: acpEnv() });
 
-    const match = balOut.match(/^USDC\s+\S+\s+([\d.]+)/m);
-    if (!match) { log("[Sweep] Could not parse USDC balance"); return; }
-
-    const balance = parseFloat(match[1]);
+    // Match the real USDC contract, not the "USDC" symbol: the wallet holds look-alike spam tokens.
+    const balance = findTokenBalance(balOut, USDC_CONTRACT);
+    if (balance === null) { log("[Sweep] Could not find the USDC row (contract " + USDC_CONTRACT + ") in acp wallet balance"); return; }
+    if (!Number.isFinite(balance)) { log("[Sweep] USDC balance not a number"); return; }
     if (balance < SWEEP_THRESHOLD) {
       log(`[Sweep] ${balance} USDC — below threshold, skipping`);
       return;
     }
 
-    log(`[Sweep] ${balance} USDC ≥ ${SWEEP_THRESHOLD} — sweeping to personal wallet`);
-    const tx = sendUSDC(SWEEP_DEST, balance);
-    log(`[Sweep] Swept ${balance} USDC. TX: ${tx}`);
+    // Keep a buffer: this smart wallet pays its network fee from its own balance, so sending 100% reverts
+    // (same failure AEONOS hit on 10/10/2026) while the bundle tx itself "succeeds".
+    const amount = parseFloat((balance - SWEEP_FEE_BUFFER).toFixed(6));
+    if (amount < 0.01) { log(`[Sweep] ${balance} USDC — nothing to send after the ${SWEEP_FEE_BUFFER} fee buffer`); return; }
+    const before = await getUSDCBalance(SWEEP_DEST);
+    const tx = sendUSDC(SWEEP_DEST, amount);
+    // Only report success once the destination wallet actually went up.
+    let after = before;
+    for (let i = 0; i < 12 && after < before + amount - 0.001; i++) { await new Promise(r => setTimeout(r, 10_000)); after = await getUSDCBalance(SWEEP_DEST); }
+    if (after >= before + amount - 0.001) log(`[Sweep] OK ${amount} USDC → personal wallet ${SWEEP_DEST} (now ${after}). TX: ${tx}`);
+    else log(`[Sweep] ERROR: sent ${amount} USDC but the personal wallet did not go up (still ${after}); the transfer probably reverted. TX: ${tx}`);
   } catch (e) {
     log("[Sweep] ERROR:", e.message.slice(0, 200));
   }
