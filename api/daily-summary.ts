@@ -5,11 +5,12 @@
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createClient } from "@supabase/supabase-js";
+import { bearerMatches } from "./_bearer.js";
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!bearerMatches(req.headers.authorization, process.env.CRON_SECRET)) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
