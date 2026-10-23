@@ -4,6 +4,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { bearerMatches } from "./_bearer.js";
 
 const PACKAGES = [
   { name: "@x402/core",        pinned: "2.11.0" },
@@ -14,7 +15,7 @@ const PACKAGES = [
 ];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!bearerMatches(req.headers.authorization, process.env.CRON_SECRET)) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
