@@ -1,0 +1,66 @@
+[
+ {
+  "id": "c096",
+  "verdict": "OUTDATED",
+  "seconds": 22.018,
+  "usd": 0.0973021,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was accurate from August 2022 until March 2024, when the helpful content system was a standalone system (the 'Helpful Content Update'). Google's own ranking-systems guide now lists it under 'Retired systems' and says it became part of the core ranking systems in March 2024. Google's March 2024 announcement says there is no longer one signal or system for this. Third-party SEO sources say the same thing, but I rely on Google's documentation. Today is 2026-11-17, and the claim no longer holds. The caller-memory lookup failed, so nothing was personalised.\",\n  \"what_changed\": \"In March 2024, with the March 2024 core update, Google folded the helpful content system into its core ranking systems. It is now listed as a retired system, and Google says it is no longer a single separate signal or system.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not repeat this claim. Say instead that the helpful content system was a separate system from 2022 to March 2024 and is now part of Google's core ranking systems.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2024-03-05\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ranking-systems-guide\",\n      \"title\": \"A guide to Google Search ranking systems | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"In March 2024, it evolved and [became part of](/search/blog/2024/03/core-update-spam-policies) our core ranking systems, as our systems use a variety of signals and systems to present helpful results to users.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2024/03/core-update-spam-policies\",\n      \"title\": \"What web creators should know about our March 2024 core update and new spam policies | Google Search Central Blog\",\n      \"published_date\": \"2024-03-05\",\n      \"quote\": \"There's no longer one signal or system used to do this, and we've also added a [new FAQ page](/search/help/helpful-content-faq) to help explain this change.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ranking-systems-guide\",\n      \"quote\": \"Announced in 2022](/search/blog/2022/08/helpful-content-update) as the \\\"Helpful Content Update\\\", this was a system designed to better ensure people see original, helpful content written by people, for people, in search results, rather than content made primarily to gain search engine traffic.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ]\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c098",
+  "verdict": "CURRENT",
+  "seconds": 19.971,
+  "usd": 0.0691744,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Anthropic's own Privacy Center page, fetched live, says this in its table for Claude-SearchBot. Disabling the bot prevents indexing of your content for search optimization, which may reduce your site's visibility and accuracy in user search results. The claim matches that wording. Secondary coverage (Search Engine Journal, Search Engine Land) and third-party pages updated as recently as Nov 2026 repeat the same wording. No renaming, retraction or change turned up. I could not retrieve caller memory because the tool errored, so no caller context was used. This did not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. If you want your content to appear in Claude's search results, allow Claude-SearchBot in robots.txt. You can block ClaudeBot separately to opt out of training.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://privacy.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler\",\n      \"title\": \"Does Anthropic crawl data from the web, and how can site owners block the crawler? | Anthropic Privacy Center\",\n      \"published_date\": null,\n      \"quote\": \"Disabling Claude-SearchBot on your site prevents our system from indexing your content for search optimization, which may reduce your site's visibility and accuracy in user search results.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"anthropic.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://searchengineland.com/anthropic-claude-bots-470171\",\n      \"title\": \"Anthropic clarifies how Claude bots crawl sites and how to block them\",\n      \"published_date\": null,\n      \"quote\": \"If you block Claude-SearchBot, Anthropic won’t index your content for search optimization, which may reduce visibility and accuracy in Claude-powered search answers.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"searchengineland.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c099",
+  "verdict": "OUTDATED",
+  "seconds": 25.201,
+  "usd": 0.0975443,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true for over a decade, but Google retired the tool. Google's Search Central Blog (24 Nov 2023) announced that the Search Console crawl rate limiter tool would be deprecated on 8 Jan 2024. Google said Googlebot now adjusts its crawl speed automatically from server responses, and the minimum crawl speed was lowered to roughly match the old limits. Site owners can no longer reduce the Googlebot crawl rate through a Search Console tool. Google's current documentation says to reduce crawling by returning 500, 503 or 429 HTTP status codes. A Googlebot report form remains for unusual activity and emergencies. A Search Central Community thread from Oct 2025 also asks for an alternative after the 'crawl rate control option' was removed. I did not find any sign that the tool has returned. The caller-memory lookup failed, so no caller context was used.\",\n  \"what_changed\": \"Google deprecated and removed the Search Console crawl rate limiter tool on 8 January 2024 (announced 24 Nov 2023). Crawl rate is now handled automatically. To reduce it, site owners return 500, 503 or 429 status codes, or use the Googlebot report form for emergencies.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not tell users to use a Search Console crawl rate limiter. Tell them to return 500, 503 or 429 status codes to slow Googlebot, or to use Google's Googlebot report form in emergencies.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2023-11-24\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/11/sc-crawl-limiter-byebye\",\n      \"title\": \"Upcoming deprecation of Crawl Rate Limiter Tool in Search Console | Google Search Central Blog\",\n      \"published_date\": \"2023-11-24\",\n      \"quote\": \"The crawl rate limiter tool in Search Console is being deprecated on Jan 8th, 2024.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/crawling-indexing/reduce-crawl-rate\",\n      \"title\": \"Reduce Google Crawl Rate | Google Crawling Infrastructure\",\n      \"published_date\": null,\n      \"quote\": \"To urgently reduce the crawl rate for a short period of time (for example, a couple of hours, or 1-2 days), return a `500`, `503`, or `429` HTTP response status code instead of `200` to the crawl requests.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c100",
+  "verdict": "OUTDATED",
+  "seconds": 25.489,
+  "usd": 0.0826269,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true for years but stopped being true on 1 July 2026. Google's own Search Central changelog says Google Search now takes users directly to the publisher's AMP host pages. It no longer sends them to a copy served from the Google AMP Cache. Google also removed its references to the AMP viewer, AMP Cache and signed exchanges from the AMP documentation. Search Engine Journal and other SEO sites report the same change. The old behaviour is still described on some older pages, such as the TechAffinity blog. I could not fetch Google's old AMP Cache overview page (HTTP 404), which fits with the documentation having been removed or simplified.\",\n  \"what_changed\": \"On 1 July 2026 Google Search stopped serving AMP results from the Google AMP Cache (AMP viewer, google.com URL). Clicking an AMP result now goes directly to the publisher's own AMP host page. Signed exchanges and AMP Cache configuration are no longer needed for Search.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Don't rely on this claim. Say instead that since 1 July 2026 Google Search sends users directly to publisher-hosted AMP pages, and don't assume the Google AMP Cache is involved when a user clicks an AMP result.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-07-01\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2026-07-01\",\n      \"quote\": \"Starting today, Google Search is updating how it connects users to AMP pages, and will now take users directly to the publisher's AMP host pages.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2026-07-01\",\n      \"quote\": \"Simplified our [AMP documentation](/search/docs/crawling-indexing/amp) by removing outdated references to the AMP viewer, AMP Cache, and signed exchange.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/google-ends-cache-served-amp-pages-in-search/581405\",\n      \"title\": \"Google Ends Cache-Served AMP Pages In Search\",\n      \"published_date\": null,\n      \"quote\": \"As of July 1, clicking an AMP result will take you to the domain’s AMP host page instead of a version served from Google’s AMP cache.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ }
+]

@@ -1,0 +1,77 @@
+[
+ {
+  "id": "c001",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 14.859,
+  "usd": 0.055559,
+  "confidence": 0,
+  "downgrade_reason": "CURRENT needs one primary/official source or two independent organisations with verified quotes; found 1 non-primary",
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"VERITY could not stand behind the CURRENT verdict: CURRENT needs one primary/official source or two independent organisations with verified quotes; found 1 non-primary. Canberra is the capital city of Australia. Wikipedia (last edited 2026-11-15) and EBSCO Research Starters both say so, and Britannica and recent news coverage describe it the same way. No source found any renaming, relocation or change of status. The retrieveCallerMemory call failed, which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not rely on this claim: VERITY could not verify it with quoted primary or independent sources.\",\n  \"confidence\": 0,\n  \"downgraded_from\": \"CURRENT\",\n  \"downgrade_reason\": \"CURRENT needs one primary/official source or two independent organisations with verified quotes; found 1 non-primary\",\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 1,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Canberra\",\n      \"quote\": \"Canberra is the capital city of Australia and the largest population centre in the Australian Capital Territory.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ]\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c020",
+  "verdict": "OUTDATED",
+  "seconds": 17.859,
+  "usd": 0.0457451,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Elizabeth II was the UK's reigning monarch from 6 February 1952 until her death in September 2022, so the claim was true in the past. It is no longer true. Her son became monarch on 8 September 2022 and was crowned on 6 May 2023. As of 2026-11-17 the reigning monarch is King Charles III. Wikipedia, the BBC and Britannica agree. The memory lookup failed, so no caller context was used.\",\n  \"what_changed\": \"Queen Elizabeth II died on 8 September 2022. King Charles III succeeded her immediately and has been the UK's reigning monarch since then.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not rely on this claim. Replace it with 'King Charles III is the reigning monarch of the United Kingdom (since 8 September 2022)'.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Monarchy_of_the_United_Kingdom\",\n      \"title\": \"Monarchy of the United Kingdom - Wikipedia\",\n      \"published_date\": null,\n      \"quote\": \"The monarch since 8 September 2022 is King Charles III, who ascended the throne on the death of his mother, Queen Elizabeth II.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.bbc.com/news/uk-59135132\",\n      \"title\": \"King Charles III, the UK's monarch\",\n      \"published_date\": null,\n      \"quote\": \"After Queen Elizabeth II died, the throne passed immediately and without ceremony to King Charles III.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"bbc.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Elizabeth_II\",\n      \"quote\": \"Elizabeth II was Queen of the United Kingdom and other Commonwealth realms from 6 February 1952 until her death in 2022.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ]\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c052",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 14.486,
+  "usd": 0.044718900000000006,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"I found no source that reports a Ballarat café selling exactly 1,234 flat whites on 3 March 2026. A web search and a recency-biased update search returned only café-for-sale listings, local café guides, and general flat white articles. None mentions this figure, date or event. A figure this specific would normally be private point-of-sale data, and no published original source for it turned up. The claim is neither confirmed nor contradicted. Caller memory was unavailable because the tool returned a connection error. Perplexity, Wikipedia and Semantic Scholar were not queried because the claim is a hyper-specific private sales figure that those sources are unlikely to cover.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not treat this figure as fact unless the café or a credible news report gives the original sales record. Ask the claim's source for the café's name and a citation.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c063",
+  "verdict": "CURRENT",
+  "seconds": 18.906,
+  "usd": 0.0824137,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's official Search Central guide, 'Optimizing for generative AI search', says this directly. Its mythbusting section says site owners don't need new machine-readable files, AI text files, markup or Markdown to appear in Google Search, and it explicitly includes generative AI capabilities. I fetched the live page and the sentence is there. The wording in the claim is close to Google's. The claim names 'AI Overviews', and the guide says 'generative AI capabilities', which covers AI Overviews. The updates search found no later reversal or correction. Secondary sources date the guide to May 2026 and say it still holds. The caller memory tool failed, so no personalisation was applied.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate and don't invest in llms.txt or AI-specific markup for Google Search visibility. It is still fine to keep such files for other services that use them.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\",\n      \"title\": \"Google's Guide to Optimizing for Generative AI Features on Google Search | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"You don't need to create new machine readable files, AI text files, markup, or Markdown to appear in Google Search (including its generative AI capabilities), as Google Search itself doesn't use them.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c079",
+  "verdict": "DISPUTED",
+  "seconds": 23.075,
+  "usd": 0.0874002,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"Google's own documentation contradicts the claim as worded. Google does not automatically penalise content for being AI-generated. Its ranking systems reward quality 'however it is produced'. It says appropriate use of AI is not against its guidelines. What it treats as a spam-policy violation is using AI or automation to generate content mainly to manipulate rankings. Examples are mass-producing pages without adding value, which is 'scaled content abuse'. SpamBrain detects spam 'however it is produced'. So AI origin alone does not trigger a penalty, but low-value, scaled, manipulative AI content can be demoted or actioned. Third-party SEO pages broadly agree with this reading, though they are not primary evidence. I could not retrieve caller memory because the tool errored. That did not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not repeat the claim that Google automatically penalises AI content. Say instead that Google penalises low-quality, scaled or manipulative content, whether it is AI-generated or human-written.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2023-02-08\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"Our focus on the quality of content, rather than how content is produced, is a useful guide that has helped us deliver reliable, high quality results to users for years.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"Using AI doesn't give content any special gains.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"Using automation—including AI—to generate content with the primary purpose of manipulating ranking in search results is a violation of our spam policies.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/using-gen-ai-content\",\n      \"title\": \"Google Search's guidance on using generative AI content on your website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"However, using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google's spam policy on scaled content abuse.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ }
+]

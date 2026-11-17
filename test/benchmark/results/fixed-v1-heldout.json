@@ -1,0 +1,622 @@
+[
+ {
+  "id": "c004",
+  "verdict": "CURRENT",
+  "seconds": 14.433,
+  "usd": 0.0336117,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Mars has two moons, Phobos and Deimos. NASA's official science site states this directly, and Wikipedia's 'Moons of Mars' article (last edited 2026-11-11) agrees. A search for updates found no new moons, renamings or corrections. The only recent news is about missions to the moons, such as JAXA's MMX, and new theories about how the moons formed. Neither changes the count or the names. The caller memory lookup failed, so no personalisation was applied.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate and safe to rely on.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-11\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://science.nasa.gov/mars/moons\",\n      \"title\": \"Mars Moons - NASA Science\",\n      \"published_date\": null,\n      \"quote\": \"Mars has two moons, Phobos and Deimos.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Moons_of_Mars\",\n      \"title\": \"Moons of Mars - Wikipedia\",\n      \"published_date\": \"2026-11-11\",\n      \"quote\": \"The two moons of Mars are Phobos and Deimos.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c005",
+  "verdict": "DISPUTED",
+  "seconds": 16.761,
+  "usd": 0.0359164,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Mars has two moons, Phobos and Deimos, not three. NASA's own pages say so, and so does Wikipedia (last edited 2026-11-11). I found no source reporting a third moon, and the recency-biased update search turned up none. The claim was never true, so under the verdict rules it is DISPUTED, not OUTDATED.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not use the claim; correct it to say Mars has two moons, Phobos and Deimos.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-11\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://science.nasa.gov/mars/facts\",\n      \"title\": \"Mars: Facts - NASA Science\",\n      \"published_date\": null,\n      \"quote\": \"Mars has two small moons, Phobos and Deimos, that may be captured asteroids.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://science.nasa.gov/mars/moons\",\n      \"title\": \"Mars Moons - NASA Science\",\n      \"published_date\": null,\n      \"quote\": \"Mars has two moons, Phobos and Deimos.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Moons_of_Mars\",\n      \"title\": \"Moons of Mars - Wikipedia\",\n      \"published_date\": \"2026-11-11\",\n      \"quote\": \"The two moons of Mars are Phobos and Deimos.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c009",
+  "verdict": "CURRENT",
+  "seconds": 25.821,
+  "usd": 0.058444699999999995,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The Burj Khalifa in Dubai is still the world's tallest building as of 2026-11-17. Wikipedia, last edited 2026-11-06, says it has held the record since 2011 and gives its height as 828 m to the roof. Guinness World Records, an official record-keeper, says it was certified as the tallest building on the planet when it opened in 2010. It also describes the Jeddah Tower, which is meant to reach 1,000 m, as still under construction. A recent blog result (swikblog.com) says the Burj Khalifa keeps the title until another building is completed and officially measured above it. I found no source saying any building has overtaken it. The Guinness page is undated, and the Jeddah Tower has not been confirmed as completed. Because of that, I would re-check the claim if the Jeddah Tower's completion is announced.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate for now, but re-verify if the Jeddah Tower is announced as complete, since that would take the title from the Burj Khalifa.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-06\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Burj_Khalifa\",\n      \"title\": \"Burj Khalifa - Wikipedia\",\n      \"published_date\": \"2026-11-06\",\n      \"quote\": \"It has been the tallest building in the world since its complete inauguration in 2011, surpassing Taipei 101, which had held the record since 2004.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.guinnessworldrecords.com/records/hall-of-fame/burj-khalifa-tallest-building-in-the-world\",\n      \"title\": \"Burj Khalifa: The tallest building in the world | Guinness World Records\",\n      \"published_date\": null,\n      \"quote\": \"The monumental edifice officially opened on 4 January 2010 and was certified as the Tallest building on the planet.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"guinnessworldrecords.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.guinnessworldrecords.com/records/hall-of-fame/burj-khalifa-tallest-building-in-the-world\",\n      \"title\": \"Burj Khalifa: The tallest building in the world | Guinness World Records\",\n      \"published_date\": null,\n      \"quote\": \"The Jeddah Tower – formerly known as the Kingdom Tower – is currently under construction in Jeddah, Saudi Arabia, and is designed to reach 1,000 m (3,281 ft).\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"guinnessworldrecords.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl",
+   "json_schema"
+  ]
+ },
+ {
+  "id": "c010",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 17.324,
+  "usd": 0.0298772,
+  "confidence": 0,
+  "downgrade_reason": "OUTDATED needs one primary/official source or two independent organisations with verified quotes; found 1 non-primary",
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"VERITY could not stand behind the OUTDATED verdict: OUTDATED needs one primary/official source or two independent organisations with verified quotes; found 1 non-primary. Taipei 101 did hold the title of world's tallest building, but only from 2004 until the Burj Khalifa in Dubai overtook it. Wikipedia, last edited 2026-10-28, says Taipei 101 is now the eleventh tallest building in the world. The Burj Khalifa, at about 828–830 m against Taipei 101's 508 m, is the current tallest. Sources differ slightly on the year of the handover (2009, 2010 or 2011 for full inauguration), but they agree it was superseded long ago. My memory lookup failed, so I used no caller context.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not rely on this claim: VERITY could not verify it with quoted primary or independent sources.\",\n  \"confidence\": 0,\n  \"downgraded_from\": \"OUTDATED\",\n  \"downgrade_reason\": \"OUTDATED needs one primary/official source or two independent organisations with verified quotes; found 1 non-primary\",\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-10-28\"\n  },\n  \"sources\": [],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c011",
+  "verdict": "CURRENT",
+  "seconds": 19.279,
+  "usd": 0.0400657,
+  "confidence": 75,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The Eiffel Tower was completed in 1889. The official Eiffel Tower site gives the completion date as 31 March 1889. Wikipedia's infobox gives the same date. Wikipedia's summary and Britannica both say it was built from 1887 to 1889. The Tower opened to the public on 15 May 1889. Nothing found suggests the date has been revised or the claim superseded. The searches returned no contradicting sources. The caller memory lookup failed, but that does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. If more precision is needed, cite 31 March 1889 as the completion date and 15 May 1889 as the public opening.\",\n  \"confidence\": 75,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.toureiffel.paris/en/the-monument/history\",\n      \"title\": \"Eiffel Tower history, architecture, design & construction\",\n      \"published_date\": null,\n      \"quote\": \"On March 31, 1889, the Tower was completed in record time – 2 years, 2 months and 5 days – and stood as a a remarkable engineering achievement.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"toureiffel.paris\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Eiffel_Tower\",\n      \"title\": \"Eiffel Tower - Wikipedia\",\n      \"published_date\": \"2026-11-16\",\n      \"quote\": \"It is named after the engineer Gustave Eiffel, whose company designed and built the tower from 1887 to 1889.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.britannica.com/topic/Eiffel-Tower-Paris-France\",\n      \"title\": \"Eiffel Tower | History, Height, & Facts\",\n      \"published_date\": null,\n      \"quote\": \"It was designed and built (1887–89) by Gustave Eiffel and named in his honor.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"britannica.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c012",
+  "verdict": "DISPUTED",
+  "seconds": 17.275,
+  "usd": 0.0367976,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. It was never true. The Eiffel Tower was completed on 31 March 1889, not in 1899. The official Eiffel Tower site, Wikipedia and Britannica all give 1889. The tower opened to the public on 15 May 1889 for the World's Fair. The year 1899 looks like a transposition of 1889. No source supports 1899. The verdict is DISPUTED rather than OUTDATED because the claim was never accurate. The memory tool failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not use 1899. Correct it to 31 March 1889 (opened to the public 15 May 1889).\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.toureiffel.paris/en/the-monument/history\",\n      \"title\": \"Eiffel Tower history, architecture, design & construction\",\n      \"published_date\": null,\n      \"quote\": \"On March 31, 1889, the Tower was completed in record time – 2 years, 2 months and 5 days – and stood as a a remarkable engineering achievement.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"toureiffel.paris\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.toureiffel.paris/en/news/130-years/1889-2019-130-years-amazement\",\n      \"title\": \"130th anniversary focus on 1889 - The Eiffel Tower\",\n      \"published_date\": null,\n      \"quote\": \"The construction of the Eiffel Tower structure was completed on Sunday, March 31, 1889.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"toureiffel.paris\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Eiffel_Tower\",\n      \"title\": \"Eiffel Tower - Wikipedia\",\n      \"published_date\": \"2026-11-16\",\n      \"quote\": \"It is named after the engineer Gustave Eiffel, whose company designed and built the tower from 1887 to 1889.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c015",
+  "verdict": "CURRENT",
+  "seconds": 17.894,
+  "usd": 0.0422066,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The claim matches the current HTTP standard. RFC 9110 (HTTP Semantics, STD 97, June 2022) defines 404 almost word for word as the claim does. It obsoletes the earlier RFC 7231, and the IANA registry points 404 Not Found to RFC 9110 Section 15.5.5. The RFC adds that the server may also use 404 when it is unwilling to disclose that a resource exists. That is a nuance, not a contradiction. Wikipedia and MDN describe 404 the same way. I found no newer RFC that supersedes this definition.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"lookupWikipedia\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T12:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate, and cite RFC 9110 Section 15.5.5 (not the obsolete RFC 7231 or RFC 2616) if you need a reference. Note that servers may also return 404 to hide a resource's existence.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.rfc-editor.org/rfc/rfc9110.html\",\n      \"title\": \"RFC 9110: HTTP Semantics\",\n      \"published_date\": \"2022-06-01\",\n      \"quote\": \"The 404 (Not Found) status code indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"rfc-editor.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.iana.org/assignments/http-status-codes\",\n      \"title\": \"Hypertext Transfer Protocol (HTTP) Status Code Registry\",\n      \"published_date\": null,\n      \"quote\": \"| 404 | Not Found | RFC 9110, Section 15.5.5 |\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"iana.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/HTTP_404\",\n      \"title\": \"HTTP 404\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"The code is often associated with response reason Not Found and is often referred to as page not found or file not found.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "lookupWikipedia",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c016",
+  "verdict": "DISPUTED",
+  "seconds": 17.145,
+  "usd": 0.0404813,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. It was never true. HTTP 404 means 'Not Found'. RFC 9110 is the IETF standard, and it says the origin server did not find a current representation of the target resource, or is unwilling to disclose that one exists. Wikipedia and MDN agree. 'Internal Server Error' is a different code, 500. I did not retrieve a quote for that point, so it is not in the evidence list. The caller memory lookup failed, but this did not affect the result. The verdict is DISPUTED because the rules reserve OUTDATED for claims that were once true.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T12:00:00Z\",\n  \"recommendation\": \"Do not use this claim. Treat 404 as 'Not Found' (the resource was not found, or the server is hiding that it exists). Treat 500 as 'Internal Server Error'.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.rfc-editor.org/rfc/rfc9110.html\",\n      \"title\": \"RFC 9110: HTTP Semantics\",\n      \"published_date\": \"2022-06-01\",\n      \"quote\": \"The 404 (Not Found) status code indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"rfc-editor.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/HTTP_404\",\n      \"title\": \"HTTP 404\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"In HTTP, the 404 HTTP status code indicates that a web client was able to communicate with a server, but the server could not provide the requested resource.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status\",\n      \"title\": \"HTTP response status codes - HTTP | MDN\",\n      \"published_date\": null,\n      \"quote\": \"The server cannot find the requested resource. In the browser, this means the URL is not recognized.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"mozilla.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c023",
+  "verdict": "CURRENT",
+  "seconds": 32.256,
+  "usd": 0.047413,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The Hubble Space Telescope was launched in 1990, on 24 April, aboard Space Shuttle Discovery on mission STS-31. NASA's official mission page, a NASA Science page and the Smithsonian National Air and Space Museum all give this date. Wikipedia and ESA/Hubble also say 1990. The update search found no correction or change to the date. Hubble is still in operation. A Friends of NASA video from April 2026 describes Hubble's 36th anniversary year. The caller-memory lookup failed because of a connection error. That did not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"The claim can be treated as accurate. For more precision, cite the full launch date of 24 April 1990 (STS-31, Space Shuttle Discovery).\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2020-04-24\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.nasa.gov/mission/sts-31\",\n      \"title\": \"STS-31 - NASA\",\n      \"published_date\": null,\n      \"quote\": \"Launched: April 24, 1990, 8:33:51 a.m. EDT\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://airandspace.si.edu/stories/editorial/telling-hubbles-story-30-years\",\n      \"title\": \"Telling Hubble's Story for 30 Years | National Air and Space Museum\",\n      \"published_date\": \"2020-04-24\",\n      \"quote\": \"On April 24, 1990, the Hubble Space Telescope was launched into low Earth orbit by the Space Shuttle Discovery.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"si.edu\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://esahubble.org/about/general/fact_sheet\",\n      \"title\": \"Fact Sheet | ESA/Hubble\",\n      \"published_date\": null,\n      \"quote\": \"The Hubble Space Telescope is a joint ESA/NASA project and was launched in 1990 by the Space Shuttle mission STS-31 into a low-Earth orbit 569 km above the ground.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"esahubble.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c024",
+  "verdict": "DISPUTED",
+  "seconds": 15.236,
+  "usd": 0.0238837,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. NASA and Wikipedia both give the Hubble Space Telescope's launch as April 24, 1990, aboard Space Shuttle Discovery on STS-31. It was not launched in 2005. The claim was never true, so it is DISPUTED rather than OUTDATED. The caller memory lookup failed, which does not affect this verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not use the 2005 launch year; correct it to April 24, 1990 (STS-31, Space Shuttle Discovery).\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://science.nasa.gov/mission/hubble/overview/the-history-of-hubble\",\n      \"title\": \"The History of Hubble - NASA Science\",\n      \"published_date\": null,\n      \"quote\": \"Hubble was launched April 24, 1990, aboard Space Shuttle Discovery's STS-31 mission.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Hubble_Space_Telescope\",\n      \"title\": \"Hubble Space Telescope\",\n      \"published_date\": \"2026-11-15\",\n      \"quote\": \"The Hubble Space Telescope is a space telescope that was launched into low Earth orbit in 1990 on STS-31 and remains in operation.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.aps.org/apsnews/2022/04/launch-hubble-space-telescope\",\n      \"title\": \"Launch of the Hubble Space Telescope | American Physical Society\",\n      \"published_date\": \"2022-04-24\",\n      \"quote\": \"Launched on April 24, 1990, the Hubble Space Telescope (HST) represents one of the most ambitious undertakings in the history of unmanned space study.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"aps.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c029",
+  "verdict": "OUTDATED",
+  "seconds": 19.925,
+  "usd": 0.0620763,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"RFC 8446 (August 2018) was the original specification of TLS 1.3, but it is now obsolete. The RFC Editor page for RFC 8446 says it is obsolete and points to RFC 9846. The IETF Datatracker lists RFC 9846, \\\"The Transport Layer Security (TLS) Protocol Version 1.3\\\", as a Proposed Standard from July 2026 that obsoletes RFC 8446. As of 2026-11-17, the current TLS 1.3 specification is RFC 9846. Secondary sources describe RFC 9846 as a minor, backward-compatible update, so TLS 1.3 itself is unchanged. Wikipedia's summary, which the tool returned, did not address the RFC number. Caller memory could not be retrieved because the memory tool failed.\",\n  \"what_changed\": \"RFC 9846 was published in July 2026 (Datatracker 'Last updated' 2026-07-11). It obsoletes RFC 8446 and is now the current specification of TLS 1.3. It also obsoletes RFC 5246 (TLS 1.2), so it folds in requirements for TLS 1.2 implementations.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T12:00:00Z\",\n  \"recommendation\": \"Cite RFC 9846 as the current TLS 1.3 specification, and mention that it obsoletes RFC 8446 (August 2018) if the original is referenced.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-07-11\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.rfc-editor.org/info/rfc8446\",\n      \"title\": \"RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3 | RFC Editor\",\n      \"published_date\": \"2018-08-01\",\n      \"quote\": \"**This RFC is now obsolete, see**\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"rfc-editor.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://datatracker.ietf.org/doc/rfc9846\",\n      \"title\": \"RFC 9846 - The Transport Layer Security (TLS) Protocol Version 1.3\",\n      \"published_date\": \"2026-07-11\",\n      \"quote\": \"RFC - Proposed Standard  (July 2026)\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"ietf.org\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c030",
+  "verdict": "CURRENT",
+  "seconds": 17.962,
+  "usd": 0.046319700000000005,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Australia has six states: New South Wales, Victoria, Queensland, South Australia, Western Australia and Tasmania. The Parliamentary Education Office (a government source) says the six colonies became the six states at Federation in 1901. Tourism Australia, Wikipedia (edited 2026-11-15) and Britannica Kids give the same count. The states are separate from the territories: two mainland territories (the Northern Territory and the ACT) plus external territories. The claim is accurate and nothing in it has been renamed or changed. The searches turned up no sign that a state has been added or removed.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. If you need the full subdivision picture, add that Australia also has two mainland territories (the Northern Territory and the ACT) alongside the six states.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://peo.gov.au/understand-our-parliament/your-questions-on-notice/questions/why-does-australia-have-6-separate-states\",\n      \"title\": \"Why does Australia have 6 separate states? - Parliamentary Education Office\",\n      \"published_date\": null,\n      \"quote\": \"When the colonies joined together to form Australia in 1901, they kept their borders and governments, becoming the 6 states of New South Wales, Victoria, Queensland, South Australia, Western Australia and Tasmania.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"peo.gov.au\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.australia.com/en-us/facts-and-planning/about-australia/cities-states-and-territories.html\",\n      \"title\": \"Australian states, territories and capital cities - Tourism Australia\",\n      \"published_date\": null,\n      \"quote\": \"The country is divided into six states and two territories.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"australia.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/States_and_territories_of_Australia\",\n      \"quote\": \"Australia has six federated states: New South Wales, Queensland, South Australia, Tasmania, Victoria \\\"Victoria (state)\\\"), and Western Australia; and ten federal territories, comprising three internal territories on the mainland and seven offshore external territories.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ]\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c031",
+  "verdict": "DISPUTED",
+  "seconds": 16.25,
+  "usd": 0.0256642,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Australia has six states: New South Wales, Queensland, South Australia, Tasmania, Victoria and Western Australia. It also has two internal mainland territories (the Northern Territory and the Australian Capital Territory) and several external territories. The number eight matches the combined count of states and internal territories, which Tourism Australia describes as 'eight states and territories'. That is not eight states. Wikipedia and Tourism Australia agree on the six-state count. The State Library of Victoria and Wikipedia count more territories overall (ten), which does not change the state count. The memory lookup failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Correct the claim to 'Australia has six states and two internal territories (eight states and territories in total, plus external territories)'. Do not pass on 'eight states'.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.australia.com/en-us/facts-and-planning/about-australia/cities-states-and-territories.html\",\n      \"title\": \"Australian states, territories and capital cities - Tourism Australia\",\n      \"published_date\": null,\n      \"quote\": \"The country is divided into six states and two territories.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"australia.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/States_and_territories_of_Australia\",\n      \"title\": \"States and territories of Australia - Wikipedia\",\n      \"published_date\": \"2026-11-15\",\n      \"quote\": \"Australia has six federated states: New South Wales, Queensland, South Australia, Tasmania, Victoria\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c034",
+  "verdict": "DISPUTED",
+  "seconds": 19.017,
+  "usd": 0.0463283,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. NASA, the primary source, says the Great Wall is not visible from the Moon. It also says the wall is difficult or impossible to see from Earth orbit without high-powered lenses. Britannica and BBC Science Focus agree. The verdict is DISPUTED, not CURRENT, because the claim was never true. It is a myth, so it can't be OUTDATED either. The brivience.com blog notes that UNESCO's Great Wall page still contains a legacy sentence saying the wall can be seen from the Moon, which may explain why the myth persists. I did not open that page, and UNESCO is not cited as evidence.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not repeat or act on this claim; state instead that the Great Wall is not visible to the naked eye from the Moon and is barely visible, if at all, from low Earth orbit.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.nasa.gov/image-article/great-wall\",\n      \"title\": \"Great Wall - NASA\",\n      \"published_date\": null,\n      \"quote\": \"Despite myths to the contrary, the wall isn’t visible from the moon, and is difficult or impossible to see from Earth orbit without the high-powered lenses used for this photo.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.britannica.com/question/Can-you-see-the-Great-Wall-of-China-from-space\",\n      \"title\": \"Can you see the Great Wall of China from space? | Britannica\",\n      \"published_date\": null,\n      \"quote\": \"A popular myth, the claim was disproved when astronauts stated that the Great Wall of China was not visible with the naked eye from the Moon.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"britannica.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.sciencefocus.com/planet-earth/is-the-great-wall-of-china-really-visible-from-space\",\n      \"title\": \"Is the Great Wall of China really visible from space? - BBC Science Focus Magazine\",\n      \"published_date\": null,\n      \"quote\": \"From the Moon, no man-made structure is visible.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"sciencefocus.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c037",
+  "verdict": "OUTDATED",
+  "seconds": 14.53,
+  "usd": 0.025692700000000002,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Swaziland was the official name of this kingdom until 2018. On 19 April 2018 King Mswati III renamed it the Kingdom of Eswatini. The geography in the claim is correct: the country borders South Africa and Mozambique. The name is not. Wikipedia lists Swaziland as a 'former official name', and the US government's E-Verify page records the renaming. The caller's memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": \"On 19 April 2018 King Mswati III officially renamed the Kingdom of Swaziland the Kingdom of Eswatini. 'Swaziland' is now a former official name.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Replace 'Swaziland' with 'Eswatini' (formally the Kingdom of Eswatini) and mention Swaziland only as the former name.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-10-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.e-verify.gov/about-e-verify/whats-new/kingdom-of-swaziland-renamed-kingdom-of-eswatini-select-eswatini-in-e\",\n      \"title\": \"Kingdom of Swaziland Renamed Kingdom of Eswatini; Select Eswatini in E-Verify | E-Verify\",\n      \"published_date\": null,\n      \"quote\": \"On April 19, 2018, King Mswati III officially renamed the Kingdom of Swaziland the Kingdom of Eswatini.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"e-verify.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Eswatini\",\n      \"title\": \"Eswatini - Wikipedia\",\n      \"published_date\": \"2026-10-17\",\n      \"quote\": \"In April 2018, the king changed the official name from Kingdom of Swaziland to Kingdom of Eswatini, the name commonly used in the Swazi language.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.bbc.com/news/world-africa-43821512\",\n      \"title\": \"Swaziland king renames country 'the Kingdom of eSwatini'\",\n      \"published_date\": null,\n      \"quote\": \"The new name, eSwatini, means \\\"land of the Swazis\\\".\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"bbc.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c038",
+  "verdict": "OUTDATED",
+  "seconds": 21.437,
+  "usd": 0.0498714,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim reads as referring to the country in the Balkans that was formerly the Republic of Macedonia. That was its official constitutional name from 1991, but it changed under the 2018 Prespa Agreement. The agreement entered into force on 12 February 2019. The official name is now the Republic of North Macedonia, and the short form is North Macedonia. Wikipedia (last edited 2026-10-13) and a Congressional Research Service document both give the new name. A 2026 report from the Bertelsmann Stiftung's Transformation Index (BTI) says that even the VMRO-DPMNE party, which opposed the name, accepted the new constitutional name as a legal reality after winning the 2024 elections. Retrieving caller memory failed because of a connection error. This did not affect the verdict.\",\n  \"what_changed\": \"On 12 February 2019 the Prespa Agreement took effect and the constitutional name changed from 'Republic of Macedonia' to 'Republic of North Macedonia'. The short name became 'North Macedonia'.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Replace 'Republic of Macedonia' with 'Republic of North Macedonia' (short form 'North Macedonia') in any current-facing content.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-10-13\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/North_Macedonia\",\n      \"title\": \"North Macedonia\",\n      \"published_date\": \"2026-10-13\",\n      \"quote\": \"North Macedonia, officially the Republic of North Macedonia, is a landlocked country in Southeastern Europe.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.congress.gov/crs_external_products/IN/PDF/IN10977/IN10977.6.pdf\",\n      \"title\": \"Macedonia Changes Name, Moves Closer to NATO Membership\",\n      \"published_date\": null,\n      \"quote\": \"Although the country’s name is now the Republic of North Macedonia, the agreement specifies that its language and citizens will remain “Macedonian.”\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"congress.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Prespa_Agreement\",\n      \"title\": \"Prespa Agreement\",\n      \"published_date\": null,\n      \"quote\": \"the agreement went into force on 12 February 2019, when the two countries notified the UN of the deal's completion, following the ratification of the NATO accession protocol for North Macedonia on 8 February.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c041",
+  "verdict": "OUTDATED",
+  "seconds": 18.543,
+  "usd": 0.039520700000000006,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Instagram and WhatsApp are owned by the company that was Facebook, Inc., but that company is no longer called Facebook, Inc. It rebranded in 2021 to Meta Platforms, Inc. Britannica, Quartz and Wikipedia all use the current name, Meta Platforms, Inc. (Britannica: 'formerly Facebook'). A 2026 claim that uses 'Facebook, Inc.' as the owner's name therefore uses a superseded name. The retrieveCallerMemory call failed, so no caller context was used. I did not run searchForUpdates, and the verdict does not depend on it.\",\n  \"what_changed\": \"Facebook, Inc. rebranded to Meta Platforms, Inc. in 2021. The current name of the company that owns Instagram and WhatsApp is Meta Platforms, Inc. (doing business as Meta). 'Facebook' is now only the name of one of its products.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Replace 'Facebook, Inc.' with 'Meta Platforms, Inc. (formerly Facebook, Inc.)' when naming the owner of Instagram and WhatsApp.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-13\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://qz.com/what-is-meta-platforms\",\n      \"title\": \"What is Meta? The company behind Facebook, Instagram, and WhatsApp\",\n      \"published_date\": null,\n      \"quote\": \"In 2021, Facebook, Inc. rebranded to MetaPlatforms, Inc.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"qz.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Meta_Platforms\",\n      \"title\": \"Meta Platforms\",\n      \"published_date\": \"2026-11-13\",\n      \"quote\": \"Meta owns and operates several prominent social media platforms and communication services, including Facebook, Instagram, WhatsApp, Messenger, and Threads\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://www.britannica.com/money/Meta-Platforms\",\n      \"quote\": \"Meta Platforms, Inc., formerly Facebook, is an American technology company focused on social media and artificial intelligence whose products include Facebook, Instagram, WhatsApp, Messenger, and Threads.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ]\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c042",
+  "verdict": "OUTDATED",
+  "seconds": 17.049,
+  "usd": 0.0478502,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim used to be true. Twitter was the name of the social network when Musk bought it in October 2022. It was rebranded to X on July 23, 2023, and the domain moved from twitter.com to x.com on May 17, 2024. Wikipedia's current entry is titled 'X (social network)' and describes it as 'formerly known as Twitter'. Ownership has also changed since the acquisition. Musk is still the controlling figure, but X is now held through X Corp, xAI and SpaceX. The platform's current name is X, so a claim that calls it 'Twitter' is outdated. A startup called Operation Bluebird has launched a separate service branded 'Twitter now', but Musk does not own it. That source is a Facebook post, which I did not rely on.\",\n  \"what_changed\": \"Twitter was rebranded to X on July 23, 2023. The twitter.com domain changed to x.com on May 17, 2024. The platform is now called X, and is owned through X Corp, a subsidiary of SpaceXSI, which is a subsidiary of SpaceX.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Refer to the platform as 'X (formerly Twitter)', and note that it is owned through X Corp, xAI and SpaceX. Do not describe 'Twitter' as the current name.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-14\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/X_(social_network)\",\n      \"title\": \"X (social network)\",\n      \"published_date\": \"2026-11-14\",\n      \"quote\": \"X, formerly known as Twitter, is an American microblogging and social networking service, headquartered in Bastrop, Texas, and owned by X Corp., a subsidiary of SpaceXSI, a subsidiary of the technology company SpaceX.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Twitter_under_Elon_Musk\",\n      \"title\": \"Twitter under Elon Musk - Wikipedia\",\n      \"published_date\": null,\n      \"quote\": \"Twitter was rebranded to X on July 23, 2023, and its domain name changed from twitter.com to x.com on May 17, 2024.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.wsj.com/tech/twitter-rebrand-x-elon-musk-d55c0c2d\",\n      \"title\": \"Elon Musk's X Completes Rebranding Away From Twitter - WSJ\",\n      \"published_date\": null,\n      \"quote\": \"Elon Musk said his social-media platform formerly known as Twitter has completed its rebranding to X, with the site's URL now reading X.com.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wsj.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c045",
+  "verdict": "OUTDATED",
+  "seconds": 24.331,
+  "usd": 0.0680676,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Google Optimize was once a real tool for running website A/B tests, but it is no longer available. Google's own help page says Optimize and Optimize 360 stopped being available on September 30, 2023, and any experiments still running on that date ended. Wikipedia lists its status as 'Discontinued'. Google says it is now investing in third-party A/B testing integrations with Google Analytics (AB Tasty, Optimizely, VWO) instead. Anyone acting on the claim as written in November 2026 would be relying on a product that no longer exists.\",\n  \"what_changed\": \"Google Optimize and Optimize 360 were shut down on September 30, 2023. Active experiments and personalizations ended on that date. Google now points users to third-party A/B testing tools that integrate with Google Analytics (AB Tasty, Optimizely, VWO).\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"lookupWikipedia\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not recommend or rely on Google Optimize; point users to a currently supported A/B testing tool such as AB Tasty, Optimizely or VWO, which Google lists as integrating with Google Analytics.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-10\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.google.com/optimize/answer/12979939\",\n      \"title\": \"[Sunset September 2023] Google Optimize - Analytics Help\",\n      \"published_date\": \"2023-01-24\",\n      \"quote\": \"Google Optimize and Optimize 360 are no longer available as of September 30, 2023.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.google.com/optimize/answer/12979939\",\n      \"title\": \"[Sunset September 2023] Google Optimize - Analytics Help\",\n      \"published_date\": \"2023-01-24\",\n      \"quote\": \"Any experiments and personalizations still active on that date have ended.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Google_Optimize\",\n      \"title\": \"Google Optimize - Wikipedia\",\n      \"published_date\": \"2026-11-10\",\n      \"quote\": \"Google Optimize, formerly Google Website Optimizer, was a freemium web analytics and testing tool by Google.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "lookupWikipedia",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c048",
+  "verdict": "OUTDATED",
+  "seconds": 24.558,
+  "usd": 0.0646349,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Windows 10 did get regular security updates at no extra charge while it was in support. That ended on October 14, 2025. Microsoft's support page says security updates are no longer provided. As of 2026-11-17, a Windows 10 PC on default settings gets no free monthly security updates. Updates now come only through the Extended Security Updates (ESU) program, and they are not free for everyone. ZDNET says the free consumer route requires enrolling with a Microsoft account, and EEA customers qualify automatically. ZDNET puts the consumer ESU end date at October 2027. Wikipedia lists consumer ESU support until October 12, 2027, and business/school ESU until at most October 10, 2028. Enterprise ESU is paid. The sources do not agree on the free-ESU details. SC Media says the original free consumer ESU was set to expire on October 12, 2026, and was then extended. The claim's \\\"all users\\\" wording is wrong either way.\",\n  \"what_changed\": \"Windows 10 reached end of support on October 14, 2025, so routine free monthly security updates stopped for everyone. Only the ESU program now delivers updates. Consumer ESU runs to October 12, 2027, and free access has conditions such as a Microsoft account or EEA residency. Business and school ESU is paid and runs to at most October 10, 2028.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Don't state that Windows 10 gets free monthly security updates for all users. Say that Windows 10 is out of support and that updates come only through the ESU program, which is free only under certain conditions and runs to October 2027 for consumers.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.microsoft.com/en-us/windows/windows-10-support-has-ended-on-october-14-2025-2ca8b313-1946-43d3-b55c-2b95b107f281\",\n      \"title\": \"Windows 10 support has ended on October 14, 2025 | Microsoft Support\",\n      \"published_date\": null,\n      \"quote\": \"At this point technical assistance, feature updates and security updates is no longer provided.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.microsoft.com/en-us/windows/windows-10-support-has-ended-on-october-14-2025-2ca8b313-1946-43d3-b55c-2b95b107f281\",\n      \"title\": \"Windows 10 support has ended on October 14, 2025 | Microsoft Support\",\n      \"published_date\": null,\n      \"quote\": \"the consumer [Extended Security Updates (ESU) program](https://www.microsoft.com/windows/extended-security-updates) can protect your Windows 10 device till October 12, 2027.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.zdnet.com/article/how-to-get-free-windows-10-security-patches-until-october-2027\",\n      \"title\": \"How to get free Windows 10 security patches until October 2027 - and save $30 - ZDNET\",\n      \"published_date\": null,\n      \"quote\": \"Any PC running Windows 10 with its default settings no longer receives critical monthly security updates from the Windows Update servers.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"zdnet.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c050",
+  "verdict": "OUTDATED",
+  "seconds": 22.621,
+  "usd": 0.0639334,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Jacinda Ardern was Prime Minister of New Zealand from 2017 until January 2023, so the claim was once true. She is not PM now. The New Zealand Government's Beehive site and Wikipedia both name Christopher Luxon as the 42nd Prime Minister, in office since 27 November 2023. The general election on 7 November 2026 produced no clear winner, and coalition talks are under way. Luxon is still described as the sitting Prime Minister, and Ardern is not a candidate for the office.\",\n  \"what_changed\": \"Ardern resigned as PM and Labour leader in January 2023. Chris Hipkins succeeded her, and Christopher Luxon (National) has been PM since 27 November 2023. The Hipkins step is from my own knowledge, not from a quoted source. Ardern is now a former PM, and the current office-holder is Luxon.\",\n  \"tools_used\": [\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not treat Ardern as the current PM. Use Christopher Luxon, and re-check after coalition negotiations from the 7 November 2026 election conclude, since the next PM may change.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.beehive.govt.nz/minister/biography/christopher-luxon\",\n      \"title\": \"Rt Hon Christopher Luxon | Beehive.govt.nz\",\n      \"published_date\": null,\n      \"quote\": \"Christopher Luxon is the 42nd Prime Minister of New Zealand.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"beehive.govt.nz\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.bbc.com/news/articles/c3ewev11g1e0o\",\n      \"title\": \"No clear winner after tight New Zealand general election\",\n      \"published_date\": \"2026-11-08\",\n      \"quote\": \"Prime Minister Christopher Luxon's centre-right National Party won 42 seats but was 19 short of the simple majority needed to form a government, despite being the largest party, preliminary results showed.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"bbc.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Prime_Minister_of_New_Zealand\",\n      \"quote\": \"The incumbent( prime minister, Christopher Luxon, leader of the New Zealand National Party, took office on 27 November 2023.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ]\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c053",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 13.465,
+  "usd": 0.0221527,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"No reliable source says Shakespeare's favourite colour was green, and none says it was any other colour. The Wikipedia entry for Shakespeare says nothing about a favourite colour. The Nature article 'Shakespeare's Colour-Names' discusses how he used colour words in his plays, such as green eyes, which is not a record of personal preference. A user-generated Brainly answer says his favourite colour 'is not explicitly known' and points to the 'green-eyed monster' line in Othello. Using a colour often in his writing does not show it was his favourite. Nothing is known to have survived in which Shakespeare states a colour preference, so the claim is not supported by any source I can quote. It is better treated as unsupported speculation than as fact. I could not retrieve caller memory because that tool returned an error, and this did not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not state or act on this as fact; if the claim appears in content, rephrase it to say Shakespeare's personal favourite colour is not documented, and that green appears in his works as a symbol of jealousy and nature.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c057",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 18.529,
+  "usd": 0.048748799999999995,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"I found no source that gives a count of sand grains on Bondi Beach, let alone exactly 4.2 trillion. The sources the tools returned say that grain counts are rough Fermi estimates. They depend on assumptions about beach volume, grain size and packing, and they are not counts. The word 'exactly' cannot be true for a figure of this kind. The evidence also does not show whether 4.2 trillion is the right order of magnitude. A beach with 50,000 m² of area and 1 m depth is estimated at about 781 trillion grains. Bondi Beach is a real beach, but its dimensions and sand depth were not established here. The claim looks like an unsourced figure of the kind an LLM might invent. I could not retrieve caller memory, and Perplexity was not configured, so the check used only Wikipedia and web search.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"lookupWikipedia\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not use '4.2 trillion' or 'exactly' as a fact about Bondi Beach. If a figure is needed, present it as an unsourced rough estimate and give the assumptions behind it (beach volume, grain size).\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "lookupWikipedia",
+   "searchForUpdates",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c059",
+  "verdict": "DISPUTED",
+  "seconds": 32.25,
+  "usd": 0.106818,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"I found no source showing that more than 62% of AI agents deployed in 2026 run on open-weight models. The nearest figures measure something different. They are token volume on Vercel's AI Gateway, not the share of agents deployed. The State of AI Report 2026 says open-weight models handled 62.7% of Vercel tokens on October 4, and it warns that this platform snapshot cannot be read as market-wide. An ibl.ai post says the 62% figure is token volume on Vercel's gateway, and that the same models took under 9% of spend. Enterprise Technology Research's September 2026 survey of 200 respondents puts open-weight models at 34% of enterprise AI token usage. It also finds 42% of respondents have open-weight models in production. Other sources put open-weight share at about one-third of OpenRouter tokens. These figures differ materially from the claim and measure different things. The claim looks like a garbled version of the Vercel token-share statistic. Perplexity was not available, and no Semantic Scholar check was run. No academic source was found for the claim.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"askPerplexity\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not repeat this claim as stated; if a 62% figure is needed, cite it as open-weight share of tokens on Vercel's AI Gateway (62.7% on 4 Oct 2026), not the share of deployed agents.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-10-08\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.stateof.ai/State-of-AI-Report-2026.pdf\",\n      \"title\": \"State of AI Report 2026 (Air Street Capital)\",\n      \"published_date\": \"2026-10-08\",\n      \"quote\": \"Different customer samples, workloads and prices mean\\nthese snapshots cannot be read as a single market-wide ranking.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"stateof.ai\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://techstrong.ai/articles/open-weight-ai-models-expected-to-capture-41-of-enterprise-token-usage\",\n      \"title\": \"Open-Weight AI Models Expected to Capture 41% of Enterprise Token Usage - Techstrong.ai\",\n      \"published_date\": \"2026-09-22\",\n      \"quote\": \"The September 2026 survey of 200 respondents found that open-weight models now account for 34% of enterprise AI token usage, compared with 23% a year ago.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"techstrong.ai\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c060",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 20.547,
+  "usd": 0.0637441,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"No source I could retrieve mentions a diary kept by Melbourne's first lighthouse keeper, or a count of 212 shipwreck sightings. The claim also assumes a specific, identifiable person. The sources I found don't settle who 'Melbourne's first lighthouse keeper' was. The Williamstown Timeball Tower page on Wikipedia describes the first lighthouse on that site as built in 1839–40, but it names no keeper. State Library Victoria's lighthouse page lists diaries and journals by other keepers (Charles Mapelstone, Thomas Pearson of Port Fairy). Neither is tied to this claim, and neither mentions 212 sightings. Perplexity was unavailable (API key missing), and the caller-memory lookup failed. The figure of 212 can't be traced to any original source, so it should be treated as unsupported and possibly fabricated.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"lookupWikipedia\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not repeat the '212 shipwreck sightings' figure unless the diary's name, the keeper's name and a primary source such as the State Library Victoria or Public Record Office Victoria catalogue are identified.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchClaim",
+   "lookupWikipedia",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c062",
+  "verdict": "CURRENT",
+  "seconds": 20.468,
+  "usd": 0.060696700000000006,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central documentation, fetched live, says what the claim says. A page must be indexed and eligible to be shown in Google Search with a snippet to be a supporting link in AI Overviews or AI Mode. The page states: 'There are no additional technical requirements.' A second official Google page, the generative AI optimization guide, repeats the same eligibility rule. The update search found no later change or retraction. The claim is about technical requirements only. Google separately recommends SEO best practices such as allowing crawling in robots.txt, but it says these are not required. The caller-memory lookup failed, so no caller context was used. This does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. Make sure the page is indexed and snippet-eligible, for example by checking it in Search Console, and don't spend effort on AI-specific files or markup to appear in AI Overviews or AI Mode.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"To be eligible to be shown as a supporting link in AI Overviews or AI Mode, a page must be indexed and eligible to be shown in Google Search with a snippet, fulfilling the Search technical requirements.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"There are no additional technical requirements.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"While specific optimization isn't required for AI Overviews and AI Mode, all existing SEO fundamentals continue to be worthwhile, for example:\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c066",
+  "verdict": "CURRENT",
+  "seconds": 21.642,
+  "usd": 0.07335330000000001,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central documentation, fetched live, says site owners can use nosnippet, data-nosnippet, max-snippet or noindex to limit what Search shows from their pages. Google's robots meta tag specification adds that nosnippet applies to AI Overviews and AI Mode. It says max-snippet limits how much content those features can use directly. One caveat: max-snippet does not override permissions a publisher has granted separately, such as in-page structured data or a license agreement. The claim matches both official pages. I did not find any renaming or replacement of these controls. The caller-memory lookup failed, but this did not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate, and note that max-snippet does not override separately granted permissions such as structured data or license agreements.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI features and your website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"To limit the information shown from your pages in Search, use `nosnippet`, `data-nosnippet`, `max-snippet`, or `noindex` controls.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag\",\n      \"title\": \"Robots Meta Tags Specifications | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"This applies to all forms of search results (at Google: web search, Google Images, Discover, AI Overviews, AI Mode) and will also prevent the content from being used as a direct input for AI Overviews and AI Mode.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c069",
+  "verdict": "CURRENT",
+  "seconds": 17.222,
+  "usd": 0.049226400000000003,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"OpenAI's own crawler documentation, fetched live today, says GPTBot crawls content that may be used to train its generative AI foundation models. The same page says disallowing GPTBot signals that a site's content should not be used for that training. The search for updates found no rename, retirement or change to this wording. The user-agent string now shows GPTBot/1.4, but the claim doesn't depend on the version. Third-party pages dated October 2026 quote the same sentence.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. If you act on it, for example by editing robots.txt, check OpenAI's crawler documentation page again first, because the bot list and user-agent versions change.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://platform.openai.com/docs/bots\",\n      \"title\": \"Overview of OpenAI Crawlers\",\n      \"published_date\": null,\n      \"quote\": \"It is used to crawl content that may be used in training our generative AI foundation models.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"openai.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://platform.openai.com/docs/bots\",\n      \"title\": \"Overview of OpenAI Crawlers\",\n      \"published_date\": null,\n      \"quote\": \"Disallowing GPTBot indicates a site’s content should not be used in training generative AI foundation models.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"openai.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c072",
+  "verdict": "CURRENT",
+  "seconds": 12.931,
+  "usd": 0.0342557,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own General structured data guidelines page, last updated 2026-07-10 according to the page metadata, says not to mark up content that is not visible to readers of the page. The rule sits under the Quality guidelines, in the Content section. Secondary sources about 2026 changes (review rules, FAQ) did not show that this rule was removed or reworded. The caller memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate: only mark up content that is visible on the page, and re-check Google's General structured data guidelines page periodically because it is updated often.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-07-10\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/structured-data/sd-policies\",\n      \"title\": \"General Structured Data Guidelines | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": \"2026-07-10\",\n      \"quote\": \"Don't mark up content that is not visible to readers of the page.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c073",
+  "verdict": "CURRENT",
+  "seconds": 13.539,
+  "usd": 0.021096200000000002,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The abstract of the GEO paper (Aggarwal et al., arXiv:2311.09735, v3 revised 28 Jun 2024) says that GEO can boost visibility by up to 40% in generative engine responses. That is the claim. The arXiv page is the paper's own primary source. The memory lookup and the Semantic Scholar check both failed, so I did not cross-check them. The primary source settles the claim, because the figure is stated in the paper's abstract. I did not check whether the 40% figure holds up. I only checked that the paper reports it.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"checkAcademic\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"The claim can be cited as accurate, and should be worded as 'up to 40%' in the paper's own evaluation, not as a guaranteed gain.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2023-11-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://arxiv.org/abs/2311.09735\",\n      \"title\": \"[2311.09735] GEO: Generative Engine Optimization\",\n      \"published_date\": \"2023-11-16\",\n      \"quote\": \"Through rigorous evaluation, we demonstrate that GEO can boost visibility by up to $40\\\\%$ in generative engine responses.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"arxiv.org\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "checkAcademic",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c074",
+  "verdict": "DISPUTED",
+  "seconds": 15.406,
+  "usd": 0.0390512,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is contradicted by the paper itself (Aggarwal et al., 'GEO: Generative Engine Optimization', arXiv 2311.09735). The authors evaluated keyword stuffing and found it ineffective. Their results table lists it under 'Non-Performing Generative Engine Optimization methods'. Its scores (17.8 on the word metric and 17.7 on position) are below the 19.5 and 19.3 for no optimization. The methods the paper reports as most effective were ones such as Easy-to-Understand and Authoritative, together with citation, quotation and statistics additions. Semantic Scholar and the caller-memory lookup failed (429 and a connection error), so no academic cross-check was possible. The paper is the primary source and is unambiguous.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"checkAcademic\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not repeat this claim: the GEO paper found keyword stuffing offered little to no improvement, and it reported methods such as adding statistics, quotations, and citations as the effective ones.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2024-06-28\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://arxiv.org/html/2311.09735v3\",\n      \"title\": \"GEO: Generative Engine Optimization\",\n      \"published_date\": \"2024-06-28\",\n      \"quote\": \"While widely used for Search Engine Optimization, we find such methods offer little to no improvement on generative engine’s responses.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"arxiv.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://arxiv.org/html/2311.09735v3\",\n      \"title\": \"GEO: Generative Engine Optimization\",\n      \"published_date\": \"2024-06-28\",\n      \"quote\": \"This underscores the need for website owners to rethink optimization strategies for generative engines, as techniques effective in search engines may not translate to success in this new paradigm.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"arxiv.org\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "checkAcademic",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c075",
+  "verdict": "OUTDATED",
+  "seconds": 32.133,
+  "usd": 0.1309944,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Google did say this. Its August 2023 announcement and FAQ documentation limited FAQ rich results to well-known, authoritative government and health websites. That is no longer true. Google's changelog shows FAQ rich results stopped appearing in Google Search for all sites on 7 May 2026, and Google later removed the FAQ rich result documentation. Google's May 2026 changelog entry does not appear in the text I retrieved. Its deprecation notice is quoted by Search Engine Journal, and Google's own changelog later cites that entry and says the feature is no longer shown. The claim therefore describes a past policy, not the current state. Government and health sites no longer get FAQ rich results either.\",\n  \"what_changed\": \"In August 2023 Google restricted FAQ rich results to well-known, authoritative government and health sites. On 7 May 2026 Google stopped showing FAQ rich results in Search for all sites. The FAQ search appearance filter, rich result report and Rich Results Test support were due to be dropped in June 2026, and Search Console API support in August 2026. Google later removed its FAQ rich result documentation page.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Don't tell anyone that FAQ rich results still appear for government and health sites. Describe it as a 2023 restriction that Google replaced with a full removal on 7 May 2026. FAQPage markup can stay on pages, but it no longer produces a visible FAQ result in Google Search.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-05-01\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/structured-data/faqpage\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"The FAQ rich result feature is no longer shown in Google Search results\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/google-drops-faq-rich-results-from-search/574429\",\n      \"title\": \"Google Drops FAQ Rich Results From Search\",\n      \"published_date\": \"2026-05\",\n      \"quote\": \"FAQ rich results stopped appearing in search results on May 7.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl",
+   "searchClaim",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c076",
+  "verdict": "OUTDATED",
+  "seconds": 27.652,
+  "usd": 0.0953828,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim is false today. Before August 2023, any site with valid FAQPage markup could be eligible for FAQ rich results, though Google never guaranteed they would appear. In August 2023 Google restricted them to well-known, authoritative government and health sites. Google's own changelog then says the feature stopped appearing in Google Search for all sites on 7 May 2026, and the FAQ rich result documentation was removed in June 2026. Valid FAQPage markup is still allowed, but it no longer produces a visible FAQ rich result for any website. I found no source showing the 'any website' version is true now. The only evidence for the earlier state is the 2023 restriction, so the pre-2023 history rests on that rather than on a quoted source.\",\n  \"what_changed\": \"On 2023-08-08 Google limited FAQ rich results to well-known, authoritative government and health websites. On 2026-05-07 Google stopped showing FAQ rich results in Search for all sites. In June 2026 Google removed the FAQ rich result documentation, the Search Console rich result report and Rich Results Test support. Support in the Search Console API was due to be removed in August 2026.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not tell users or agents that FAQPage markup will earn a Google FAQ rich result. The markup is harmless to keep, but Google no longer shows the feature for any site.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-06-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2026-05-08\",\n      \"quote\": \"This feature will no longer appear in Google Search starting May 7, 2026.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2026-06-15\",\n      \"quote\": \"The FAQ rich result feature is no longer shown in Google Search results, as announced in the [changelog entry in May 2026](#faq-deprecation).\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/08/howto-faq-changes\",\n      \"title\": \"Changes to HowTo and FAQ rich results | Google Search Central Blog\",\n      \"published_date\": \"2023-08-08\",\n      \"quote\": \"Going forward, FAQ (from `FAQPage` structured data) rich results will only be shown for well-known, authoritative government and health websites.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c080",
+  "verdict": "DISPUTED",
+  "seconds": 17.418,
+  "usd": 0.0596948,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"Google's own documentation, last updated 2026-10-05, says directly that E-E-A-T is not a specific ranking factor. Its automated systems use a mix of factors that can identify content with good E-E-A-T, and they give more weight to such content for YMYL topics. So E-E-A-T works as a concept that other signals approximate. It is not a standalone signal or score. Secondary SEO sources (Search Engine Journal, Rankability) agree, and they say Google has stated there is no 'E-E-A-T score'. The claim contradicts Google's primary source. One caveat: Backlinko's list of 'ranking factors' includes E-A-T, but Backlinko is a third-party site, so its list is not Google's own position. The caller memory lookup failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not state that E-E-A-T is a direct ranking factor. Say instead that it is a quality framework, and that Google's systems use a mix of signals aligned with it, especially for YMYL topics.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-10-05\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/creating-helpful-content\",\n      \"title\": \"Creating Helpful, Reliable, People-First Content | Google Search Central\",\n      \"published_date\": \"2026-10-05\",\n      \"quote\": \"While E-E-A-T itself isn't a specific ranking factor, using a mix of factors that can identify content with good E-E-A-T is useful.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/google-e-e-a-t-how-to-demonstrate-first-hand-experience/474446\",\n      \"title\": \"Google E-E-A-T: What Is It & How To Demonstrate It For SEO\",\n      \"published_date\": null,\n      \"quote\": \"It’s important to note that E-E-A-T is not a direct ranking factor in Google’s search algorithm.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c081",
+  "verdict": "DISPUTED",
+  "seconds": 26.641,
+  "usd": 0.0895922,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"Google's own documentation does not set a 40–60 word requirement for AI Overviews. Google's Search Central page on AI features says a page needs to be indexed and eligible to show in Search with a snippet, and that there are no additional technical requirements. It also says specific optimization isn't required. The 40–60 word 'rule' appears only on third-party SEO and marketing pages, such as easyaccordion.io, which present it as a writing best practice and not as a Google rule. A Surfer study of 405,576 searches found that AI Overviews themselves average about 157 words. That figure describes the generated summary, not the cited source passages, so it is context and not direct refutation. I could not find any Google source that sets a word-count requirement. Perplexity and the caller memory lookup both failed with errors, so this verdict rests on Google's documentation and web search results. The claim, as an absolute requirement ('must'), is not supported.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Don't treat 40–60 words as a Google requirement; it is an unofficial SEO heuristic, so rely on Google's Search Central guidance (indexable, snippet-eligible, helpful content) instead.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"There are no additional technical requirements.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"While specific optimization isn't required for AI Overviews and AI Mode\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://surfer.ai/blog/ai-overviews-study\",\n      \"title\": \"Google AI Overviews Study: 25+ Statistics from 405,576 searches\",\n      \"published_date\": null,\n      \"quote\": \"AI overviews in Google search are, on average, 157 words long.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"surfer.ai\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c082",
+  "verdict": "DISPUTED",
+  "seconds": 30.859,
+  "usd": 0.1103566,
+  "confidence": 75,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim that adding llms.txt gets a site cited by ChatGPT is not supported by the evidence I could find. SE Ranking analysed about 300,000 domains and found no relationship between having llms.txt and how often a domain is cited in LLM answers. Its model got more accurate when the llms.txt variable was removed. Search Engine Journal reports that OpenAI's crawler documentation recommends allowing OAI-SearchBot in robots.txt but does not say llms.txt affects ranking or citations. SE Ranking says GPTBot sometimes fetches llms.txt files, but not often, and this does not appear tied to citations. One marketing blog (AI Rank Lab) claims a 12% citation lift on 'ChatGPT Browse' across 500 sites. I could not trace that figure to an original methodology, so I don't treat it as corroborated. Perplexity and Semantic Scholar were unavailable during this check (missing API key and a 429 error), so the verdict rests on web sources and OpenAI's own docs page. That page mentions an llms.txt for OpenAI's own documentation index, but I found no statement on it that llms.txt influences ChatGPT citations. At most, llms.txt is a low-cost, unproven bet. It is not a mechanism that gets a site cited.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"askPerplexity\",\n    \"checkAcademic\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not tell users that llms.txt will get a site cited by ChatGPT. Adding the file is harmless, but for citation visibility focus on allowing OAI-SearchBot in robots.txt and on content quality.\",\n  \"confidence\": 75,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 5,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 4,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-06-29\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.searchenginejournal.com/llms-txt-shows-no-clear-effect-on-ai-citations-based-on-300k-domains/561542\",\n      \"title\": \"LLMs.txt Does Not Boost AI Citations, New Analysis Finds\",\n      \"published_date\": \"2025-11-07\",\n      \"quote\": \"After examining roughly 300,000 domains, the company found no relationship between having llms.txt and how often a domain is cited in major LLM answers.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/llms-txt-shows-no-clear-effect-on-ai-citations-based-on-300k-domains/561542\",\n      \"title\": \"LLMs.txt Does Not Boost AI Citations, New Analysis Finds\",\n      \"published_date\": \"2025-11-07\",\n      \"quote\": \"OpenAI recommends allowing OAI-SearchBot in robots.txt to support discovery for its search features, but does not say llms.txt affects ranking or citations.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://seranking.com/blog/llms-txt\",\n      \"title\": \"LLMs.txt: Why Brands Rely On It and Why It Doesn't Work\",\n      \"published_date\": \"2025-11-07\",\n      \"quote\": \"However, there’s no confirmation that LLMs.txt affects how ChatGPT ranks or cites content.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"seranking.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://greeto.studio/blog/does-llms-txt-help-chatgpt\",\n      \"title\": \"Does llms.txt Help With ChatGPT Citations?\",\n      \"published_date\": \"2026-06-29\",\n      \"quote\": \"As of mid-2026, adding an `llms.txt` file to your site does not get you cited in ChatGPT, and there is no public evidence it helps with ChatGPT citations.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"greeto.studio\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.airanklab.com/blog/does-llms-txt-improve-ai-citations\",\n      \"title\": \"Does llms.txt Improve AI Citations? What the Data Shows | AI Rank Lab\",\n      \"published_date\": null,\n      \"quote\": \"Yes, based on our analysis of 500 sites, adding llms.txt increased average citation rates by 18% on Perplexity, 12% on ChatGPT Browse, and 7% on Claude over 90 days.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"airanklab.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "checkAcademic",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c086",
+  "verdict": "DISPUTED",
+  "seconds": 20.736,
+  "usd": 0.0587809,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Google's own documentation says a page is eligible for AI Overviews if it is indexed and eligible to appear in Google Search with a snippet, and that there are no additional technical requirements. Search Console has no opt-in step. In 2026 Google added an opt-out toggle in Search Console, so sites are included by default and can choose to exclude themselves. This is the reverse of the claim. Secondary sources say the opt-out control launched in June 2026 and reached all sites worldwide by 31 August 2026. I did not quote those dates as evidence.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not act on this claim: no Search Console opt-in is needed, and sites that want to be excluded from AI Overviews must use the Search Console opt-out setting.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-06-02\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI features and your website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"To be eligible to be shown as a supporting link in AI Overviews or AI Mode, a page must be indexed and eligible to be shown in Google Search with a snippet, fulfilling the [Search technical requirements](/search/docs/essentials/technical).\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI features and your website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"While specific optimization isn't required for AI Overviews and AI Mode, all existing [SEO fundamentals](/search/docs/fundamentals/seo-starter-guide) continue to be worthwhile, for example:\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://9to5google.com/2026/06/02/google-ai-mode-overviews-opt-out\",\n      \"title\": \"Google will let sites opt-out of AI Mode and Overviews in Search\",\n      \"published_date\": \"2026-06-02\",\n      \"quote\": \"Google is introducing a new opt-out toggle in the Search Console tool to determine whether a site appears in and is used to help ground generative AI Search features.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"9to5google.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c093",
+  "verdict": "OUTDATED",
+  "seconds": 24.66,
+  "usd": 0.0628296,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Google no longer shows HowTo rich results, so the claim is false today. It was true before 2023. Google deprecated the feature on mobile in August 2023 and on desktop on 13 September 2023. Google's own documentation changelog says it removed the How-to structured data documentation because the rich result is no longer shown on desktop or mobile. A Google Search Central community answer quotes Google's update that Search no longer shows How-to rich results on desktop. Search Engine Journal and other SEO sites say the same. The same sources say HowTo markup can stay on a page, but it no longer produces a rich result. FAQ rich results were also dropped in May 2026.\",\n  \"what_changed\": \"In August 2023 Google stopped showing HowTo rich results on mobile. On 13 September 2023 it stopped showing them on desktop, and the feature was deprecated. Google then removed the How-to structured data documentation and the case study.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not rely on HowTo structured data to get a rich result in Google Search; the markup is harmless but has no visible effect, so drop any plans or claims that depend on it.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2024-05-22\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/structured-data/how-to\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"as this rich result is no longer shown in search results, on both desktop and mobile devices.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.google.com/webmasters/thread/275828534/%E2%80%9Chow-to%E2%80%9D-schema-not-reflecting-in-google-rich-results-testing-tool?hl=en\",\n      \"title\": \"“How-to” Schema not reflecting in Google Rich Results Testing tool - Google Search Central Community\",\n      \"published_date\": \"2024-05-22\",\n      \"quote\": \"As of September 13, Google Search no longer shows How-to rich results on desktop, which means this result type is now deprecated.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c095",
+  "verdict": "OUTDATED",
+  "seconds": 17.583,
+  "usd": 0.0518647,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true from 2009 until April 2022, but it is no longer true. Google announced the deprecation of the Search Console URL Parameters tool on 28 March 2022 and removed it about a month later. Search Engine Roundtable reported it offline on 26 April 2022. Google says its crawlers now work out how to handle URL parameters automatically. Site owners who want more control are pointed to robots.txt rules or hreflang. A claim written in the present tense in November 2026 therefore describes a retired tool. I could not retrieve caller memory because of a connection error, and that did not affect the verdict.\",\n  \"what_changed\": \"Google deprecated the URL Parameters tool in Search Console. The deprecation was announced on 2022-03-28 and the tool went offline around 2022-04-26. Google's crawlers now handle URL parameters automatically, and robots.txt rules or hreflang are the alternatives for extra control.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not tell users to configure the URL Parameters tool in Search Console, because it was retired in April 2022. Point them to robots.txt rules, hreflang, canonical tags and consistent URL parameter structure instead.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2022-03-28\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2022/03/url-parameters-tool-deprecated\",\n      \"title\": \"Spring cleaning: the URL Parameters tool | Google Search Central Blog\",\n      \"published_date\": \"2022-03-28\",\n      \"quote\": \"Due to the low value of the tool both for Google and Search Console users, we're deprecating the URL Parameters tool in 1 month.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2022/03/url-parameters-tool-deprecated\",\n      \"title\": \"Spring cleaning: the URL Parameters tool | Google Search Central Blog\",\n      \"published_date\": \"2022-03-28\",\n      \"quote\": \"Going forward you don't need to do anything to specify the function of URL parameters on your site, Google's crawlers will learn how to deal with URL parameters automatically.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c097",
+  "verdict": "CURRENT",
+  "seconds": 18.918,
+  "usd": 0.047603,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central documentation, fetched live, says its spam policies cover attempts to manipulate generative AI responses in Google Search. Secondary reports say Google added this wording on 15 May 2026 as a clarification, and that later spam updates in June, August and September 2026 enforce the same policies. I found no sign that the wording has been removed or changed. The claim is accurate as of 2026-11-17. The caller-memory lookup failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. When citing it, point to Google's Search Central spam policies page and note that the AI-response wording was added on 15 May 2026.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/essentials/spam-policies\",\n      \"title\": \"Spam Policies for Google Web Search | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"In the context of Google Search, spam refers to techniques used to deceive users or manipulate our Search systems into featuring content prominently, such as attempting to manipulate Search systems into ranking content highly or attempting to manipulate generative AI responses in Google Search.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://searchengineland.com/google-updates-search-spam-policies-to-clarify-it-applies-to-generative-ai-responses-477657\",\n      \"title\": \"Google confirms spam policies apply to AI Overviews and AI Mode\",\n      \"published_date\": null,\n      \"quote\": \"Google updated its Search spam policies to clarify that they also apply to generative AI features in Google Search.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"searchengineland.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": []\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ }
+]

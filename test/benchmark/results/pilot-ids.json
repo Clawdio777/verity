@@ -1,0 +1,32 @@
+[
+ {
+  "id": "c001",
+  "verdict": "CURRENT",
+  "seconds": 18.302,
+  "usd": 0.0498965,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "response": "```json\n{\n  \"verdict\": \"CURRENT\",\n  \"confidence\": 90,\n  \"summary\": \"Canberra is the capital city of Australia. Wikipedia, last edited 2026-11-15, states this directly. Britannica and EBSCO Research Starters agree. Web search found no source saying the capital has changed or is disputed. The Australian Bureau of Statistics lists Canberra among the capital cities with a 30 June 2025 population of about 484,600. Canberra has been the seat of government since 1927. No renaming or replacement of the city or its status turned up. Perplexity and Semantic Scholar were not used, because this is a stable encyclopaedic fact. The caller memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Canberra\",\n      \"title\": \"Canberra - Wikipedia\",\n      \"published_date\": \"2026-11-15\",\n      \"source_type\": \"wikipedia\",\n      \"credibility_tier\": 2,\n      \"supports\": \"CONFIRMS\"\n    },\n    {\n      \"url\": \"https://www.britannica.com/place/Canberra\",\n      \"title\": \"Canberra | History, Map, Population, Climate, & Facts | Britannica\",\n      \"published_date\": \"2026-11 (page lists news dated 2026-11-04)\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 2,\n      \"supports\": \"CONFIRMS\"\n    },\n    {\n      \"url\": \"https://www.abs.gov.au/media-centre/media-releases/capital-city-growth-slows\",\n      \"title\": \"Capital city growth slows | Australian Bureau of Statistics\",\n      \"published_date\": \"2025 (population as at 30 June 2025)\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 1,\n      \"supports\": \"CONFIRMS\"\n    },\n    {\n      \"url\": \"https://www.ebsco.com/research-starters/geography-and-cartography/canberra-australia\",\n      \"title\": \"Canberra, Australia | EBSCOhost Research Starters\",\n      \"published_date\": \"unknown\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 2,\n      \"supports\": \"CONFIRMS\"\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Australian_Capital_Territory\",\n      \"title\": \"Australian Capital Territory - Wikipedia\",\n      \"published_date\": \"unknown\",\n      \"source_type\": \"wikipedia\",\n      \"credibility_tier\": 2,\n      \"supports\": \"CONFIRMS\"\n    }\n  ],\n  \"tools_used\": [\"retrieveCallerMemory\", \"lookupWikipedia\", \"searchClaim\", \"searchForUpdates\"],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate and use it as written; no update is needed.\"\n}\n```",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c036",
+  "verdict": "OUTDATED",
+  "seconds": 17.832,
+  "usd": 0.052895,
+  "confidence": 95,
+  "downgrade_reason": null,
+  "response": "```json\n{\n  \"verdict\": \"OUTDATED\",\n  \"confidence\": 95,\n  \"summary\": \"The claim is false as of 2026-11-17. The UK was an EU member state from 1 January 1973, when it joined the European Communities, until 31 January 2020. It left at 11 p.m. GMT on that date under the Withdrawal Agreement, after the 2016 referendum (51.9% for Leave). A transition period ended on 31 December 2020. Since then the UK has been a third country, and its relationship with the EU is governed by the Withdrawal Agreement (modified by the Windsor Framework in 2023) and the Trade and Cooperation Agreement. The UK has been working on a closer 'reset' with the EU since May 2025, and a 2026 review of the Trade and Cooperation Agreement is under way. None of the sources describe a rejoining. Best for Britain, an advocacy group, describes Article 49 accession as the route back. All sources agree and none contradict. The claim's wording is only true for the period before 31 January 2020.\",\n  \"what_changed\": \"The UK ceased to be an EU member state at 11 p.m. GMT on 31 January 2020 (Brexit). The transition period ended on 31 December 2020. The UK is now a non-member third country with a separate trade and cooperation relationship with the EU. It would have to apply under Article 49 TEU to rejoin.\",\n  \"sources\": [\n    {\n      \"url\": \"https://www.europarl.europa.eu/factsheets/en/sheet/216/the-united-kingdom\",\n      \"title\": \"The United Kingdom | Fact Sheets on the European Union | European Parliament\",\n      \"published_date\": \"2026 (updated; refers to events in Feb 2026)\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 1,\n      \"supports\": \"UPDATES\"\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Brexit\",\n      \"title\": \"Brexit - Wikipedia\",\n      \"published_date\": \"2026-11-17 (last edited); accepted revision reviewed 2026-11-02\",\n      \"source_type\": \"wikipedia\",\n      \"credibility_tier\": 2,\n      \"supports\": \"UPDATES\"\n    },\n    {\n      \"url\": \"https://www.instituteforgovernment.org.uk/explainer/uk-and-european-union\",\n      \"title\": \"The UK and the European Union | Institute for Government\",\n      \"published_date\": \"not stated\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 2,\n      \"supports\": \"UPDATES\"\n    },\n    {\n      \"url\": \"https://commonslibrary.parliament.uk/research-briefings/cdp-2025-0067\",\n      \"title\": \"Debate on the UK applying to join the European Union - House of Commons Library\",\n      \"published_date\": \"2025\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 1,\n      \"supports\": \"UPDATES\"\n    },\n    {\n      \"url\": \"https://bestforbritain.org/how-and-when-could-the-uk-rejoin-the-eu\",\n      \"title\": \"FAQ: How and when could the UK rejoin the EU? - Best for Britain\",\n      \"published_date\": \"not stated\",\n      \"source_type\": \"web\",\n      \"credibility_tier\": 3,\n      \"supports\": \"UPDATES\"\n    }\n  ],\n  \"tools_used\": [\"retrieveCallerMemory (failed: connection error)\", \"lookupWikipedia\", \"searchClaim\", \"searchForUpdates\"],\n  \"checked_at\": \"2026-11-17T00:00:00Z\",\n  \"recommendation\": \"Do not treat the UK as an EU member state. Describe it as a former member that left on 31 January 2020 and now has a third-country relationship with the EU.\"\n}\n```",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ }
+]

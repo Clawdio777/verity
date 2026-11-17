@@ -13,6 +13,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@supabase/supabase-js";
+import { htmlToText, isPrimarySource, pageExcerpt, rankOfficialFirst } from "./evidence.js";
 
 const db = createClient(
   process.env.SUPABASE_URL!,
@@ -137,6 +138,10 @@ export const tools: Anthropic.Tool[] = [
         url: {
           type: "string",
           description: "The full URL to fetch and extract. Must start with http:// or https://",
+        },
+        find: {
+          type: "string",
+          description: "Optional phrase to look for. Long pages are cut at 3000 characters; with find, up to three passages around the phrase (or its longer words) are added, so you can quote the exact sentence.",
         },
       },
       required: ["url"],
@@ -420,9 +425,10 @@ async function runSearchClaim(input: Record<string, any>): Promise<string> {
 
     if (!data.results?.length) return "No results found for this claim.";
 
-    return JSON.stringify(data.results.map(r => ({
+    return JSON.stringify(rankOfficialFirst(data.results, query).map(r => ({
       url: r.url,
       title: r.title,
+      official_source: isPrimarySource(r.url, query),
       content: r.content?.substring(0, 500),
       published_date: r.published_date,
       relevance_score: r.score,
@@ -435,7 +441,7 @@ async function runSearchClaim(input: Record<string, any>): Promise<string> {
 // ── Tavily Extract ─────────────────────────────────────────────────────────────
 
 async function runFetchUrl(input: Record<string, any>): Promise<string> {
-  const { url } = input;
+  const { url, find } = input;
 
   try {
     const res = await fetch("https://api.tavily.com/extract", {
@@ -450,7 +456,7 @@ async function runFetchUrl(input: Record<string, any>): Promise<string> {
 
     if (!res.ok) {
       // Fall back to native fetch
-      return await fallbackFetch(url);
+      return await fallbackFetch(url, find);
     }
 
     const data = await res.json() as {
@@ -459,20 +465,20 @@ async function runFetchUrl(input: Record<string, any>): Promise<string> {
     };
 
     if (data.failed_results?.length && !data.results?.length) {
-      return await fallbackFetch(url);
+      return await fallbackFetch(url, find);
     }
 
     const result = data.results?.[0];
     if (!result) return "Could not extract content from URL.";
 
-    const content = result.raw_content?.substring(0, 3000) || "No content extracted";
+    const content = result.raw_content ? pageExcerpt(result.raw_content, find) : "No content extracted";
     return JSON.stringify({ url: result.url, title: result.title, content }, null, 2);
   } catch (e: any) {
-    return await fallbackFetch(url);
+    return await fallbackFetch(url, find);
   }
 }
 
-async function fallbackFetch(url: string): Promise<string> {
+async function fallbackFetch(url: string, find?: string): Promise<string> {
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "VERITY-Bot/1.0 (fact-check agent)" },
@@ -481,7 +487,7 @@ async function fallbackFetch(url: string): Promise<string> {
     if (!res.ok) return `Could not fetch URL: HTTP ${res.status}`;
     const html = await res.text();
     // Strip tags, take first 2000 chars
-    const text = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().substring(0, 2000);
+    const text = pageExcerpt(htmlToText(html).replace(/\s+/g, " ").trim(), find, 2000);
     const lastModified = res.headers.get("last-modified");
     return JSON.stringify({ url, content: text, last_modified: lastModified }, null, 2);
   } catch (e: any) {
@@ -524,9 +530,10 @@ async function runSearchForUpdates(input: Record<string, any>): Promise<string> 
     if (!data.results?.length) return "No recent updates found for this claim.";
 
     // Filter for results newer than original_date if provided
-    const results = data.results.map(r => ({
+    const results = rankOfficialFirst(data.results, original_claim).map(r => ({
       url: r.url,
       title: r.title,
+      official_source: isPrimarySource(r.url, original_claim),
       content: r.content?.substring(0, 400),
       published_date: r.published_date,
       relevance_score: r.score,
