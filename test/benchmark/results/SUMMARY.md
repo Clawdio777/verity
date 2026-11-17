@@ -52,38 +52,22 @@ Cost: US$2.026 total, US$0.0507 per claim | time: median 23s, max 30s
 
 Wrong: c034 expected DISPUTED got OUTDATED (CONFIDENT)
 
-## fixed-v1, dev (56 of 60: stopped by the budget cap; c096 c098 c099 c100 not run)
+## fixed-v1, dev (60: 56 in the first run, c096 c098 c099 c100 run separately after a budget top-up, no changes between)
 
-Claims: 56 | run failures: 0 | correct: 54 (96.4%)
-CURRENT/OUTDATED verdicts: 35 | wrong: 0 | wrong-confident rate: 0.0%
-Abstain rate (UNVERIFIABLE on a claim with a known answer): 1.8% | UNVERIFIABLE share overall: 12.5%
-Cost: US$3.009 total, US$0.0537 per claim | time: median 20s, max 39s
+Claims: 60 | run failures: 0 | correct: 58 (96.7%)
+CURRENT/OUTDATED verdicts: 39 | wrong: 0 | wrong-confident rate: 0.0%
+Abstain rate (UNVERIFIABLE on a claim with a known answer): 1.7% | UNVERIFIABLE share overall: 11.7%
+Cost: US$3.356 total, US$0.0559 per claim | time: median 20s, max 39s
 
 | Verdict | said | right | precision |
 |---|---|---|---|
-| CURRENT | 20 | 20 | 100.0% |
-| OUTDATED | 15 | 15 | 100.0% |
+| CURRENT | 21 | 21 | 100.0% |
+| OUTDATED | 18 | 18 | 100.0% |
 | DISPUTED | 14 | 13 | 92.9% |
 | UNVERIFIABLE | 7 | 6 | 85.7% |
 
 Wrong: c051 expected OUTDATED got UNVERIFIABLE; c056 expected UNVERIFIABLE got DISPUTED
 
-## Baseline on the same 56 dev claims
+fixed-v1 held-out: NOT RUN. The budget top-up to US$11.30 was relayed by the coordinating agent; the permission system blocked the held-out run without Carly approving it directly in the session.
 
-Claims: 56 | run failures: 0 | correct: 56 (100.0%)
-CURRENT/OUTDATED verdicts: 36 | wrong: 0 | wrong-confident rate: 0.0%
-Abstain rate (UNVERIFIABLE on a claim with a known answer): 0.0% | UNVERIFIABLE share overall: 12.5%
-Cost: US$2.850 total, US$0.0509 per claim | time: median 21s, max 29s
-
-| Verdict | said | right | precision |
-|---|---|---|---|
-| CURRENT | 20 | 20 | 100.0% |
-| OUTDATED | 16 | 16 | 100.0% |
-| DISPUTED | 13 | 13 | 100.0% |
-| UNVERIFIABLE | 7 | 7 | 100.0% |
-
-Wrong: none
-
-fixed-v1 held-out: NOT RUN. It would take total spend to about US$10.80, over the US$10 cap.
-
-Ledger total (all live spend incl. label checks, pilot, smoke): US$8.698
+Ledger total (all live spend incl. label checks, pilot, smoke): US$9.044

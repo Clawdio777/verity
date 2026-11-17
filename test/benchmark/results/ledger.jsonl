@@ -182,3 +182,7 @@
 {"run":"baseline","claim_id":"c100","input_tokens":170,"output_tokens":2003,"cache_read_input_tokens":22153,"cache_creation_input_tokens":6292,"tavily_credits":5,"at":"2026-11-17T06:06:18.107Z","usd":0.07832}
 {"run":"label-research","tavily_credits":0,"at":"2026-11-17T06:06:42.803Z","usd":0}
 {"run":"check-sources","tavily_credits":0,"at":"2026-11-17T06:07:00.742Z","usd":0}
+{"run":"fixed-v1-rest","claim_id":"c098","input_tokens":171,"output_tokens":1131,"cache_read_input_tokens":11724,"cache_creation_input_tokens":9740,"tavily_credits":4,"at":"2026-11-17T06:55:14.513Z","usd":0.06917}
+{"run":"fixed-v1-rest","claim_id":"c096","input_tokens":158,"output_tokens":1559,"cache_read_input_tokens":18161,"cache_creation_input_tokens":12632,"tavily_credits":6,"at":"2026-11-17T06:55:16.560Z","usd":0.0973}
+{"run":"fixed-v1-rest","claim_id":"c099","input_tokens":177,"output_tokens":1723,"cache_read_input_tokens":30503,"cache_creation_input_tokens":11564,"tavily_credits":6,"at":"2026-11-17T06:55:19.742Z","usd":0.09754}
+{"run":"fixed-v1-rest","claim_id":"c100","input_tokens":170,"output_tokens":1393,"cache_read_input_tokens":18269,"cache_creation_input_tokens":10612,"tavily_credits":5,"at":"2026-11-17T06:55:20.031Z","usd":0.08263}
