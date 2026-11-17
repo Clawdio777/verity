@@ -166,3 +166,18 @@ describe("fix b (search side): official sources are read first and can be quoted
     expect(pageExcerpt(page, "additional technical requirements")).toContain("There are no additional technical requirements for AI Overviews.");
   });
 });
+
+test("a sentence quoted from the Wikipedia summary matches its article even though the page has a pronunciation bracket", async () => {
+  const { defaultFetcher } = await import("../src/evidence.ts");
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = (async (u: string) => String(u).includes("/api/rest_v1/page/summary/")
+    ? new Response(JSON.stringify({ extract: "Canberra is the capital city of Australia." }), { headers: { "content-type": "application/json" } })
+    : new Response("<p>Canberra (/ˈkænbərə/ KAN-bər-ə) is the capital city of Australia.</p>", { headers: { "content-type": "text/html" } })) as any;
+  try {
+    const u = "https://en.wikipedia.org/wiki/Canberra";
+    const pages = await defaultFetcher({ tavily_credits: 0 })([u]);
+    expect(quoteOnPage("Canberra is the capital city of Australia.", pages.get(u)!)).toBe(true);
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});

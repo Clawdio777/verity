@@ -238,6 +238,23 @@ const stripUrl = (u: string) => u.replace(/^https?:\/\/(www\.)?/, "").replace(/[
 export interface FetchStats { tavily_credits: number }
 
 /**
+ * The lookupWikipedia tool shows the article's REST summary, whose lead sentence drops the
+ * pronunciation/etymology brackets that are on the HTML page. Read that text too, so a sentence
+ * quoted from the summary still matches the same article.
+ */
+async function wikipediaSummary(url: string): Promise<string | null> {
+  const m = url.match(/^https?:\/\/([a-z-]+)\.wikipedia\.org\/wiki\/([^#?]+)/);
+  if (!m) return null;
+  try {
+    const res = await fetch(`https://${m[1]}.wikipedia.org/api/rest_v1/page/summary/${m[2]}`, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(10000) });
+    if (!res.ok) return null;
+    return ((await res.json()) as { extract?: string }).extract ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Default fetcher: plain fetch first, then Tavily Extract for anything that failed.
  * `wanted` (url -> quotes) lets it also try Tavily when a page loaded but the quote is not in
  * the raw HTML (JavaScript-rendered pages).
@@ -245,7 +262,10 @@ export interface FetchStats { tavily_credits: number }
 export function defaultFetcher(stats: FetchStats, wanted?: Map<string, string[]>): PageFetcher {
   return async (urls) => {
     const out = new Map<string, string | null>();
-    await Promise.all(urls.map(async (u) => out.set(u, await fetchDirect(u))));
+    await Promise.all(urls.map(async (u) => {
+      const [page, summary] = await Promise.all([fetchDirect(u), wikipediaSummary(u)]);
+      out.set(u, page && summary ? `${page}\n${summary}` : page ?? summary);
+    }));
     const retry = urls.filter((u) => {
       const text = out.get(u);
       if (!text) return true;
