@@ -126,10 +126,26 @@ export interface AgentQuery {
   caller_id: string;
 }
 
+export interface AgentUsage {
+  input_tokens: number;
+  output_tokens: number;
+  cache_read_input_tokens: number;
+  cache_creation_input_tokens: number;
+  /** Tavily API credits used by this run (search basic = 1, advanced = 2, extract = 1 per 5 URLs). */
+  tavily_credits: number;
+}
+
 export interface AgentResponse {
   response: string;
   tool_calls_made: string[];
   tokens_used: number;
+  usage: AgentUsage;
+}
+
+export function tavilyCredits(name: string, input: Record<string, any>): number {
+  if (name === "searchClaim") return input?.search_depth === "advanced" ? 2 : 1;
+  if (name === "searchForUpdates" || name === "fetchUrl") return 1;
+  return 0;
 }
 
 const VERDICT_JSON = /"verdict"\s*:\s*"(CURRENT|OUTDATED|DISPUTED|UNVERIFIABLE)"/;
@@ -146,6 +162,10 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
 
   const toolCallsMade: string[] = [];
   let totalTokens = 0;
+  const usage: AgentUsage = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0, tavily_credits: 0 };
+  // Prompt caching: the system prompt and the growing tool history are re-sent every turn, so mark the
+  // newest tool-result block as a cache breakpoint (one moving breakpoint plus the system prompt).
+  let marked: { cache_control?: unknown } | null = null;
   let iterations = 0;
   let forceSynthesis = false;
   let askedForJson = false;
@@ -154,21 +174,33 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
   while (iterations < MAX_ITERATIONS + (askedForJson ? 1 : 0)) {
     iterations++;
 
+    const last = messages[messages.length - 1];
+    if (Array.isArray(last.content) && last.content.length) {
+      if (marked) delete marked.cache_control;
+      marked = last.content[last.content.length - 1] as { cache_control?: unknown };
+      marked.cache_control = { type: "ephemeral" };
+    }
+
     const response = await anthropic.messages.create({
       model: "claude-sonnet-5-5",
       max_tokens: forceSynthesis ? 8192 : 4096,
-      system: SYSTEM_PROMPT,
+      system: [{ type: "text", text: SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
       ...(forceSynthesis ? {} : { tools }),
       messages,
     });
 
-    totalTokens += response.usage.input_tokens + response.usage.output_tokens;
+    const u = response.usage;
+    totalTokens += u.input_tokens + u.output_tokens + (u.cache_read_input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0);
+    usage.input_tokens += u.input_tokens;
+    usage.output_tokens += u.output_tokens;
+    usage.cache_read_input_tokens += u.cache_read_input_tokens ?? 0;
+    usage.cache_creation_input_tokens += u.cache_creation_input_tokens ?? 0;
 
     if (response.stop_reason === "end_turn" || response.stop_reason === "max_tokens") {
       // The JSON can follow a short text block, so read every text block, not just the first.
       const text = response.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("\n").trim();
       if (VERDICT_JSON.test(text)) {
-        return { response: text, tool_calls_made: toolCallsMade, tokens_used: totalTokens };
+        return { response: text, tool_calls_made: toolCallsMade, tokens_used: totalTokens, usage };
       }
       // 23/10/2026: 1 in 10 paid checks and 1 in 19 trial checks ended with no verdict (empty, or prose with
       // no JSON) and failed after all the research was paid for. Ask once for the verdict before giving up.
@@ -197,6 +229,7 @@ export async function runAgent(input: AgentQuery): Promise<AgentResponse> {
         toolUseBlocks.map(async (block) => {
           if (block.type !== "tool_use") return null;
           toolCallsMade.push(block.name);
+          usage.tavily_credits += tavilyCredits(block.name, block.input as Record<string, any>);
           const result = await executeTool(block.name, block.input as Record<string, any>);
           return {
             type: "tool_result" as const,
