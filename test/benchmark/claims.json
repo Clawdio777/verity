@@ -1,0 +1,1532 @@
+[
+ {
+  "id": "c001",
+  "split": "dev",
+  "category": "true",
+  "claim": "Canberra is the capital city of Australia.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Stable fact.",
+  "source_url": "https://en.wikipedia.org/wiki/Canberra",
+  "source_quote": "is the capital city of Australia",
+  "checked_on": "2026-11-17",
+  "group": "canberra",
+  "smoke": true
+ },
+ {
+  "id": "c002",
+  "split": "dev",
+  "category": "false",
+  "claim": "Sydney is the capital city of Australia.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Canberra is the capital; Sydney never was.",
+  "source_url": "https://en.wikipedia.org/wiki/Canberra",
+  "source_quote": "is the capital city of Australia",
+  "checked_on": "2026-11-17",
+  "group": "canberra"
+ },
+ {
+  "id": "c003",
+  "split": "dev",
+  "category": "true",
+  "claim": "The speed of light in a vacuum is exactly 299,792,458 metres per second.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Fixed by the SI definition of the metre.",
+  "source_url": "https://en.wikipedia.org/wiki/Speed_of_light",
+  "source_quote": "it is exact because, by international agreement, a metre is defined as the length of the path travelled by light in vacuum",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c004",
+  "split": "heldout",
+  "category": "true",
+  "claim": "Mars has two moons, Phobos and Deimos.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "NASA: Mars has two moons, Phobos and Deimos.",
+  "source_url": "https://science.nasa.gov/mars/moons/",
+  "source_quote": "Mars has two moons, Phobos and Deimos.",
+  "checked_on": "2026-11-17",
+  "group": "mars"
+ },
+ {
+  "id": "c005",
+  "split": "heldout",
+  "category": "false",
+  "claim": "Mars has three moons.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Mars has two moons.",
+  "source_url": "https://science.nasa.gov/mars/moons/",
+  "source_quote": "Mars has two moons, Phobos and Deimos.",
+  "checked_on": "2026-11-17",
+  "group": "mars"
+ },
+ {
+  "id": "c006",
+  "split": "dev",
+  "category": "true",
+  "claim": "Mount Everest is Earth's highest mountain above sea level.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Stable fact.",
+  "source_url": "https://en.wikipedia.org/wiki/Mount_Everest",
+  "source_quote": "is the highest mountain on Earth above sea level",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c007",
+  "split": "dev",
+  "category": "true",
+  "claim": "Albert Einstein received the 1921 Nobel Prize in Physics, especially for his discovery of the law of the photoelectric effect.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Nobel Prize citation.",
+  "source_url": "https://www.nobelprize.org/prizes/physics/1921/summary/",
+  "source_quote": "especially for his discovery of the law of the photoelectric effect",
+  "checked_on": "2026-11-17",
+  "group": "einstein"
+ },
+ {
+  "id": "c008",
+  "split": "dev",
+  "category": "false",
+  "claim": "Albert Einstein won the Nobel Prize for his theory of relativity.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "The prize cited the photoelectric effect, not relativity.",
+  "source_url": "https://www.nobelprize.org/prizes/physics/1921/summary/",
+  "source_quote": "especially for his discovery of the law of the photoelectric effect",
+  "checked_on": "2026-11-17",
+  "group": "einstein"
+ },
+ {
+  "id": "c009",
+  "split": "heldout",
+  "category": "true",
+  "claim": "The Burj Khalifa in Dubai is the tallest building in the world.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Tallest since 2010; Jeddah Tower not complete.",
+  "source_url": "https://en.wikipedia.org/wiki/Burj_Khalifa",
+  "source_quote": "it is the world's tallest structure, with a total height of 829.8 m",
+  "checked_on": "2026-11-17",
+  "group": "tallest"
+ },
+ {
+  "id": "c010",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Taipei 101 is the tallest building in the world.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Tallest 2004 until the Burj Khalifa was completed (2009/2010).",
+  "source_url": "https://en.wikipedia.org/wiki/Taipei_101",
+  "source_quote": "world's tallest building",
+  "checked_on": "2026-11-17",
+  "group": "tallest"
+ },
+ {
+  "id": "c011",
+  "split": "heldout",
+  "category": "true",
+  "claim": "The Eiffel Tower was completed in 1889.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Historical fact.",
+  "source_url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+  "source_quote": "whose company designed and built the tower from 1887 to 1889",
+  "checked_on": "2026-11-17",
+  "group": "eiffel"
+ },
+ {
+  "id": "c012",
+  "split": "heldout",
+  "category": "false",
+  "claim": "The Eiffel Tower was completed in 1899.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Completed 1889.",
+  "source_url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+  "source_quote": "whose company designed and built the tower from 1887 to 1889",
+  "checked_on": "2026-11-17",
+  "group": "eiffel"
+ },
+ {
+  "id": "c013",
+  "split": "dev",
+  "category": "true",
+  "claim": "Python was created by Guido van Rossum and first released in 1991.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Stable fact.",
+  "source_url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+  "source_quote": "Van Rossum first released it in 1991 as Python 0.9.0.",
+  "checked_on": "2026-11-17",
+  "group": "python"
+ },
+ {
+  "id": "c014",
+  "split": "dev",
+  "category": "false",
+  "claim": "The Python programming language was created by James Gosling.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Gosling created Java; van Rossum created Python.",
+  "source_url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+  "source_quote": "Python was conceived in the late 1980s by Guido van Rossum",
+  "checked_on": "2026-11-17",
+  "group": "python"
+ },
+ {
+  "id": "c015",
+  "split": "heldout",
+  "category": "true",
+  "claim": "The HTTP 404 status code means the server did not find a current representation of the requested resource (Not Found).",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "RFC 9110.",
+  "source_url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+  "source_quote": "The 404 (Not Found) status code indicates that the origin server did not find a current representation for the target resource",
+  "checked_on": "2026-11-17",
+  "group": "404"
+ },
+ {
+  "id": "c016",
+  "split": "heldout",
+  "category": "false",
+  "claim": "The HTTP 404 status code means Internal Server Error.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "404 is Not Found; 500 is Internal Server Error.",
+  "source_url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+  "source_quote": "The 404 (Not Found) status code indicates that the origin server did not find a current representation for the target resource",
+  "checked_on": "2026-11-17",
+  "group": "404"
+ },
+ {
+  "id": "c017",
+  "split": "dev",
+  "category": "true",
+  "claim": "The Universal Declaration of Human Rights was adopted by the UN General Assembly on 10 December 1948.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "UN: proclaimed by the General Assembly in Paris on 10 December 1948.",
+  "source_url": "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+  "source_quote": "the Declaration was proclaimed by the United Nations General Assembly in Paris on 10 December 1948",
+  "checked_on": "2026-11-17",
+  "group": "udhr"
+ },
+ {
+  "id": "c018",
+  "split": "dev",
+  "category": "false",
+  "claim": "The Universal Declaration of Human Rights was adopted by the UN General Assembly in 1958.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Adopted 1948.",
+  "source_url": "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+  "source_quote": "the Declaration was proclaimed by the United Nations General Assembly in Paris on 10 December 1948",
+  "checked_on": "2026-11-17",
+  "group": "udhr"
+ },
+ {
+  "id": "c019",
+  "split": "dev",
+  "category": "true",
+  "claim": "Charles III is King of the United Kingdom.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Acceded 8 September 2022.",
+  "source_url": "https://en.wikipedia.org/wiki/Charles_III",
+  "source_quote": "King of the United Kingdom",
+  "checked_on": "2026-11-17",
+  "group": "monarch"
+ },
+ {
+  "id": "c020",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Queen Elizabeth II is the reigning monarch of the United Kingdom.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "She died on 8 September 2022; Charles III succeeded.",
+  "source_url": "https://en.wikipedia.org/wiki/Elizabeth_II",
+  "source_quote": "was queen of the United Kingdom and other Commonwealth realms from 6 February 1952 until her death in 2022",
+  "checked_on": "2026-11-17",
+  "group": "monarch",
+  "smoke": true
+ },
+ {
+  "id": "c021",
+  "split": "dev",
+  "category": "true",
+  "claim": "Leo XIV is the current Pope.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Elected 8 May 2025.",
+  "source_url": "https://en.wikipedia.org/wiki/Pope_Leo_XIV",
+  "source_quote": "is the head of the Catholic Church and sovereign of Vatican City",
+  "checked_on": "2026-11-17",
+  "group": "pope"
+ },
+ {
+  "id": "c022",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Pope Francis is the current head of the Catholic Church.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Francis died 21 April 2025; Leo XIV elected 8 May 2025.",
+  "source_url": "https://en.wikipedia.org/wiki/Pope_Francis",
+  "source_quote": "was the head of the Catholic Church and sovereign of Vatican City from his election in 2013 until his death in 2025",
+  "checked_on": "2026-11-17",
+  "group": "pope"
+ },
+ {
+  "id": "c023",
+  "split": "heldout",
+  "category": "true",
+  "claim": "The Hubble Space Telescope was launched in 1990.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Hubble launched on STS-31 in 1990 and is still operating.",
+  "source_url": "https://en.wikipedia.org/wiki/Hubble_Space_Telescope",
+  "source_quote": "launched into low Earth orbit in 1990 on STS-31 and remains in operation",
+  "checked_on": "2026-11-17",
+  "group": "hubble"
+ },
+ {
+  "id": "c024",
+  "split": "heldout",
+  "category": "false",
+  "claim": "The Hubble Space Telescope was launched in 2005.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Launched 1990.",
+  "source_url": "https://en.wikipedia.org/wiki/Hubble_Space_Telescope",
+  "source_quote": "launched into low Earth orbit in 1990 on STS-31 and remains in operation",
+  "checked_on": "2026-11-17",
+  "group": "hubble"
+ },
+ {
+  "id": "c025",
+  "split": "dev",
+  "category": "true",
+  "claim": "Mercury is the planet closest to the Sun.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "NASA: Mercury is the planet nearest to the Sun.",
+  "source_url": "https://science.nasa.gov/mercury/facts/",
+  "source_quote": "Mercury is the smallest planet in our solar system and nearest to the Sun.",
+  "checked_on": "2026-11-17",
+  "group": "mercury"
+ },
+ {
+  "id": "c026",
+  "split": "dev",
+  "category": "false",
+  "claim": "Mercury is the planet farthest from the Sun.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Mercury is closest; Neptune is farthest.",
+  "source_url": "https://science.nasa.gov/mercury/facts/",
+  "source_quote": "Mercury is the smallest planet in our solar system and nearest to the Sun.",
+  "checked_on": "2026-11-17",
+  "group": "mercury"
+ },
+ {
+  "id": "c027",
+  "split": "dev",
+  "category": "true",
+  "claim": "The Treaty of Waitangi was first signed in 1840.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "NZ history.",
+  "source_url": "https://nzhistory.govt.nz/politics/treaty-of-waitangi",
+  "source_quote": "Since it was signed in 1840, the Treaty has continued to exert a powerful",
+  "checked_on": "2026-11-17",
+  "group": "waitangi"
+ },
+ {
+  "id": "c028",
+  "split": "dev",
+  "category": "false",
+  "claim": "The Treaty of Waitangi was first signed in 1901.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Signed 1840.",
+  "source_url": "https://nzhistory.govt.nz/politics/treaty-of-waitangi",
+  "source_quote": "Since it was signed in 1840, the Treaty has continued to exert a powerful",
+  "checked_on": "2026-11-17",
+  "group": "waitangi"
+ },
+ {
+  "id": "c029",
+  "split": "heldout",
+  "category": "true",
+  "claim": "TLS 1.3 is specified in RFC 8446.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "IETF RFC 8446 is the TLS 1.3 specification.",
+  "source_url": "https://www.rfc-editor.org/rfc/rfc8446.html",
+  "source_quote": "The Transport Layer Security (TLS) Protocol Version 1.3",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c030",
+  "split": "heldout",
+  "category": "true",
+  "claim": "Australia has six states.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Constitution.",
+  "source_url": "https://en.wikipedia.org/wiki/States_and_territories_of_Australia",
+  "source_quote": "Each of the six states has its own capital city",
+  "checked_on": "2026-11-17",
+  "group": "states"
+ },
+ {
+  "id": "c031",
+  "split": "heldout",
+  "category": "false",
+  "claim": "Australia has eight states.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Six states (plus territories).",
+  "source_url": "https://en.wikipedia.org/wiki/States_and_territories_of_Australia",
+  "source_quote": "Each of the six states has its own capital city",
+  "checked_on": "2026-11-17",
+  "group": "states"
+ },
+ {
+  "id": "c032",
+  "split": "dev",
+  "category": "true",
+  "claim": "The Great Barrier Reef lies off the coast of Queensland, Australia.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "GBRMPA.",
+  "source_url": "https://en.wikipedia.org/wiki/Great_Barrier_Reef",
+  "source_quote": "The reef is located in the Coral Sea, off the coast of Queensland, Australia.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c033",
+  "split": "dev",
+  "category": "false",
+  "claim": "Lightning never strikes the same place twice.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "US National Weather Service: lightning often strikes the same place repeatedly.",
+  "source_url": "https://www.weather.gov/safety/lightning-myths",
+  "source_quote": "Lightning often strikes the same place repeatedly",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c034",
+  "split": "heldout",
+  "category": "false",
+  "claim": "The Great Wall of China is visible from the Moon with the naked eye.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "NASA: not even reliably visible from low Earth orbit unaided.",
+  "source_url": "https://cosmicopia.gsfc.nasa.gov/qa_earth.html",
+  "source_quote": "The Great Wall can barely be seen from the Shuttle, so it would not be possible to see it from the Moon with the naked eye.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c035",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Pluto is the ninth planet of the Solar System.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "IAU reclassified Pluto as a dwarf planet on 24 August 2006.",
+  "source_url": "https://en.wikipedia.org/wiki/Pluto",
+  "source_quote": "In 2006, the International Astronomical Union (IAU) formally redefined the term planet to exclude dwarf planets such as Pluto.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c036",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "The United Kingdom is a member state of the European Union.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "The UK left the EU on 31 January 2020.",
+  "source_url": "https://en.wikipedia.org/wiki/Brexit",
+  "source_quote": "The UK officially left the European Union on 31 January 2020",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c037",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Swaziland is the official name of the kingdom in southern Africa bordered by South Africa and Mozambique.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Renamed the Kingdom of Eswatini in April 2018.",
+  "source_url": "https://en.wikipedia.org/wiki/Eswatini",
+  "source_quote": "Mswati III announced that the Kingdom of Swaziland had been renamed as the Kingdom of Eswatini",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c038",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "The country's official name is the Republic of Macedonia.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Renamed North Macedonia in February 2019 (Prespa Agreement).",
+  "source_url": "https://en.wikipedia.org/wiki/North_Macedonia",
+  "source_quote": "Republic of North Macedonia",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c039",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Turkey's official name at the United Nations is 'Turkey'.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "The UN registered the name Türkiye in June 2022.",
+  "source_url": "https://en.wikipedia.org/wiki/Turkey",
+  "source_quote": "the Turkish government requested the United Nations and other international organizations to use Republic of Türkiye officially in English; the UN agreed",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c040",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Internet Explorer 11 is a supported Microsoft browser on Windows 10.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "IE11 desktop app retired and out of support 15 June 2022.",
+  "source_url": "https://learn.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge",
+  "source_quote": "As of June 15, 2022, the IE11 desktop application is no longer supported",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c041",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Facebook, Inc. is the name of the company that owns Instagram and WhatsApp.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Renamed Meta Platforms in October 2021.",
+  "source_url": "https://en.wikipedia.org/wiki/Meta_Platforms",
+  "source_quote": "and was renamed Facebook, Inc. in 2005. In 2021, it rebranded as Meta Platforms, Inc.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c042",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Twitter is the name of the social network owned by Elon Musk.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Rebranded as X in July 2023.",
+  "source_url": "https://en.wikipedia.org/wiki/Twitter",
+  "source_quote": "Twitter was rebranded to X on July 23, 2023, and its domain name changed from twitter.com to x.com on May 17, 2024.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c043",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "NASA's Kepler space telescope is still collecting data.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Retired 30 October 2018 after running out of fuel.",
+  "source_url": "https://en.wikipedia.org/wiki/Kepler_space_telescope",
+  "source_quote": "On October 30, 2018, after the spacecraft ran out of fuel, NASA announced that the telescope would be retired.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c044",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Universal Analytics is Google's current web analytics product.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Standard UA properties stopped processing data on 1 July 2023; replaced by Google Analytics 4.",
+  "source_url": "https://support.google.com/analytics/answer/11583528",
+  "source_quote": "standard Universal Analytics properties stopped processing hits, including standard properties in accounts that also contain 360 properties",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c045",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Google Optimize is available for running A/B tests on websites.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Sunset 30 September 2023.",
+  "source_url": "https://support.google.com/optimize/answer/12979939",
+  "source_quote": "Google Optimize and Optimize 360 are no longer available as of September 30, 2023.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c046",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Bard is the name of Google's AI chatbot.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Renamed Gemini in February 2024.",
+  "source_url": "https://en.wikipedia.org/wiki/Gemini_(chatbot)",
+  "source_quote": "In February 2024, the Bard chatbot was renamed Gemini",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c047",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Bing Chat is the name of Microsoft's AI chat assistant.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Rebranded Microsoft Copilot in November 2023.",
+  "source_url": "https://en.wikipedia.org/wiki/Microsoft_Copilot",
+  "source_quote": "On November 15, 2023, Microsoft announced that Bing Chat itself was being rebranded under the Copilot name.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c048",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Windows 10 receives free monthly security updates for all users.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Support ended 14 October 2025; updates now only via paid/enrolled ESU.",
+  "source_url": "https://www.microsoft.com/en-us/windows/end-of-support",
+  "source_quote": "Windows 10 reached end of support on October 14, 2025",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c049",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Rishi Sunak is the Prime Minister of the United Kingdom.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Keir Starmer became PM on 5 July 2024.",
+  "source_url": "https://en.wikipedia.org/wiki/Rishi_Sunak",
+  "source_quote": "who served as Prime Minister of the United Kingdom and Leader of the Conservative Party from 2022 to 2024",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c050",
+  "split": "heldout",
+  "category": "outdated",
+  "claim": "Jacinda Ardern is the Prime Minister of New Zealand.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Resigned January 2023.",
+  "source_url": "https://en.wikipedia.org/wiki/Jacinda_Ardern",
+  "source_quote": "who served as prime minister of New Zealand and leader of the Labour Party from 2017 to 2023",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c051",
+  "split": "dev",
+  "category": "outdated",
+  "claim": "Angela Merkel is the Chancellor of Germany.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Left office 8 December 2021.",
+  "source_url": "https://en.wikipedia.org/wiki/Angela_Merkel",
+  "source_quote": "retired politician who served as chancellor of Germany from 2005 to 2021",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c052",
+  "split": "dev",
+  "category": "unverifiable",
+  "claim": "A café in Ballarat sold exactly 1,234 flat whites on 3 March 2026.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Private, unpublished sales data.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null,
+  "smoke": true
+ },
+ {
+  "id": "c053",
+  "split": "heldout",
+  "category": "unverifiable",
+  "claim": "William Shakespeare's favourite colour was green.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "No historical record exists.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c054",
+  "split": "dev",
+  "category": "unverifiable",
+  "claim": "Australia will win the 2034 FIFA World Cup.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Future event.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c055",
+  "split": "dev",
+  "category": "unverifiable",
+  "claim": "About 37% of small business owners in Tasmania privately prefer tea to coffee.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Invented statistic with no source.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c056",
+  "split": "dev",
+  "category": "unverifiable",
+  "claim": "The first person to eat an oyster lived in what is now France.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Unknowable prehistory.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c057",
+  "split": "heldout",
+  "category": "unverifiable",
+  "claim": "There are exactly 4.2 trillion grains of sand on Bondi Beach.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Never measured; unknowable precision.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c058",
+  "split": "dev",
+  "category": "unverifiable",
+  "claim": "A secret internal Google memo from 2025 says AI Overviews will replace all blue links by 2028.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "No such published document.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c059",
+  "split": "heldout",
+  "category": "unverifiable",
+  "claim": "More than 62% of AI agents deployed in 2026 run on open-weight models.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Invented statistic with no traceable original source.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c060",
+  "split": "heldout",
+  "category": "unverifiable",
+  "claim": "The private diary of Melbourne's first lighthouse keeper records 212 shipwreck sightings.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "No such published record.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c061",
+  "split": "dev",
+  "category": "unverifiable",
+  "claim": "Most professional SEO consultants privately believe GEO is a passing fad.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE"
+  ],
+  "reason": "Private beliefs; no representative source.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c062",
+  "split": "heldout",
+  "category": "aeo-true",
+  "claim": "Google says that to appear as a supporting link in AI Overviews or AI Mode, a page only needs to be indexed and eligible to be shown in Google Search with a snippet, with no additional technical requirements.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central 'AI features and your website'.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "There are no additional technical requirements",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c063",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Google says you don't need to create new machine-readable files, AI text files or special markup to appear in its AI features such as AI Overviews.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central 'AI features and your website'.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "AI text files, or markup to appear in these features. There's also no special schema.org structured data that you need to add.",
+  "checked_on": "2026-11-17",
+  "group": null,
+  "smoke": true
+ },
+ {
+  "id": "c064",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Google says AI Overviews and AI Mode may use a 'query fan-out' technique that issues multiple related searches across subtopics.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "Both AI Overviews and AI Mode may use a \"query fan-out\" technique",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c065",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Google says traffic from its AI features such as AI Overviews and AI Mode is included in the Search Console Performance report within the 'Web' search type.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "they're reported on in the Performance report, within the \"Web\" search type",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c066",
+  "split": "heldout",
+  "category": "aeo-true",
+  "claim": "Google says the nosnippet, data-nosnippet, max-snippet and noindex controls can limit how a site's content is shown in AI Overviews and AI Mode.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "To limit the information shown from your pages in Search, use nosnippet, data-nosnippet, max-snippet, or noindex controls.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c067",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Google says the Google-Extended robots.txt token does not affect a site's inclusion or ranking in Google Search.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google common crawlers doc.",
+  "source_url": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers",
+  "source_quote": "Google-Extended does not impact a site's inclusion",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c068",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "OpenAI says sites that opt out of OAI-SearchBot will not be shown in ChatGPT search answers.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "OpenAI crawlers doc.",
+  "source_url": "https://platform.openai.com/docs/bots",
+  "source_quote": "will not be shown in ChatGPT search answers",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c069",
+  "split": "heldout",
+  "category": "aeo-true",
+  "claim": "OpenAI says its GPTBot crawler collects content that may be used to train its generative AI foundation models.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "OpenAI crawlers doc.",
+  "source_url": "https://platform.openai.com/docs/bots",
+  "source_quote": "It is used to crawl content that may be used in training our generative AI foundation models.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c070",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Perplexity says PerplexityBot is designed to surface and link websites in Perplexity search results and is not used to crawl content for AI foundation models.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Perplexity crawler doc.",
+  "source_url": "https://docs.perplexity.ai/guides/bots",
+  "source_quote": "not used to crawl content for AI foundation models",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c071",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Perplexity says its Perplexity-User fetcher generally ignores robots.txt rules because the fetch is requested by a user.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Perplexity crawler doc.",
+  "source_url": "https://docs.perplexity.ai/guides/bots",
+  "source_quote": "generally ignores robots.txt rules",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c072",
+  "split": "heldout",
+  "category": "aeo-true",
+  "claim": "Google's structured data guidelines say you should not mark up content that is not visible to readers of the page.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "General structured data guidelines.",
+  "source_url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+  "source_quote": "not visible to readers of the page",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c073",
+  "split": "heldout",
+  "category": "aeo-true",
+  "claim": "The GEO paper by Aggarwal et al. reports that GEO methods can boost visibility by up to 40% in generative engine responses.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "arXiv 2311.09735 abstract.",
+  "source_url": "https://arxiv.org/html/2311.09735",
+  "source_quote": "we demonstrate that GEO can boost visibility by up to 40% in generative engine responses",
+  "checked_on": "2026-11-17",
+  "group": "geo"
+ },
+ {
+  "id": "c074",
+  "split": "heldout",
+  "category": "aeo-myth",
+  "claim": "The GEO paper by Aggarwal et al. found keyword stuffing was among the most effective methods for improving visibility in generative engine responses.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "The paper reports keyword stuffing performed poorly versus methods like adding citations, quotations and statistics.",
+  "source_url": "https://arxiv.org/html/2311.09735",
+  "source_quote": "Compared to baselines, simple methods like keyword stuffing traditionally used in SEO don't perform well.",
+  "checked_on": "2026-11-17",
+  "group": "geo"
+ },
+ {
+  "id": "c075",
+  "split": "heldout",
+  "category": "aeo-outdated",
+  "claim": "Google says FAQ rich results are only shown for well-known, authoritative government and health websites.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Was true Aug 2023 to May 2026; Google deprecated the FAQ rich result (no longer shown from 7 May 2026) and removed its documentation in June 2026 (Search Central documentation updates changelog).",
+  "source_url": "https://developers.google.com/search/updates",
+  "source_quote": "the FAQ rich result feature is no longer shown in Google Search results, as announced in the changelog entry in May 2026",
+  "checked_on": "2026-11-17",
+  "group": "faq"
+ },
+ {
+  "id": "c076",
+  "split": "heldout",
+  "category": "aeo-outdated",
+  "claim": "Google shows FAQ rich results for any website that adds valid FAQPage structured data.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Restricted to authoritative government and health sites from August 2023.",
+  "source_url": "https://developers.google.com/search/blog/2023/08/howto-faq-changes",
+  "source_quote": "rich results will only be shown for well-known, authoritative government and health websites. For all other sites, this rich result will no longer be shown regularly.",
+  "checked_on": "2026-11-17",
+  "group": "faq"
+ },
+ {
+  "id": "c077",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Anthropic says its crawlers respect robots.txt directives.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Anthropic help centre.",
+  "source_url": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+  "source_quote": "Anthropic's bots respect \"do not crawl\" signals by honoring industry standard directives in robots.txt.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c078",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Google says appropriate use of AI or automation to generate content is not against its guidelines.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central blog, Feb 2023.",
+  "source_url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+  "source_quote": "Appropriate use of AI or automation is not against our guidelines",
+  "checked_on": "2026-11-17",
+  "group": "aicontent"
+ },
+ {
+  "id": "c079",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Google automatically penalises AI-generated content in Search.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Google says appropriate AI use is not against guidelines; only content made primarily to manipulate rankings violates policy.",
+  "source_url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+  "source_quote": "Appropriate use of AI or automation is not against our guidelines",
+  "checked_on": "2026-11-17",
+  "group": "aicontent",
+  "smoke": true
+ },
+ {
+  "id": "c080",
+  "split": "heldout",
+  "category": "aeo-myth",
+  "claim": "E-E-A-T is a specific, direct ranking factor in Google Search.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Google: E-E-A-T itself isn't a specific ranking factor.",
+  "source_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+  "source_quote": "isn't a specific ranking factor",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c081",
+  "split": "heldout",
+  "category": "aeo-myth",
+  "claim": "Answers must be 40 to 60 words long to be selected for Google AI Overviews.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE",
+   "DISPUTED"
+  ],
+  "reason": "No Google source; Google says no additional technical requirements or special optimisation.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "There are no additional technical requirements",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c082",
+  "split": "heldout",
+  "category": "aeo-myth",
+  "claim": "Adding an llms.txt file to your site gets it cited by ChatGPT.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE",
+   "DISPUTED"
+  ],
+  "reason": "No OpenAI documentation says llms.txt is used; no causal evidence.",
+  "source_url": "https://platform.openai.com/docs/bots",
+  "source_quote": "To help ensure your site appears in search results, we recommend allowing OAI-SearchBot in your site's robots.txt file",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c083",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Adding FAQ schema increases AI citations by 80%.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE",
+   "DISPUTED"
+  ],
+  "reason": "Invented statistic with no original study.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c084",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Speakable schema markup is required for content to appear in Google AI Overviews.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Google: no special schema.org structured data is needed to appear in AI features; speakable is a beta TTS feature.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "There's also no special schema.org structured data that you need to add.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c085",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Blocking Google-Extended in robots.txt removes your pages from Google AI Overviews.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Google-Extended does not affect inclusion in Google Search, of which AI Overviews are part.",
+  "source_url": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers",
+  "source_quote": "Google-Extended does not impact a site's inclusion",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c086",
+  "split": "heldout",
+  "category": "aeo-myth",
+  "claim": "Sites must opt in through Google Search Console before their pages can appear in AI Overviews.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "No opt-in; indexed and snippet-eligible pages are eligible.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ai-features",
+  "source_quote": "There are no additional technical requirements",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c087",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Google uses a site's llms.txt file to decide which pages appear in AI Overviews.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "Google Search Central changelog (15 June 2026): llms.txt files aren't needed for Google Search and don't affect visibility or rankings.",
+  "source_url": "https://developers.google.com/search/updates",
+  "source_quote": "while these files aren't needed for Google Search (and won't negatively or positively impact your visibility or rankings)",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c088",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Google Search supports the IndexNow protocol for faster indexing.",
+  "expected": "DISPUTED",
+  "accept": [
+   "DISPUTED",
+   "UNVERIFIABLE"
+  ],
+  "reason": "IndexNow participants are Bing, Yandex, Naver, Seznam, Yep and others; Google does not participate.",
+  "source_url": "https://www.indexnow.org/searchengines.json",
+  "source_quote": "\"bing\": \"https://www.bing.com/indexnow/meta.json\", \"yandex\": \"https://www.yandex.com/indexnow/meta.json\"",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c089",
+  "split": "dev",
+  "category": "aeo-myth",
+  "claim": "Pages showing a 'last updated' date get 30% more citations from AI assistants.",
+  "expected": "UNVERIFIABLE",
+  "accept": [
+   "UNVERIFIABLE",
+   "DISPUTED"
+  ],
+  "reason": "Invented statistic.",
+  "source_url": "",
+  "source_quote": "",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c090",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "First Input Delay (FID) is one of Google's Core Web Vitals.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Interaction to Next Paint replaced FID on 12 March 2024.",
+  "source_url": "https://web.dev/blog/inp-cwv-march-12",
+  "source_quote": "Interaction to Next Paint (INP) is now a stable Core Web Vital metric, and has officially replaced First Input Delay (FID).",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c091",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "Google supports a noindex rule inside robots.txt files.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Google stopped supporting noindex in robots.txt on 1 September 2019.",
+  "source_url": "https://developers.google.com/search/blog/2019/07/a-note-on-unsupported-rules-in-robotstxt",
+  "source_quote": "we're retiring all code that handles unsupported and unpublished rules (such as noindex) on September 1, 2019.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c092",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "Google's Mobile-Friendly Test tool is available for checking whether a page is mobile friendly.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Retired December 2023.",
+  "source_url": "https://developers.google.com/search/blog/2023/04/page-experience-in-search",
+  "source_quote": "Also starting December 1, 2023, we'll be retiring Search Console's \"Mobile Usability\" report, the Mobile-Friendly Test tool and Mobile-Friendly Test API.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c093",
+  "split": "heldout",
+  "category": "aeo-outdated",
+  "claim": "Google shows HowTo rich results in search results for pages with HowTo structured data.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "HowTo rich results deprecated (mobile Aug 2023, desktop Sept 2023).",
+  "source_url": "https://developers.google.com/search/blog/2023/08/howto-faq-changes",
+  "source_quote": "As of September 13, Google Search no longer shows How-to rich results on desktop, which means this result type is now deprecated.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c094",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "You can notify Google of a new sitemap by sending a request to its sitemaps ping endpoint.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Ping endpoint deprecated June 2023 and removed end of 2023.",
+  "source_url": "https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping",
+  "source_quote": "we're deprecating our support for sitemaps ping and the endpoint will stop functioning in 6 months",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c095",
+  "split": "heldout",
+  "category": "aeo-outdated",
+  "claim": "Google Search Console's URL Parameters tool lets site owners tell Google how to handle URL parameters.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Deprecated April 2022.",
+  "source_url": "https://developers.google.com/search/blog/2022/03/url-parameters-tool-deprecated",
+  "source_quote": "we're deprecating the URL parameters tool in Search Console in 1 month",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c096",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "Google's helpful content system is a separate system from its core ranking systems.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Became part of core ranking systems in March 2024.",
+  "source_url": "https://developers.google.com/search/docs/appearance/ranking-systems-guide",
+  "source_quote": "In March 2024, it evolved and became part of our core ranking systems",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c097",
+  "split": "heldout",
+  "category": "aeo-true",
+  "claim": "Google says its spam policies cover attempts to manipulate generative AI responses in Google Search.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Google Search Central spam policies page (clarified May 2026).",
+  "source_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+  "source_quote": "or attempting to manipulate generative AI responses in Google Search",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c098",
+  "split": "dev",
+  "category": "aeo-true",
+  "claim": "Anthropic says blocking Claude-SearchBot may reduce a site's visibility in Claude's user search results.",
+  "expected": "CURRENT",
+  "accept": [
+   "CURRENT"
+  ],
+  "reason": "Anthropic help centre article on its crawlers.",
+  "source_url": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+  "source_quote": "Disabling Claude-SearchBot on your site prevents our system from indexing your content for search optimization, which may reduce your site's visibility and accuracy in user search results.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c099",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "Google Search Console's crawl rate limiter tool lets site owners reduce how fast Googlebot crawls their site.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "Google deprecated the crawl rate limiter tool on 8 January 2024.",
+  "source_url": "https://developers.google.com/search/blog/2023/11/sc-crawl-limiter-byebye",
+  "source_quote": "The crawl rate limiter tool in Search Console is being deprecated on Jan 8th, 2024.",
+  "checked_on": "2026-11-17",
+  "group": null
+ },
+ {
+  "id": "c100",
+  "split": "dev",
+  "category": "aeo-outdated",
+  "claim": "When a user clicks an AMP result in Google Search, Google serves the page from the Google AMP Cache.",
+  "expected": "OUTDATED",
+  "accept": [
+   "OUTDATED"
+  ],
+  "reason": "From 1 July 2026 Google Search takes users directly to the publisher's AMP host pages (Search Central documentation updates changelog).",
+  "source_url": "https://developers.google.com/search/updates",
+  "source_quote": "Google Search is updating how it connects users to AMP pages, and will now take users directly to the publisher's AMP host pages.",
+  "checked_on": "2026-11-17",
+  "group": null
+ }
+]

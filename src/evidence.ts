@@ -158,6 +158,36 @@ export function isPrimarySource(url: string, claim: string): boolean {
   return names.some((n) => new RegExp(`(^|[^a-z0-9])${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z0-9]|$)`).test(c));
 }
 
+// ── Reading sources (used by the search and fetch tools) ──
+
+/** Official/primary sources (government, standards bodies, the organisation the query is about) first; stable otherwise. */
+export function rankOfficialFirst<T extends { url: string }>(results: T[], query: string): T[] {
+  return results.map((r, i) => ({ r, i, p: isPrimarySource(r.url, query) ? 0 : 1 }))
+    .sort((a, b) => a.p - b.p || a.i - b.i).map((x) => x.r);
+}
+
+/** The start of a page plus up to three passages around `find`, so a quote deep in a long page can be read. */
+export function pageExcerpt(text: string, find?: string, head = 3000): string {
+  const start = text.substring(0, head);
+  if (!find?.trim()) return start;
+  const lower = text.toLowerCase();
+  const needles = [find.toLowerCase(), ...find.toLowerCase().split(/\s+/).filter((w) => w.length >= 5)];
+  const passages: string[] = [];
+  const used: number[] = [];
+  for (const n of needles) {
+    let at = lower.indexOf(n, head);
+    while (at >= 0 && passages.length < 3) {
+      if (!used.some((u) => Math.abs(u - at) < 800)) {
+        used.push(at);
+        passages.push(text.substring(Math.max(0, at - 400), at + 600));
+      }
+      at = lower.indexOf(n, at + n.length);
+    }
+    if (passages.length >= 3) break;
+  }
+  return passages.length ? `${start}\n\n[passages matching "${find}"]\n${passages.join("\n...\n")}` : start;
+}
+
 // ── Page fetching ───────────────────────────────────────────────────────────
 
 const UA = "Mozilla/5.0 (compatible; VERITY-Bot/1.1; +https://verity.basechainlabs.com)";
@@ -337,4 +367,73 @@ export function gateVerdict(proposed: Verdict, checked: CheckedEvidence[]): Gate
   }
 
   return result("UNVERIFIABLE", []);
+}
+
+// ── Final result assembly ───────────────────────────────────────────────────
+
+/** The model's JSON object: the last fenced ```json block, else the outermost {...} that parses. */
+export function parseModelJson(text: string): Record<string, any> | null {
+  const fenced = [...text.matchAll(/```(?:json)?\s*([\s\S]*?)```/g)].map((m) => m[1]);
+  const candidates = [...fenced.reverse()];
+  const first = text.indexOf("{"), last = text.lastIndexOf("}");
+  if (first >= 0 && last > first) candidates.push(text.slice(first, last + 1));
+  for (const c of candidates) {
+    try {
+      const o = JSON.parse(c.trim());
+      if (o && typeof o === "object" && typeof o.verdict === "string") return o;
+    } catch { /* try the next candidate */ }
+  }
+  return null;
+}
+
+const VERDICTS: Verdict[] = ["CURRENT", "OUTDATED", "DISPUTED", "UNVERIFIABLE"];
+
+export interface FinaliseInput {
+  modelText: string;
+  claim: string;
+  /** False when every search/fetch tool call failed or none was made. */
+  evidenceToolsWorked: boolean;
+  fetcher: PageFetcher;
+}
+
+/**
+ * Turns the model's answer into the public VerityResult: verdict gated on re-fetched quotes,
+ * `sources` = verified evidence only, `confidence` derived from that evidence.
+ * Returns null when the model gave no parseable verdict (the caller fails the run, nobody is charged).
+ */
+export async function finaliseResult(input: FinaliseInput): Promise<Record<string, any> | null> {
+  const model = parseModelJson(input.modelText);
+  if (!model) return null;
+  const proposed = String(model.verdict).toUpperCase() as Verdict;
+  if (!VERDICTS.includes(proposed)) return null;
+
+  const items = readEvidence(model.evidence);
+  const checked = await checkEvidence(items, input.claim, input.fetcher);
+  let gate = gateVerdict(proposed, checked);
+  if (!input.evidenceToolsWorked && gate.verdict !== "UNVERIFIABLE") {
+    gate = { ...gate, verdict: "UNVERIFIABLE", confidence: 0, basis: [], reason: "the search and fetch tools failed, so nothing was checked against live sources" };
+  }
+  const downgraded = gate.verdict !== proposed;
+
+  const { confidence: _ignored, sources: _modelSources, evidence: _raw, ...rest } = model;
+  return {
+    ...rest,
+    verdict: gate.verdict,
+    confidence: gate.confidence,
+    ...(downgraded ? {
+      summary: `VERITY could not stand behind the ${proposed} verdict: ${gate.reason}. ${model.summary ?? ""}`.trim(),
+      what_changed: gate.verdict === "OUTDATED" ? model.what_changed ?? null : null,
+      recommendation: gate.verdict === "DISPUTED"
+        ? "Do not rely on this claim: verified sources disagree."
+        : "Do not rely on this claim: VERITY could not verify it with quoted primary or independent sources.",
+    } : {}),
+    downgraded_from: downgraded ? proposed : null,
+    downgrade_reason: downgraded ? gate.reason ?? null : null,
+    evidence_summary: gate.summary,
+    sources: gate.basis.map((b) => ({
+      url: b.url, title: b.title ?? null, published_date: b.published_date ?? null,
+      quote: b.quote, stance: b.stance, organisation: b.organisation, primary: b.primary,
+    })),
+    unverified_quotes: checked.filter((c) => !c.verified).map((c) => ({ url: c.url, quote: c.quote, reason: c.reason })),
+  };
 }
