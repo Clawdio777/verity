@@ -49,7 +49,9 @@ const { SettleError } = await import("@x402/core/types");
   return state.settleOk ? { success: true, transaction: "0xabc", network: "eip155:8453" } : { success: false, errorReason: "insufficient_funds" };
 };
 
-const runAgent = async () => {
+const agentInputs: any[] = [];
+const runAgent = async (input: any) => {
+  agentInputs.push(input);
   if (state.agent === "throw") throw new Error("anthropic 529 overloaded");
   return { response: '{"verdict":"CURRENT","confidence":90}', tool_calls_made: [], tokens_used: 10, costs: {}, cost_usd: 0 };
 };
@@ -386,5 +388,19 @@ describe("x402 routes charge only after the work succeeds", () => {
     expect(state.emails).toHaveLength(1);
     expect(state.emails[0].subject).toContain("charged but");
     expect(state.emails[0].subject + state.emails[0].text).not.toMatch(/not charged|nothing was charged|not taken/i);
+  });
+});
+
+describe("no_memory: a fresh check that neither reads nor writes caller memory", () => {
+  test("verify and agent pass no_memory: true through to the agent loop only when the caller sends true", async () => {
+    agentInputs.length = 0;
+    const withFlag = (body: Record<string, unknown>) => ({ ...paidReq(), body: { query: "The Eiffel Tower is 330 m tall", caller_id: "acme.com", ...body } });
+    await verify(withFlag({ no_memory: true }) as any, fakeRes());
+    await verify(withFlag({}) as any, fakeRes());
+    await verify(withFlag({ no_memory: "yes" }) as any, fakeRes());
+    await agent(withFlag({ no_memory: true }) as any, fakeRes());
+    await agent({ ...paidReq(), body: { jsonrpc: "2.0", id: 1, params: { query: "q", caller_id: "acme.com", no_memory: true } } } as any, fakeRes());
+    expect(agentInputs.map((i) => i.no_memory)).toEqual([true, false, false, true, true]);
+    expect(agentInputs[0].caller_id).toBe("acme.com");
   });
 });

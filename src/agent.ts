@@ -113,7 +113,11 @@ Rules:
 export interface AgentQuery {
   query: string;
   caller_id: string;
+  /** true: caller memory is neither read nor written for this call (fresh check, nothing cached passed off as new). */
+  no_memory?: boolean;
 }
+
+export const MEMORY_TOOLS = new Set(["retrieveCallerMemory", "storeCallerMemory"]);
 
 export interface AgentUsage {
   input_tokens: number;
@@ -154,11 +158,13 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
   const messages: Anthropic.MessageParam[] = [
     {
       role: "user",
-      content: `Today's date: ${today}\nCaller ID: ${input.caller_id}\n\nVerify this: ${input.query}`,
+      content: `Today's date: ${today}\nCaller ID: ${input.caller_id}\n${input.no_memory ? "Caller memory: OFF for this request. Do not call retrieveCallerMemory or storeCallerMemory.\n" : ""}\nVerify this: ${input.query}`,
     },
   ];
 
   const toolCallsMade: string[] = [];
+  // no_memory: the memory tools are not offered, and a call to one anyway is refused without touching the database.
+  const runTools = input.no_memory ? tools.filter((t) => !MEMORY_TOOLS.has(t.name)) : tools;
   let totalTokens = 0;
   const usage: AgentUsage = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0, tavily_credits: 0 };
   // Prompt caching: the system prompt and the growing tool history are re-sent every turn, so mark the
@@ -206,7 +212,7 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
         model: "claude-sonnet-5-5",
         max_tokens: forceSynthesis ? 8192 : 4096,
         system: [{ type: "text", text: SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
-        ...(forceSynthesis ? {} : { tools }),
+        ...(forceSynthesis ? {} : { tools: runTools }),
         messages,
       });
     } catch (e) {
@@ -276,6 +282,9 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
         toolUseBlocks.map(async (block) => {
           if (block.type !== "tool_use") return null;
           toolCallsMade.push(block.name);
+          if (input.no_memory && MEMORY_TOOLS.has(block.name)) {
+            return { type: "tool_result" as const, tool_use_id: block.id, content: "Caller memory is off for this request.", is_error: true };
+          }
           const credits = tavilyCredits(block.name, block.input as Record<string, any>);
           if (round > 0) {
             if (escalationCredits + credits > ESCALATION.tavilyCredits) {

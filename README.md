@@ -112,6 +112,8 @@ Response (the `text` part of the artifact):
 
 Pass a consistent `caller_id` on every call. VERITY remembers topics you've checked, domains you monitor, and previous results — no re-sending context.
 
+To get a fresh check with no memory at all, send `"no_memory": true` in the request body (`/api/verify`, `/api/deep-check`, `/api/batch-verify`, `/api/agent`; for JSON-RPC put it in `params`; in the MCP tools it is a tool argument). VERITY then neither reads nor writes caller memory for that call: the memory tools are not offered to the model, and a memory call is refused without touching the database. Only the boolean `true` turns it on. Your `caller_id` is still used for logging.
+
 ## A2A Agent Card
 
 ```

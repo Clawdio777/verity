@@ -55,6 +55,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!claims.length) return res.status(400).json({ error: "Provide claims as array or newline-separated string. Max 10." });
 
   const caller_id = req.body?.caller_id || "anon";
+  const no_memory = req.body?.no_memory === true; // skip caller memory: no read, no write
 
   const payment = await verifyPayment(req, res, PRICE_USDC, BAZAAR, RESOURCE_URL(), RESOURCE_DESC);
   if (payment === null) return;
@@ -64,7 +65,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const results = await Promise.all(
       claims.map(async (claim) => {
         const directive = `Verify this claim and return a compact VerityResult JSON. Keep summary to 1 sentence.\n\nClaim: ${claim}`;
-        const result    = await runAgent({ query: directive, caller_id });
+        const result    = await runAgent({ query: directive, caller_id, no_memory });
         return { claim, result: result.response, tokens: result.tokens_used };
       })
     );

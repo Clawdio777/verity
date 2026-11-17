@@ -13,7 +13,7 @@ import { createClient } from "@supabase/supabase-js";
 import type { PaymentRequired, PaymentPayload, PaymentRequirements } from "@x402/core/types";
 import { x402Version as X402_VERSION } from "@x402/core";
 import { declareDiscoveryExtension } from "@x402/extensions";
-import { runAgent } from "../src/agent.js";
+import { runAgent, type AgentQuery } from "../src/agent.js";
 import { waitUntil } from "@vercel/functions";
 import {
   facilitatorClient, paymentsConfigured, PAYMENTS_NOT_CONFIGURED, DISCOVERY_CALLER_ID_EXAMPLE,
@@ -49,13 +49,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   let query:     string;
   let caller_id: string;
+  let no_memory: boolean; // skip caller memory: no read, no write
 
   if (isJsonRpc) {
     query     = body.params?.query || body.params?.message || "";
     caller_id = body.params?.caller_id || "anon";
+    no_memory = body.params?.no_memory === true;
   } else {
     query     = body?.query || body?.message || body?.claim || "";
     caller_id = body?.caller_id || "anon";
+    no_memory = body?.no_memory === true;
   }
 
   const xPaymentHeader = (req.headers["payment-signature"] ?? req.headers["x-payment"]) as string | undefined;
@@ -65,9 +68,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (internalKey && process.env.INTERNAL_API_KEY && internalKey === process.env.INTERNAL_API_KEY) {
     if (!query) return jsonRpcError(res, isJsonRpc, jsonRpcId, -32602, "Missing query");
     try {
-      if (isStream) return await handleStream(res, query, caller_id);
-      if (isAsync)  return await handleAsync(req, res, query, caller_id, isJsonRpc, jsonRpcId);
-      return await handleSync(res, query, caller_id, isJsonRpc, jsonRpcId);
+      if (isStream) return await handleStream(res, { query, caller_id, no_memory });
+      if (isAsync)  return await handleAsync(req, res, { query, caller_id, no_memory }, isJsonRpc, jsonRpcId);
+      return await handleSync(res, { query, caller_id, no_memory }, isJsonRpc, jsonRpcId);
     } catch (e: any) {
       return jsonRpcError(res, isJsonRpc, jsonRpcId, -32000, e.message);
     }
@@ -107,9 +110,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!(await claimPayment(res, payment))) return;
 
   try {
-    if (isStream)  return await handleStream(res, query, caller_id, payment);
-    if (isAsync)   return await handleAsync(req, res, query, caller_id, isJsonRpc, jsonRpcId, payment);
-    return await handleSync(res, query, caller_id, isJsonRpc, jsonRpcId, payment);
+    if (isStream)  return await handleStream(res, { query, caller_id, no_memory }, payment);
+    if (isAsync)   return await handleAsync(req, res, { query, caller_id, no_memory }, isJsonRpc, jsonRpcId, payment);
+    return await handleSync(res, { query, caller_id, no_memory }, isJsonRpc, jsonRpcId, payment);
   } catch (e: any) {
     // Not settled yet, so the buyer was not charged.
     await alertPaidFailure("agent", caller_id, e);
@@ -117,8 +120,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 }
 
-async function handleSync(res: VercelResponse, query: string, caller_id: string, isJsonRpc: boolean, jsonRpcId: any, payment?: PendingPayment) {
-  const result = await runAgent({ query, caller_id });
+async function handleSync(res: VercelResponse, input: AgentQuery, isJsonRpc: boolean, jsonRpcId: any, payment?: PendingPayment) {
+  const { query, caller_id } = input;
+  const result = await runAgent(input);
   if (payment) {
     const settled = await settlePayment(payment, "agent", caller_id);
     if (!settled.ok) return send402(res, payment.reqs!, settled.reason);
@@ -135,7 +139,8 @@ async function handleSync(res: VercelResponse, query: string, caller_id: string,
   return isJsonRpc ? res.json({ jsonrpc: "2.0", id: jsonRpcId, result: body }) : res.json(body);
 }
 
-async function handleAsync(req: VercelRequest, res: VercelResponse, query: string, caller_id: string, isJsonRpc: boolean, jsonRpcId: any, payment?: PendingPayment) {
+async function handleAsync(req: VercelRequest, res: VercelResponse, input: AgentQuery, isJsonRpc: boolean, jsonRpcId: any, payment?: PendingPayment) {
+  const { query, caller_id } = input;
   const { data: task, error } = await db
     .schema("verity").from("tasks")
     .insert({ caller_id, query, status: "working" })
@@ -153,7 +158,7 @@ async function handleAsync(req: VercelRequest, res: VercelResponse, query: strin
   // Once settled, the buyer has paid: a later failure must never be reported as "not charged".
   let charged = false;
   try {
-    const result = await runAgent({ query, caller_id });
+    const result = await runAgent(input);
     let payment_response: string | undefined;
     if (payment) {
       const settled = await settlePayment(payment, "agent", caller_id);
@@ -214,7 +219,8 @@ async function handleTaskPoll(req: VercelRequest, res: VercelResponse) {
   });
 }
 
-async function handleStream(res: VercelResponse, query: string, caller_id: string, payment?: PendingPayment) {
+async function handleStream(res: VercelResponse, input: AgentQuery, payment?: PendingPayment) {
+  const { query, caller_id } = input;
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
@@ -226,7 +232,7 @@ async function handleStream(res: VercelResponse, query: string, caller_id: strin
 
   try {
     send({ status: "working", progress: "Searching live sources..." });
-    const result = await runAgent({ query, caller_id });
+    const result = await runAgent(input);
     // Headers are already sent on a stream, so the settlement receipt goes in the final event.
     let payment_response: string | undefined;
     if (payment) {
