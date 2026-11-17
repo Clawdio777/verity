@@ -67,6 +67,26 @@ describe("fix b: independence and primary sources", () => {
     expect(isPrimarySource("https://ahrefs.com/blog/x", "An Ahrefs study found 34.5% fewer clicks")).toBe(true);
     expect(isPrimarySource("https://someseoblog.com/x", "Google says AI Overviews need nothing extra")).toBe(false);
   });
+  test("government domains beyond the fixed suffix list are primary (17/11/2026: c051 Merkel)", () => {
+    for (const u of [
+      "https://www.bundesregierung.de/breg-en/federal-government/chancellor", "https://www.bundeskanzler.de/x",
+      "https://www.bmi.bund.de/x", "https://www.gov.uk/government/ministers/prime-minister", "https://www.gov.ie/en/",
+      "https://www.canada.ca/en.html", "https://www.economie.gouv.fr/x", "https://www.sat.gob.mx/x", "https://www.mom.gov.sg/x",
+      "https://www.mofa.go.kr/x", "https://www.bmf.gv.at/x", "https://www.admin.ch/gov/en/start.html", "https://www.elysee.fr/x",
+    ]) expect(isPrimarySource(u, "a claim about anything")).toBe(true);
+  });
+  test("lookalikes of government domains are not primary", () => {
+    for (const u of [
+      "https://gov.example.com/x", "https://mygov.com/x", "https://governmentnews.com.au/x", "https://bundesregierung.de.example.com/x",
+      "https://go.com/x", "https://www.gov-news.org/x", "https://notgov.uk/x", "https://bund.de.example.org/x",
+      "https://gov.tk/x", "https://anything.gov.tk/x", "https://gov.sg.example.com/x",
+    ]) expect(isPrimarySource(u, "a claim about anything")).toBe(false);
+  });
+  test("the authoritative body for building heights (CTBUH) is primary (17/11/2026: c010 Taipei 101)", () => {
+    expect(isPrimarySource("https://www.skyscrapercenter.com/building/burj-khalifa/3", "Taipei 101 is the tallest building in the world.")).toBe(true);
+    expect(isPrimarySource("https://www.ctbuh.org/resource/height", "x")).toBe(true);
+    expect(organisationOf("https://www.skyscrapercenter.com/b")).toBe("ctbuh.org");
+  });
   test("the same sentence syndicated on two sites counts as one source", () => {
     const q = "The company announced the product would be discontinued in March.";
     expect(independentOrganisations([ev({ organisation: "a.com", quote: q }), ev({ organisation: "b.com", quote: q })])).toBe(1);

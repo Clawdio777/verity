@@ -8,6 +8,8 @@ export interface Claim {
 export interface RunResult {
   id: string; verdict: string | null; error?: string; seconds: number; usd: number;
   confidence?: number | null; downgrade_reason?: string | null; response?: string; tools?: string[];
+  /** Evidence escalation rounds the run used (src/escalation.ts); 0 or missing = none. */
+  escalation_rounds?: number;
 }
 
 const CONFIDENT = ["CURRENT", "OUTDATED"];
@@ -30,6 +32,9 @@ export function score(claims: Claim[], results: RunResult[]) {
   const confident = done.filter((r) => r.confident);
   const wrongConfident = confident.filter((r) => !r.correct);
   const abstained = done.filter((r) => r.verdict === "UNVERIFIABLE" && r.expected !== "UNVERIFIABLE");
+  // Missed facts: UNVERIFIABLE on a claim whose answer is known and findable (CURRENT/OUTDATED/DISPUTED),
+  // even where UNVERIFIABLE is an accepted answer. Target 0. Same set as `abstained`, listed by id.
+  const missed = abstained;
   const secs = done.map((r) => r.seconds).sort((a, b) => a - b);
   const usd = rows.reduce((s, r) => s + r.usd, 0);
   return {
@@ -42,6 +47,9 @@ export function score(claims: Claim[], results: RunResult[]) {
     wrong_confident: wrongConfident.length,
     wrong_confident_rate: confident.length ? wrongConfident.length / confident.length : 0,
     abstain_rate: n ? abstained.length / n : 0,
+    missed_facts: missed.length,
+    missed_fact_ids: missed.map((r) => r.id),
+    escalated: rows.filter((r) => (r.escalation_rounds ?? 0) > 0).length,
     unverifiable_share: n ? done.filter((r) => r.verdict === "UNVERIFIABLE").length / n : 0,
     usd_total: usd,
     usd_per_claim: n ? usd / n : 0,
@@ -58,7 +66,8 @@ export function report(title: string, s: ReturnType<typeof score>): string {
     `## ${title}`,
     ``,
     `Claims: ${s.claims} | run failures: ${s.run_failures} | correct: ${s.correct} (${pct(s.accuracy)})`,
-    `CURRENT/OUTDATED verdicts: ${s.confident_verdicts} | wrong: ${s.wrong_confident} | wrong-confident rate: ${pct(s.wrong_confident_rate)}`,
+    `CURRENT/OUTDATED verdicts: ${s.confident_verdicts} | wrong: ${s.wrong_confident} | wrong-confident rate: ${pct(s.wrong_confident_rate)} | missed facts: ${s.missed_facts} (target 0)${s.missed_facts ? ` ${s.missed_fact_ids.join(", ")}` : ""}`,
+    `Evidence escalation used on ${s.escalated} claim(s)`,
     `Abstain rate (UNVERIFIABLE on a claim with a known answer): ${pct(s.abstain_rate)} | UNVERIFIABLE share overall: ${pct(s.unverifiable_share)}`,
     `Cost: US$${s.usd_total.toFixed(3)} total, US$${s.usd_per_claim.toFixed(4)} per claim | time: median ${s.seconds_median.toFixed(0)}s, max ${s.seconds_max.toFixed(0)}s`,
     ``,

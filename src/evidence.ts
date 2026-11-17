@@ -114,6 +114,7 @@ const SAME_ORGANISATION: Record<string, string> = {
   "googleblog.com": "google.com", "chatgpt.com": "openai.com", "claude.ai": "anthropic.com", "claude.com": "anthropic.com",
   "twitter.com": "x.com", "facebook.com": "meta.com", "fb.com": "meta.com", "instagram.com": "meta.com",
   "bing.com": "microsoft.com", "live.com": "microsoft.com",
+  "skyscrapercenter.com": "ctbuh.org",
 };
 
 export function organisationOf(url: string): string {
@@ -127,10 +128,23 @@ export function organisationOf(url: string): string {
 
 // Institutions that are primary for anything they publish: governments, intergovernmental and
 // standards bodies, universities, scientific publishers and the paper repositories studies live on.
-const PRIMARY_SUFFIXES = [".gov", ".mil", ".int", ".edu", ".gov.au", ".edu.au", ".gov.uk", ".ac.uk", ".govt.nz", ".gc.ca", ".europa.eu", ".gov.in", ".go.jp"];
+const PRIMARY_SUFFIXES = [".gov", ".mil", ".int", ".edu", ".gov.au", ".edu.au", ".gov.uk", ".ac.uk", ".govt.nz", ".gc.ca", ".europa.eu", ".gov.in", ".go.jp", ".bund.de", ".admin.ch"];
+// Sites under a government second-level domain (mom.gov.sg, economie.gouv.fr, sat.gob.mx ...). A department
+// subdomain is required, and the free-registration ccTLDs are left out, where "gov.xx" could be anyone's.
+// "go." and "gv." only count in the countries where they are government-only.
+const GOVERNMENT_SLD = /\.(gov|gouv|gob|govt)\.(?!(tk|ml|ga|cf|gq)$)[a-z]{2}$|\.go\.(jp|kr|th|id|ke|tz|ug)$|\.gv\.at$/;
+// National governments and parliaments whose main sites sit outside those suffixes.
+const GOVERNMENT_DOMAINS = new Set([
+  "gov.uk", "gov.ie", "canada.ca", "bundesregierung.de", "bundeskanzler.de", "bundestag.de", "bundespraesident.de",
+  "elysee.fr", "parliament.uk", "royal.uk", "government.nl", "rijksoverheid.nl", "regeringen.se", "regjeringen.no",
+  "valtioneuvosto.fi", "governo.it", "lamoncloa.gob.es", "kantei.go.jp",
+]);
 const PRIMARY_INSTITUTIONS = new Set([
   "w3.org", "schema.org", "ietf.org", "rfc-editor.org", "iso.org", "whatwg.org", "unicode.org", "bipm.org", "iupac.org",
+  "iana.org", "icann.org", "iec.ch", "ecma-international.org",
   "un.org", "who.int", "oecd.org", "imf.org", "worldbank.org", "iau.org", "nobelprize.org", "ipcc.ch",
+  // Council on Tall Buildings and Urban Habitat: the body that certifies building heights (its database is skyscrapercenter.com).
+  "ctbuh.org",
   "arxiv.org", "doi.org", "acm.org", "ieee.org", "nature.com", "science.org", "thelancet.com", "nejm.org", "bmj.com", "cochranelibrary.com",
 ]);
 // A company's own site is primary for claims about that company or its products.
@@ -145,10 +159,13 @@ const VENDOR_NAMES: Record<string, string[]> = {
   "apple.com": ["apple", "iphone", "siri", "applebot"],
 };
 
+const hostMatches = (host: string, domain: string) => host === domain || host.endsWith(`.${domain}`);
+
 export function isPrimarySource(url: string, claim: string): boolean {
   let host: string;
   try { host = new URL(url).hostname.toLowerCase().replace(/^www\./, ""); } catch { return false; }
-  if (PRIMARY_SUFFIXES.some((s) => host.endsWith(s))) return true;
+  if (PRIMARY_SUFFIXES.some((s) => hostMatches(host, s.slice(1)))) return true;
+  if (GOVERNMENT_SLD.test(host) || [...GOVERNMENT_DOMAINS].some((d) => hostMatches(host, d))) return true;
   const org = organisationOf(url);
   if (PRIMARY_INSTITUTIONS.has(org)) return true;
   const c = claim.toLowerCase();
@@ -349,6 +366,8 @@ export interface GateResult {
   verdict: Verdict;
   confidence: number;
   reason?: string;
+  /** True when a CURRENT/OUTDATED/DISPUTED verdict became UNVERIFIABLE only because the evidence was too thin (not because sources conflict). */
+  thin?: boolean;
   basis: CheckedEvidence[];
   summary: EvidenceSummary;
 }
@@ -365,9 +384,10 @@ export function gateVerdict(proposed: Verdict, checked: CheckedEvidence[]): Gate
   };
   const result = (verdict: Verdict, basis: CheckedEvidence[], reason?: string): GateResult =>
     ({ verdict, confidence: confidenceFor(verdict, basis), reason, basis, summary });
+  const thin = (reason: string): GateResult => ({ ...result("UNVERIFIABLE", [], reason), thin: proposed !== "UNVERIFIABLE" });
 
   if (!ok.length) {
-    return result("UNVERIFIABLE", [], checked.length ? "none of the quoted source sentences could be found on the source pages" : "no quoted source sentences were returned");
+    return thin(checked.length ? "none of the quoted source sentences could be found on the source pages" : "no quoted source sentences were returned");
   }
 
   if (proposed === "CURRENT" || proposed === "OUTDATED") {
@@ -375,14 +395,14 @@ export function gateVerdict(proposed: Verdict, checked: CheckedEvidence[]): Gate
     const against = proposed === "CURRENT" ? by("REFUTES", "SUPERSEDES") : by("SUPPORTS");
     if (against.length && support.length) return result("DISPUTED", [...support, ...against], "verified sources conflict");
     if (!meetsBar(support)) {
-      return result("UNVERIFIABLE", [], `${proposed} needs one primary/official source or two independent organisations with verified quotes; found ${independentOrganisations(support)} non-primary`);
+      return thin(`${proposed} needs one primary/official source or two independent organisations with verified quotes; found ${independentOrganisations(support)} non-primary`);
     }
     return result(proposed, support);
   }
 
   if (proposed === "DISPUTED") {
     const against = by("REFUTES", "SUPERSEDES");
-    if (!against.length) return result("UNVERIFIABLE", [], "DISPUTED needs at least one verified contradicting source");
+    if (!against.length) return thin("DISPUTED needs at least one verified contradicting source");
     return result("DISPUTED", [...against, ...by("SUPPORTS")]);
   }
 
@@ -416,26 +436,81 @@ export interface FinaliseInput {
   fetcher: PageFetcher;
 }
 
+/** What VERITY searched, returned with an UNVERIFIABLE verdict so callers can see the effort behind it. */
+export interface SearchLog {
+  queries: string[];
+  domains: string[];
+  escalation_rounds: number;
+}
+
+export interface Assessment {
+  model: Record<string, any>;
+  proposed: Verdict;
+  /** Every evidence item so far: earlier rounds first, with the stance they were first given. */
+  items: EvidenceItem[];
+  checked: CheckedEvidence[];
+  gate: GateResult;
+}
+
+const sameQuote = (a: EvidenceItem, b: EvidenceItem) => {
+  if (a.url !== b.url) return false;
+  const x = normaliseText(a.quote), y = normaliseText(b.quote);
+  return x.includes(y) || y.includes(x);
+};
+
 /**
- * Turns the model's answer into the public VerityResult: verdict gated on re-fetched quotes,
- * `sources` = verified evidence only, `confidence` derived from that evidence.
- * Returns null when the model gave no parseable verdict (the caller fails the run, nobody is charged).
+ * Evidence is cumulative across escalation rounds: nothing given earlier can be dropped (so a
+ * contradicting source stays in), and re-quoting an earlier sentence (or part of it) with a new
+ * stance does not count, so a verdict cannot pass the gate by relabelling what it already had.
  */
-export async function finaliseResult(input: FinaliseInput): Promise<Record<string, any> | null> {
-  const model = parseModelJson(input.modelText);
+export function mergeEvidence(prior: EvidenceItem[], next: EvidenceItem[]): EvidenceItem[] {
+  const out = [...prior];
+  for (const n of next) if (!out.some((o) => sameQuote(o, n))) out.push(n);
+  return out;
+}
+
+const CONFIDENT: Verdict[] = ["CURRENT", "OUTDATED"];
+
+/**
+ * Parses the model's answer, re-checks every quote (plus all evidence from earlier rounds) and gates
+ * the verdict. Returns null when the model gave no parseable verdict.
+ * `firstProposed`: the verdict proposed before escalation. Swinging between CURRENT and OUTDATED
+ * while searching for more evidence means the evidence does not settle it, so that is UNVERIFIABLE.
+ */
+export async function assessAnswer(
+  modelText: string, claim: string, fetcher: PageFetcher,
+  opts: { prior?: EvidenceItem[]; firstProposed?: Verdict | null } = {},
+): Promise<Assessment | null> {
+  const model = parseModelJson(modelText);
   if (!model) return null;
   const proposed = String(model.verdict).toUpperCase() as Verdict;
   if (!VERDICTS.includes(proposed)) return null;
 
-  const items = readEvidence(model.evidence);
-  const checked = await checkEvidence(items, input.claim, input.fetcher);
+  const items = mergeEvidence(opts.prior ?? [], readEvidence(model.evidence));
+  const checked = await checkEvidence(items, claim, fetcher);
   let gate = gateVerdict(proposed, checked);
-  if (!input.evidenceToolsWorked && gate.verdict !== "UNVERIFIABLE") {
-    gate = { ...gate, verdict: "UNVERIFIABLE", confidence: 0, basis: [], reason: "the search and fetch tools failed, so nothing was checked against live sources" };
+  const first = opts.firstProposed;
+  if (first && first !== proposed && CONFIDENT.includes(first) && CONFIDENT.includes(proposed)) {
+    gate = { ...gate, verdict: "UNVERIFIABLE", confidence: 0, basis: [], thin: false,
+      reason: `the verdict changed from ${first} to ${proposed} while VERITY searched for more evidence, so the evidence does not settle it` };
+  }
+  return { model, proposed, items, checked, gate };
+}
+
+/**
+ * Turns an assessment into the public VerityResult: verdict gated on re-fetched quotes,
+ * `sources` = verified evidence only, `confidence` derived from that evidence, and for UNVERIFIABLE
+ * the `searched` log.
+ */
+export function buildResult(a: Assessment, evidenceToolsWorked: boolean, searched?: SearchLog): Record<string, any> {
+  const { model, proposed, checked } = a;
+  let gate = a.gate;
+  if (!evidenceToolsWorked && gate.verdict !== "UNVERIFIABLE") {
+    gate = { ...gate, verdict: "UNVERIFIABLE", confidence: 0, basis: [], thin: false, reason: "the search and fetch tools failed, so nothing was checked against live sources" };
   }
   const downgraded = gate.verdict !== proposed;
 
-  const { confidence: _ignored, sources: _modelSources, evidence: _raw, ...rest } = model;
+  const { confidence: _ignored, sources: _modelSources, evidence: _raw, searched: _s, escalation_rounds: _e, ...rest } = model;
   return {
     ...rest,
     verdict: gate.verdict,
@@ -455,5 +530,16 @@ export async function finaliseResult(input: FinaliseInput): Promise<Record<strin
       quote: b.quote, stance: b.stance, organisation: b.organisation, primary: b.primary,
     })),
     unverified_quotes: checked.filter((c) => !c.verified).map((c) => ({ url: c.url, quote: c.quote, reason: c.reason })),
+    escalation_rounds: searched?.escalation_rounds ?? 0,
+    ...(gate.verdict === "UNVERIFIABLE" && searched ? { searched } : {}),
   };
+}
+
+/**
+ * One-shot version (no escalation): parse, re-check, gate, assemble.
+ * Returns null when the model gave no parseable verdict (the caller fails the run, nobody is charged).
+ */
+export async function finaliseResult(input: FinaliseInput): Promise<Record<string, any> | null> {
+  const a = await assessAnswer(input.modelText, input.claim, input.fetcher);
+  return a ? buildResult(a, input.evidenceToolsWorked) : null;
 }
