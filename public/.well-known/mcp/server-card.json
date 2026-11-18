@@ -7,7 +7,7 @@
   "authentication": {
     "required": true,
     "schemes": ["header"],
-    "description": "The hosted endpoint uses a VERITY API key (starts with pg_) from a card credit purchase at https://verity.basechainlabs.com/#get-access, sent as the X-Api-Key header. Never send a wallet private key to any hosted service. To pay per call in USDC on Base, run the npm package locally (npx verity-mcp) so your wallet key never leaves your machine."
+    "description": "The hosted endpoint uses a VERITY API key (starts with pg_) from a card credit purchase at https://verity.basechainlabs.com/#get-access, sent as the X-Api-Key header to https://verity.basechainlabs.com/api/mcp. Never send a wallet private key to any hosted service. To pay per call in USDC on Base, run the npm package locally (npx verity-mcp) so your wallet key never leaves your machine."
   },
   "tools": [
     { "name": "verity_verify",     "description": "Verify a claim or URL against live sources. Returns verdict, evidence-based confidence tier, quoted sources, and what changed if OUTDATED. 0.10 USDC." },

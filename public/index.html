@@ -315,7 +315,7 @@
         if (key) {
           document.getElementById('modal-key').textContent = key;
           document.getElementById('modal-config').textContent = JSON.stringify({
-            mcpServers: { verity: { url: "https://paygate-verity-production.up.railway.app/mcp", headers: { "X-Api-Key": key } } }
+            mcpServers: { verity: { url: "https://verity.basechainlabs.com/api/mcp", headers: { "X-Api-Key": key } } }
           }, null, 2);
           var modal = document.getElementById('checkout-modal');
           modal.style.display = 'flex';
