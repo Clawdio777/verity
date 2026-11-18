@@ -1,0 +1,1002 @@
+[
+ {
+  "id": "c001",
+  "verdict": "CURRENT",
+  "seconds": 18.008,
+  "usd": 0.0485559,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Canberra is the capital city of Australia. Wikipedia (last edited 2026-11-15) says so directly. The Australian Government's Study Australia site (an official source) and Britannica agree. The update search found no sign of a change of capital or a rename. The caller-memory lookup failed, so no caller context was used. This does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate and use it as is.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Canberra\",\n      \"title\": \"Canberra - Wikipedia\",\n      \"published_date\": \"2026-11-15\",\n      \"quote\": \"Canberra is the capital city of Australia and the largest population centre in the Australian Capital Territory.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.studyaustralia.gov.au/en/life-in-australia/locations-in-australia/australian-capital-territory-canberra\",\n      \"title\": \"Australian Capital Territory (Canberra) | Study Australia\",\n      \"published_date\": null,\n      \"quote\": \"As Australia's capital, Canberra boasts some of the country’s preeminent educational and cultural institutions.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"studyaustralia.gov.au\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.ebsco.com/research-starters/geography-and-cartography/canberra-australia\",\n      \"title\": \"Canberra, Australia | EBSCOhost Research Starters\",\n      \"published_date\": null,\n      \"quote\": \"Canberra, the capital of Australia and the Australian Capital Territory (ACT), is a uniquely planned city established to serve as the nation's administrative center.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"ebsco.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c002",
+  "verdict": "DISPUTED",
+  "seconds": 34.51,
+  "usd": 0.0706618,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false and was never true. Canberra is Australia's capital, not Sydney. Wikipedia and the National Capital Authority (an Australian government body) both say so. Sydney is the capital of the state of New South Wales. The verdict is DISPUTED because the rules reserve it for claims that were never true. This is a flat contradiction, not a disagreement between sources.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not use this claim; treat Canberra as the capital of Australia and Sydney as the capital of New South Wales only.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Canberra\",\n      \"title\": \"Canberra - Wikipedia\",\n      \"published_date\": \"2026-11-15\",\n      \"quote\": \"Canberra is the capital city of Australia and the largest population centre in the Australian Capital Territory.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.nca.gov.au/education/canberras-history/siting-and-naming-canberra\",\n      \"title\": \"The Siting and Naming of Canberra | National Capital Authority\",\n      \"published_date\": null,\n      \"quote\": \"‘I name the capital of Australia, Canberra – the accent is on the Can’.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nca.gov.au\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.nca.gov.au/education/canberras-history/canberra-seat-government\",\n      \"title\": \"Canberra, the Seat of Government | National Capital Authority\",\n      \"published_date\": null,\n      \"quote\": \"Canberra is not only the national capital but, as the Australian Capital Territory (ACT), it is a self-governing city-state of more than 300 000 citizens.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nca.gov.au\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c003",
+  "verdict": "CURRENT",
+  "seconds": 20.897,
+  "usd": 0.0493271,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The claim is accurate. The BIPM, which maintains the SI, defines the metre by fixing the numerical value of c at 299 792 458 m/s, so the value is exact by definition and is not a measurement. The 2019 SI revision kept this value and reworded the metre's definition. NIST and Wikipedia (last edited 2026-11-09) say the same. A search for updates found no change or proposed change to the value. Two tool calls failed or were not made: the caller-memory lookup errored, and I did not run Perplexity or Semantic Scholar because the official sources settle the claim.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat 299,792,458 m/s as the exact defined value of c and use it without caveats.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-09\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.bipm.org/en/si-base-units/metre\",\n      \"title\": \"metre - BIPM\",\n      \"published_date\": null,\n      \"quote\": \"This definition implies the exact relation c = 299 792 458 m s–1.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"bipm.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.nist.gov/si-redefinition/meet-constants\",\n      \"title\": \"Meet the Constants | NIST\",\n      \"published_date\": null,\n      \"quote\": \"c is equal to 299,792,458 meters per second.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"nist.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Speed_of_light\",\n      \"title\": \"Speed of light - Wikipedia\",\n      \"published_date\": \"2026-11-09\",\n      \"quote\": \"The speed of light in vacuum is a universal physical constant denoted c, exactly equal to 299792458 m⋅s−1.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c006",
+  "verdict": "CURRENT",
+  "seconds": 15.852,
+  "usd": 0.0587255,
+  "confidence": 75,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Mount Everest is the highest mountain on Earth measured above sea level. Wikipedia (last edited 2026-11-12), Britannica and geology.com agree, and no update contradicts this. The most recent official measurement is the 2020 joint Nepal–China survey, which gave 8,848.86 m. Mountains such as Mauna Kea (tallest base to summit) and Chimborazo (farthest from Earth's centre) beat Everest on other measures, but not on elevation above sea level, which is what the claim states. The caller-memory lookup failed, so no personalised context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate, and say 'above sea level' explicitly, because Mauna Kea and Chimborazo beat Everest on other measures.\",\n  \"confidence\": 75,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-12\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Mount_Everest\",\n      \"title\": \"Mount Everest\",\n      \"published_date\": \"2026-11-12\",\n      \"quote\": \"Mount Everest is the highest mountain on Earth above sea level.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.britannica.com/story/is-mount-everest-really-the-tallest-mountain-in-the-world\",\n      \"title\": \"Is Mount Everest Really the Tallest Mountain in the World? | Britannica\",\n      \"published_date\": null,\n      \"quote\": \"Mount Everest is best described as the highest mountain in the world.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"britannica.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://geology.com/records/highest-mountain-in-the-world.shtml\",\n      \"title\": \"Highest Mountain in the World - Tallest Mountain\",\n      \"published_date\": null,\n      \"quote\": \"No other mountain on Earth has a higher altitude.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"geology.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c007",
+  "verdict": "CURRENT",
+  "seconds": 21.724,
+  "usd": 0.0398503,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The claim is accurate. The Nobel Foundation's own pages say the 1921 Nobel Prize in Physics went to Albert Einstein \\\"for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect\\\". The claim's wording is a fair shortening of that citation. The prize was reserved in 1921 and awarded to Einstein in 1922, and he collected it that year. The claim does not say otherwise. Wikipedia gives the same citation. The recency-biased search found no correction or change.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. If the date of the ceremony matters, note that the 1921 prize was formally awarded to Einstein in 1922.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.nobelprize.org/prizes/physics/1921/summary\",\n      \"title\": \"The Nobel Prize in Physics 1921 - NobelPrize.org\",\n      \"published_date\": null,\n      \"quote\": \"The Nobel Prize in Physics 1921 was awarded to Albert Einstein \\\"for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect\\\"\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"nobelprize.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.nobelprize.org/prizes/lists/all-nobel-prizes-in-physics/1929-1920\",\n      \"title\": \"All Nobel Prizes in Physics - NobelPrize.org\",\n      \"published_date\": null,\n      \"quote\": \"“for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect”\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"nobelprize.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Albert_Einstein\",\n      \"title\": \"Albert Einstein\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"He received the 1921 Nobel Prize in Physics for \\\"his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect\\\".\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c008",
+  "verdict": "DISPUTED",
+  "seconds": 16.905,
+  "usd": 0.0260955,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Einstein won the 1921 Nobel Prize in Physics (presented in 1922), but not for relativity. The Nobel Foundation's pages say the prize was for his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect. NobelPrize.org adds that the committee chose the photoelectric work instead of relativity, because some members hesitated over relativity. Wikipedia agrees. It says Einstein is best known for relativity, but that his Nobel citation was for theoretical physics and the photoelectric effect. The claim was never true, so it is DISPUTED rather than OUTDATED. The caller memory lookup failed, but that does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not repeat this claim. Say instead that Einstein won the 1921 Nobel Prize in Physics for his discovery of the law of the photoelectric effect and his services to theoretical physics, not for relativity.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.nobelprize.org/prizes/physics/1921/summary\",\n      \"title\": \"The Nobel Prize in Physics 1921 - NobelPrize.org\",\n      \"published_date\": null,\n      \"quote\": \"The Nobel Prize in Physics 1921 was awarded to Albert Einstein \\\"for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect\\\"\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nobelprize.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.nobelprize.org/stories/photoelectric-effect\",\n      \"title\": \"Why we should thank Einstein for our smartphone cameras - NobelPrize.org\",\n      \"published_date\": null,\n      \"quote\": \"Some members of the Nobel physics committee at the time hesitated to award him a prize and, when they did, they chose to award it for his work on the photoelectric effect, rather than relativity.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nobelprize.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Albert_Einstein\",\n      \"title\": \"Albert Einstein\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"He received the 1921 Nobel Prize in Physics for \\\"his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect\\\".\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c013",
+  "verdict": "CURRENT",
+  "seconds": 20.935,
+  "usd": 0.0540871,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The claim is accurate. Wikipedia, the Computer History Museum and the Python Institute all say Guido van Rossum created Python and first released it in 1991. The first release was on 20 February 1991, as version 0.9.0. Python's own FAQ (docs.python.org) confirms van Rossum's role as creator. Nothing has been renamed or superseded. Caveat: the caller-memory lookup failed, so no caller context was used. This did not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"The claim can be used as written: Guido van Rossum created Python, and its first release was on 20 February 1991.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 4,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Python_(programming_language)\",\n      \"title\": \"Python (programming language) - Wikipedia\",\n      \"published_date\": \"2026-11-16\",\n      \"quote\": \"Van Rossum first released it in 1991 as Python 0.9.0.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://computerhistory.org/profile/guido-van-rossum\",\n      \"title\": \"Guido van Rossum - CHM\",\n      \"published_date\": null,\n      \"quote\": \"First released by its creator Guido van Rossum in 1991, Python has undergone continual improvement and has become a powerful yet flexible and easy-to- learn “Swiss Army knife” for programmers.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"computerhistory.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://pythoninstitute.org/about-python\",\n      \"title\": \"About Python\",\n      \"published_date\": null,\n      \"quote\": \"Python was created by Guido van Rossum and first released on February 20, 1991.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"pythoninstitute.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://docs.python.org/3/faq/general.html\",\n      \"title\": \"General Python FAQ — Python 3.15.2 documentation\",\n      \"published_date\": null,\n      \"quote\": \"The very first article about Python was written in 1991 and is now quite outdated.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"python.org\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "json"
+  ]
+ },
+ {
+  "id": "c014",
+  "verdict": "DISPUTED",
+  "seconds": 18.753,
+  "usd": 0.0538728,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Python was not created by James Gosling. Wikipedia names Guido van Rossum as Python's designer and says he began working on it in the late 1980s at CWI in the Netherlands as a successor to ABC. A separate web result says he started it over the 1989 Christmas holidays. No source I retrieved credits James Gosling with Python. The claim was never true, so the verdict is DISPUTED rather than OUTDATED. The caller memory lookup failed, which doesn't affect the verdict. I didn't run a Gosling-specific search, and the Python.org page I fetched doesn't name the creator, so the evidence is Wikipedia plus a secondary web result.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not use this claim; correct it to say Python was created by Guido van Rossum.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Python_(programming_language)\",\n      \"title\": \"Python (programming language) - Wikipedia\",\n      \"published_date\": null,\n      \"quote\": \"Guido van Rossum began working on Python in the late 1980s as a successor to the ABC programming language.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://pwskills.com/blog/python/guido-van-rossum\",\n      \"title\": \"Guido Van Rossum: The creator Of The Python Programming Language\",\n      \"published_date\": null,\n      \"quote\": \"During the Christmas holidays of 1989, Van Rossum started Python as a hobby project to keep himself busy.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"pwskills.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c017",
+  "verdict": "CURRENT",
+  "seconds": 16.053,
+  "usd": 0.032815,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The claim is accurate. Official UN pages and Wikipedia agree that the UN General Assembly adopted the Universal Declaration of Human Rights on 10 December 1948 in Paris, as resolution 217 A (III). Nothing has been renamed or superseded, and the date is historical, so it does not change. The caller memory lookup failed because of a connection error. That does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate and use 10 December 1948 (General Assembly resolution 217 A (III)) as the adoption date.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-05\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.un.org/en/about-us/udhr/history-of-the-declaration\",\n      \"title\": \"History of the Declaration | United Nations\",\n      \"published_date\": null,\n      \"quote\": \"By its resolution 217 A (III) of 10 December 1948, the General Assembly, meeting in Paris, adopted the Universal Declaration of Human Rights with eight nations abstaining from the vote but none dissenting.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"un.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://research.un.org/en/undhr\",\n      \"title\": \"Introduction - Universal Declaration of Human Rights (1948), Drafting History - Research Guides at United Nations Dag Hammarskjöld Library\",\n      \"published_date\": null,\n      \"quote\": \"The Universal Declaration of Human Rights was adopted by the United Nations General Assembly resolution 217A&Lang=E) at its 3rd session in Paris on 10 December 1948.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"un.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights\",\n      \"title\": \"Universal Declaration of Human Rights - Wikipedia\",\n      \"published_date\": \"2026-11-05\",\n      \"quote\": \"it was accepted by the General Assembly as Resolution 217 during its third session on 10 December 1948 at the Palais de Chaillot in Paris, France.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c018",
+  "verdict": "DISPUTED",
+  "seconds": 15.323,
+  "usd": 0.0323345,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is wrong about the year. The UN General Assembly adopted the Universal Declaration of Human Rights on 10 December 1948, not in 1958. The UN's own pages, the OHCHR and Wikipedia all give 1948. No source gives 1958, so this claim was never true. The 'DISPUTED' verdict is the label this schema uses for claims that credible sources contradict, including claims that were never true. The memory lookup failed because of a connection error, which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Reject the 1958 date and use 10 December 1948 (UN General Assembly Resolution 217 A) instead.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.un.org/en/about-us/udhr/history-of-the-declaration\",\n      \"title\": \"History of the Declaration | United Nations\",\n      \"published_date\": null,\n      \"quote\": \"The Universal Declaration of Human Rights, which was adopted by the UN General Assembly on 10 December 1948, was the result of the experience of the Second World War.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"un.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://research.un.org/en/undhr\",\n      \"title\": \"Introduction - Universal Declaration of Human Rights (1948), Drafting History - UN Dag Hammarskjöld Library\",\n      \"published_date\": null,\n      \"quote\": \"The Universal Declaration of Human Rights was adopted by the United Nations General Assembly resolution 217A&Lang=E) at its 3rd session in Paris on 10 December 1948.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"un.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.ohchr.org/en/universal-declaration-of-human-rights\",\n      \"title\": \"Universal Declaration of Human Rights | OHCHR\",\n      \"published_date\": null,\n      \"quote\": \"The Declaration was adopted by the UN General Assembly in Paris on 10 December 1948 during its 183rd plenary meeting.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"ohchr.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c019",
+  "verdict": "CURRENT",
+  "seconds": 14.987,
+  "usd": 0.035013,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Charles III is the reigning King of the United Kingdom. The Royal Family's official site says he became King on 8 September 2022. Wikipedia (last edited 2026-11-14) says he is King, and Britannica says he has been king since that date. A GOV.UK page shows him delivering the King's Speech to Parliament on 13 May 2026. The update search found no sign of abdication, death or succession. The caller memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate; no change is needed.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-14\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.royal.uk/the-king\",\n      \"title\": \"The King | The Royal Family\",\n      \"published_date\": null,\n      \"quote\": \"King Charles III, formerly known as The Prince of Wales, became King on the death of his mother Queen Elizabeth II on 8 September 2022.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"royal.uk\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Charles_III\",\n      \"title\": \"Charles III - Wikipedia\",\n      \"published_date\": \"2026-11-14\",\n      \"quote\": \"Charles III is King of the United Kingdom and 14 other Commonwealth realms.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.britannica.com/biography/Charles-III-king-of-the-United-Kingdom\",\n      \"title\": \"King Charles III | Biography, Prince, Wives, Cancer, & Age | Britannica\",\n      \"published_date\": null,\n      \"quote\": \"He was crowned in the first coronation in seven decades on May 6, 2023.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"britannica.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c020",
+  "verdict": "OUTDATED",
+  "seconds": 15.538,
+  "usd": 0.025297,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Elizabeth II was the UK's reigning monarch from 6 February 1952 until she died on 8 September 2022, so the claim was true until then. It is no longer true. King Charles III succeeded her on her death and is the current reigning monarch. The official Royal Family website, Wikipedia, Britannica and the BBC all agree on this. I did not run searchForUpdates, and the caller-memory lookup failed with a connection error. Neither gap affects the verdict, because the official source and several independent sources agree.\",\n  \"what_changed\": \"Queen Elizabeth II died on 8 September 2022. Charles III became King that day and was crowned on 6 May 2023. He is the current reigning monarch.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not act on this claim. Treat King Charles III, who has reigned since 8 September 2022, as the current UK monarch, and refer to Elizabeth II only in the past tense.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.royal.uk/the-king\",\n      \"title\": \"The King | The Royal Family\",\n      \"published_date\": null,\n      \"quote\": \"King Charles III, formerly known as The Prince of Wales, became King on the death of his mother Queen Elizabeth II on 8 September 2022.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"royal.uk\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.bbc.com/news/uk-59135132\",\n      \"title\": \"King Charles III, the UK's monarch\",\n      \"published_date\": null,\n      \"quote\": \"After Queen Elizabeth II died, the throne passed immediately and without ceremony to King Charles III.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"bbc.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c021",
+  "verdict": "CURRENT",
+  "seconds": 25.743,
+  "usd": 0.07816809999999999,
+  "confidence": 75,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Leo XIV (born Robert Francis Prevost) is the current Pope. He was elected on 8 May 2025. The Vatican's own site lists him as the 267th Pope and carries documents of his apostolic journey to Uruguay, Argentina and Peru on 6–17 November 2026, which is days before today's date (2026-11-18). Wikipedia, last edited 2026-11-17, still calls him head of the Catholic Church. EWTN's ACI Africa reports on his activity through 16 Nov 2026. One snippet from ACI Africa mentions a surgery and a lung adenocarcinoma diagnosis. I did not verify that, and the pontiff was still travelling and speaking in public in mid-November 2026. I found no report of a resignation, death or successor.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. Leo XIV is the reigning Pope as of 2026-11-18, but re-check if the claim is used after any reported health or succession news.\",\n  \"confidence\": 75,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Pope_Leo_XIV\",\n      \"title\": \"Pope Leo XIV - Wikipedia\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"Pope Leo XIV is the head of the Catholic Church and sovereign of Vatican City.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"http://www.vatican.va/content/leo-xiv/en/travels/2026/documents/uruguay-argentina-peru-6-17novembre2026.html\",\n      \"title\": \"Apostolic Journey of the Holy Father to Uruguay, Argentina and Peru (6–17 November 2026)\",\n      \"published_date\": \"2026-11-06\",\n      \"quote\": \"Apostolic Journey of the Holy Father to Uruguay, Argentina and Peru (6–17 November 2026)\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"vatican.va\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.aciafrica.org/tag/pope-leo-xiv\",\n      \"title\": \"Pope Leo XIV - Latest news\",\n      \"published_date\": \"2026-11-13\",\n      \"quote\": \"Back at the Chiclayo university he once oversaw as grand chancellor, the pope warned against transhumanism and urged students to seek the light of faith.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"aciafrica.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates",
+   "searchClaim",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c022",
+  "verdict": "OUTDATED",
+  "seconds": 52.58,
+  "usd": 0.1591505,
+  "confidence": 75,
+  "downgrade_reason": null,
+  "escalation_rounds": 1,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Pope Francis was head of the Catholic Church from 2013 until his death in 2025, so the claim was once true. It is no longer true. The Vatican's own news service reports that the Conclave elected Robert Francis Cardinal Prevost as the 267th Bishop of Rome, who took the name Leo XIV. Wikipedia says he was elected on 8 May 2025 and is the current pope. DW (German public broadcaster) reports that Pope Leo XIV is the new head of the Catholic Church. NPR calls Francis Leo's 'late predecessor'. A Vatican search result and the Vatican biography page also list Leo XIV's pontificate as beginning in May 2025. Nothing found contradicts this. The caller-memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": \"Pope Francis's papacy ended with his death in 2025. Pope Leo XIV (Robert Francis Prevost) was elected on 8 May 2025 and is now head of the Catholic Church and sovereign of Vatican City.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Replace 'Pope Francis' with 'Pope Leo XIV' (elected 8 May 2025) wherever this claim is used, and treat Francis only as the previous pope (2013–2025).\",\n  \"confidence\": 75,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 6,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 4,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2025-05-08\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Pope\",\n      \"title\": \"Pope - Wikipedia\",\n      \"published_date\": null,\n      \"quote\": \"The current pope is Leo XIV, who was elected on 8 May 2025 on the second day of the 2025 papal conclave.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Pope_Leo_XIV\",\n      \"title\": \"Pope Leo XIV - Wikipedia\",\n      \"published_date\": null,\n      \"quote\": \"Pope Leo XIV is the head of the Catholic Church and sovereign of Vatican City.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.vaticannews.va/en/pope/news/2025-05/cardinal-elected-pope-papal-name.html\",\n      \"title\": \"Leo XIV is the new Pope - Vatican News\",\n      \"published_date\": \"2025-05-08\",\n      \"quote\": \"The Conclave has elected Robert Francis Cardinal Prevost as the 267th Bishop of Rome.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"vaticannews.va\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.dw.com/en/us-cardinal-prevost-to-lead-catholic-church-as-pope-leo-xiv/live-72450604\",\n      \"title\": \"US Cardinal Prevost to lead Catholic Church as Pope Leo XIV\",\n      \"published_date\": \"2025-05-07\",\n      \"quote\": \"Cardinal Robert Prevost has been announced as the next head of the Catholic Church.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"dw.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.npr.org/2025/05/08/g-s1-65147/new-pope-leo-xiv-robert-prevost-views\",\n      \"title\": \"What to know about Pope Leo XIV and his background : NPR\",\n      \"published_date\": \"2025-05-08\",\n      \"quote\": \"He also expressed gratitude to his former diocese in Peru and spoke warmly of Pope Francis, his late predecessor, before ending his remarks with a prayer.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"npr.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 1\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "lookupWikipedia",
+   "searchClaim",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c025",
+  "verdict": "CURRENT",
+  "seconds": 17.191,
+  "usd": 0.0358044,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Mercury is the planet closest to the Sun. NASA, the Smithsonian National Air and Space Museum and Wikipedia all state this directly. Wikipedia's Mercury article was last edited 2026-11-15 and still calls it the first planet from the Sun. A search for updates found nothing that contradicts or changes the claim.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"The claim is accurate and can be used as stated.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://science.nasa.gov/mercury\",\n      \"title\": \"Mercury\",\n      \"published_date\": null,\n      \"quote\": \"Mercury is the closest planet to the Sun, and the smallest planet in our solar system.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://airandspace.si.edu/explore/stories/mercury\",\n      \"title\": \"Mercury | National Air and Space Museum\",\n      \"published_date\": null,\n      \"quote\": \"Mercury is the closest planet to the Sun.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"si.edu\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Mercury_(planet)\",\n      \"title\": \"Mercury (planet) - Wikipedia\",\n      \"published_date\": \"2026-11-15\",\n      \"quote\": \"Mercury is the first planet from the Sun and the smallest in the Solar System.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c026",
+  "verdict": "DISPUTED",
+  "seconds": 11.984,
+  "usd": 0.0109095,
+  "confidence": 40,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Wikipedia describes Mercury as the first planet from the Sun, which makes it the closest planet, not the farthest. Wikipedia describes Neptune as the eighth and farthest known planet from the Sun. Mercury was never the farthest planet, so OUTDATED does not apply. The caller-memory lookup failed, but that does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Reject the claim and do not act on it. Mercury is the closest planet to the Sun, and Neptune is the farthest known planet.\",\n  \"confidence\": 40,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-15\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Mercury_(planet)\",\n      \"title\": \"Mercury (planet)\",\n      \"published_date\": \"2026-11-15\",\n      \"quote\": \"Mercury is the first planet from the Sun and the smallest in the Solar System.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Neptune\",\n      \"title\": \"Neptune\",\n      \"published_date\": \"2026-11-08\",\n      \"quote\": \"Neptune is the eighth and farthest known planet orbiting the Sun.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "lookupWikipedia"
+  ]
+ },
+ {
+  "id": "c027",
+  "verdict": "CURRENT",
+  "seconds": 19.581,
+  "usd": 0.038708599999999996,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The claim is accurate. The Treaty of Waitangi was first signed on 6 February 1840 at Waitangi in the Bay of Islands. The Waitangi Tribunal (official), Te Ara (government encyclopedia), UNESCO and Wikipedia all agree. More signatures were collected around the country over the following months, but the first signing was in 1840. The searches found no renaming or correction. The caller-memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"The claim can be relied on as stated. For more precision, cite the date as 6 February 1840 at Waitangi.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.waitangitribunal.govt.nz/en/about/the-treaty/about-the-treaty\",\n      \"title\": \"About the treaty | Waitangi Tribunal\",\n      \"published_date\": null,\n      \"quote\": \"On 6 February 1840, te Tiriti o Waitangi was signed at Waitangi in the Bay of Islands by Captain William Hobson, several English residents, and between 43 and 46 Māori rangatira.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"waitangitribunal.govt.nz\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://teara.govt.nz/en/te-tiriti-o-waitangi-the-treaty-of-waitangi/print\",\n      \"title\": \"Te Tiriti o Waitangi – the Treaty of Waitangi | Te Ara Encyclopedia of New Zealand\",\n      \"published_date\": null,\n      \"quote\": \"The following day, 6 February 1840, with little further debate, more than 40 rangatira agreed to sign te tiriti.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"teara.govt.nz\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Treaty_of_Waitangi\",\n      \"title\": \"Treaty of Waitangi - Wikipedia\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"It was first signed on 6 February 1840 by Captain William Hobson as consul for the Crown and by Māori chiefs from the North Island of New Zealand.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c028",
+  "verdict": "DISPUTED",
+  "seconds": 16.322,
+  "usd": 0.0369885,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Official New Zealand government sources and Wikipedia all say the Treaty of Waitangi was first signed on 6 February 1840 at Waitangi in the Bay of Islands. No source supports 1901. The claim was never true, so the verdict is DISPUTED rather than OUTDATED.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Reject the 1901 date and use 6 February 1840 as the date of first signing.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-17\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://nzhistory.govt.nz/politics/treaty/the-treaty-in-brief\",\n      \"title\": \"The Treaty in brief | NZ History\",\n      \"published_date\": null,\n      \"quote\": \"It takes its name from the place in the Bay of Islands where it was first signed, on 6 February 1840.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nzhistory.govt.nz\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.waitangitribunal.govt.nz/en/about/the-treaty/about-the-treaty\",\n      \"title\": \"About the treaty | Waitangi Tribunal\",\n      \"published_date\": null,\n      \"quote\": \"On 6 February 1840, te Tiriti o Waitangi was signed at Waitangi in the Bay of Islands by Captain William Hobson, several English residents, and between 43 and 46 Māori rangatira.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"waitangitribunal.govt.nz\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Treaty_of_Waitangi\",\n      \"title\": \"Treaty of Waitangi - Wikipedia\",\n      \"published_date\": \"2026-11-17\",\n      \"quote\": \"It was first signed on 6 February 1840 by Captain William Hobson as consul for the Crown and by Māori chiefs from the North Island of New Zealand.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c032",
+  "verdict": "CURRENT",
+  "seconds": 17.162,
+  "usd": 0.045746300000000004,
+  "confidence": 75,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"The Great Barrier Reef lies off the coast of Queensland, Australia. Wikipedia (last edited 2026-11-14) and Britannica both say so in almost the same words as the claim. UNESCO, the World Heritage authority for the site, describes its location as 'Off the east coast of the Queensland mainland'. The search for updates found no renaming, relocation or correction. This is a stable geographic fact.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate and use it as written. No update is needed.\",\n  \"confidence\": 75,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-14\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://whc.unesco.org/en/list/154\",\n      \"title\": \"Great Barrier Reef - UNESCO World Heritage Centre\",\n      \"published_date\": null,\n      \"quote\": \"Off the east coast of the Queensland mainland\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"unesco.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Great_Barrier_Reef\",\n      \"title\": \"Great Barrier Reef\",\n      \"published_date\": \"2026-11-14\",\n      \"quote\": \"The reef is located in the Coral Sea, off the coast of Queensland, Australia.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.britannica.com/place/Great-Barrier-Reef\",\n      \"title\": \"Great Barrier Reef | Map, Animals, Bleaching, & Facts\",\n      \"published_date\": null,\n      \"quote\": \"The Great Barrier Reef, located off the coast of Queensland, Australia, is the world's largest reef complex.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"britannica.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c033",
+  "verdict": "DISPUTED",
+  "seconds": 20.25,
+  "usd": 0.0467666,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is a myth and was never true. NOAA, an official source, says lightning can and often does strike the same place repeatedly, especially tall, isolated objects. Britannica agrees that lightning can and will strike the same place twice, in the same storm or centuries apart. Under the verdict rules, a claim that was never true is DISPUTED, not OUTDATED. The Wikipedia lookup returned only a generic summary and did not address the claim. Other search results (Empire State Building struck about 25 times a year) come from non-authoritative sites, so I did not rely on them.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not repeat or act on this claim as fact. Use NOAA's guidance instead: lightning can repeatedly strike the same place, so seek shelter whenever thunder is audible.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2025-06-13\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.noaa.gov/stories/5-striking-facts-versus-myths-about-lightning-you-should-know\",\n      \"title\": \"5 striking facts versus myths about lightning you should know | NOAA\",\n      \"published_date\": null,\n      \"quote\": \"Fact: Actually, lightning can, and often does, strike the same place repeatedly — especially if it’s a tall and isolated object.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"noaa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.britannica.com/story/can-lightning-strike-the-same-place-twice\",\n      \"title\": \"Can Lightning Strike the Same Place Twice? | Britannica\",\n      \"published_date\": \"2025-06-13\",\n      \"quote\": \"In reality, lightning can and will strike the same place twice, whether it be during the same storm or even centuries later.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"britannica.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c035",
+  "verdict": "OUTDATED",
+  "seconds": 15.225,
+  "usd": 0.038349,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Pluto was classed as the ninth planet from its discovery in 1930 until 24 August 2006. On that date the IAU adopted a definition of 'planet' that Pluto does not meet, because it has not cleared its orbital neighbourhood. Pluto is now officially a dwarf planet, and the Solar System has eight planets. NASA and Wikipedia agree. Recent news items about a hypothetical 'Planet Nine' or about calls to restore Pluto do not change its official status. The claim was true historically but is no longer true.\",\n  \"what_changed\": \"On 24 August 2006 the IAU reclassified Pluto as a dwarf planet under its new planet definition (IAU Resolution 6A/5A). The Solar System now has eight planets.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not state that Pluto is the ninth planet. Say that Pluto was considered the ninth planet until 2006 and is now classified as a dwarf planet.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://science.nasa.gov/dwarf-planets/pluto\",\n      \"title\": \"Pluto\",\n      \"published_date\": null,\n      \"quote\": \"Pluto was long considered our ninth planet, but the International Astronomical Union reclassified Pluto as a dwarf planet in 2006.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Pluto\",\n      \"title\": \"Pluto\",\n      \"published_date\": \"2026-11-16\",\n      \"quote\": \"Originally considered a planet, its status was changed when astronomers adopted a new definition of the word with new criteria.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c036",
+  "verdict": "OUTDATED",
+  "seconds": 15.789,
+  "usd": 0.037722000000000006,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true from 1973 until 31 January 2020, but it is no longer true. The UK ceased to be an EU member state on 31 January 2020 through Brexit. Its relationship with the EU is now governed by the Withdrawal Agreement and the Trade and Cooperation Agreement. A May 2026 European Commission press briefing treated a UK return as a hypothetical future scenario, and a House of Commons Library briefing is titled 'Debate on the UK applying to join the European Union', which also indicates the UK is not currently a member. The Wikipedia page and the Institute for Government agree with each other. I could not retrieve caller memory because the tool errored, which does not affect this verdict.\",\n  \"what_changed\": \"The UK left the EU on 31 January 2020 (Brexit). The transition period ended on 31 December 2020, and since then the UK has been a non-member third country.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not treat the UK as an EU member state. Describe it as a former member that left on 31 January 2020 and is now a non-EU third country.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Member_state_of_the_European_Union\",\n      \"title\": \"Member state of the European Union - Wikipedia\",\n      \"published_date\": null,\n      \"quote\": \"The United Kingdom, which had acceded to the EU's predecessor in 1973, ceased to be an EU member state on 31 January 2020, in a political process known as Brexit.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.instituteforgovernment.org.uk/explainer/uk-and-european-union\",\n      \"title\": \"The UK and the European Union | Institute for Government\",\n      \"published_date\": null,\n      \"quote\": \"The UK stopped being a member of the EU on 31 January 2020.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"instituteforgovernment.org.uk\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c039",
+  "verdict": "OUTDATED",
+  "seconds": 16.048,
+  "usd": 0.037067,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true until 2022. Turkey's official name at the UN is now 'Türkiye'. The UN's own member-states page says the country changed its official name from 'The Republic of Turkey' in a request submitted by its Foreign Minister. The UN Secretary-General's spokesman said the change took effect when the letter was received, in late May or early June 2022. The UN's date for the request is 26 May 2022. The UN Türkiye page and El País give 1 June 2022 as the date the letter was received. The memory tool failed, so no caller context was used.\",\n  \"what_changed\": \"Turkey's name at the UN changed from 'Turkey' to 'Türkiye'. The request was dated 26 May 2022, and the UN spokesman said it took effect when the letter reached the Secretary-General on 1 June 2022.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Use 'Türkiye' (the Republic of Türkiye) when referring to the country's name at the UN, and treat 'Turkey' as the superseded name.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2022-06-02\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.un.org/en/about-us/member-states/turkiye\",\n      \"title\": \"Türkiye | United Nations\",\n      \"published_date\": null,\n      \"quote\": \"The Republic of Türkiye changed its official name from The Republic of Turkey on 26 May 2022 in a request submitted to the Secretary-General by the country's Minister of Foreign Affairs.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"un.org\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://turkiye.un.org/en/184798-turkeys-name-changed-t%C3%BCrkiye\",\n      \"title\": \"Turkey's name changed to Türkiye | United Nations in Türkiye\",\n      \"published_date\": \"2022-06-02\",\n      \"quote\": \"The spokesman said the country name change became effective from the moment the letter was received.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"un.org\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c040",
+  "verdict": "OUTDATED",
+  "seconds": 24.514,
+  "usd": 0.071802,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true until 15 June 2022 and is no longer true for mainstream Windows 10. Microsoft's lifecycle pages say the IE11 desktop application ended support on Windows 10 semi-annual channel (SAC) on 15 June 2022. Microsoft also scheduled it to be permanently disabled through a Microsoft Edge update on 14 February 2023. Microsoft now steers customers to Microsoft Edge with IE mode, which it says will be supported through at least 2029. The Lifecycle FAQ still lists IE11 as the supported version on Windows 10 LTSB/LTSC editions, so a narrow exception exists. Those are special long-term servicing editions, not general Windows 10. I did not verify whether the Windows 10 LTSB/LTSC editions themselves are still in support as of 2026-11-18. The unqualified claim therefore does not hold.\",\n  \"what_changed\": \"On 15 June 2022 the IE11 desktop application ended support on Windows 10 semi-annual channel. It was permanently disabled via a Microsoft Edge update on certain Windows 10 versions from 14 February 2023. Microsoft Edge (with IE mode, supported through at least 2029) is the supported replacement. Only Windows 10 LTSB/LTSC editions and some Windows Server editions still list IE11.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"lookupWikipedia\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not treat IE11 as a supported browser on Windows 10. Use Microsoft Edge (with IE mode for legacy sites), and mention IE11 only for Windows 10 LTSB/LTSC editions, with that qualification.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://learn.microsoft.com/en-us/lifecycle/products/internet-explorer-11\",\n      \"title\": \"Internet Explorer 11 - Microsoft Lifecycle | Microsoft Learn\",\n      \"published_date\": null,\n      \"quote\": \"The Internet Explorer (IE) 11 desktop application ended support for Windows 10 semi-annual channel on June 15, 2022.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://learn.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge\",\n      \"title\": \"Lifecycle FAQ - Internet Explorer and Microsoft Edge | Microsoft Learn\",\n      \"published_date\": null,\n      \"quote\": \"| Windows 10 Semi-Annual Channel (SAC) | Internet Explorer 11 | As of June 15, 2022, the IE11 desktop application is no longer supported\\\\*. |\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://learn.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge\",\n      \"title\": \"Lifecycle FAQ - Internet Explorer and Microsoft Edge | Microsoft Learn\",\n      \"published_date\": null,\n      \"quote\": \"IE mode enables backward compatibility and will be supported through at least 2029.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://learn.microsoft.com/en-us/lifecycle/announcements/internet-explorer-11-end-of-support-windows-10\",\n      \"title\": \"Internet Explorer 11 desktop app support ended for certain versions of Windows 10 - Microsoft Lifecycle | Microsoft Learn\",\n      \"published_date\": null,\n      \"quote\": \"The retired, out-of-support Internet Explorer 11 desktop application is scheduled to be permanently disabled through a Microsoft Edge update on certain versions of Windows 10 on February 14, 2023.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "lookupWikipedia",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c043",
+  "verdict": "DISPUTED",
+  "seconds": 24.085,
+  "usd": 0.0371321,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Kepler is not collecting data. NASA retired the spacecraft on 30 October 2018 after it ran out of the fuel it needed for science operations, and it has been inactive for about eight years as of 2026-11-18. The claim was true until 2018, but the rules reserve OUTDATED for claims that have been superseded, renamed or retired, so I am labelling it DISPUTED because current sources contradict it. NASA's pages and Wikipedia agree. Kepler's archived data are still being analysed, but the spacecraft is no longer gathering new data.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't treat Kepler as an active data source. Describe it as a retired mission (ended 30 Oct 2018) and point to archived Kepler/K2 data, or to TESS for current exoplanet surveys.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-08\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://science.nasa.gov/mission/kepler\",\n      \"title\": \"Kepler / K2 - NASA Science\",\n      \"published_date\": null,\n      \"quote\": \"In October 2018, NASA decided to retire the spacecraft within its current, safe orbit, away from Earth.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://science.nasa.gov/mission/kepler/in-depth\",\n      \"title\": \"Kepler / K2 In Depth - NASA Science\",\n      \"published_date\": null,\n      \"quote\": \"On Oct. 30, 2018, after nine years in deep space collecting data, NASA announced that Kepler had run out of fuel.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"nasa.gov\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Kepler_space_telescope\",\n      \"title\": \"Kepler space telescope\",\n      \"published_date\": \"2026-11-08\",\n      \"quote\": \"After nine and a half years of operation, the telescope's reaction control system fuel was depleted, and NASA announced its retirement on October 30, 2018.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c044",
+  "verdict": "OUTDATED",
+  "seconds": 21.15,
+  "usd": 0.07857120000000001,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true until 2023 and is no longer true. Universal Analytics (UA) was Google's main web analytics product, but Google replaced it with Google Analytics 4 (GA4). Google's own Analytics Help page, last updated 2025-07-16, says GA4 has replaced UA. Standard UA properties stopped processing data on 1 July 2023, and UA 360 properties stopped on 1 July 2024. Google's help page says UA data and interface access ended from the week of 1 July 2024. As of 2026-11-18, GA4 is the current product. The caller's memory lookup failed, so no personalised context was used.\",\n  \"what_changed\": \"Google Analytics 4 replaced Universal Analytics. Standard UA properties stopped processing new hits on 1 July 2023, UA 360 properties on 1 July 2024, and UA was fully shut down from the week of 1 July 2024.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"lookupWikipedia\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not treat Universal Analytics as Google's current analytics product; refer to Google Analytics 4 (GA4) instead, since UA is shut down and its data is deleted.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2025-07-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.google.com/analytics/answer/11583528\",\n      \"title\": \"Google Analytics 4 has replaced Universal Analytics - Analytics Help\",\n      \"published_date\": \"2025-07-16\",\n      \"quote\": \"Google Analytics 4 is our next-generation measurement solution, and it has replaced Universal Analytics.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.google.com/analytics/answer/11583528\",\n      \"title\": \"Google Analytics 4 has replaced Universal Analytics - Analytics Help\",\n      \"published_date\": \"2025-07-16\",\n      \"quote\": \"After July 1, 2024, once a property does not show in the interface, you should consider your property shut down.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://blog.google/products/ads-commerce/upgrade-to-google-analytics-4-before-july-1\",\n      \"quote\": \"Starting July 1, 2023, standard Universal Analytics properties will no longer process new data.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "lookupWikipedia",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c046",
+  "verdict": "OUTDATED",
+  "seconds": 14.293,
+  "usd": 0.045274499999999995,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Bard was the name of Google's AI chatbot, but Google renamed it Gemini in February 2024. Wikipedia says the chatbot is now Gemini, 'originally known as Bard'. Inc.com's report from the rename date says Google announced it was renaming Bard to Gemini. A claim that uses 'Bard' as the current name is out of date as of 2026-11-18. The memory lookup failed, which does not affect the verdict.\",\n  \"what_changed\": \"In February 2024 Google renamed the Bard chatbot to Gemini. The Gemini app launched on Android, and the Duet AI branding for Google Cloud and Workspace was retired in favour of Gemini.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Replace 'Bard' with 'Gemini' (formerly Bard) when referring to Google's current AI chatbot, and use 'Bard' only for the pre-February-2024 product.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-12\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Google_Gemini\",\n      \"title\": \"Google Gemini - Wikipedia\",\n      \"published_date\": \"2026-11-12\",\n      \"quote\": \"In February 2024, the Bard chatbot was renamed Gemini, and the \\\"Duet AI\\\" branding for Google Cloud and Workspace was retired in favor of the Gemini identifier.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.inc.com/jason-aten/google-just-killed-bard-replaced-it-with-gemini-its-more-than-just-a-name-change.html\",\n      \"title\": \"Google Just Killed Bard and Replaced It With Gemini. It's More Than Just a Name Change\",\n      \"published_date\": \"2024-02-08\",\n      \"quote\": \"Today, Google announced that it is renaming Bard, its AI chat experience, to Gemini.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"inc.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c047",
+  "verdict": "OUTDATED",
+  "seconds": 17.611,
+  "usd": 0.027316,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Bing Chat was the name of Microsoft's AI chat assistant when it launched in February 2023. Microsoft renamed it Copilot (first 'Copilot in Bing') in November 2023. Microsoft's own Bing blog says Bing Chat and Bing Chat Enterprise changed to Copilot. Wikipedia now describes the product as Microsoft Copilot. The Wikipedia entry was last edited 2026-11-14. The name 'Bing Chat' is no longer current.\",\n  \"what_changed\": \"Microsoft renamed Bing Chat to Copilot (initially 'Copilot in Bing') at Microsoft Ignite on 2023-11-15. Bing Chat Enterprise was also rebranded to Copilot. The assistant is now called Microsoft Copilot, at copilot.microsoft.com.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Replace 'Bing Chat' with 'Microsoft Copilot' (formerly Bing Chat) when referring to Microsoft's AI chat assistant.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-11-14\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://blogs.bing.com/search/2023/12/Microsoft-Copilot-is-now-generally-available\",\n      \"title\": \"Microsoft Copilot is now generally available | Bing Search Blog\",\n      \"published_date\": \"2023-12-01\",\n      \"quote\": \"As previously announced, Bing Chat and Bing Chat Enterprise recently changed to Copilot to make AI-powered web chat more accessible with a simplified user experience at copilot.microsoft.com.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"microsoft.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://techcrunch.com/2023/11/15/bing-chat-is-now-copilot\",\n      \"title\": \"Microsoft renames Bing Chat to Copilot as it competes with ChatGPT | TechCrunch\",\n      \"published_date\": \"2023-11-15\",\n      \"quote\": \"Today at Microsoft Ignite 2023, the company renamed Bing Chat, the AI-powered chatbot it launched on Bing earlier this year, to Copilot in Bing.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"techcrunch.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Microsoft_Copilot\",\n      \"title\": \"Microsoft Copilot\",\n      \"published_date\": \"2026-11-14\",\n      \"quote\": \"Microsoft Copilot is a generative artificial intelligence chatbot developed by Microsoft AI, a division of Microsoft.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c049",
+  "verdict": "OUTDATED",
+  "seconds": 24.682,
+  "usd": 0.0412647,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Rishi Sunak was UK Prime Minister from 25 October 2022 to 5 July 2024, so the claim was once true. He lost the July 2024 general election and was succeeded by Keir Starmer. Sources dated 2026 say Andy Burnham took over from Starmer on 20 July 2026 and is the current Prime Minister as of 2026-11-18. Sunak's own website says his premiership ended on 5 July 2024. The claim is therefore wrong today.\",\n  \"what_changed\": \"Sunak's premiership ended on 5 July 2024 after the general election, and Keir Starmer succeeded him. Andy Burnham then succeeded Starmer on 20 July 2026 and is the current Prime Minister.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not treat Sunak as the current Prime Minister; use Andy Burnham (in office since 20 July 2026), and describe Sunak as the Prime Minister from October 2022 to July 2024.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 4,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-10-07\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.rishisunak.com/about-me\",\n      \"title\": \"About Me | Rishi Sunak\",\n      \"published_date\": null,\n      \"quote\": \"On October 25, 2022, I was honoured and privileged to be appointed UK Prime Minister, a role I held until July 5, 2024.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"rishisunak.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://sfs.georgetown.edu/news/five-questions-about-new-uk-prime-minister-andy-burnham\",\n      \"title\": \"Five questions about new UK Prime Minister Andy Burnham | School of Foreign Service | Georgetown\",\n      \"published_date\": \"2026-07-20\",\n      \"quote\": \"On Monday, July 20, 2026, Andy Burnham became the new prime minister of the United Kingdom.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"georgetown.edu\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Prime_Minister_of_the_United_Kingdom\",\n      \"title\": \"Prime Minister of the United Kingdom - Wikipedia\",\n      \"published_date\": \"2026-10-07\",\n      \"quote\": \"The current prime minister is Andy Burnham who has held the office since 20 July 2026.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c051",
+  "verdict": "OUTDATED",
+  "seconds": 25.892,
+  "usd": 0.0598931,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Angela Merkel was Chancellor of Germany from 2005 to 2021, so the claim was true in the past. She is not Chancellor now. Friedrich Merz (CDU) has held the office since 6 May 2025, and Wikipedia's Chancellor of Germany page was edited on 2026-11-16 and still lists him as the current officeholder. Merkel is described as a retired politician and 'former Chancellor' in 2026 coverage. I found no source saying Merz has left office. A Wikipedia article on a '2026 German government crisis' exists, but the part of it I could read does not say he has been replaced. The caller-memory lookup failed, so no caller context was used.\",\n  \"what_changed\": \"Merkel's chancellorship ended in 2021 and Olaf Scholz succeeded her. Friedrich Merz was elected by the Bundestag and sworn in as Chancellor on 6 May 2025, and he is the current officeholder.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"lookupWikipedia\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not state that Merkel is Chancellor. Say that Friedrich Merz has been Chancellor since 6 May 2025 and that Merkel served from 2005 to 2021.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-11-16\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://en.wikipedia.org/wiki/Chancellor_of_Germany\",\n      \"title\": \"Chancellor of Germany - Wikipedia\",\n      \"published_date\": \"2026-11-16\",\n      \"quote\": \"The current officeholder is Friedrich Merz of the Christian Democratic Union, sworn in on 6 May 2025.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"wikipedia.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.einbuergerung-bitte.de/en/fragen/72\",\n      \"title\": \"What is the name of Germany’s current Chancellor? | Einbuergerung Bitte\",\n      \"published_date\": null,\n      \"quote\": \"He was elected by the Bundestag in May 2025, following the federal election of February 2025.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"einbuergerung-bitte.de\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "lookupWikipedia",
+   "searchClaim",
+   "lookupWikipedia",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c052",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 15.445,
+  "usd": 0.032850500000000005,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"I found no source that mentions a Ballarat café selling 1,234 flat whites on 3 March 2026. The search results covered only general flat white pricing, the history of the drink, and café industry stress. None of them gave sales figures for any café on that date. The claim is a very specific statistic about an unnamed café, so it would need the café's own records or a news report to be confirmed. The tools found neither. A private sales figure like this is probably unknowable from public sources. I am not calling it false, only that it cannot be verified. My caller-memory lookup also failed, so no earlier context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not treat this figure as fact. Ask for the café's name and a primary source, such as a POS sales record or a published news report, before relying on it.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0,\n  \"searched\": {\n    \"queries\": [\n      \"Ballarat café sold 1,234 flat whites 3 March 2026\",\n      \"Ballarat café sold 1,234 flat whites in one day record [updates]\"\n    ],\n    \"domains\": [],\n    \"escalation_rounds\": 0\n  }\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c054",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 16.875,
+  "usd": 0.0225621,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"The claim is a prediction about a future event. As of 2026-11-18 the 2034 FIFA World Cup has not been played. Wikipedia describes it as a \\\"Future association football tournament in Saudi Arabia\\\", and says the 25th World Cup \\\"will be\\\" held there. No source can show that Australia will win it, and none of the sources returned says so. The claim cannot be called true or false now. Australia winning is not ruled out, but no evidence supports it. The memory lookup failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"lookupWikipedia\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not treat this as fact or act on it. Treat it as speculation until the tournament has been played, which is scheduled to take place in Saudi Arabia in 2034.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0,\n  \"searched\": {\n    \"queries\": [\n      \"2034 FIFA World Cup winner Saudi Arabia host date\",\n      \"2034 FIFA World Cup [Wikipedia]\"\n    ],\n    \"domains\": [\n      \"en.wikipedia.org\"\n    ],\n    \"escalation_rounds\": 0\n  }\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "lookupWikipedia"
+  ]
+ },
+ {
+  "id": "c055",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 23.505,
+  "usd": 0.0555369,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"I could not trace the claim that 37% of Tasmanian small business owners privately prefer tea to coffee to any original survey or study. The web searches returned nothing on Tasmanian small business owners' drink preferences. The closest results were unrelated: a TR Consulting survey of café owners, US tea-versus-coffee polls from YouGov and Time, and an IELTS writing exercise about Australian cities. None of them contains this figure or this population. A precise statistic needs its original source, and finding none means the claim cannot be called current. It also cannot be called disputed, because no source gives a different figure. The Perplexity tool was unavailable (API key missing). The caller-memory lookup also failed. The claim looks like a fabricated or unsourced statistic.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not repeat or act on this 37% figure unless the originating survey (publisher, sample, date) is identified; treat it as unsourced.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0,\n  \"searched\": {\n    \"queries\": [\n      \"Tasmania small business owners prefer tea to coffee survey 37%\",\n      \"Is it true that 37% of small business owners in Tasmania privately prefer tea to coffee? Source of the statistic? [Perplexity]\",\n      \"37% of small business owners in Tasmania privately prefer tea to coffee [updates]\",\n      \"\\\"Tasmania\\\" \\\"small business\\\" owners tea coffee preference poll percent\"\n    ],\n    \"domains\": [],\n    \"escalation_rounds\": 0\n  }\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c056",
+  "verdict": "DISPUTED",
+  "seconds": 40.18,
+  "usd": 0.0645337,
+  "confidence": 40,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim can't be supported. No source identifies 'the first person to eat an oyster', and that person is almost certainly unknowable. The earliest evidence I found of humans eating shellfish is in South Africa, not France. NPR reports on a cave at Pinnacle Point where humans ate shellfish about 164,000 years ago. The NPR piece says 'shellfish' and does not say these were oysters. Secondary pages repeat the 164,000-year oyster figure, but I didn't trace it to the original paper. I found no source linking the first oyster-eater to France. The 'bold man' line quoted in the sources is a proverb, not a historical record. Perplexity was unavailable, Wikipedia's Oyster summary had nothing on the topic, and the caller-memory lookup failed. The verdict rests on the NPR page and the web searches.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"lookupWikipedia\",\n    \"askPerplexity\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't repeat this claim as fact. If you need a sourced statement, say that the earliest known evidence of humans eating shellfish is from South Africa, about 164,000 years ago, and that the first oyster-eater is unknown.\",\n  \"confidence\": 40,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2007-10-18\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.npr.org/2007/10/18/15391834/who-ate-the-first-oyster-cave-may-hold-an-answer\",\n      \"title\": \"Who Ate the First Oyster? Cave May Hold an Answer : NPR\",\n      \"published_date\": \"2007-10-18\",\n      \"quote\": \"Scientists exploring a cave in South Africa report evidence of shellfish dinners enjoyed by humans who lived 164,000 years ago.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"npr.org\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://www.npr.org/2007/10/18/15391834/who-ate-the-first-oyster-cave-may-hold-an-answer\",\n      \"title\": \"Who Ate the First Oyster? Cave May Hold an Answer : NPR\",\n      \"published_date\": \"2007-10-18\",\n      \"quote\": \"But now, the first people to eat shellfish may have been found.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"npr.org\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "lookupWikipedia",
+   "askPerplexity",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c058",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 22.072,
+  "usd": 0.0591623,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"I found no report, leak or Google document of a secret 2025 internal memo saying AI Overviews will replace all blue links by 2028. Searches turned up only public coverage of Google's AI Mode and AI Overviews. TechCrunch's 19 May 2026 piece says the 'ten blue links' era is effectively over because of the Google I/O search overhaul, but that is a journalist's characterisation and not a memo. PCMag reports Google's position that the AI Mode overhaul applies only to AI Mode and that blue links are not going away. That cuts against the 'replace all blue links' substance, but it does not settle whether a private memo exists. A search that finds nothing does not prove a secret document is absent. Perplexity was unavailable (API key missing) and the caller-memory lookup failed, so the cross-check rests on web search alone. With no traceable source for the memo, the 2028 date or the quoted content, the claim looks like a likely fabrication or a misattribution of general commentary, and I cannot confirm or refute it.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not cite or act on this claim as fact: no source for the memo or the 2028 date was found, and Google's public stance is that blue links are not going away.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0,\n  \"searched\": {\n    \"queries\": [\n      \"Google internal memo AI Overviews will replace all blue links by 2028\",\n      \"Is there a leaked internal Google memo from 2025 saying AI Overviews will replace all blue links by 2028? [Perplexity]\",\n      \"Secret internal Google memo 2025 AI Overviews will replace all blue links by 2028 [updates]\",\n      \"leaked Google internal memo 2025 search blue links AI Mode replace\"\n    ],\n    \"domains\": [],\n    \"escalation_rounds\": 0\n  }\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c061",
+  "verdict": "UNVERIFIABLE",
+  "seconds": 20.989,
+  "usd": 0.057674,
+  "confidence": 0,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"UNVERIFIABLE\",\n  \"summary\": \"No source I found shows that most professional SEO consultants privately believe GEO is a passing fad. The claim is about private beliefs, which a survey can't directly measure, and I found no survey that asks the question. The surveys I did find point away from the claim. A Search Engine Journal State of Search report (published 2026-09-18) says 43% of those surveyed plan to invest in or prioritize GEO in the coming year. A Fiverr freelancer survey reports growing client demand for GEO. A MarTech piece argues 'GEO isn't a fad', though that is one author's opinion and not survey data. Other commentary calls GEO partly hype or relabelled SEO, but that is a different claim from 'a passing fad', and it is opinion, not a measure of what most consultants believe. Perplexity and the retrieveCallerMemory tool were unavailable, so I relied on web search alone. No academic or Wikipedia source addresses this claim.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not repeat or act on this claim as fact; if a view of practitioner sentiment is needed, cite a named survey, such as the Search Engine Journal State of Search report, with its actual figures.\",\n  \"confidence\": 0,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 0,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 0,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0,\n  \"searched\": {\n    \"queries\": [\n      \"survey SEO professionals opinion generative engine optimization GEO fad or hype\",\n      \"What do surveys show about what SEO professionals think of GEO (generative engine optimization)? Do most consider it a fad? [Perplexity]\",\n      \"Most SEO professionals believe GEO generative engine optimization is a fad [updates]\",\n      \"survey of SEO professionals percent say GEO is a fad OR important, State of SEO survey 2026\"\n    ],\n    \"domains\": [],\n    \"escalation_rounds\": 0\n  }\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c063",
+  "verdict": "CURRENT",
+  "seconds": 20.847,
+  "usd": 0.0853033,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central documentation says this directly. Its guide to optimizing for generative AI features lists LLMS.txt files and other \\\"special\\\" markup as things site owners can ignore. It says you don't need new machine-readable files, AI text files, markup or Markdown to appear in Google Search, including its generative AI capabilities, because Google Search doesn't use them. The wording matches the claim closely. AI Overviews are covered under 'generative AI features'. The guide is live as of the check date, and a secondary source dates it to May 2026. Search for updates found no retraction or reversal. One nuance: the guide says it is fine to create llms.txt files for other services, and that Google may crawl and index many file types without treating them specially.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate: don't build llms.txt files or AI-specific markup just to appear in Google AI Overviews, and focus on standard SEO fundamentals and indexability.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\",\n      \"title\": \"Google's Guide to Optimizing for Generative AI Features on Google Search | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"You don't need to create new machine readable files, AI text files, markup, or Markdown to appear in Google Search (including its generative AI capabilities), as Google Search itself doesn't use them.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c064",
+  "verdict": "CURRENT",
+  "seconds": 18.81,
+  "usd": 0.0481942,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central documentation, fetched live, says the same thing as the claim. It states that both AI Overviews and AI Mode may use a 'query fan-out' technique that issues multiple related searches across subtopics and data sources. A Google Search Help page on AI Mode and Google blog posts also describe AI Mode as using query fan-out. The recency search found nothing that renames, retracts or changes the description. Third-party 2026 articles repeat it. I could not read the page's publication date, but the live page carries the wording today. The caller memory lookup failed, so no personalisation was applied.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate, and cite Google's Search Central 'AI features and your website' page as the source.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"Both AI Overviews and AI Mode may use a \\\"query fan-out\\\" technique — issuing multiple related searches across subtopics and data sources — to develop a response.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.google.com/websearch/answer/16011537?hl=en&co=GENIE.Platform%3DDesktop\",\n      \"title\": \"Get AI-powered responses with AI Mode in Google Search - Computer - Google Search Help\",\n      \"published_date\": null,\n      \"quote\": \"AI mode uses a “query fan-out” technique, dividing your question into subtopics and searching for each one simultaneously across multiple data sources.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c065",
+  "verdict": "CURRENT",
+  "seconds": 27.138,
+  "usd": 0.1033574,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central documentation still says that sites appearing in AI features (AI Overviews and AI Mode) are included in Search Console's overall search traffic. They are reported in the Performance report under the 'Web' search type. Google has also launched a separate Generative AI performance report, announced 3 June 2026 and rolled out worldwide by 31 August 2026. That report is an extra impressions-only view and does not move AI data out of Web. Google's help page says it 'includes data from the Web search type in the Performance report (Search results)'. One third-party blog (digitalapplied.com) claims Search Console now has dedicated AI Overview and AI Mode segments in the Search Type filter. I found no Google source that says this, and the official documentation contradicts it. The Search Central page was fetched live without a visible last-updated date, so its freshness rests on its content and the 2026 help pages that agree with it. The caller-memory lookup failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate: AI Overviews and AI Mode data sits inside the Web search type. For an AI-only view of impressions, use the separate Generative AI performance report, and don't add its numbers to Web totals, because they are already counted there.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-10-31\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI features and your website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"Just like the rest of the search results page, sites appearing in AI features (such as AI Overviews and AI Mode) are included in the overall search traffic in\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.google.com/webmasters/thread/475657245/are-clicks-from-ai-overviews-included-in-search-console%E2%80%99s-performance-report?hl=en-KY\",\n      \"title\": \"Are clicks from AI Overviews included in Search Console's Performance report? - Google Search Central Community\",\n      \"published_date\": \"2026-10-31\",\n      \"quote\": \"They're reported under the Web search type together with the rest of your organic clicks, so they're not missing from the report.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.google.com/webmasters/answer/7042828\",\n      \"title\": \"What are impressions, position, and clicks? - Search Console Help\",\n      \"published_date\": null,\n      \"quote\": \"Clicking a link to an external page in AI Mode counts as a click.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c067",
+  "verdict": "CURRENT",
+  "seconds": 18.223,
+  "usd": 0.0760988,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own documentation, fetched live on 2026-11-18, says Google-Extended 'does not impact a site's inclusion in Google Search nor is it used as a ranking signal in Google Search.' This matches the claim. I found no later change. A Google Search announcement from October 2026 about a planned shared AI-training robots.txt control (targeted for 2027) says Google-Extended will keep working alongside it, and it does not alter the Search statement. Third-party pages repeat the same statement, but the verdict rests on Google's page.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate: blocking Google-Extended opts out of Gemini training and grounding without affecting Search inclusion or ranking. Blocking Googlebot is what removes a site from Search.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers\",\n      \"title\": \"Google's common crawlers | Google Crawling Infrastructure | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"Google-Extended does not impact a site's inclusion in Google Search nor is it used as a ranking signal in Google Search.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c068",
+  "verdict": "CURRENT",
+  "seconds": 20.894,
+  "usd": 0.0521813,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"OpenAI's own crawler documentation currently says this. It states that sites opted out of OAI-SearchBot will not be shown in ChatGPT search answers. The same sentence adds that they can still appear as navigational links, so the claim is accurate but leaves out that caveat. I fetched the official page live today. A search for updates found no change, retraction or renaming. An OpenAI Developer Community post repeats the same wording. Several third-party pages also repeat it, but they only quote the official page and are not independent evidence.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate, and when repeating it add that opted-out sites can still appear as navigational links.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://platform.openai.com/docs/bots\",\n      \"title\": \"Overview of OpenAI Crawlers\",\n      \"published_date\": null,\n      \"quote\": \"Sites that are opted out of OAI-SearchBot will not be shown in ChatGPT search answers, though can still appear as navigational links.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"openai.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.openai.com/api/docs/bots\",\n      \"title\": \"Overview of OpenAI Crawlers\",\n      \"published_date\": null,\n      \"quote\": \"OAI-SearchBot is used to surface websites in search results in ChatGPT’s search features.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"openai.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c070",
+  "verdict": "CURRENT",
+  "seconds": 13.839,
+  "usd": 0.0448515,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Perplexity's own crawler documentation says this. Its page 'Perplexity Crawlers' describes PerplexityBot as designed to surface and link websites in Perplexity search results and says it is not used to crawl content for AI foundation models. The same text appears on a second official docs URL, and the update search found no later change or retraction. The claim is attributed to Perplexity ('Perplexity says'), and that attribution is accurate. This check confirms only what Perplexity states. It does not test whether the crawler behaves that way in practice, and third parties have disputed that in the past. Caller memory could not be retrieved (connection error), which does not affect the verdict.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat this as Perplexity's stated policy and cite the official crawler documentation. Do not present it as independently verified crawler behaviour.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 1,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://docs.perplexity.ai/guides/bots\",\n      \"title\": \"Perplexity Crawlers - Perplexity\",\n      \"published_date\": null,\n      \"quote\": \"`PerplexityBot` is designed to surface and link websites in search results on Perplexity. It is not used to crawl content for AI foundation models.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"perplexity.ai\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c071",
+  "verdict": "CURRENT",
+  "seconds": 17.591,
+  "usd": 0.0505129,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Perplexity's own crawler documentation page, fetched live during this check, says what the claim says. It states: \\\"Since a user requested the fetch, this fetcher generally ignores robots.txt rules.\\\" Several third-party pages quote the same line and are dated Oct–Nov 2026. The search for updates found no sign that Perplexity has changed, renamed or retracted this policy. The page carries no visible publication date, but it was live on the check date. The same page also says \\\"`Perplexity-User` controls which sites these user requests can access,\\\" which is a wording nuance and not a contradiction of the claim.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate: robots.txt rules will not reliably stop Perplexity-User, so block it with server or firewall rules using Perplexity's published IP ranges if you need to.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://docs.perplexity.ai/guides/bots\",\n      \"title\": \"Perplexity Crawlers - Perplexity\",\n      \"published_date\": null,\n      \"quote\": \"Since a user requested the fetch, this fetcher generally ignores robots.txt rules.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"perplexity.ai\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.elementera.com/ai-crawlers/perplexity-user\",\n      \"title\": \"Perplexity-User: What It Is and How to Block or Allow It\",\n      \"published_date\": null,\n      \"quote\": \"Since a user requested the fetch, this fetcher generally ignores robots.txt rules.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"elementera.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c077",
+  "verdict": "CURRENT",
+  "seconds": 19.578,
+  "usd": 0.0558488,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Anthropic's own Claude Help Center page says its bots honor robots.txt. The page is Anthropic's official crawler documentation and I fetched it directly. It covers all three bots: ClaudeBot (training), Claude-User (user-requested fetches) and Claude-SearchBot (search). The page also says Anthropic supports the non-standard Crawl-delay extension and follows robots.txt rules that name ClaudeBot directly. Searches for newer updates found no retraction or change. Search Engine Journal reported a recent documentation update that split the bots into three, but the robots.txt commitment stayed the same. The claim is about what Anthropic says, not about independently measured crawler behavior. This check did not test whether the crawlers comply in practice.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate as a statement of Anthropic's published policy, and say that robots.txt rules naming ClaudeBot, Claude-User or Claude-SearchBot are the supported way to opt out. Blocking IP addresses is not a reliable substitute, because Anthropic says it may not work.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler\",\n      \"title\": \"Does Anthropic crawl data from the web, and how can site owners block the crawler? | Claude Help Center\",\n      \"published_date\": null,\n      \"quote\": \"Anthropic’s Bots respect “do not crawl” signals by honoring industry standard directives in robots.txt.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"anthropic.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler\",\n      \"title\": \"Does Anthropic crawl data from the web, and how can site owners block the crawler? | Claude Help Center\",\n      \"published_date\": null,\n      \"quote\": \"Opting out of being crawled by Anthropic Bots requires modifying the robots.txt file in the manner above.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"anthropic.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/anthropics-claude-bots-make-robots-txt-decisions-more-granular/568253\",\n      \"title\": \"Anthropic’s Claude Bots Make Robots.txt Decisions More Granular\",\n      \"published_date\": null,\n      \"quote\": \"Anthropic says all three of its bots honor robots.txt, including Claude-User.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c078",
+  "verdict": "CURRENT",
+  "seconds": 22.627,
+  "usd": 0.0677478,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Google's own Search Central blog says this almost word for word: appropriate use of AI or automation is not against its guidelines. The qualifier is that the content must not be generated primarily to manipulate search rankings, which violates the spam policies. Google's current guidance page on generative AI content (fetched 2026-11-18) is consistent with this. Third-party coverage says Google edited that page on 2026-10-01 to stress fact-checking AI output, and that edit did not change the policy. The page still warns that generating many pages without adding value may violate the scaled content abuse policy. The claim holds as long as 'appropriate' is read as 'not primarily for ranking manipulation, and with added value'. The retrieveCallerMemory call failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate, but state the condition that AI content made at scale mainly to manipulate rankings, or without added value, still violates Google's spam policies.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2023-02-08\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"Appropriate use of AI or automation is not against our guidelines.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"it's important to recognize that not all use of automation, including AI generation, is spam.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/using-gen-ai-content\",\n      \"title\": \"Google Search's guidance on using generative AI content on your website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"Generative AI can be particularly useful when researching a topic, and to add structure to original content.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c079",
+  "verdict": "DISPUTED",
+  "seconds": 26.753,
+  "usd": 0.08333789999999999,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"Google's own documentation contradicts the claim as worded. Google does not penalise content merely because AI produced it. Its Search Central blog says its ranking focus is 'the quality of content, rather than how content is produced'. Google does act against AI-generated content that breaks its spam policies, such as scaled content abuse, which means mass-producing pages with generative AI without adding value. Google says it detects spam through 'automated systems and, as needed, human review', and violating sites 'may rank lower in results or not appear in results at all'. So automatic demotion applies to low-value, scaled, manipulative content. It does not apply to AI-generated content as a category. The claim as stated is too broad and misleading. Perplexity was unavailable (API key missing) and the caller memory lookup failed. The verdict rests on Google's official pages. Third-party SEO blogs agree with this reading but were not used as evidence.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't repeat this claim as written. Say instead that Google demotes low-quality, scaled or manipulative content (including AI-generated content) under its spam policies, and that AI use alone is not penalised.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 5,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-08-28\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"Our focus on the quality of content, rather than how content is produced, is a useful guide that has helped us deliver reliable, high quality results to users for years.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/essentials/spam-policies\",\n      \"title\": \"Spam Policies for Google Web Search | Google Search Central\",\n      \"published_date\": \"2026-08-28\",\n      \"quote\": \"This abusive practice is typically focused on creating large amounts of unoriginal content that provides little to no value to users, no matter how it's created.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/02/google-search-and-ai-content\",\n      \"title\": \"Google Search's guidance about AI-generated content | Google Search Central Blog\",\n      \"published_date\": \"2023-02-08\",\n      \"quote\": \"Using automation—including AI—to generate content with the primary purpose of manipulating ranking in search results is a [violation of our spam policies](/search/docs/essentials/spam-policies#scaled-content).\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/using-gen-ai-content\",\n      \"title\": \"Google Search's Guidance on Generative AI Content on Your Website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"However, using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google's spam policy on scaled content abuse.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/essentials/spam-policies\",\n      \"title\": \"Spam Policies for Google Web Search | Google Search Central\",\n      \"published_date\": \"2026-08-28\",\n      \"quote\": \"We detect policy-violating practices both through automated systems and, as needed, human review that can result in a manual action.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c083",
+  "verdict": "DISPUTED",
+  "seconds": 26.396,
+  "usd": 0.0650309,
+  "confidence": 65,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim that adding FAQ schema increases AI citations by 80% is not supported by any original source I could find. The only place the 80% figure appeared was a vendor page (Presenc AI). That page says FAQ schema gives +80% on Perplexity only, and it gives different figures for other platforms (+70% ChatGPT, +60% Gemini, +45% Claude). The page compares FAQ schema with prose, and I could not trace the figure to a methodology or a primary study. Other pages give other figures: 36%, 40%, about 50%, and 3-7x. These are all from blogs and marketing pages, and none is corroborated. The one controlled study I found contradicts the claim. Ahrefs tracked 1,885 pages that added JSON-LD schema against 4,000 control pages. It found no meaningful uplift in citations on AI Mode or ChatGPT, and a small decline on AI Overviews. SE Ranking's analysis, as reported by a third-party blog, found a slight negative correlation. Pages with schema are cited more often, but that is correlation, not a causal effect. The Perplexity and Semantic Scholar tools failed, so no academic check was possible. The caller memory lookup also failed.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"checkAcademic\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not repeat or act on the '80% increase' figure. Say instead that a controlled Ahrefs study found no meaningful citation uplift from adding schema, and treat any FAQ-schema lift figures as unverified until an original study is cited.\",\n  \"confidence\": 65,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://ahrefs.com/aeo/technical-aeo\",\n      \"title\": \"How to Optimize Your Website for Answer Engines\",\n      \"published_date\": null,\n      \"quote\": \"But correlation isn’t cause. We tracked 1,885 pages that added JSON-LD against 4,000 controls and found no meaningful uplift on AI Mode or ChatGPT, and a small AI Overview decline we couldn’t pin on schema.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"ahrefs.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://presenc.ai/research/does-faq-schema-improve-ai-citations-2026\",\n      \"title\": \"Does FAQ Schema Improve AI Citations? | Presenc AI\",\n      \"published_date\": null,\n      \"quote\": \"| Perplexity | +80% | RAG retrieval prioritizes question-matched content |\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"presenc.ai\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "checkAcademic",
+   "searchForUpdates",
+   "searchClaim",
+   "json"
+  ]
+ },
+ {
+  "id": "c084",
+  "verdict": "DISPUTED",
+  "seconds": 27.137,
+  "usd": 0.0857444,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"Google's own documentation contradicts the claim. Its AI features guide says a page needs only to be indexed and eligible to show in Search with a snippet, and that there are no additional technical requirements. Its generative AI optimization guide says structured data isn't required and no special schema.org markup is needed. Google's Speakable documentation describes the markup as a BETA feature for Google Assistant text-to-speech playback of news content on smart speakers. It does not link speakable to AI Overviews. The claim was never true according to these sources. Retrieving caller memory failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't treat speakable schema as a requirement for AI Overviews; make sure pages are indexed and snippet-eligible, and add speakable markup only if you want Google Assistant news playback.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"To be eligible to be shown as a supporting link in AI Overviews or AI Mode, a page must be indexed and eligible to be shown in Google Search with a snippet, fulfilling the Search technical requirements.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"While specific optimization isn't required for AI Overviews and AI Mode, all existing SEO fundamentals continue to be worthwhile, for example:\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\",\n      \"title\": \"Google's Guide to Optimizing for Generative AI Features on Google Search | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"Structured data isn't required for generative AI search, and there's no special schema.org markup you need to add.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/structured-data/speakable\",\n      \"title\": \"Speakable (BETA) Schema Markup | Google Search Central | Documentation | Google for Developers\",\n      \"published_date\": null,\n      \"quote\": \"The Google Assistant uses `speakable` structured data to answer topical news queries on smart speaker devices.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl",
+   "searchClaim"
+  ]
+ },
+ {
+  "id": "c085",
+  "verdict": "DISPUTED",
+  "seconds": 24.442,
+  "usd": 0.0909237,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Google's own documentation says Google-Extended is a robots.txt token that controls whether crawled content is used to train Gemini models and to ground Gemini Apps and Vertex AI. It says Google-Extended does not affect inclusion in Google Search. Google's AI features guide says AI is built into Search, so the controls for AI Overviews are Googlebot robots.txt rules and the snippet controls (`nosnippet`, `data-nosnippet`, `max-snippet`, `noindex`). Search Engine Land makes the same point about the earlier SGE. A secondary source (elementera.com) cites a 2026 study that found a correlation between blocking Google-Extended and being retrieved less often by AI Overviews. That source says the study showed correlation, not cause, and that Google states Google-Extended does not affect Google Search inclusion. I did not open the study itself.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not rely on Google-Extended to remove pages from AI Overviews. Use `nosnippet`, `data-nosnippet`, `max-snippet` or `noindex` for that, and note that Googlebot robots.txt rules also remove the pages from Search itself.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers\",\n      \"title\": \"Google's common crawlers | Google Crawling Infrastructure\",\n      \"published_date\": null,\n      \"quote\": \"Google-Extended does not impact a site's inclusion in Google Search nor is it used as a ranking signal in Google Search.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"To limit the information shown from your pages in Search, use `nosnippet`, `data-nosnippet`, `max-snippet`, or `noindex` controls.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://searchengineland.com/websites-blocking-google-extended-jump-435006\",\n      \"title\": \"Number of websites blocking Google-Extended jump 180%\",\n      \"published_date\": null,\n      \"quote\": \"While you can block Google-Extended in robots.txt, that does not block your content from appearing in Google’s Search Generative Experience or prevent Google from using your content from training SGE.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"searchengineland.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c087",
+  "verdict": "DISPUTED",
+  "seconds": 17.656,
+  "usd": 0.076864,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is false. Google's own Search Central documentation says Google Search does not use llms.txt files, including for its generative AI features such as AI Overviews. The same guide says a page becomes eligible as a supporting link in AI Overviews by being indexed and eligible to appear in Search with a snippet, and it lists no other technical requirements. Search Engine Journal reports that Google's Search team has said for over a year that it is not adopting llms.txt. One nuance: Chrome's Lighthouse 13.3 has an experimental 'Agentic Browsing' audit that checks for llms.txt. That audit is for browser-agent readiness and is separate from Search, so it does not support the claim. The memory lookup failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not act on this claim: Google says Search does not use llms.txt for AI Overviews, so improve indexability, snippet eligibility and content quality instead.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\",\n      \"title\": \"Google's Guide to Optimizing for Generative AI Features on Google Search | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"You don't need to create new machine readable files, AI text files, markup, or Markdown to appear in Google Search (including its generative AI capabilities), as Google Search itself doesn't use them.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ai-features\",\n      \"title\": \"AI Features and Your Website | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"To be eligible to be shown as a supporting link in AI Overviews or AI Mode, a page must be indexed and eligible to be shown in Google Search with a snippet, fulfilling the Search technical requirements.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/googles-llms-txt-guidance-depends-on-which-product-you-ask/575431\",\n      \"title\": \"Google's llms.txt Guidance Depends On Which Product You Ask\",\n      \"published_date\": null,\n      \"quote\": \"For Google Search, llms.txt isn’t needed for AI Overviews, AI Mode, or other generative AI Search features.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchClaim",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c088",
+  "verdict": "DISPUTED",
+  "seconds": 30.213,
+  "usd": 0.1235975,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"The claim is not supported. Google has never adopted IndexNow, so it was never true and is not an outdated claim. In November 2021 Google said it would test the protocol, and I found no later announcement of support. The official IndexNow registry (searchengines.json, last modified 11 Feb 2026) lists only Bing, Yandex, Seznam, Naver, Yep, Internet Archive and Amazonbot as participating engines, and Google is not among them. A Google Search Central Community reply from June 2024 says Google does not support IndexNow. Secondary 2026 write-ups say the same. Perplexity was unavailable (API key missing), and my caller-memory lookup also failed. Neither affected the result. The evidence is not fully primary: the quotable pages are a Google community reply from a product expert (not an official Google statement) and third-party blogs. The registry file supports the conclusion but has no sentence I could quote. Google's own documentation, which would be the strongest source, did not turn up in my searches.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"askPerplexity\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not rely on IndexNow to get pages into Google; use XML sitemaps and Search Console URL Inspection for Google, and use IndexNow only for Bing, Yandex, Seznam, Naver and the other participating engines.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 3,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2024-06-07\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.google.com/webmasters/thread/278807782/indexnow-implementation?hl=en\",\n      \"title\": \"IndexNow Implementation - Google Search Central Community\",\n      \"published_date\": \"2024-06-07\",\n      \"quote\": \"Google does not support Index Now but here is where to send.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.indexernow.com/google-indexnow\",\n      \"title\": \"Does Google Support IndexNow? No — Here's What Works · IndexerNow\",\n      \"published_date\": null,\n      \"quote\": \"Google evaluated IndexNow after its 2021 launch but never adopted it for web indexing.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"indexernow.com\",\n      \"primary\": false\n    },\n    {\n      \"url\": \"https://swapbiswas.com/blog/does-google-support-indexnow\",\n      \"title\": \"Does Google Support IndexNow? No. What Google Uses Instead\",\n      \"published_date\": null,\n      \"quote\": \"No. Google has not joined IndexNow as of September 2026.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"swapbiswas.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "askPerplexity",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c089",
+  "verdict": "DISPUTED",
+  "seconds": 26.464,
+  "usd": 0.0793334,
+  "confidence": 40,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"DISPUTED\",\n  \"summary\": \"I could not trace the claim to an original source that supports it as stated. The nearest match is a vendor experiment by OtterlyAI. It changed only the visible date on 10 of its own articles. Citations rose 31.5% over the next 30 days, while 2 control articles fell 10.6%. That is a small before/after test on one brand's pages, not a finding that pages showing a 'last updated' date get 30% more citations than pages without one. Another page, a NOVASTACKS blog post, says pages with a visible timestamp get 1.8x (80%) more citations than pages without one. It cites no original study. The two figures differ materially. Ahrefs found that AI-cited URLs are fresher on average, which concerns content age rather than a visible date. The Otterly page itself says the effect varied by engine: Google AI Mode fell 20% and Gemini fell 37%. The Semantic Scholar check failed with a 429 error, and Perplexity and caller memory were unavailable, so no peer-reviewed support was found. Treat the claim as unsupported and misattributed.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"askPerplexity\",\n    \"checkAcademic\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T12:00:00Z\",\n  \"recommendation\": \"Do not repeat or act on '30% more citations' as a general rule. Cite it only as one vendor's 10-page experiment (31.5%, Otterly, 2026), and do not re-date pages without making real content changes.\",\n  \"confidence\": 40,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": false,\n    \"newest_source_date\": \"2026-09-24\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://www.novastacks-ai.com/blog/what-drives-ai-citations\",\n      \"title\": \"What Drives AI Citations? Data from 129,000 Domains (2026) - NOVASTACKS\",\n      \"published_date\": null,\n      \"quote\": \"Pages with a visible \\\"last updated\\\" or \\\"last modified\\\" timestamp receive 1.8x more citations than pages without one.\",\n      \"stance\": \"REFUTES\",\n      \"organisation\": \"novastacks-ai.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "askPerplexity",
+   "checkAcademic",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c090",
+  "verdict": "OUTDATED",
+  "seconds": 20.754,
+  "usd": 0.040204699999999996,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"FID was a Core Web Vital, but it no longer is. Google's Chrome team replaced it with Interaction to Next Paint (INP) as the responsiveness metric. The change took effect on 12 March 2024. Chrome later ended support for FID in its tools. The Core Web Vitals responsiveness metric today is INP, so a claim that FID is one of the Core Web Vitals is out of date. The caller-memory lookup failed, so no caller context was used.\",\n  \"what_changed\": \"On 12 March 2024, INP replaced FID as the Core Web Vitals responsiveness metric. Chrome subsequently ended support for FID in its tools. The current Core Web Vitals are LCP, CLS and INP.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"lookupWikipedia\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Replace 'First Input Delay (FID)' with 'Interaction to Next Paint (INP)' wherever the claim describes the current Core Web Vitals, and state that FID was retired in March 2024.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://web.dev/blog/fid\",\n      \"title\": \"Chrome ends support for First Input Delay | Blog | web.dev\",\n      \"published_date\": null,\n      \"quote\": \"In May, the Chrome team officially replaced First Input Delay (FID) with Interaction to Next Paint (INP) as the Core Web Vitals metric for measuring interaction responsiveness.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://web.dev/blog/fid\",\n      \"title\": \"Chrome ends support for First Input Delay | Blog | web.dev\",\n      \"published_date\": null,\n      \"quote\": \"Well, that time has finally come, and as of today FID is no longer supported in Chrome tools.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://web.dev/articles/inp\",\n      \"title\": \"Interaction to Next Paint (INP) | web.dev\",\n      \"published_date\": null,\n      \"quote\": \"INP is the successor metric to First Input Delay (FID).\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "lookupWikipedia"
+  ]
+ },
+ {
+  "id": "c091",
+  "verdict": "OUTDATED",
+  "seconds": 22.028,
+  "usd": 0.06262960000000001,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Google does not support a noindex rule in robots.txt today. Its current documentation says so directly. On 2 July 2019 Google announced it would retire all code handling unsupported and unpublished robots.txt rules, with noindex named as an example, effective 1 September 2019. Before then the rule was never documented, but Google's parser code did handle it, so the claim was once true in practice. It stopped being true after 1 September 2019. Google's noindex guidance now points to the robots meta tag or the X-Robots-Tag HTTP header. A page must also stay crawlable, so it must not be blocked by robots.txt, for Google to see the noindex.\",\n  \"what_changed\": \"Google retired handling of the unofficial robots.txt noindex rule on 1 September 2019, announced 2 July 2019. Its documentation (last updated 2025-12-10) now says the rule is not supported. Use a meta robots noindex tag or an X-Robots-Tag HTTP header instead.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not rely on a robots.txt noindex rule for Google; use a meta robots noindex tag or an X-Robots-Tag header on a crawlable page instead.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2025-12-10\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/crawling-indexing/block-indexing\",\n      \"title\": \"Block Search Indexing with noindex | Google Search Central\",\n      \"published_date\": \"2025-12-10\",\n      \"quote\": \"Specifying the `noindex` rule in the robots.txt file is not supported by Google.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2019/07/a-note-on-unsupported-rules-in-robotstxt\",\n      \"title\": \"A note on unsupported rules in robots.txt | Google Search Central Blog\",\n      \"published_date\": \"2019-07-02\",\n      \"quote\": \"we're retiring all code that handles unsupported and unpublished rules (such as\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c092",
+  "verdict": "OUTDATED",
+  "seconds": 27.929,
+  "usd": 0.0982959,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Google retired the Mobile-Friendly Test tool and the Mobile-Friendly Test API on or after 1 December 2023, so the claim no longer holds as of 2026-11-18. The tool did exist and work for years, so the claim was once true. Google's own documentation changelog says it removed mentions of the tool because it was going away. A Google-hosted community post quotes the retirement announcement. Google's 2016 launch post for the tool is now titled '(retired)'. Third-party sources agree that the tool is gone, but I did not rely on them. I could not load the original April 2023 Google blog post, and a guessed URL for it returned 404. The evidence therefore comes from the changelog and the Google community thread that quotes the announcement.\",\n  \"what_changed\": \"Google announced in April 2023 that, starting 1 December 2023, it would retire the Mobile-Friendly Test tool, the Mobile-Friendly Test API and Search Console's Mobile Usability report. Its documentation changelog for 1 December 2023 records that mentions of the tool were removed. Google points site owners to other tools such as Lighthouse.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't tell users to use Google's Mobile-Friendly Test; point them to Lighthouse, Chrome DevTools device emulation or PageSpeed Insights instead.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2023-12-01\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.google.com/webmasters/thread/254884956/where-is-mobile-usability-in-search-console?hl=en\",\n      \"title\": \"where is mobile usability in search console? - Google Search Central Community\",\n      \"published_date\": null,\n      \"quote\": \"Also starting December 1, 2023, we'll be retiring Search Console's \\\"Mobile Usability\\\" report, the Mobile-Friendly Test tool and Mobile-Friendly\\nTest API.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2023-12-01\",\n      \"quote\": \"Removed mentions of the Mobile Friendly Test and the Mobile Usability report throughout our documentation, [as they are going away]\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl",
+   "fetchUrl",
+   "searchClaim",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c094",
+  "verdict": "OUTDATED",
+  "seconds": 22.572,
+  "usd": 0.062315,
+  "confidence": 80,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"Sending a request to Google's sitemaps ping endpoint once worked and was Google's documented method. Google announced on 26 June 2023 that it was deprecating the endpoint and that it would stop working within 6 months, which is about December 2023. Requests to it now return a 404 error and do nothing useful. Google's current documentation says to submit sitemaps through Search Console, its API, or a robots.txt reference. I did not test the endpoint myself. The conclusion rests on Google's announcement, and the only sign of the shutdown date is the 6-month timeline it gave.\",\n  \"what_changed\": \"Google deprecated the sitemaps ping endpoint on 2023-06-26 and said it would stop functioning in 6 months (around December 2023). Requests to it now return a 404 error. Sitemaps should be submitted through Search Console, the Search Console API, or robots.txt.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't rely on the Google sitemap ping endpoint. Submit sitemaps through Search Console or the Search Console API, or list them in robots.txt, and keep accurate lastmod values.\",\n  \"confidence\": 80,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 1,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2023-06-26\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping\",\n      \"title\": \"Sitemaps ping endpoint is going away | Google Search Central Blog\",\n      \"published_date\": \"2023-06-26\",\n      \"quote\": \"To wit, we're deprecating our support for sitemaps ping and the endpoint will stop functioning in 6 months.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping\",\n      \"title\": \"Sitemaps ping endpoint is going away | Google Search Central Blog\",\n      \"published_date\": \"2023-06-26\",\n      \"quote\": \"You can still submit your sitemaps through robots.txt and Search Console, but the HTTP requests (\\\"pings\\\") to the deprecated REST endpoint will result in a `404` error.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "fetchUrl"
+  ]
+ },
+ {
+  "id": "c096",
+  "verdict": "OUTDATED",
+  "seconds": 20.973,
+  "usd": 0.0510559,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was true from August 2022 until March 2024, when Google ran the helpful content system as a standalone system. Google's own ranking systems guide now lists it under 'Retired systems' and says it became part of the core ranking systems in March 2024. Independent SEO sources say the same. Saying it is a separate system is therefore no longer accurate.\",\n  \"what_changed\": \"In March 2024, with the March 2024 core update, Google retired the standalone helpful content system and folded it into its core ranking systems. Helpfulness is now assessed by multiple signals within the core systems, not by a separate classifier or update.\",\n  \"tools_used\": [\n    \"fetchUrl\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Don't describe the helpful content system as separate from core ranking; say it was a standalone system from 2022 to 2024 and has been part of Google's core ranking systems since March 2024.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 3,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ranking-systems-guide\",\n      \"title\": \"A guide to Google Search ranking systems | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"In March 2024, it evolved and [became part of](/search/blog/2024/03/core-update-spam-policies) our core ranking systems, as our systems use a variety of signals and systems to present helpful results to users.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/docs/appearance/ranking-systems-guide\",\n      \"title\": \"A guide to Google Search ranking systems | Google Search Central\",\n      \"published_date\": null,\n      \"quote\": \"The following systems are noted for historical purposes. They've either been incorporated into successor systems or made part of our core ranking systems.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.gsqi.com/marketing-blog/google-march-2024-core-update-helpful-content-system\",\n      \"title\": \"The March 2024 Google Core Update and how the transition of Google's helpful content system to its core ranking system is supposed to work.\",\n      \"published_date\": null,\n      \"quote\": \"Since the helpful content system is part of core now, it’s not some type of separate hit to rankings.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"gsqi.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "fetchUrl",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c098",
+  "verdict": "CURRENT",
+  "seconds": 22.355,
+  "usd": 0.0578401,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"CURRENT\",\n  \"summary\": \"Anthropic's own Help Center page on its crawlers says this. It lists Claude-SearchBot in a table with the heading 'What happens when you disable it', and the entry says disabling the bot may reduce a site's visibility and accuracy in user search results. The wording matches the claim. The Search Engine Journal write-up quotes the same sentence, and a recency-biased search found no retraction, rename or change to it. The tool that retrieves caller memory failed, so no caller context was used.\",\n  \"what_changed\": null,\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"fetchUrl\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Treat the claim as accurate. Site owners who want to appear in Claude's search results should allow Claude-SearchBot in robots.txt, and blocking it is separate from blocking ClaudeBot, the training crawler.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": null\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler\",\n      \"title\": \"Does Anthropic crawl data from the web, and how can site owners block the crawler? | Claude Help Center\",\n      \"published_date\": null,\n      \"quote\": \"Disabling `Claude-SearchBot` on your site prevents our system from indexing your content for search optimization, which may reduce your site's visibility and accuracy in user search results.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"anthropic.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/anthropics-claude-bots-make-robots-txt-decisions-more-granular/568253\",\n      \"title\": \"Anthropic’s Claude Bots Make Robots.txt Decisions More Granular\",\n      \"published_date\": null,\n      \"quote\": \"Each bot gets a “What happens when you disable it” explanation.\",\n      \"stance\": \"SUPPORTS\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "fetchUrl",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c099",
+  "verdict": "OUTDATED",
+  "seconds": 23.302,
+  "usd": 0.0498666,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim describes the Search Console crawl rate limiter as a working tool, and that was true in the past. Google deprecated and removed the tool on 8 January 2024. Google's own Search Central blog explains that Googlebot now adjusts its crawl speed automatically. Site owners are told to reduce crawl rate through server responses, such as HTTP 500, 503 or 429 errors. Google kept only a Googlebot report form for unusual activity and emergencies. Search Engine Land confirmed the removal after the date passed, and a later community thread shows users still looking for the missing setting. A search of Google's pages found no replacement tool. As of 2026-11-18, the claim that the tool lets site owners reduce crawl speed is no longer true.\",\n  \"what_changed\": \"Google removed the Search Console crawl rate limiter tool on 8 January 2024. Googlebot now adjusts crawl speed automatically based on server responses. The fastest way to reduce crawling is to return error status codes. A Googlebot report form remains for unusual activity and emergencies.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not tell users to use a Search Console crawl rate limiter. Tell them to reduce Googlebot load by returning HTTP 500, 503 or 429 responses, or to use the Googlebot report form for emergencies.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 2,\n    \"unverified_quotes\": 1,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2024-01-08\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/blog/2023/11/sc-crawl-limiter-byebye\",\n      \"title\": \"Upcoming deprecation of Crawl Rate Limiter Tool in Search Console | Google Search Central Blog\",\n      \"published_date\": \"2023-11-01\",\n      \"quote\": \"Because of the advances in the automated crawl rate handling, and in the spirit of keeping things simple for users, we'll be deprecating this tool in Search Console.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://searchengineland.com/googlebot-crawl-rate-tool-is-now-gone-436382\",\n      \"title\": \"Googlebot crawl rate tool is now gone\",\n      \"published_date\": \"2024-01-08\",\n      \"quote\": \"As expected, Google removed the crawl rate setting tool within Google Search Console.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"searchengineland.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [\n    {\n      \"url\": \"https://searchengineland.com/googlebot-crawl-rate-tool-in-search-console-is-going-away-435012\",\n      \"quote\": \"What is the crawl rate limiter.It is a tool within the legacy version of Google Search Console that lets you communicate to Google crawl your site less than it currently does.\",\n      \"reason\": \"quote not found on the source page\"\n    }\n  ],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates"
+  ]
+ },
+ {
+  "id": "c100",
+  "verdict": "OUTDATED",
+  "seconds": 22.943,
+  "usd": 0.0723129,
+  "confidence": 90,
+  "downgrade_reason": null,
+  "escalation_rounds": 0,
+  "response": "{\n  \"verdict\": \"OUTDATED\",\n  \"summary\": \"The claim was accurate for years. Clicking an AMP result in Google Search loaded the page from the Google AMP Cache, either in the AMP viewer or as a signed exchange. Google's own Search Central changelog says that on July 1 (listed under July 2026) Google changed this. Google Search now takes users directly to the publisher's AMP host pages, and Google removed the AMP viewer, AMP Cache and signed exchange references from its AMP documentation. Search Engine Journal reports the same change in the past tense. The Google AMP Cache still exists as a product, but Search no longer serves clicked AMP results from it. I could not retrieve caller memory because the tool errored, which does not affect the verdict.\",\n  \"what_changed\": \"On 1 July 2026, Google Search stopped routing AMP result clicks through the Google AMP Cache (viewer or signed exchange). It now sends users straight to the publisher's own AMP host pages, and publishers no longer need to update the AMP cache or configure signed exchanges for Search.\",\n  \"tools_used\": [\n    \"retrieveCallerMemory\",\n    \"searchClaim\",\n    \"searchForUpdates\",\n    \"lookupWikipedia\",\n    \"fetchUrl\"\n  ],\n  \"checked_at\": \"2026-11-18T00:00:00Z\",\n  \"recommendation\": \"Do not assume AMP results in Google Search are served from the Google AMP Cache. Treat them as served directly from the publisher's AMP host pages, and don't tell publishers to maintain AMP cache or signed exchange setups for Search.\",\n  \"confidence\": 90,\n  \"downgraded_from\": null,\n  \"downgrade_reason\": null,\n  \"evidence_summary\": {\n    \"verified_quotes\": 4,\n    \"unverified_quotes\": 0,\n    \"independent_organisations\": 2,\n    \"primary_source\": true,\n    \"newest_source_date\": \"2026-07-01\"\n  },\n  \"sources\": [\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2026-07-01\",\n      \"quote\": \"Starting today, Google Search is updating how it connects users to AMP pages, and will now take users directly to the publisher's AMP host pages.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://developers.google.com/search/updates\",\n      \"title\": \"Latest Google Search Documentation Updates | Google Search Central\",\n      \"published_date\": \"2026-07-01\",\n      \"quote\": \"Simplified our AMP documentation by removing outdated references to the AMP viewer, AMP Cache, and signed exchange.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"google.com\",\n      \"primary\": true\n    },\n    {\n      \"url\": \"https://www.searchenginejournal.com/google-ends-cache-served-amp-pages-in-search/581405\",\n      \"title\": \"Google Ends Cache-Served AMP Pages In Search\",\n      \"published_date\": null,\n      \"quote\": \"Clicking an AMP result used to cause Google to serve the page from its AMP Cache, which displayed in the AMP viewer with a google.com URL.\",\n      \"stance\": \"SUPERSEDES\",\n      \"organisation\": \"searchenginejournal.com\",\n      \"primary\": false\n    }\n  ],\n  \"unverified_quotes\": [],\n  \"escalation_rounds\": 0\n}",
+  "tools": [
+   "retrieveCallerMemory",
+   "searchClaim",
+   "searchForUpdates",
+   "lookupWikipedia",
+   "fetchUrl",
+   "fetchUrl"
+  ]
+ }
+]

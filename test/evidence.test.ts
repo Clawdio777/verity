@@ -201,3 +201,12 @@ test("a sentence quoted from the Wikipedia summary matches its article even thou
     globalThis.fetch = realFetch;
   }
 });
+
+test("checked_at is stamped by the server at check time, never taken from the model (it wrote bare dates, 18/11/2026)", async () => {
+  const before = Date.now();
+  const r = await finaliseResult({ modelText: '{"verdict":"CURRENT","summary":"s","checked_at":"2026-11-18T00:00:00Z"}', claim: "c", evidenceToolsWorked: true, fetcher: pagesFetcher({}) });
+  const at = Date.parse(r!.checked_at);
+  expect(r!.checked_at).not.toBe("2026-11-18T00:00:00Z");
+  expect(at).toBeGreaterThanOrEqual(before - 1000);
+  expect(at).toBeLessThanOrEqual(Date.now() + 1000);
+});

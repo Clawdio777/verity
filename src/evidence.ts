@@ -513,6 +513,9 @@ export function buildResult(a: Assessment, evidenceToolsWorked: boolean, searche
   const { confidence: _ignored, sources: _modelSources, evidence: _raw, searched: _s, escalation_rounds: _e, ...rest } = model;
   return {
     ...rest,
+    // Stamped by the server, not the model: the model wrote bare dates like "2026-11-18T00:00:00Z" (18/11/2026),
+    // so callers could not tell when the check really ran.
+    checked_at: new Date().toISOString(),
     verdict: gate.verdict,
     confidence: gate.confidence,
     ...(downgraded ? {
