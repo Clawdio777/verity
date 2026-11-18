@@ -4,7 +4,7 @@
  */
 import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
-import { score, type Claim } from "./benchmark/score.ts";
+import { report, score, type Claim } from "./benchmark/score.ts";
 
 const claims = JSON.parse(readFileSync(new URL("./benchmark/claims.json", import.meta.url), "utf8")) as (Claim & { group?: string | null; smoke?: boolean })[];
 
@@ -59,6 +59,31 @@ test("scorer: wrong-confident rate counts only CURRENT/OUTDATED, abstain counts 
   expect(s.wrong_confident).toBe(1);
   expect(s.wrong_confident_rate).toBe(0.5);
   expect(s.abstain_rate).toBe(0.25);
+  expect(s.missed_facts).toBe(1);
+  expect(s.missed_fact_ids).toEqual(["c"]);
   expect(s.run_failures).toBe(1);
   expect(s.per_verdict.CURRENT.precision).toBe(0.5);
+});
+
+test("scorer: missed facts count UNVERIFIABLE on CURRENT/OUTDATED/DISPUTED claims, even when UNVERIFIABLE is accepted", () => {
+  const mk = (id: string, expected: string, accept: string[]): Claim =>
+    ({ id, split: "dev", category: "x", claim: "", expected, accept, reason: "", source_url: "", source_quote: "" });
+  const cs = [mk("a", "CURRENT", ["CURRENT"]), mk("b", "DISPUTED", ["DISPUTED", "UNVERIFIABLE"]), mk("c", "UNVERIFIABLE", ["UNVERIFIABLE"]), mk("d", "OUTDATED", ["OUTDATED"])];
+  const s = score(cs, [
+    { id: "a", verdict: "UNVERIFIABLE", seconds: 1, usd: 0 },
+    { id: "b", verdict: "UNVERIFIABLE", seconds: 1, usd: 0, escalation_rounds: 2 },
+    { id: "c", verdict: "UNVERIFIABLE", seconds: 1, usd: 0 },
+    { id: "d", verdict: "OUTDATED", seconds: 1, usd: 0, escalation_rounds: 1 },
+  ]);
+  expect(s.missed_facts).toBe(2);
+  expect(s.missed_fact_ids).toEqual(["a", "b"]);
+  expect(s.escalated).toBe(2);
+  expect(report("t", s)).toContain("missed facts: 2 (target 0) a, b");
+});
+
+test("fixed-v1 results: the missed facts were c051 (dev) and c010 (held-out); both are offline regressions in test/escalation.test.ts", () => {
+  const dev = JSON.parse(readFileSync(new URL("./benchmark/results/fixed-v1-dev.json", import.meta.url), "utf8"));
+  const held = JSON.parse(readFileSync(new URL("./benchmark/results/fixed-v1-heldout.json", import.meta.url), "utf8"));
+  expect(score(claims, dev).missed_fact_ids).toEqual(["c051"]);
+  expect(score(claims, held).missed_fact_ids).toEqual(["c010"]);
 });

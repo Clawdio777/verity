@@ -16,11 +16,22 @@ Real-time fact-checking and data freshness agent. Verifies claims, URLs, and con
 The model only proposes a verdict. Code then checks it (`src/evidence.ts`):
 
 1. Every source must come with an exact sentence quoted from it. VERITY re-fetches each page and confirms the sentence is really there (whitespace, case, quote marks and dashes normalised). Quotes it cannot find are dropped and listed under `unverified_quotes`.
-2. `CURRENT` and `OUTDATED` need one primary/official source (government, standards body, university, the study itself, or the organisation the claim is about) or two independent organisations. Pages of one organisation, and the same sentence syndicated on several sites, count once. Otherwise the verdict becomes `UNVERIFIABLE`.
+2. `CURRENT` and `OUTDATED` need one primary/official source (government, standards body, university, the study itself, or the organisation the claim is about) or two independent organisations. Government sites count by domain (`.gov`, `.gov.au`, `.gc.ca`, `europa.eu`, department sites under `gov.xx` / `gouv.xx` / `gob.xx`, and a short list of national sites such as `bundesregierung.de`), plus a fixed list of standards and authoritative bodies (e.g. IETF, ISO, CTBUH for building heights). Pages of one organisation, and the same sentence syndicated on several sites, count once. Otherwise the verdict becomes `UNVERIFIABLE`.
 3. Verified evidence on both sides turns the verdict into `DISPUTED`. `OUTDATED` needs a verified quote showing the change.
 4. If the search and fetch tools failed, the verdict is `UNVERIFIABLE`: VERITY never answers from the model's memory.
 
 When the check changes the model's verdict, `downgraded_from` and `downgrade_reason` say why.
+
+### Evidence escalation
+
+A verdict that fails step 2 only because the evidence is thin (not because sources conflict) is not dropped straight away. VERITY tells the model exactly what counted and what did not, and runs up to 2 more search rounds aimed at (a) the authoritative body for the claim's domain (the government site for an office-holder, CTBUH for building heights, the standards body, the company's own site, the journal) and (b) independent major outlets. Every new quote is re-fetched and the same gate runs again: the bar does not move. Guards (`src/escalation.ts`):
+
+- Evidence is cumulative: nothing found earlier can be dropped, and re-quoting an earlier sentence with a different stance does not count.
+- Contradicting evidence found while escalating makes the verdict `DISPUTED`.
+- Switching between `CURRENT` and `OUTDATED` while escalating makes it `UNVERIFIABLE`.
+- Caps per claim: 2 rounds, 3 model turns per round, 8 Tavily credits in total. If an escalation round fails, the answer from before it is returned (the check never fails because of escalation).
+
+`escalation_rounds` says how many rounds ran. An `UNVERIFIABLE` verdict also carries `searched`: the queries and domains VERITY tried.
 
 ### Confidence
 
@@ -91,6 +102,7 @@ Response (the `text` part of the artifact):
   "downgraded_from": null,
   "downgrade_reason": null,
   "unverified_quotes": [],
+  "escalation_rounds": 0,
   "checked_at": "2026-11-17T09:00:00Z",
   "recommendation": "Refer to Pluto as a dwarf planet."
 }
@@ -99,6 +111,8 @@ Response (the `text` part of the artifact):
 ## Persistent Memory
 
 Pass a consistent `caller_id` on every call. VERITY remembers topics you've checked, domains you monitor, and previous results — no re-sending context.
+
+To get a fresh check with no memory at all, send `"no_memory": true` in the request body (`/api/verify`, `/api/deep-check`, `/api/batch-verify`, `/api/agent`; for JSON-RPC put it in `params`; in the MCP tools it is a tool argument). VERITY then neither reads nor writes caller memory for that call: the memory tools are not offered to the model, and a memory call is refused without touching the database. Only the boolean `true` turns it on. Your `caller_id` is still used for logging.
 
 ## A2A Agent Card
 
@@ -144,7 +158,7 @@ Because there are no tests, prove a change on the live endpoint with a read-only
 - `bun run benchmark:smoke`: five dev claims, about US$0.30.
 - Held-out: `bun run benchmark --split heldout --label <name> --final`. Run it once per change you want to report, never to tune.
 
-The headline number is the wrong-confident rate: of the `CURRENT`/`OUTDATED` verdicts, how many were wrong. Results are in `test/benchmark/results/*.md`.
+The headline number is the wrong-confident rate: of the `CURRENT`/`OUTDATED` verdicts, how many were wrong. Next to it, missed facts: `UNVERIFIABLE` on a claim whose label is `CURRENT`, `OUTDATED` or `DISPUTED` (target 0). Results are in `test/benchmark/results/*.md`.
 
 ### Things that bite
 

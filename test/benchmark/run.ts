@@ -47,9 +47,10 @@ async function main() {
         const verdict = r.response.match(/"verdict"\s*:\s*"(CURRENT|OUTDATED|DISPUTED|UNVERIFIABLE)"/)?.[1] ?? null;
         const confidence = Number(r.response.match(/"confidence"\s*:\s*(\d+)/)?.[1] ?? NaN);
         const downgrade = r.response.match(/"downgrade_reason"\s*:\s*"([^"]*)"/)?.[1] ?? null;
+        const escalation_rounds = Number(r.response.match(/"escalation_rounds"\s*:\s*(\d+)/)?.[1] ?? 0);
         const seconds = (Date.now() - t0) / 1000;
-        results.push({ id: c.id, verdict, seconds, usd: costOf(line), confidence: Number.isFinite(confidence) ? confidence : null, downgrade_reason: downgrade, response: r.response, tools: r.tool_calls_made });
-        console.log(`${c.id} ${verdict ?? "NO-VERDICT"} (expected ${c.expected}) US$${costOf(line).toFixed(3)} ${seconds.toFixed(0)}s`);
+        results.push({ id: c.id, verdict, seconds, usd: costOf(line), confidence: Number.isFinite(confidence) ? confidence : null, downgrade_reason: downgrade, escalation_rounds, response: r.response, tools: r.tool_calls_made });
+        console.log(`${c.id} ${verdict ?? "NO-VERDICT"} (expected ${c.expected}) US$${costOf(line).toFixed(3)} ${seconds.toFixed(0)}s${escalation_rounds ? ` escalated x${escalation_rounds}` : ""}`);
       } catch (e) {
         const name = (e as Error)?.constructor?.name ?? "Error";
         results.push({ id: c.id, verdict: null, error: name, seconds: (Date.now() - t0) / 1000, usd: 0 });

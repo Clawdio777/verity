@@ -40,6 +40,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const claim     = req.body?.claim || req.body?.query || "";
   const caller_id = req.body?.caller_id || "anon";
+  const no_memory = req.body?.no_memory === true; // skip caller memory: no read, no write
 
   const payment = await verifyPayment(req, res, PRICE_USDC, BAZAAR, RESOURCE_URL(), RESOURCE_DESC);
   if (payment === null) return;
@@ -53,7 +54,7 @@ Return a VerityResult JSON object with high-confidence analysis.
 
 Claim: ${claim}`;
 
-    const result = await runAgent({ query: directive, caller_id });
+    const result = await runAgent({ query: directive, caller_id, no_memory });
 
     // Charge only now that the result is ready (see _x402-gate.ts "Charge only after the work succeeds").
     const settled = await settlePayment(payment, "deep-check", caller_id);

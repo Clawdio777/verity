@@ -103,8 +103,12 @@ test("when every search tool fails, the run returns UNVERIFIABLE instead of the 
 
 test("a quote that is not on its page turns OUTDATED into UNVERIFIABLE", async () => {
   const bad = VERDICT.replace("the plan was renamed the GP Chronic Condition Management Plan", "the plan was abolished entirely in 2024 by the minister");
-  replies = [toolTurn, { stop_reason: "end_turn", content: [{ type: "text", text: bad }], usage }];
+  // Thin evidence now gets two more search rounds (src/escalation.ts); the model finds nothing better.
+  const answer = { stop_reason: "end_turn", content: [{ type: "text", text: bad }], usage };
+  replies = [toolTurn, answer, answer, answer];
   const out = JSON.parse((await run()).response);
   expect(out.verdict).toBe("UNVERIFIABLE");
   expect(out.downgraded_from).toBe("OUTDATED");
+  expect(out.escalation_rounds).toBe(2);
+  expect(sent).toHaveLength(4);
 });

@@ -44,6 +44,7 @@ const TOOLS = [
       properties: {
         claim:     { type: "string", description: "The claim, URL, or content to verify. E.g. 'Is GPT-4 still the most capable AI model?' or 'https://example.com/article'" },
         caller_id: { type: "string", description: "Optional stable ID to activate persistent memory across calls." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["claim"],
     },
@@ -58,6 +59,7 @@ const TOOLS = [
       properties: {
         claim:     { type: "string", description: "The claim to deeply verify. E.g. 'Did the 2024 US election results change after court challenges?'" },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["claim"],
     },
@@ -72,6 +74,7 @@ const TOOLS = [
       properties: {
         claims:    { type: "array", items: { type: "string" }, description: "Array of claims to verify. Max 10." },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["claims"],
     },
@@ -86,6 +89,7 @@ const TOOLS = [
       properties: {
         query:     { type: "string", description: "Natural language fact-check request. E.g. 'Is Elon Musk still the richest person in the world?'" },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["query"],
     },
@@ -260,7 +264,7 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
       const callerId = args.caller_id || defaultCallerId || "mcp-user";
       let text: string;
       const directive = buildVerityDirective(name, args);
-      const result    = await runAgent({ query: directive, caller_id: callerId });
+      const result    = await runAgent({ query: directive, caller_id: callerId, no_memory: args.no_memory === true });
       text = result.response;
       return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
     } catch (e: any) {

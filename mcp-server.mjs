@@ -59,6 +59,7 @@ const TOOLS = [
       properties: {
         claim:     { type: "string", description: "The claim, URL, or content to verify." },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["claim"],
     },
@@ -71,6 +72,7 @@ const TOOLS = [
       properties: {
         claim:     { type: "string", description: "The claim to deeply verify." },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["claim"],
     },
@@ -83,6 +85,7 @@ const TOOLS = [
       properties: {
         claims:    { type: "array", items: { type: "string" }, description: "Array of claims to verify. Max 10." },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["claims"],
     },
@@ -95,6 +98,7 @@ const TOOLS = [
       properties: {
         query:     { type: "string", description: "Natural language fact-check request." },
         caller_id: { type: "string", description: "Optional stable ID for persistent memory." },
+        no_memory: { type: "boolean", description: "true = do not read or write caller memory for this call (a fresh check; nothing remembered is reused)." },
       },
       required: ["query"],
     },
@@ -163,6 +167,7 @@ async function handleRequest(req) {
       const body = {
         [route.field]: args[route.field] ?? args.claim ?? args.query,
         caller_id: args.caller_id || "mcp-user",
+        ...(args.no_memory === true ? { no_memory: true } : {}),
       };
       const text = await callVerity(route.path, body);
       return send({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });

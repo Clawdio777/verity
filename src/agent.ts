@@ -11,7 +11,8 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { tools, executeTool } from "./tools.js";
-import { defaultFetcher, finaliseResult, parseModelJson, readEvidence, type PageFetcher } from "./evidence.js";
+import { assessAnswer, buildResult, defaultFetcher, parseModelJson, readEvidence, type Assessment, type EvidenceItem, type PageFetcher, type Verdict } from "./evidence.js";
+import { ESCALATION, escalationPrompt, SearchRecorder, shouldEscalate } from "./escalation.js";
 
 // maxRetries 4 (SDK default 2): rides out short overloads/5xx with backoff before a paid run is failed.
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY!, maxRetries: 4 });
@@ -112,7 +113,11 @@ Rules:
 export interface AgentQuery {
   query: string;
   caller_id: string;
+  /** true: caller memory is neither read nor written for this call (fresh check, nothing cached passed off as new). */
+  no_memory?: boolean;
 }
+
+export const MEMORY_TOOLS = new Set(["retrieveCallerMemory", "storeCallerMemory"]);
 
 export interface AgentUsage {
   input_tokens: number;
@@ -153,11 +158,13 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
   const messages: Anthropic.MessageParam[] = [
     {
       role: "user",
-      content: `Today's date: ${today}\nCaller ID: ${input.caller_id}\n\nVerify this: ${input.query}`,
+      content: `Today's date: ${today}\nCaller ID: ${input.caller_id}\n${input.no_memory ? "Caller memory: OFF for this request. Do not call retrieveCallerMemory or storeCallerMemory.\n" : ""}\nVerify this: ${input.query}`,
     },
   ];
 
   const toolCallsMade: string[] = [];
+  // no_memory: the memory tools are not offered, and a call to one anyway is refused without touching the database.
+  const runTools = input.no_memory ? tools.filter((t) => !MEMORY_TOOLS.has(t.name)) : tools;
   let totalTokens = 0;
   const usage: AgentUsage = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0, tavily_credits: 0 };
   // Prompt caching: the system prompt and the growing tool history are re-sent every turn, so mark the
@@ -168,8 +175,28 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
   let forceSynthesis = false;
   let askedForJson = false;
   const MAX_ITERATIONS = 10;
+  // Turn limits: the first pass may use tools until turn 7 and must answer by turn 10. Each evidence
+  // escalation round (src/escalation.ts) moves both limits on by ESCALATION.turnsPerRound.
+  let synthesiseAfter = MAX_ITERATIONS - 3;
+  let turnLimit = MAX_ITERATIONS;
 
-  while (iterations < MAX_ITERATIONS + (askedForJson ? 1 : 0)) {
+  // Evidence escalation state: rounds done, evidence so far, the verdict first proposed, the last
+  // gated answer (returned as-is if an escalation round fails) and the Tavily credits escalation used.
+  let round = 0;
+  let prior: EvidenceItem[] = [];
+  let firstProposed: Verdict | null = null;
+  let lastAssessment: Assessment | null = null;
+  let escalationCredits = 0;
+  const searches = new SearchRecorder();
+  const fetchStats = { tavily_credits: 0 };
+  const finish = (a: Assessment): AgentResponse => {
+    usage.tavily_credits += fetchStats.tavily_credits;
+    searches.addSources(a.items.map((i) => i.url));
+    const final = buildResult(a, evidenceToolsWorked, searches.log(round));
+    return { response: JSON.stringify(final, null, 2), tool_calls_made: toolCallsMade, tokens_used: totalTokens, usage };
+  };
+
+  while (iterations < turnLimit + (askedForJson ? 1 : 0)) {
     iterations++;
 
     const last = messages[messages.length - 1];
@@ -179,13 +206,20 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
       marked.cache_control = { type: "ephemeral" };
     }
 
-    const response = await anthropic.messages.create({
-      model: "claude-sonnet-5-5",
-      max_tokens: forceSynthesis ? 8192 : 4096,
-      system: [{ type: "text", text: SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
-      ...(forceSynthesis ? {} : { tools }),
-      messages,
-    });
+    let response: Anthropic.Message;
+    try {
+      response = await anthropic.messages.create({
+        model: "claude-sonnet-5-5",
+        max_tokens: forceSynthesis ? 8192 : 4096,
+        system: [{ type: "text", text: SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
+        ...(forceSynthesis ? {} : { tools: runTools }),
+        messages,
+      });
+    } catch (e) {
+      // An escalation round must never turn a finished check into a failed one.
+      if (lastAssessment) return finish(lastAssessment);
+      throw e;
+    }
 
     const u = response.usage;
     totalTokens += u.input_tokens + u.output_tokens + (u.cache_read_input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0);
@@ -199,16 +233,24 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
       const text = response.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("\n").trim();
       if (VERDICT_JSON.test(text)) {
         // The model only proposes. Code re-fetches every quoted source and gates the verdict (src/evidence.ts).
-        const fetchStats = { tavily_credits: 0 };
-        const final = await finaliseResult({
-          modelText: text,
-          claim: input.query,
-          evidenceToolsWorked,
-          fetcher: opts.fetcher ?? defaultFetcher(fetchStats, quotesByUrl(text)),
-        });
-        usage.tavily_credits += fetchStats.tavily_credits;
-        if (final) {
-          return { response: JSON.stringify(final, null, 2), tool_calls_made: toolCallsMade, tokens_used: totalTokens, usage };
+        const fetcher = opts.fetcher ?? defaultFetcher(fetchStats, quotesByUrl(text));
+        const a = await assessAnswer(text, input.query, fetcher, { prior, firstProposed });
+        if (a) {
+          // Thin evidence (not conflicting evidence): search again before abstaining (src/escalation.ts).
+          if (shouldEscalate(a, evidenceToolsWorked, round) && escalationCredits < ESCALATION.tavilyCredits) {
+            round++;
+            prior = a.items;
+            firstProposed ??= a.proposed;
+            lastAssessment = a;
+            messages.push({ role: "assistant", content: response.content });
+            messages.push({ role: "user", content: [{ type: "text", text: escalationPrompt(a, round) }] });
+            forceSynthesis = false;
+            askedForJson = false;
+            synthesiseAfter = iterations + ESCALATION.turnsPerRound - 1;
+            turnLimit = iterations + ESCALATION.turnsPerRound;
+            continue;
+          }
+          return finish(a);
         }
       }
       // 23/10/2026: 1 in 10 paid checks and 1 in 19 trial checks ended with no verdict (empty, or prose with
@@ -226,7 +268,9 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
         }
         continue;
       }
-      // Still no verdict: a failed run. Throw so the paid routes don't charge for it.
+      // Still no verdict. After an escalation round, return the answer from before it; otherwise
+      // this is a failed run: throw so the paid routes don't charge for it.
+      if (lastAssessment) return finish(lastAssessment);
       throw new Error("No response produced");
     }
 
@@ -238,7 +282,18 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
         toolUseBlocks.map(async (block) => {
           if (block.type !== "tool_use") return null;
           toolCallsMade.push(block.name);
-          usage.tavily_credits += tavilyCredits(block.name, block.input as Record<string, any>);
+          if (input.no_memory && MEMORY_TOOLS.has(block.name)) {
+            return { type: "tool_result" as const, tool_use_id: block.id, content: "Caller memory is off for this request.", is_error: true };
+          }
+          const credits = tavilyCredits(block.name, block.input as Record<string, any>);
+          if (round > 0) {
+            if (escalationCredits + credits > ESCALATION.tavilyCredits) {
+              return { type: "tool_result" as const, tool_use_id: block.id, content: "Evidence search budget for this check is used up: return your final JSON answer now.", is_error: true };
+            }
+            escalationCredits += credits;
+          }
+          searches.record(block.name, block.input as Record<string, any>);
+          usage.tavily_credits += credits;
           const result = await executeTool(block.name, block.input as Record<string, any>);
           const failed = TOOL_FAILED.test(result);
           if (!failed && EVIDENCE_TOOLS.has(block.name)) evidenceToolsWorked = true;
@@ -256,7 +311,7 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
         content: toolResults.filter(Boolean) as Anthropic.ToolResultBlockParam[],
       });
 
-      if (iterations >= MAX_ITERATIONS - 3) {
+      if (iterations >= synthesiseAfter || (round > 0 && escalationCredits >= ESCALATION.tavilyCredits)) {
         forceSynthesis = true;
       }
 
@@ -266,6 +321,7 @@ export async function runAgent(input: AgentQuery, opts: AgentOptions = {}): Prom
     break;
   }
 
+  if (lastAssessment) return finish(lastAssessment);
   throw new Error("Agent completed without a final response");
 }
 

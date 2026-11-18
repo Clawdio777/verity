@@ -121,6 +121,11 @@ export const tools: Anthropic.Tool[] = [
           enum: ["basic", "advanced"],
           description: "'basic' for standard verify (fast), 'advanced' for deep-check (thorough). Default: basic",
         },
+        include_domains: {
+          type: "array",
+          items: { type: "string" },
+          description: "Optional: only search these sites (max 5), e.g. [\"skyscrapercenter.com\"] or [\"bundesregierung.de\"]. Use it to reach the authoritative body for the claim.",
+        },
       },
       required: ["query"],
     },
@@ -397,6 +402,9 @@ async function runCheckAcademic(input: Record<string, any>): Promise<string> {
 
 async function runSearchClaim(input: Record<string, any>): Promise<string> {
   const { query, max_results = 5, search_depth = "basic" } = input;
+  const includeDomains = Array.isArray(input.include_domains)
+    ? input.include_domains.filter((d: unknown) => typeof d === "string" && /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(d)).slice(0, 5)
+    : [];
 
   try {
     const res = await fetch("https://api.tavily.com/search", {
@@ -411,7 +419,7 @@ async function runSearchClaim(input: Record<string, any>): Promise<string> {
         search_depth,
         include_answer: false,
         include_raw_content: false,
-        include_domains: [],
+        include_domains: includeDomains,
         exclude_domains: [],
       }),
       signal: AbortSignal.timeout(20000),
