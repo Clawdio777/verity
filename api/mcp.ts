@@ -37,7 +37,7 @@ const TOOL_ANNOTATIONS = {
 const TOOLS = [
   {
     name:        "verity_verify",
-    description: "Verify a claim, URL, or statement against multiple live sources: web search (Tavily), AI synthesis (Perplexity), Wikipedia, and academic papers (Semantic Scholar). Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, confidence 0–100, sources with credibility tiers, and what has changed. 0.10 USDC per call. Supports agent-to-agent trust workflows — verify another agent's stated capabilities or track record before task delegation. Use this to detect AI hallucinations, misinformation, and outdated facts before publishing.",
+    description: "Verify a claim, URL, or statement against multiple live sources: web search (Tavily), AI synthesis (Perplexity), Wikipedia, and academic papers (Semantic Scholar). Returns a CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdict, a confidence tier set by the verified evidence (90, 80, 75, 65, 40 or 0), quoted sources re-checked on each page, and what changed when a claim is OUTDATED. 0.10 USDC per call. Also useful in agent-to-agent trust workflows: check another agent's stated capabilities or track record before task delegation. Use this to detect AI hallucinations, misinformation, and outdated facts before publishing.",
     annotations: TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
@@ -52,7 +52,7 @@ const TOOLS = [
   },
   {
     name:        "verity_deep_check",
-    description: "Thorough multi-angle verification using all available sources: Perplexity sonar-pro, Wikipedia, Semantic Scholar academic papers, and advanced Tavily search. Cross-references 5+ independent angles. Returns highest-confidence verdicts for high-stakes fact-checks. 0.50 USDC per call.",
+    description: "Thorough multi-angle verification using all available sources: Perplexity sonar-pro, Wikipedia, Semantic Scholar academic papers, and advanced Tavily search. Uses deeper search and more source types for high-stakes claims. Confidence still depends on the evidence found. 0.50 USDC per call.",
     annotations: TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
@@ -121,7 +121,7 @@ function buildVerityDirective(toolName: string, args: Record<string, any>): stri
 
 const CHECK_CREDITS_TOOL = {
   name:        "check_credits",
-  description: "Check your remaining VERITY credit balance. Call this whenever you want to see how many credits you have left. Returns a warning if balance is low.",
+  description: "Check your remaining VERITY credit balance. Costs 1 credit. Returns a warning if balance is low.",
   annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   inputSchema: {
     type:       "object",
@@ -142,7 +142,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
     return res.status(200).json({
       name:    "verity-mcp",
-      version: "1.2.0",
+      version: "1.2.1",
       tools:   TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
     });
   }
@@ -162,9 +162,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       jsonrpc: "2.0", id,
       result: {
         protocolVersion: "2024-11-05",
-        serverInfo:      { name: "verity-mcp", version: "1.2.0" },
+        serverInfo:      { name: "verity-mcp", version: "1.2.1" },
         capabilities:    { tools: {}, prompts: {} },
-        instructions: `Real-time fact-checking and misinformation detection agent. Catches AI hallucinations, verifies claims, detects outdated information. You have access to VERITY — a specialist real-time fact-checking and data freshness agent. Also used by A2A agent orchestrators to verify agent claims, credentials, and capability assertions before hiring via protocols like Swarmwage or MoltGig.
+        instructions: `Real-time fact-checking and misinformation detection agent. Catches AI hallucinations, verifies claims, detects outdated information. You have access to VERITY — a specialist real-time fact-checking and data freshness agent. A2A agent orchestrators can also use it to check agent claims, credentials, and capability assertions before hiring another agent.
 
 Use VERITY tools to verify claims, URLs, and content against live web sources before trusting or publishing them.
 
@@ -174,7 +174,7 @@ Tool selection guide:
 - Auditing a piece of content with multiple claims → verity_batch (0.75 USDC)
 - Natural language question → verity_agent (0.10 USDC)
 
-VERITY returns structured verdicts: CURRENT, OUTDATED, DISPUTED, or UNVERIFIABLE — with confidence 0–100, sources, and exactly what has changed.
+VERITY returns structured verdicts: CURRENT, OUTDATED, DISPUTED, or UNVERIFIABLE, with a confidence tier based on the verified evidence, quoted sources, and what changed when a claim is OUTDATED. When the evidence does not settle a claim, it answers UNVERIFIABLE rather than guess.
 
 Pass a consistent caller_id to activate persistent memory. VERITY remembers domains and topics you've checked before.
 
@@ -194,7 +194,7 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
           { name: "verify-claim",   description: "Verify a specific claim against live sources",                       arguments: [{ name: "claim", description: "The claim to verify", required: true }] },
           { name: "check-url",      description: "Check if a URL's content is still current and accurate",             arguments: [{ name: "url", description: "URL to check", required: true }] },
           { name: "content-audit",  description: "Audit a piece of content for outdated claims",                       arguments: [{ name: "content", description: "Content to audit", required: true }] },
-          { name: "deep-verify",    description: "Thorough multi-angle verification for high-stakes fact-checks",      arguments: [{ name: "claim", description: "The claim to deeply verify", required: true }] },
+          { name: "deep-verify",    description: "Deeper search for high-stakes fact-checks",                              arguments: [{ name: "claim", description: "The claim to deeply verify", required: true }] },
           { name: "freshness-check",description: "Check how fresh/current a topic or data point is",                  arguments: [{ name: "topic", description: "Topic or data point to check", required: true }] },
         ],
       },
@@ -207,7 +207,7 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
       "verify-claim":    `Verify this claim and return a verdict with confidence score, sources, and what has changed: ${args?.claim}`,
       "check-url":       `Check if this URL's content is still current and accurate. Fetch the page, find the publication date, and search for newer information on the same topic: ${args?.url}`,
       "content-audit":   `Audit the following content for outdated or disputed claims. Identify each claim, verify it, and flag which ones are OUTDATED or DISPUTED with sources:\n\n${args?.content}`,
-      "deep-verify":     `Perform a thorough multi-angle deep verification of this claim. Use advanced search, check 5+ angles, cross-reference authoritative sources, and return a high-confidence verdict: ${args?.claim}`,
+      "deep-verify":     `Perform a thorough multi-angle deep verification of this claim. Use advanced search, check 5+ angles, cross-reference authoritative sources, and return a verdict: ${args?.claim}`,
       "freshness-check": `How current and accurate is the following topic or data point? When was it last updated, what has changed recently, and what is the current state as of today? Topic: ${args?.topic}`,
     };
 
@@ -242,7 +242,7 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
         const credits = found.credits as number;
         const text = credits < 100
           ? `⚠️ **Low balance: ${credits} credits remaining**\n\nTop up at: https://verity.basechainlabs.com/#get-access`
-          : `✅ **${credits} credits remaining**\n\n10cr/verify · 50cr/deep-check · 75cr/batch · 10cr/agent`;
+          : `✅ **${credits} credits remaining**\n\n10cr/verify · 50cr/deep-check · 75cr/batch · 10cr/agent · 1cr/credit check`;
         return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
       } catch (e: any) {
         return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Could not check credits. Try again." }] } });

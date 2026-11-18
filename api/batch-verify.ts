@@ -13,13 +13,13 @@ import { runAgent } from "../src/agent.js";
 const PRICE_USDC    = 0.75;
 const BASE_URL      = () => (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
 const RESOURCE_URL  = () => `${BASE_URL()}/api/batch-verify`;
-const RESOURCE_DESC = "Batch fact-checking with persistent memory — verify up to 10 claims per call. VERITY remembers prior checks so repeat claims aren't re-verified. Use for content audits and fact-check pipelines. 0.75 USDC for the batch.";
+const RESOURCE_DESC = "Batch fact-checking: verify up to 10 claims per call, each checked against live sources with re-fetched quotes. Use for content audits and fact-check pipelines. 0.75 USDC for the batch.";
 
 const BAZAAR = buildBazaarExtension({
   serviceName:      "VERITY — Batch Verify",
   queryDescription: "JSON array of up to 10 claims to verify, or a newline-separated list",
   queryExample:     '["GPT-4 is OpenAIs most capable model", "The iPhone 15 was released in 2024", "Python is the most popular programming language"]',
-  outputExample:    '[{"claim":"...","verdict":"OUTDATED","confidence":88},{"claim":"...","verdict":"CURRENT","confidence":75}]',
+  outputExample:    '[{"claim":"...","verdict":"OUTDATED","confidence":80},{"claim":"...","verdict":"CURRENT","confidence":75}]',
 });
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
