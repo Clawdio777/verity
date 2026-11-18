@@ -1,8 +1,8 @@
 {
   "name": "VERITY",
-  "description": "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with confidence scores, what changed, and supporting sources. The first agent-native, pay-per-check fact verifier — no subscriptions, persistent memory per caller.",
+  "description": "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with quoted sources that VERITY re-fetched from each page, a confidence tier based on that evidence, and what changed when a claim is out of date. When the evidence does not settle a claim, it answers UNVERIFIABLE rather than guess. Agent-native and pay per check, with optional persistent memory per caller.",
   "url": "https://verity.basechainlabs.com/api/agent",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "protocolVersion": "0.2.1",
   "capabilities": {
     "streaming": true,
@@ -13,18 +13,18 @@
     {
       "id": "claim_verify",
       "name": "Claim Verification",
-      "description": "Input: claim or URL (string). Output: VerityResult JSON — verdict (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE), confidence 0–100, sources array, what_changed string. Verifies against live web via Tavily.",
+      "description": "Input: claim or URL (string). Output: VerityResult JSON: verdict (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE), confidence tier (90, 80, 75, 65, 40 or 0, set by the evidence), sources with exact quotes, stance, organisation and primary flag, what_changed when OUTDATED, and downgraded_from when the evidence could not support the first draft verdict. Verifies against live sources; quotes re-checked on the page.",
       "tags": ["fact-check", "verification", "claim", "live-web"],
       "endpoint": "https://verity.basechainlabs.com/api/verify",
       "price": "0.10 USDC",
-      "inputExample": { "claim": "Is GPT-4 still the most capable OpenAI model?", "caller_id": "my-agent-id" },
-      "outputExample": { "verdict": "OUTDATED", "confidence": 91, "summary": "GPT-4 has been superseded by GPT-4o and o3.", "what_changed": "OpenAI released GPT-4o (May 2024) and o3 (late 2024), both outperforming GPT-4.", "sources": [] }
+      "inputExample": { "claim": "Pluto is the ninth planet of the Solar System", "caller_id": "my-agent-id" },
+      "outputExample": { "verdict": "OUTDATED", "confidence": 90, "summary": "Pluto was called the ninth planet until 2006, when it was reclassified as a dwarf planet.", "what_changed": "In August 2006 the International Astronomical Union reclassified Pluto as a dwarf planet.", "downgraded_from": null, "sources": [{ "url": "https://www.iau.org/...", "quote": "(exact sentence copied from the page)", "stance": "SUPERSEDES", "organisation": "iau.org", "primary": true }] }
     },
     {
       "id": "deep_check",
       "name": "Deep Fact Check",
-      "description": "Input: claim (string). Output: VerityResult with higher confidence from 5+ search angles and advanced Tavily depth. Use for high-stakes verification.",
-      "tags": ["fact-check", "deep-research", "high-confidence"],
+      "description": "Input: claim (string). Output: VerityResult. Uses deeper search and more source types for high-stakes claims. Confidence still depends on the evidence found.",
+      "tags": ["fact-check", "deep-research", "high-stakes"],
       "endpoint": "https://verity.basechainlabs.com/api/deep-check",
       "price": "0.50 USDC"
     },
@@ -39,16 +39,16 @@
     {
       "id": "persistent_memory",
       "name": "Persistent Caller Memory",
-      "description": "Remembers domains monitored, topics checked, and verification history across all sessions. Pass a consistent caller_id to activate.",
+      "description": "Remembers domains monitored, topics checked, and verification history across sessions. Pass a consistent caller_id to activate, or no_memory: true for a fresh check. Memory is not evidence: every verdict except UNVERIFIABLE rests on quotes VERITY re-fetches from the source pages in that call.",
       "tags": ["memory", "persistence", "context"],
       "endpoint": "https://verity.basechainlabs.com/api/agent",
       "price": "Included with every call"
     }
   ],
   "pricing": {
-    "standard": "0.10 USDC — single claim verify",
-    "deep":     "0.50 USDC — deep multi-angle check",
-    "batch":    "0.75 USDC — up to 10 claims"
+    "standard": "0.10 USDC: single claim verify",
+    "deep":     "0.50 USDC: deep check",
+    "batch":    "0.75 USDC: up to 10 claims"
   },
   "protocols": ["x402", "a2a"],
   "network": "base",

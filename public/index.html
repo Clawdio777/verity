@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="/verity-logo.jpg" type="image/jpeg" />
-  <title>VERITY — Real-Time Fact-Checking Agent</title>
-  <meta name="description" content="VERITY verifies claims, URLs, and content against live web sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with confidence scores. Agent-native, x402 payments." />
+  <title>VERITY | Real-Time Fact-Checking Agent</title>
+  <meta name="description" content="VERITY verifies claims, URLs, and content against live sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with quoted sources it re-checks on each page. Agent-native, x402 payments." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -115,8 +115,8 @@
     <img src="/verity-logo.jpg" alt="VERITY eagle logo" class="hero-logo" />
     <h1 class="hero-name">VERI<em>TY</em></h1>
     <p class="hero-eyebrow">Real-Time Fact-Checking Agent · Live Web Verification</p>
-    <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.03em;color:#f5f5f7;margin-bottom:16px;line-height:1.1;">Know if any claim is <em style="font-style:normal;color:#30d158;">current, outdated,<br>or disputed</em> — in seconds.</h2>
-    <p>Verify claims, URLs, and AI-generated content against live web sources. Structured verdicts with confidence scores, sources, and exactly what changed.</p>
+    <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.03em;color:#f5f5f7;margin-bottom:16px;line-height:1.1;">Know if any claim is <em style="font-style:normal;color:#30d158;">current, outdated,<br>or disputed</em>, usually in about 20 seconds.</h2>
+    <p>Verify claims, URLs, and AI-generated content against live sources. Structured verdicts with quoted sources, and what changed when a claim is out of date.</p>
     <div class="hero-actions">
       <a href="/api/agent" class="btn btn-primary">Try the API</a>
       <a href="/SKILL.md" class="btn btn-ghost">Download SKILL.md</a>
@@ -126,8 +126,8 @@
   <!-- Verdicts -->
   <div class="section">
     <p class="section-eyebrow">Verdicts</p>
-    <h2 class="section-title">Four verdicts.<br>Zero ambiguity.</h2>
-    <p class="section-sub">Every verification returns one of four machine-readable verdicts — no essays, no vague citations. Just a clear answer your agent can act on.</p>
+    <h2 class="section-title">Four verdicts<br>your agent can act on.</h2>
+    <p class="section-sub">Every verification returns one of four machine-readable verdicts. CURRENT: accurate now. OUTDATED: was true, but has since changed, been renamed or retired. DISPUTED: credible sources say it is false, or they conflict. UNVERIFIABLE: VERITY can't quote one official source, or two independent organisations, that settle it. It says so rather than guess.</p>
     <div class="verdict-row">
       <span class="verdict-pill pill-current">✓ CURRENT</span>
       <span class="verdict-pill pill-outdated">⚠ OUTDATED</span>
@@ -138,60 +138,62 @@
       <div class="service-card">
         <div class="service-icon">🔍</div>
         <div class="service-name">Standard Verify</div>
-        <div class="service-desc">Verify any claim or URL against live sources. Returns verdict, confidence 0–100, sources, and what changed.</div>
+        <div class="service-desc">Verify any claim or URL against live sources. Returns the verdict, quoted sources, and a confidence tier set by the evidence (see below). Says what changed when a claim is OUTDATED.</div>
         <div class="service-price">0.10 USDC · x402</div>
       </div>
       <div class="service-card">
         <div class="service-icon">🔬</div>
         <div class="service-name">Deep Check</div>
-        <div class="service-desc">Multi-angle verification with advanced search depth. Cross-references 5+ angles and authoritative sources. Higher confidence.</div>
+        <div class="service-desc">Uses deeper search and more source types for high-stakes claims. Confidence still depends on the evidence found.</div>
         <div class="service-price">0.50 USDC · x402</div>
       </div>
       <div class="service-card">
         <div class="service-icon">📋</div>
         <div class="service-name">Batch Verify</div>
-        <div class="service-desc">Verify up to 10 claims in one call. Perfect for content audits and fact-checking pipelines before publishing.</div>
+        <div class="service-desc">Verify up to 10 claims in one call. For content audits and fact-checking pipelines before publishing.</div>
         <div class="service-price">0.75 USDC · x402</div>
       </div>
       <div class="service-card">
         <div class="service-icon">💬</div>
         <div class="service-name">Natural Language</div>
-        <div class="service-desc">"Is this still true?", "Check this URL", "When was this last updated?" — VERITY picks the right strategy.</div>
+        <div class="service-desc">"Is this still true?", "Check this URL", "When was this last updated?" VERITY picks the right strategy.</div>
         <div class="service-price">0.10 USDC · x402</div>
       </div>
       <div class="service-card">
         <div class="service-icon">🧠</div>
         <div class="service-name">Persistent Memory</div>
-        <div class="service-desc">Remembers domains and topics you've checked. Pass a consistent caller_id and VERITY builds context over time.</div>
+        <div class="service-desc">Remembers domains and topics you've checked. Pass a consistent caller_id and VERITY builds context over time, or no_memory: true for a fresh check. Memory is never used as evidence.</div>
         <div class="service-price">Included with every call</div>
       </div>
       <div class="service-card">
         <div class="service-icon">⚡</div>
         <div class="service-name">What Changed</div>
-        <div class="service-desc">Every result includes exactly what has changed since the original claim — not just a verdict, but the delta.</div>
-        <div class="service-price">Included in all verdicts</div>
+        <div class="service-desc">When a claim is OUTDATED, VERITY says what changed and when.</div>
+        <div class="service-price">Included with OUTDATED verdicts</div>
       </div>
     </div>
   </div>
 
-  <!-- vs Competitors -->
+  <!-- How VERITY decides -->
   <div class="bg-off">
     <div class="section">
-      <p class="section-eyebrow">Why VERITY</p>
-      <h2 class="section-title">The gap no one filled.</h2>
-      <p class="section-sub" style="margin-bottom:36px;">Existing tools either require human editors (days of lag), return raw search results (no verdict), or only work on subscription (can't scale for agents).</p>
+      <p class="section-eyebrow">Evidence</p>
+      <h2 class="section-title">Quotes, not opinions.</h2>
+      <p class="section-sub" style="margin-bottom:36px;">VERITY searches Tavily, Perplexity, Wikipedia and Semantic Scholar, then quotes exact sentences from the pages it found. Code re-fetches every page and drops any quote it can't find there. CURRENT or OUTDATED needs one official source (government, standards body, university, the paper itself, or the organisation the claim is about) or two independent organisations. If the evidence is thin, VERITY searches again first. If it still falls short, the verdict becomes UNVERIFIABLE and <code>downgraded_from</code> shows the first draft verdict. Confidence is a label for the evidence, not a probability:</p>
       <table class="compare-table">
         <thead>
-          <tr><th>Tool</th><th>Real-time</th><th>Structured verdict</th><th>What changed</th><th>API / agent-native</th><th>Pay per check</th></tr>
+          <tr><th>Confidence</th><th>Evidence behind the verdict</th></tr>
         </thead>
         <tbody>
-          <tr class="verity-row"><td><strong>VERITY</strong></td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-          <tr><td>Snopes / FactCheck.org</td><td class="cross">✗ days</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>Perplexity / you.com</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="tick">partial</td><td class="cross">✗</td></tr>
-          <tr><td>Tavily Search</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-          <tr><td>Smithery fact-check skills</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="tick">partial</td><td class="cross">✗</td></tr>
+          <tr><td><strong>90</strong></td><td>An official source plus at least one more independent organisation</td></tr>
+          <tr><td><strong>80</strong></td><td>An official source</td></tr>
+          <tr><td><strong>75</strong></td><td>Three or more independent organisations, none official</td></tr>
+          <tr><td><strong>65</strong></td><td>Two independent organisations, none official</td></tr>
+          <tr><td><strong>40</strong></td><td>One non-official source (DISPUTED only)</td></tr>
+          <tr><td><strong>0</strong></td><td>UNVERIFIABLE</td></tr>
         </tbody>
       </table>
+      <p class="section-sub" style="margin:28px 0 0;">On 40 claims held back from tuning (18/11/2026), VERITY got 39 right, and none of its CURRENT or OUTDATED verdicts were wrong across 100 test claims.</p>
     </div>
   </div>
 
@@ -207,16 +209,23 @@
       <pre><code><span class="c-method">POST</span> <span class="c-url">https://verity.basechainlabs.com/api/verify</span>
 
 {
-  <span class="c-key">"claim"</span>: <span class="c-val">"Is GPT-4 still the most capable AI model?"</span>,
+  <span class="c-key">"claim"</span>: <span class="c-val">"Pluto is the ninth planet of the Solar System"</span>,
   <span class="c-key">"caller_id"</span>: <span class="c-val">"your-agent-id"</span>
 }
 
 <span class="c-comment">// Response</span>
 {
   <span class="c-key">"verdict"</span>: <span class="c-val">"OUTDATED"</span>,
-  <span class="c-key">"confidence"</span>: <span class="c-val">91</span>,
-  <span class="c-key">"what_changed"</span>: <span class="c-val">"GPT-4o and o3 released in 2024–25"</span>,
-  <span class="c-key">"sources"</span>: [{ <span class="c-key">"url"</span>: <span class="c-val">"..."</span>, <span class="c-key">"supports"</span>: <span class="c-val">"CONTRADICTS"</span> }]
+  <span class="c-key">"confidence"</span>: <span class="c-val">90</span>,
+  <span class="c-key">"what_changed"</span>: <span class="c-val">"Reclassified as a dwarf planet by the IAU in August 2006"</span>,
+  <span class="c-key">"downgraded_from"</span>: <span class="c-val">null</span>,
+  <span class="c-key">"sources"</span>: [{
+    <span class="c-key">"url"</span>: <span class="c-val">"https://www.iau.org/..."</span>,
+    <span class="c-key">"quote"</span>: <span class="c-val">"(exact sentence from the page)"</span>,
+    <span class="c-key">"stance"</span>: <span class="c-val">"SUPERSEDES"</span>,
+    <span class="c-key">"organisation"</span>: <span class="c-val">"iau.org"</span>,
+    <span class="c-key">"primary"</span>: <span class="c-val">true</span>
+  }, ...]
 }</code></pre>
     </div>
   </div>
@@ -226,14 +235,14 @@
     <div class="section">
       <p class="section-eyebrow">Standards</p>
       <h2 class="section-title">Built on open protocols.</h2>
-      <p class="section-sub" style="margin-bottom:36px;">VERITY runs on the same infrastructure as AEONOS, AWS AgentCore, and the Linux Foundation x402 standard.</p>
+      <p class="section-sub" style="margin-bottom:36px;">Uses the open x402 payment standard (USDC on Base) and the A2A agent card format.</p>
       <div class="proto-grid">
         <div class="proto-card"><div class="proto-label">Payment</div><div class="proto-value">x402 v2</div></div>
         <div class="proto-card"><div class="proto-label">Network</div><div class="proto-value">Base · USDC</div></div>
         <div class="proto-card"><div class="proto-label">Agent Protocol</div><div class="proto-value">A2A v0.2.1</div></div>
         <div class="proto-card"><div class="proto-label">MCP</div><div class="proto-value">Streamable HTTP</div></div>
-        <div class="proto-card"><div class="proto-label">Search</div><div class="proto-value">Tavily</div></div>
-        <div class="proto-card"><div class="proto-label">AI Model</div><div class="proto-value">Claude Sonnet 4.6</div></div>
+        <div class="proto-card"><div class="proto-label">Search</div><div class="proto-value">Tavily, Perplexity, Wikipedia, Semantic Scholar</div></div>
+        <div class="proto-card"><div class="proto-label">AI Model</div><div class="proto-value">Claude Sonnet 5.5</div></div>
       </div>
     </div>
   </div>
@@ -268,7 +277,7 @@
           <a href="/api/checkout?pack=pro" class="btn btn-primary" style="text-align:center;">Buy Pro</a>
         </div>
       </div>
-      <p style="font-size:0.8rem;color:var(--text-tertiary);text-align:center;">Credits consumed per call: verity_verify 10cr · verity_deep_check 50cr · verity_batch 75cr · verity_agent 10cr<br>Prefer USDC? Use x402 on Base — no account needed.</p>
+      <p style="font-size:0.8rem;color:var(--text-tertiary);text-align:center;">Credits consumed per call: verity_verify 10cr · verity_deep_check 50cr · verity_batch 75cr · verity_agent 10cr · check_credits 1cr<br>Prefer USDC? Use x402 on Base. No account needed.</p>
     </div>
   </div>
 
@@ -367,7 +376,7 @@
     <span class="dot">·</span>
     <a href="https://aeonos.basechainlabs.com">AEONOS</a>
     <span class="dot">·</span>
-    <a href="https://smithery.ai/server/clawdio777/verity">Smithery</a>
+    <a href="https://registry.smithery.ai/servers/clawdio777/verity">Smithery registry</a>
     <span class="dot">·</span>
     <a href="#" onclick="openRecover();return false;">Lost your key?</a>
   </footer>

@@ -14,13 +14,13 @@ import { runAgent } from "../src/agent.js";
 const PRICE_USDC    = 0.10;
 const BASE_URL      = () => (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
 const RESOURCE_URL  = () => `${BASE_URL()}/api/verify`;
-const RESOURCE_DESC = "Fact-checking with persistent memory — VERITY remembers prior claims your agent has checked and skips repeat lookups, saving tokens across sessions. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with confidence score, sources, and what changed. 0.10 USDC.";
+const RESOURCE_DESC = "Fact-checking for agents. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE with quoted sources that VERITY re-fetched from each page, a confidence tier based on that evidence, and what changed when a claim is OUTDATED. Optional memory per caller_id. 0.10 USDC.";
 
 const BAZAAR = buildBazaarExtension({
   serviceName:      "VERITY — Claim Verification",
   queryDescription: "The claim, URL, or content to verify. E.g. 'Is OpenAI still valued at $157B?' or 'https://example.com/article'",
   queryExample:     "Verify: Is GPT-4 still the most capable OpenAI model?",
-  outputExample:    '{"verdict":"OUTDATED","confidence":91,"summary":"GPT-4 has been superseded by GPT-4o and o3 models as of 2025.","what_changed":"OpenAI released GPT-4o in May 2024 and o3 in late 2024, both outperforming GPT-4.","sources":[{"url":"https://openai.com/blog/...","title":"...","published_date":"2025-01","supports":"CONTRADICTS"}]}',
+  outputExample:    '{"verdict":"OUTDATED","confidence":90,"summary":"...","what_changed":"...","downgraded_from":null,"sources":[{"url":"https://openai.com/...","title":"...","published_date":null,"quote":"(exact sentence copied from the page)","stance":"SUPERSEDES","organisation":"openai.com","primary":true}]}',
 });
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);

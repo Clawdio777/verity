@@ -303,7 +303,7 @@ const _bazaarBase = declareDiscoveryExtension({
   output: {
     example: {
       status: "completed",
-      artifact: { parts: [{ type: "text", text: '{"verdict":"OUTDATED","confidence":91,"summary":"...","sources":[...]}' }], index: 0 },
+      artifact: { parts: [{ type: "text", text: '{"verdict":"OUTDATED","confidence":90,"summary":"...","what_changed":"...","sources":[{"url":"...","quote":"...","stance":"SUPERSEDES","organisation":"...","primary":true}]}' }], index: 0 },
     },
     schema: { properties: { status: { type: "string" }, artifact: { type: "object" }, tokens: { type: "number" } } },
   },
@@ -326,7 +326,7 @@ function send402(res: VercelResponse, paymentReqs: PaymentRequirements, errorRea
     error:       errorReason ?? "payment-required",
     resource: {
       url:         `${base}/api/agent`,
-      description: "Conversational fact-checking with persistent memory — VERITY remembers what your agent has checked across sessions, skipping repeat lookups. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE verdicts with confidence scores and sources. 0.10 USDC/call.",
+      description: "Conversational fact-checking. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE with quoted sources that VERITY re-fetched from each page, a confidence tier based on that evidence, and what changed when a claim is OUTDATED. Optional memory per caller_id. 0.10 USDC/call.",
       mimeType:    "application/json",
     },
     accepts:    [paymentReqs],
@@ -345,16 +345,16 @@ function buildAgentCard() {
   const base = (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
   return {
     name: "VERITY",
-    description: "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live web sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with confidence scores, what changed, and persistent caller memory.",
+    description: "Real-time fact-checking and data freshness agent. Verifies claims, URLs, and content against live sources. Returns structured verdicts (CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE) with quoted sources that VERITY re-fetched from each page, a confidence tier based on that evidence, and what changed when a claim is out of date. Optional persistent memory per caller.",
     url: `${base}/api/agent`,
-    version: "1.0.0",
+    version: "1.2.1",
     protocolVersion: "0.2.1",
     capabilities: { streaming: true, pushNotifications: false, stateTransitionHistory: true },
     skills: [
       {
         id: "claim_verify",
         name: "Claim Verification",
-        description: "Verify any claim against live web sources. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE with confidence 0–100.",
+        description: "Verify any claim against live sources; quotes re-checked on the page. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE with an evidence-based confidence tier.",
         tags: ["fact-check", "verification", "claim"],
         endpoint: `${base}/api/verify`,
         price: "0.10 USDC",
@@ -362,7 +362,7 @@ function buildAgentCard() {
       {
         id: "deep_check",
         name: "Deep Fact Check",
-        description: "Multi-angle thorough verification with advanced search depth. For high-stakes checks.",
+        description: "Uses deeper search and more source types for high-stakes claims. Confidence still depends on the evidence found.",
         tags: ["fact-check", "deep-research"],
         endpoint: `${base}/api/deep-check`,
         price: "0.50 USDC",
@@ -377,9 +377,9 @@ function buildAgentCard() {
       },
     ],
     pricing: {
-      standard: "0.10 USDC — single claim verify",
-      deep:     "0.50 USDC — deep multi-angle check",
-      batch:    "0.75 USDC — up to 10 claims",
+      standard: "0.10 USDC: single claim verify",
+      deep:     "0.50 USDC: deep check",
+      batch:    "0.75 USDC: up to 10 claims",
     },
     protocols: ["x402", "a2a"],
     network: "base",

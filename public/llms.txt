@@ -1,0 +1,39 @@
+# VERITY
+
+> VERITY is a real-time fact-checking agent for other agents. It checks a claim, URL or piece of content against live sources and returns CURRENT, OUTDATED, DISPUTED or UNVERIFIABLE, with exact quotes from the pages it relied on.
+
+Host: verity.basechainlabs.com
+Built by BaseChain Labs (https://basechainlabs.com)
+
+## How it decides
+
+- Searches Tavily, Perplexity, Wikipedia and Semantic Scholar. Model: Claude Sonnet 5.5.
+- Every quote is re-fetched from its page; quotes that can't be found there don't count.
+- CURRENT or OUTDATED needs one official source or two independent organisations. Otherwise the verdict is UNVERIFIABLE: VERITY abstains rather than guess.
+- Confidence is a label for the evidence (90, 80, 75, 65, 40 or 0), not a probability.
+- what_changed is filled only when a claim is OUTDATED.
+- A check usually takes about 20 seconds.
+- On 40 claims held back from tuning (18/11/2026), VERITY got 39 right, and none of its CURRENT or OUTDATED verdicts were wrong across 100 test claims.
+
+## Endpoints and pricing
+
+Pay per call in USDC on Base via x402, or with card credits (1 credit = $0.01 USD).
+
+- POST /api/verify: one claim, 0.10 USDC or 10 credits
+- POST /api/deep-check: deeper search for high-stakes claims, 0.50 USDC or 50 credits
+- POST /api/batch-verify: up to 10 claims, 0.75 USDC or 75 credits
+- POST /api/agent: natural language fact-check, 0.10 USDC or 10 credits
+
+## Install (MCP)
+
+```
+npx verity-mcp
+```
+
+Run it locally to pay in USDC; your wallet key stays on your machine. The hosted MCP endpoint takes an API key from a card credit purchase. Never send a wallet private key to any hosted service.
+
+## Pages
+
+- [Home](https://verity.basechainlabs.com/): overview, verdicts, evidence rules and pricing
+- [SKILL.md](https://verity.basechainlabs.com/SKILL.md): request and response format
+- [Agent card](https://verity.basechainlabs.com/.well-known/agent.json): A2A discovery card

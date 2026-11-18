@@ -13,13 +13,13 @@ import { runAgent } from "../src/agent.js";
 const PRICE_USDC    = 0.50;
 const BASE_URL      = () => (process.env.AGENT_BASE_URL || "https://verity.basechainlabs.com").trim();
 const RESOURCE_URL  = () => `${BASE_URL()}/api/deep-check`;
-const RESOURCE_DESC = "Deep multi-angle fact-checking with persistent memory — VERITY remembers prior verdicts so your agent stops re-verifying confirmed claims. 5+ search angles, advanced Tavily depth, cross-referenced sources for high-stakes verification. 0.50 USDC.";
+const RESOURCE_DESC = "Deep fact-checking for high-stakes claims: deeper search and more source types. Returns CURRENT/OUTDATED/DISPUTED/UNVERIFIABLE with re-fetched quoted sources; confidence still depends on the evidence found. 0.50 USDC.";
 
 const BAZAAR = buildBazaarExtension({
   serviceName:      "VERITY — Deep Fact Check",
   queryDescription: "The claim to deeply verify across multiple angles and authoritative sources",
   queryExample:     "Deep check: Is climate change causing more frequent Category 5 hurricanes?",
-  outputExample:    '{"verdict":"DISPUTED","confidence":58,"summary":"Scientific consensus confirms increased intensity but frequency data is debated.","sources":[...],"what_changed":"Two major studies in 2025 reached conflicting conclusions on frequency trends."}',
+  outputExample:    '{"verdict":"DISPUTED","confidence":65,"summary":"Scientific consensus confirms increased intensity but frequency data is debated.","sources":[...],"what_changed":null}',
 });
 
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
