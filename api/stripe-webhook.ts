@@ -80,7 +80,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   "mcpServers": {
     "verity": {
       "command": "npx",
-      "args": ["verity-mcp"],
+      "args": ["-y", "verity-mcp@latest"],
       "env": {
         "VERITY_API_KEY": "${apiKey}"
       }
@@ -88,7 +88,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 }
 </pre>
-<p>Or use the hosted MCP endpoint directly:<br>
+<p>The package sends each tool call to the hosted endpoint below with your key, and it is charged to your credits.</p>
+<p>Or, if your client supports remote MCP servers, connect to the hosted endpoint directly:<br>
 <code>https://verity.basechainlabs.com/api/mcp</code><br>
 Header: <code>X-Api-Key: ${apiKey}</code></p>
 <p style="color:#888;font-size:13px;">Credits consumed per call: verity_verify 10cr · verity_deep_check 50cr · verity_batch 75cr · verity_agent 10cr</p>

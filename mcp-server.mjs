@@ -2,14 +2,12 @@
 /**
  * VERITY MCP Server — stdio transport
  *
- * Usage:
- *   VERITY_PRIVATE_KEY=0x... node mcp-server.mjs
+ * Two ways to pay:
+ *   VERITY_API_KEY=pg_... npx verity-mcp      card credits: tools/list and tools/call go to the hosted
+ *                                             endpoint (/api/mcp) with the key in X-Api-Key
+ *   VERITY_PRIVATE_KEY=0x... npx verity-mcp   USDC on Base: x402 payments signed on this machine
  *
- * Or via npx:
- *   npx verity-mcp
- *
- * Claude Desktop config:
- *   { "command": "npx", "args": ["verity-mcp"], "env": { "VERITY_PRIVATE_KEY": "0x..." } }
+ * If both are set, VERITY_API_KEY (card credits) is used.
  */
 
 import { createWalletClient, createPublicClient, http } from "viem";
@@ -20,6 +18,19 @@ import { ExactEvmScheme, toClientEvmSigner } from "@x402/evm";
 
 const BASE_URL    = "https://verity.basechainlabs.com";
 const PRIVATE_KEY = process.env.VERITY_PRIVATE_KEY;
+const API_KEY     = process.env.VERITY_API_KEY?.trim();
+
+// Card credits: forward to the hosted endpoint with the pg_ key in X-Api-Key; its answer comes back as is.
+async function forwardToHosted(req) {
+  const res  = await fetch(`${BASE_URL}/api/mcp`, {
+    method:  "POST",
+    headers: { "Content-Type": "application/json", "X-Api-Key": API_KEY },
+    body:    JSON.stringify(req),
+  });
+  const data = await res.json().catch(() => null);
+  if (!data || (data.result === undefined && data.error === undefined)) throw new Error(`VERITY error: HTTP ${res.status}`);
+  return { jsonrpc: "2.0", id: req.id, ...(data.error ? { error: data.error } : { result: data.result }) };
+}
 
 function buildX402Fetch() {
   if (!PRIVATE_KEY) return null;
@@ -39,7 +50,7 @@ function buildX402Fetch() {
 const x402Fetch = buildX402Fetch();
 
 async function callVerity(path, body) {
-  if (!x402Fetch) return "⚠️ VERITY_PRIVATE_KEY not configured. Add a Base wallet private key with USDC to use VERITY tools.";
+  if (!x402Fetch) return "⚠️ No payment configured. Set VERITY_API_KEY to your pg_ key (card credits from https://verity.basechainlabs.com/#get-access), or VERITY_PRIVATE_KEY to a Base wallet private key with USDC.";
   const res = await x402Fetch(`${BASE_URL}${path}`, {
     method:  "POST",
     headers: { "Content-Type": "application/json" },
@@ -131,12 +142,17 @@ async function handleRequest(req) {
   if (method === "initialize") {
     return send({ jsonrpc: "2.0", id, result: {
       protocolVersion: "2024-11-05",
-      serverInfo:      { name: "verity-mcp", version: "1.2.0" },
+      serverInfo:      { name: "verity-mcp", version: "1.2.1" },
       capabilities:    { tools: {} },
     }});
   }
 
   if (method === "notifications/initialized") return;
+
+  if (API_KEY && (method === "tools/list" || method === "tools/call")) {
+    try { return send(await forwardToHosted(req)); }
+    catch (e) { return send({ jsonrpc: "2.0", id, error: { code: -32000, message: e.message } }); }
+  }
 
   if (method === "tools/list") return send({ jsonrpc: "2.0", id, result: { tools: TOOLS } });
 

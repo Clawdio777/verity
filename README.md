@@ -50,12 +50,34 @@ The facts it is derived from are in `evidence_summary`: `verified_quotes`, `unve
 
 ## MCP Setup (Claude Desktop / Cursor)
 
+Set one of two environment variables. If both are set, `VERITY_API_KEY` is used.
+
+**Card credits** (no wallet): buy credits at [verity.basechainlabs.com/#get-access](https://verity.basechainlabs.com/#get-access) and use the `pg_` key from your purchase email. The package sends each tool call to `https://verity.basechainlabs.com/api/mcp` with the key in the `X-Api-Key` header, and the call is charged to your credits.
+
 ```json
 {
   "mcpServers": {
     "verity": {
       "command": "npx",
-      "args": ["verity-mcp"],
+      "args": ["-y", "verity-mcp@latest"],
+      "env": {
+        "VERITY_API_KEY": "pg_..."
+      }
+    }
+  }
+}
+```
+
+Clients that support remote MCP servers can skip the package: connect to `https://verity.basechainlabs.com/api/mcp` with the header `X-Api-Key: pg_...`.
+
+**USDC on Base (x402)**: set `VERITY_PRIVATE_KEY` to a Base wallet private key with USDC. Payments are signed on your machine; the key is never sent anywhere. Get USDC on Base at [coinbase.com/wallet](https://coinbase.com/wallet).
+
+```json
+{
+  "mcpServers": {
+    "verity": {
+      "command": "npx",
+      "args": ["-y", "verity-mcp@latest"],
       "env": {
         "VERITY_PRIVATE_KEY": "0x..."
       }
@@ -63,8 +85,6 @@ The facts it is derived from are in `evidence_summary`: `verified_quotes`, `unve
   }
 }
 ```
-
-Get USDC on Base at [coinbase.com/wallet](https://coinbase.com/wallet).
 
 ## Tools
 

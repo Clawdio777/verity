@@ -6,20 +6,27 @@
     "url": "https://github.com/Clawdio777/verity",
     "source": "github"
   },
-  "version": "1.0.2",
+  "version": "1.2.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "verity-mcp",
-      "version": "1.0.2",
+      "version": "1.2.1",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
+          "name": "VERITY_API_KEY",
+          "description": "VERITY API key (pg_...) from a card credit purchase at https://verity.basechainlabs.com/#get-access. Calls go to the hosted endpoint with this key in X-Api-Key and are charged to your credits. Used instead of VERITY_PRIVATE_KEY when both are set.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        },
+        {
           "name": "VERITY_PRIVATE_KEY",
-          "description": "Base wallet private key (0x...) — used to sign x402 payments in USDC on Base. Per-call: 0.10 USDC (verify), 0.50 USDC (deep-check), 0.75 USDC (batch).",
-          "isRequired": true,
+          "description": "Base wallet private key (0x...) to pay per call in USDC on Base via x402, signed on your machine. Per-call: 0.10 USDC (verify), 0.50 USDC (deep-check), 0.75 USDC (batch). Set this or VERITY_API_KEY.",
+          "isRequired": false,
           "format": "string",
           "isSecret": true
         }
