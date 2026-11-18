@@ -1,12 +1,19 @@
 /**
  * POST /api/mcp — VERITY MCP HTTP endpoint (Streamable HTTP transport)
- * For Smithery and other MCP clients. Paid through PayGate credits (pg_token). The hosted endpoint never
+ * For Smithery and other MCP clients. Paid with card credits: the buyer's `pg_` key in X-Api-Key, charged per call
+ * in Supabase (api/_credits.ts, 18/11/2026; replaced the PayGate proxy on Railway, whose pg_token calls still work
+ * until it is retired). The hosted endpoint never
  * accepts a wallet private key (removed 22/10/2026: the x402 docs keep the buyer's key on the buyer's
  * machine). Wallet (USDC) buyers use the local stdio server `npx verity-mcp` (mcp-server.mjs).
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { runAgent } from "../src/agent.js";
+import { PRICES, balance, paidRun, readApiKey, refusedText } from "./_credits.js";
+
+const TOP_UP_URL = "https://verity.basechainlabs.com/#get-access";
+/** Refund and answer before Vercel's 300 s limit cuts the call off. */
+const RUN_TIMEOUT_MS = 285_000;
 
 
 const OUTPUT_SCHEMA = {
@@ -134,7 +141,7 @@ const CHECK_CREDITS_TOOL = {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Caller-Id");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Caller-Id, X-Api-Key, Authorization");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
 
   if (req.method === "OPTIONS") return res.status(200).end();
@@ -225,25 +232,26 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
   if (method === "tools/call") {
     const { name, arguments: args } = params as { name: string; arguments: Record<string, any> };
 
+    const apiKey = isPaygated ? undefined : readApiKey(req.headers);
+
     if (name === "check_credits") {
-      const pgUrl      = process.env.PAYGATE_VERITY_URL;
-      const pgAdminKey = process.env.PAYGATE_VERITY_ADMIN_KEY;
-      const userKey    = (args.key || "").trim();
-      if (!pgUrl || !pgAdminKey || !userKey) {
-        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Credit check unavailable — missing key or config." }] } });
+      const userKey = String(args?.key || apiKey || "").trim();
+      if (!userKey) {
+        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Credit check unavailable — missing key." }] } });
       }
-      try {
-        const listRes = await fetch(`${pgUrl}/keys`, { headers: { "X-Admin-Key": pgAdminKey } });
-        const allKeys = await listRes.json() as any[];
-        const found   = allKeys.find((k: any) => k.keyPrefix && userKey.startsWith(k.keyPrefix.replace("...", "")));
-        if (!found) {
-          return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Key not found. Make sure you're using your full `pg_xxx...` API key." }] } });
-        }
-        const credits = found.credits as number;
-        const text = credits < 100
-          ? `⚠️ **Low balance: ${credits} credits remaining**\n\nTop up at: https://verity.basechainlabs.com/#get-access`
+      const lookup = async () => {
+        const credits = await balance(userKey);
+        if (credits === null) return "Key not found. Make sure you're using your full `pg_xxx...` API key.";
+        return credits < 100
+          ? `⚠️ **Low balance: ${credits} credits remaining**\n\nTop up at: ${TOP_UP_URL}`
           : `✅ **${credits} credits remaining**\n\n10cr/verify · 50cr/deep-check · 75cr/batch · 10cr/agent · 1cr/credit check`;
-        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
+      };
+      try {
+        if (!apiKey) return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: await lookup() }] } });
+        const run = await paidRun(apiKey, name, lookup, RUN_TIMEOUT_MS);
+        if (run.ok) return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: run.value }] } });
+        if ("refused" in run) return res.json(paymentRequired(id, run.refused, name));
+        return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Could not check credits. Try again." }] } });
       } catch (e: any) {
         return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: "Could not check credits. Try again." }] } });
       }
@@ -253,6 +261,26 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
 
     if (!route) return res.json({ jsonrpc: "2.0", id, error: { code: -32601, message: `Unknown tool: ${name}` } });
 
+    const work = async () => {
+      const callerId  = args.caller_id || defaultCallerId || "mcp-user";
+      const directive = buildVerityDirective(name, args);
+      const result    = await runAgent({ query: directive, caller_id: callerId, no_memory: args.no_memory === true });
+      return result.response;
+    };
+
+    if (apiKey) {
+      try {
+        const run = await paidRun(apiKey, name, work, RUN_TIMEOUT_MS);
+        if (run.ok) return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: run.value }] } });
+        if ("refused" in run) return res.json(paymentRequired(id, run.refused, name));
+        const note = run.refunded ? " Not charged: the credits for this call were refunded." : "";
+        return res.json({ jsonrpc: "2.0", id, error: { code: -32000, message: run.error.message + note } });
+      } catch (e: any) {
+        // The credit store itself failed before anything was charged.
+        return res.json({ jsonrpc: "2.0", id, error: { code: -32000, message: "Credit check failed, not charged. Try again." } });
+      }
+    }
+
     if (!isPaygated) {
       return res.json({
         jsonrpc: "2.0", id,
@@ -261,16 +289,23 @@ Calls on this hosted endpoint are paid from VERITY credits (card). To pay per ca
     }
 
     try {
-      const callerId = args.caller_id || defaultCallerId || "mcp-user";
-      let text: string;
-      const directive = buildVerityDirective(name, args);
-      const result    = await runAgent({ query: directive, caller_id: callerId, no_memory: args.no_memory === true });
-      text = result.response;
-      return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text }] } });
+      return res.json({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: await work() }] } });
     } catch (e: any) {
       return res.json({ jsonrpc: "2.0", id, error: { code: -32000, message: e.message } });
     }
   }
 
   return res.json({ jsonrpc: "2.0", id, error: { code: -32601, message: `Method not found: ${method}` } });
+}
+
+/** Same JSON-RPC error PayGate sent when a key could not pay (-32402). */
+function paymentRequired(id: any, r: { reason: string; balance: number }, tool: string) {
+  return {
+    jsonrpc: "2.0", id,
+    error: {
+      code: -32402,
+      message: `Payment required: ${refusedText(r, tool, TOP_UP_URL)}`,
+      data: { creditsRequired: PRICES[tool] ?? 1, remainingCredits: r.balance, topUpUrl: TOP_UP_URL },
+    },
+  };
 }
